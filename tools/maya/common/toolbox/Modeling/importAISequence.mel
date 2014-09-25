@@ -1,0 +1,69 @@
+// importAISequence
+// Created by: adamb
+// Date: 2014/07/30 11:12:15
+
+global proc importAISequence(){
+
+string $file[] = `fileDialog2 -fileFilter "All Files (*.*)" -caption "Open" -fileMode 1`;//-dir $browserPath`;
+
+// browser for a png file in the sequence
+string $filePath = $file[0];
+string $folderPath = dirname($filePath);
+string $ext = fileExtension($filePath);
+string $basename = basenameEx($filePath);
+// get the frameNum off the path
+string $frameNum = `match "[0-9]+$" $basename`;
+int $framePad = size($frameNum);
+int $subStrEnd = size($basename) - $framePad;
+string $basenamePrefix = `substring $basename 1 $subStrEnd`;
+
+if ($ext == "ai"){
+
+
+	string $fileList[] = `getFileList -fs ($basenamePrefix+"*."+$ext) -folder ($folderPath+"/")`;
+
+	
+	//string $eachBasename = basenameEx($each);
+	for ($each in $fileList){
+		file -import -type "Adobe(R) Illustrator(R)"  -ignoreVersion -ra true -mergeNamespacesOnClash false -namespace $basenamePrefix -options "sc=1.0;group=on"  -pr ($folderPath+"/"+$each);
+		string $rootNodes[] = `ls -type transform -assemblies`;
+		string $newGroup = $rootNodes[size($rootNodes)-1];
+		string $curveShapes[] = `listRelatives -c -ad -type nurbsCurve $newGroup`;
+		string $cmd = "planarSrf -ch 1 -d 3 -ko 0 -tol 0.01 -rn 0 -po 1 ";
+		for ($every in $curveShapes){
+			$cmd += ("\""+$every+"\" ");
+		}
+		string $result[] = evalEcho($cmd);
+
+		// delete the curves
+		delete $newGroup;
+
+
+	}
+
+
+
+// create a bevel and assign an expression to drive the sequence
+
+}
+else{
+	error("Please specify an AI file sequence");
+}
+
+}
+
+//file -import -type "Adobe(R) Illustrator(R)"  -ignoreVersion -ra true -mergeNamespacesOnClash false -namespace "YK_03_00_shirotaALPHA_v001_00000" -options "sc=1.0;group=on"  -pr "//pp-fs-nyc/production/0128_Yakult/Shots/YK/01_00/cel/render/Shirota/YK_03_00_shirotaALPHA_v001/ai/YK_03_00_shirotaALPHA_v001_00000.ai";
+
+global proc sequenceVisibility(){	
+
+	string $sel[] = `ls -sl`;
+	float $stFrame = `playbackOptions -q -min`;
+	int $f = $stFrame;
+	for ($each in $sel){
+		setKeyframe -t ($f-1) -v 0 ($each+".visibility");
+		setKeyframe -t ($f) -v 1 ($each+".visibility");
+		setKeyframe -t ($f+1) -v 0 ($each+".visibility");
+		//setKeyframe -t ($f+2) -v 0 ($each+".visibility");
+		$f+=1;
+	}
+}

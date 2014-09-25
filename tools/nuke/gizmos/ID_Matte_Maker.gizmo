@@ -1,0 +1,245 @@
+#! C:/Program Files/Nuke8.0v1/nuke-8.0.v1.dll -nx
+version 8.0 v1
+Gizmo {
+ inputs 2
+ addUserKnob {20 User}
+ addUserKnob {7 threshold l Threshold}
+ threshold 0.04
+ addUserKnob {18 labelColor l "Label Color" t "Color to include in matte."}
+ labelColor {0.2531738281 0.8173828125 0.98046875}
+ addUserKnob {6 labelColor_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ labelColor_panelDropped true
+ addUserKnob {12 labelPosition l "Label Position" t "Position of label."}
+ labelPosition {960 540}
+ addUserKnob {22 copyColor l "Copy Color" -STARTLINE T "myNode = nuke.thisNode()\nprint myNode\n\nx=myNode\['labelPosition'].value()\[0]\ny=myNode\['labelPosition'].value()\[1]\n\nmyNode\['labelColor'].setValue(nuke.sample(myNode, 'rgba.red', x, y),0)\nmyNode\['labelColor'].setValue(nuke.sample(myNode, 'rgba.green', x, y),1)\nmyNode\['labelColor'].setValue(nuke.sample(myNode, 'rgba.blue', x, y),2)"}
+ addUserKnob {6 usePosition l "Use Position" t "Use position to derive label color.  (Useful for inconsistent label colors)." +STARTLINE}
+ addUserKnob {6 appendToInputAlpha l "Append To Input Alpha" t "Add alpha from label to input alpha." +STARTLINE}
+}
+ Input {
+  inputs 0
+  name InputCoverage
+  label "Pixel Coverage"
+  xpos 519
+  ypos -471
+  number 1
+ }
+set N490500e0 [stack 0]
+ Dot {
+  name Dot3
+  xpos 553
+  ypos -278
+ }
+set N49050450 [stack 0]
+ Dot {
+  name Dot4
+  xpos 321
+  ypos -278
+ }
+ Dot {
+  name Dot5
+  xpos 321
+  ypos -89
+ }
+ Input {
+  inputs 0
+  name InputLabels
+  label "Object labels"
+  xpos 172
+  ypos -468
+ }
+ Dot {
+  name Dot11
+  xpos 206
+  ypos -417
+ }
+set N49051210 [stack 0]
+ Add {
+  value {{"-\[sample input red parent.labelPosition.x parent.labelPosition.y]"} {"-\[sample input green parent.labelPosition.x parent.labelPosition.y]"} {"-\[sample input blue parent.labelPosition.x parent.labelPosition.y]"} 0}
+  name SubtractColorFromPosition
+  xpos 172
+  ypos -395
+ }
+push $N49051210
+ Dot {
+  name Dot9
+  xpos 96
+  ypos -417
+ }
+ Add {
+  value {{-parent.labelColor.main.r i} {-parent.labelColor.main.g i} {-parent.labelColor.main.b i} 0}
+  name SubtractColor
+  xpos 62
+  ypos -363
+ }
+ Switch {
+  inputs 2
+  which {{"(parent.usePosition.main == true) * 1" i}}
+  name Switch1
+  xpos 172
+  ypos -357
+ }
+set N47ba2180 [stack 0]
+push $N47ba2180
+ Multiply {
+  value -1
+  name Multiply1
+  xpos 330
+  ypos -363
+ }
+ Dot {
+  name Dot10
+  xpos 364
+  ypos -325
+ }
+ Merge2 {
+  inputs 2
+  operation max
+  Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+  Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+  output {rgba.red rgba.green rgba.blue -rgba.alpha}
+  name Merge1
+  xpos 172
+  ypos -329
+ }
+ Grade {
+  blackpoint {{parent.threshold.main}}
+  name Grade1
+  xpos 172
+  ypos -298
+ }
+set N49052a20 [stack 0]
+push $N49052a20
+ Merge2 {
+  inputs 2
+  operation divide
+  name Merge3
+  xpos 172
+  ypos -268
+ }
+ Keyer {
+  operation "luminance key"
+  range {0 1.71771e-006 1 1}
+  name Keyer1
+  xpos 172
+  ypos -237
+ }
+ Invert {
+  name Invert1
+  xpos 172
+  ypos -199
+ }
+ Dot {
+  name Dot2
+  xpos 206
+  ypos -161
+ }
+set N490537e0 [stack 0]
+ FilterErode {
+  size -1
+  name FilterErode7
+  xpos 172
+  ypos -131
+ }
+push $N490537e0
+ Dot {
+  name Dot6
+  xpos 400
+  ypos -161
+ }
+set N49053ec0 [stack 0]
+ Merge2 {
+  inputs 2
+  operation minus
+  name Merge48
+  xpos 366
+  ypos -125
+ }
+ ColorCorrect {
+  inputs 1+1
+  channels alpha
+  gain 0
+  maskChannelMask rgba.red
+  name ColorCorrect71
+  xpos 366
+  ypos -99
+ }
+push $N49050450
+push $N49053ec0
+ ColorCorrect {
+  inputs 1+1
+  channels alpha
+  gain 0
+  maskChannelMask rgba.red
+  invert_mask true
+  name ColorCorrect70
+  xpos 519
+  ypos -171
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge47
+  xpos 519
+  ypos -93
+ }
+set N49054c80 [stack 0]
+push $N49051210
+ Dot {
+  name Dot1
+  xpos 663
+  ypos -417
+ }
+set N49054ff0 [stack 0]
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels {-rgba.red -rgba.green -rgba.blue rgba.alpha}
+  Bchannels {-rgba.red -rgba.green -rgba.blue rgba.alpha}
+  output {-rgba.red -rgba.green -rgba.blue rgba.alpha}
+  name Merge2
+  xpos 629
+  ypos -99
+ }
+ Clamp {
+  channels alpha
+  name Clamp1
+  xpos 629
+  ypos 16
+ }
+push $N49054c80
+push $N49054ff0
+ Dot {
+  name Dot7
+  xpos 728
+  ypos -417
+ }
+ Dot {
+  name Dot8
+  xpos 728
+  ypos -29
+ }
+ ShuffleCopy {
+  inputs 2
+  name ShuffleCopy1
+  xpos 519
+  ypos -33
+ }
+ Switch {
+  inputs 2
+  which {{parent.appendToInputAlpha.main i}}
+  name Switch2
+  xpos 519
+  ypos 22
+ }
+ Output {
+  name Output1
+  xpos 519
+  ypos 104
+ }
+push $N490500e0
+ Viewer {
+  name Viewer1
+  xpos 186
+  ypos 108
+ }
+end_group

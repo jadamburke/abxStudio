@@ -1,0 +1,769 @@
+global proc shelf_VRay () {
+    global string $gBuffStr;
+    global string $gBuffStr0;
+    global string $gBuffStr1;
+
+
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 23
+        -height 23
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Open Folders" 
+        -enableBackground 0
+        -align "center" 
+        -label "folders" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "fileOpen.png" 
+        -image1 "fileOpen.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "$empty = `confirmDialog -t \"Next Step\" -m \"Right click on icon for folder list\" -button \"Okay\" -defaultButton \"Okay\" -cancelButton \"No\"`;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -mi "Maya File" ( "import os\nimport rainbow.objects as R\nimport maya.cmds\n\nscenePath = maya.cmds.file(q=True,sn=True)\nscenePathList = scenePath.split('/')\n\nisAsset = 0\nif scenePathList[4] == 'assets':\n\tisAsset = 1\n\ndrive = scenePathList[0]\njob = scenePathList[1]\nmayaProj = scenePathList[3]\nfileName = scenePathList[-1]\n\nseq = ''\nshot = ''\nassetType = ''\nassetName = ''\nif isAsset:\n\tassetType = scenePathList[5]\n\tassetName = scenePathList[6]\nelse:\n\tseq = scenePathList[6]\n\tshot = scenePathList[7]\n\nmayaFilePath = ''\nif isAsset:\n\tmayaFilePath = drive + '\\\\' + job + '\\\\3D\\\\' + mayaProj + '\\\\assets\\\\' + assetType + '\\\\' + assetName + '\\\\geo\\\\work'\nelse:\n\tmayaFilePath = drive + '\\\\' + job + '\\\\3D\\\\' + mayaProj + '\\\\scenes\\\\_ALL_SHOTS\\\\' + seq + '\\\\' + shot + '\\\\LGT\\\\work'\n\nos.system(\"start explorer \\\"\" + mayaFilePath + \"\\\"\")" )
+        -mip 0
+        -mi "Nuke Comp" ( "import os\nimport rainbow.objects as R\nimport maya.cmds\n\nscenePath = maya.cmds.file(q=True,sn=True)\nscenePathList = scenePath.split('/')\n\nisAsset = 0\nif scenePathList[4] == 'assets':\n\tisAsset = 1\n\ndrive = scenePathList[0]\njob = scenePathList[1]\nmayaProj = scenePathList[3]\nfileName = scenePathList[-1]\n\nseq = ''\nshot = ''\nassetType = ''\nassetName = ''\nif isAsset:\n\tassetType = scenePathList[5]\n\tassetName = scenePathList[6]\nelse:\n\tseq = scenePathList[6]\n\tshot = scenePathList[7]\n\nnukeFilePath = ''\nif isAsset:\n\tnukeFilePath = drive + '\\\\' + job + '\\\\COMP\\\\_ASSETS\\\\' + assetType + '\\\\' + assetName + '\\\\PRECOMP'\nelse:\n\tnukeFilePath = drive + '\\\\' + job + '\\\\COMP\\\\_ALL_SHOTS\\\\' + seq + '\\\\' + shot + '\\\\PRECOMP'\n\nos.system(\"start explorer \\\"\" + nukeFilePath + \"\\\"\")" )
+        -mip 1
+        -mi "Source Images" ( "import os\nimport rainbow.objects as R\nimport maya.cmds\n\nscenePath = maya.cmds.file(q=True,sn=True)\nscenePathList = scenePath.split('/')\t\ndrive = scenePathList[0]\njob = scenePathList[1]\nmayaProj = scenePathList[3]\nseq = scenePathList[6]\nshot = scenePathList[7]\nfileName = scenePathList[-1]\nsceneName = fileName.strip('.ma')\n\nrenderedImagesPath = drive + '\\\\' + job + '\\\\3D\\\\' + mayaProj + '\\\\images\\\\RENDER\\\\' + seq + '\\\\' + shot + '\\\\LGT\\\\' + sceneName\n\nos.system(\"start explorer \\\"\" + renderedImagesPath + \"\\\"\")" )
+        -mip 2
+        -mi "Rendered images" ( "import os\nimport rainbow.objects as R\nimport maya.cmds\n\nscenePath = maya.cmds.file(q=True,sn=True)\nscenePathList = scenePath.split('/')\n\nisAsset = 0\nif scenePathList[4] == 'assets':\n\tisAsset = 1\n\ndrive = scenePathList[0]\njob = scenePathList[1]\nmayaProj = scenePathList[3]\nfileName = scenePathList[-1]\nsceneNameA = fileName.strip('.ma')\nsceneName = sceneNameA.strip('.mb')\n\nseq = ''\nshot = ''\nassetType = ''\nassetName = ''\nif isAsset:\n\tassetType = scenePathList[5]\n\tassetName = scenePathList[6]\nelse:\n\tseq = scenePathList[6]\n\tshot = scenePathList[7]\n\nrenderedImagesPath = ''\nif isAsset:\n\trenderedImagesPath = drive + '\\\\' + job + '\\\\3D\\\\' + mayaProj + '\\\\images\\\\_ASSETS\\\\' + assetType + '\\\\' + assetName + '\\\\' + sceneName\nelse:\n\trenderedImagesPath = drive + '\\\\' + job + '\\\\3D\\\\' + mayaProj + '\\\\images\\\\_ALL_SHOTS\\\\' + seq + '\\\\' + shot + '\\\\LGT\\\\' + sceneName\n\nos.system(\"start explorer \\\"\" + renderedImagesPath + \"\\\"\")" )
+        -mip 3
+        -mi "Composited images" ( "import os\nimport rainbow.objects as R\nimport maya.cmds\n\nscenePath = maya.cmds.file(q=True,sn=True)\nscenePathList = scenePath.split('/')\n\nisAsset = 0\nif scenePathList[4] == 'assets':\n\tisAsset = 1\n\ndrive = scenePathList[0]\njob = scenePathList[1]\nmayaProj = scenePathList[3]\nfileName = scenePathList[-1]\nsceneNameA = fileName.strip('.ma')\nsceneName = sceneNameA.strip('.mb')\n\nseq = ''\nshot = ''\nassetType = ''\nassetName = ''\nif isAsset:\n\tassetType = scenePathList[5]\n\tassetName = scenePathList[6]\nelse:\n\tseq = scenePathList[6]\n\tshot = scenePathList[7]\n\ncompImagesPath = ''\nif isAsset:\n\tcompImagesPath = drive + '\\\\' + job + '\\\\RENDER\\\\_ASSETS\\\\' + assetType + '\\\\' + assetName + '\\\\PRECOMP\\\\' + sceneName\nelse:\n\tcompImagesPath = drive + '\\\\' + job + '\\\\RENDER\\\\_ALL_SHOTS\\\\' + seq + '\\\\' + shot + '\\\\PRECOMP\\\\' + sceneName\n\nos.system(\"start explorer \\\"\" + compImagesPath + \"\\\"\")\n\n\n\n" )
+        -mip 4
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Enable hypershade swatches from updating" 
+        -enableBackground 0
+        -align "center" 
+        -label "enableSwatchRefresh" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/enableSwatchRefresh.png" 
+        -image1 "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/enableSwatchRefresh.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "if (`exists enableSwatchRefresh`==0) eval (\"source \\\"\"+`getenv MAYA_PPTOOLS`+\"/scripts/Toolbox/Lighting/enableSwatchRefresh.mel\\\"\");if (`exists enableSwatchRefresh`) enableSwatchRefresh;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Disables hypershade swatches from updating" 
+        -enableBackground 0
+        -align "center" 
+        -label "disableSwatchRefresh" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/disableSwatchRefresh.png" 
+        -image1 "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/disableSwatchRefresh.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "if (`exists disableSwatchRefresh`==0) eval (\"source \\\"\"+`getenv MAYA_PPTOOLS`+\"/scripts/Toolbox/Lighting/disableSwatchRefresh.mel\\\"\");if (`exists disableSwatchRefresh`) disableSwatchRefresh;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Select all in namespace" 
+        -enableBackground 0
+        -align "center" 
+        -label "selectAllInNamespace" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -imageOverlayLabel "SAIN" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/selectAllInNamespace.png" 
+        -image1 "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/selectAllInNamespace.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "if (`exists selectAllInNamespace`==0) eval (\"source \\\"\"+`getenv MAYA_PPTOOLS`+\"/scripts/Toolbox/Lighting/selectAllInNamespace.mel\\\"\");if (`exists selectAllInNamespace`) selectAllInNamespace;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Set scene to 30FPS" 
+        -enableBackground 0
+        -align "center" 
+        -label "setTo30FPS" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/setTo30FPS.png" 
+        -image1 "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/setTo30FPS.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "if (`exists setTo30FPS`==0) eval (\"source \\\"\"+`getenv MAYA_PPTOOLS`+\"/scripts/Toolbox/Lighting/setTo30FPS.mel\\\"\");if (`exists setTo30FPS`) setTo30FPS;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Add Vray Subd Attrs" 
+        -enableBackground 0
+        -align "center" 
+        -label "addVraySubdAttrs" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/addVraySubdAttrs.png" 
+        -image1 "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/addVraySubdAttrs.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "if (`exists addVraySubdAttrs`==0) eval (\"source \\\"\"+`getenv MAYA_PPTOOLS`+\"/scripts/Toolbox/Lighting/addVraySubdAttrs.mel\\\"\");if (`exists addVraySubdAttrs`) addVraySubdAttrs;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Add standard VRay render elements" 
+        -enableBackground 0
+        -align "center" 
+        -label "vrayElements" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -imageOverlayLabel "ELEM" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "commandButton.xpm" 
+        -image1 "commandButton.xpm" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "if (`exists vrayElements`==0) eval (\"source \\\"\"+`getenv MAYA_PPTOOLS`+\"/scripts/Toolbox/Lighting/vrayElements.mel\\\"\");if (`exists vrayElements`) vrayElements;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -mi "occlusion" ( "if(! `pluginInfo -q -l \"vrayformaya\"`){\n\tloadPlugin \"vrayformaya\";\n}\nsetCurrentRenderer vray;\nevalDeferred(\"unifiedRenderGlobalsWindow;\");\nfile -import -type \"mayaAscii\" -ra false -rpr \"CLASH\" -options \"v=0\" -pr -loadReferenceDepth \"all\" (`getenv MAYA_PPTOOLS`+\"/sceneTemplates/import_VRay_occlusionElement_01.ma\");" )
+        -mi "VRay elements documentation" ( "system \"start \\\"C:/Program Files (x86)/Mozilla Firefox/firefox.exe\\\" \\\"http://rainbow/docs/lgt/elements/\\\"\";" )
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Import primitive test render scene" 
+        -enableBackground 0
+        -align "center" 
+        -label "prim" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -imageOverlayLabel "PRIM" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "commandButton.xpm" 
+        -image1 "commandButton.xpm" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "if (`exists prim`==0) eval (\"source \\\"\"+`getenv MAYA_PPTOOLS`+\"/scripts/Toolbox/Lighting/prim.mel\\\"\");if (`exists prim`) prim;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Import VRay turntable" 
+        -enableBackground 0
+        -align "center" 
+        -label "turnTable" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/turnTable.png" 
+        -image1 "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/turnTable.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "if (`exists turnTable`==0) eval (\"source \\\"\"+`getenv MAYA_PPTOOLS`+\"/scripts/Toolbox/Lighting/turnTable.mel\\\"\");if (`exists turnTable`) turnTable;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -mi "Turntable documentation" ( "system \"start \\\"C:/Program Files (x86)/Mozilla Firefox/firefox.exe\\\" \\\"http://rainbow/docs/lgt/lightRigs/\\\"\";" )
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Eye Rig" 
+        -enableBackground 0
+        -align "center" 
+        -label "eyeRig" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/eyeRig.png" 
+        -image1 "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/eyeRig.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "if (`exists eyeRig`==0) eval (\"source \\\"\"+`getenv MAYA_PPTOOLS`+\"/scripts/Toolbox/Lighting/eyeRig.mel\\\"\");if (`exists eyeRig`) eyeRig;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -mi "Eye rig documentation" ( "system \"start \\\"C:/Program Files (x86)/Mozilla Firefox/firefox.exe\\\" \\\"http://rainbow/docs/lgt/eyes/\\\"\";" )
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Import standard VRay mtl shader" 
+        -enableBackground 0
+        -align "center" 
+        -label "greyMtl" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -imageOverlayLabel "MTL" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "commandButton.xpm" 
+        -image1 "commandButton.xpm" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "if (`exists greyMtl`==0) eval (\"source \\\"\"+`getenv MAYA_PPTOOLS`+\"/scripts/Toolbox/Lighting/greyMtl.mel\\\"\");if (`exists greyMtl`) greyMtl;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -mi "VRayMtl documentation" ( "system \"start \\\"C:/Program Files (x86)/Mozilla Firefox/firefox.exe\\\" \\\"http://rainbow/docs/lgt/VRayMtl/\\\"\";" )
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Import standard VRay subsurface shader" 
+        -enableBackground 0
+        -align "center" 
+        -label "greySSSMtl" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -imageOverlayLabel "SSS" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "commandButton.xpm" 
+        -image1 "commandButton.xpm" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "if (`exists greySSSMtl`==0) eval (\"source \\\"\"+`getenv MAYA_PPTOOLS`+\"/scripts/Toolbox/Lighting/greySSSMtl.mel\\\"\");if (`exists greySSSMtl`) greySSSMtl;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -mi "VRaySSS documentation" ( "system \"start \\\"C:/Program Files (x86)/Mozilla Firefox/firefox.exe\\\" \\\"http://rainbow/docs/lgt/VRayFastSSS/\\\"\";" )
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Import VRay shadow material" 
+        -enableBackground 0
+        -align "center" 
+        -label "shadowMtl" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -imageOverlayLabel "SHAD" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "commandButton.xpm" 
+        -image1 "commandButton.xpm" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "if (`exists shadowMtl`==0) eval (\"source \\\"\"+`getenv MAYA_PPTOOLS`+\"/scripts/Toolbox/Lighting/shadowMtl.mel\\\"\");if (`exists shadowMtl`) shadowMtl;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -mi "Shadow pass documentation" ( "system \"start \\\"C:/Program Files (x86)/Mozilla Firefox/firefox.exe\\\" \\\"http://rainbow/docs/lgt/passes/\\\"\";" )
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Import noise2D shader asset" 
+        -enableBackground 0
+        -align "center" 
+        -label "file -import -loadReferenceDepth \"all\" -namespace \"noise2DA\" -op..." 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -imageOverlayLabel "no2D" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "commandButton.png" 
+        -image1 "commandButton.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "file -import -loadReferenceDepth \"all\" -namespace \"VRay_noise2DA\" -options \"v=0\" (`getenv MAYA_PPTOOLS`+\"/sceneTemplates/import_VRay_noise2DA.mb\");" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -mi "Noise2D documentation" ( "system \"start \\\"C:/Program Files (x86)/Mozilla Firefox/firefox.exe\\\" \\\"http://rainbow/docs/lgt/noise2D/\\\"\";" )
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Import noise3D shader asset" 
+        -enableBackground 0
+        -align "center" 
+        -label "file -import -loadReferenceDepth \"all\" -namespace \"noise3DA\" -op..." 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -imageOverlayLabel "no3D" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "commandButton.png" 
+        -image1 "commandButton.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "file -import -loadReferenceDepth \"all\" -namespace \"VRay_noise3DA\" -options \"v=0\" (`getenv MAYA_PPTOOLS`+\"/sceneTemplates/import_VRay_noise3DA.mb\");" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -mi "Noise3d documentation" ( "system \"start \\\"C:/Program Files (x86)/Mozilla Firefox/firefox.exe\\\" \\\"http://rainbow/docs/lgt/noise3d/\\\"\";" )
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Import spotty shader asset" 
+        -enableBackground 0
+        -align "center" 
+        -label "file -import -loadReferenceDepth \"all\" -namespace \"spottyA\" -opt..." 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -imageOverlayLabel "sptty" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "commandButton.png" 
+        -image1 "commandButton.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "file -import -loadReferenceDepth \"all\" -namespace \"VRay_spottyA\" -options \"v=0\" (`getenv MAYA_PPTOOLS`+\"/sceneTemplates/import_VRay_spottyA.mb\");" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -mi "Spotty documentation" ( "system \"start \\\"C:/Program Files (x86)/Mozilla Firefox/firefox.exe\\\" \\\"http://rainbow/docs/lgt/spotty/\\\"\";" )
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Import halfspace shader asset" 
+        -enableBackground 0
+        -align "center" 
+        -label "file -import -loadReferenceDepth \"all\" -namespace \"halfspaceA\" -..." 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -imageOverlayLabel "halfS" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "commandButton.png" 
+        -image1 "commandButton.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "file -import -loadReferenceDepth \"all\" -namespace \"VRay_halfspaceA\" -options \"v=0\" (`getenv MAYA_PPTOOLS`+\"/sceneTemplates/import_VRay_halfspaceA.mb\");" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -mi "Halfspace documentation" ( "system \"start \\\"C:/Program Files (x86)/Mozilla Firefox/firefox.exe\\\" \\\"http://rainbow/docs/lgt/halfSpace/\\\"\";" )
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Import triplanar shader asset" 
+        -enableBackground 0
+        -align "center" 
+        -label "file -import -loadReferenceDepth \"all\" -namespace \"triplanarA\" -..." 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -imageOverlayLabel "triPla" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "commandButton.png" 
+        -image1 "commandButton.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "file -import -loadReferenceDepth \"all\" -namespace \"VRay_triplanarA\" -options \"v=0\" (`getenv MAYA_PPTOOLS`+\"/sceneTemplates/import_VRay_triplanarA.mb\");" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -mi "Triplanar documentation" ( "system \"start \\\"C:/Program Files (x86)/Mozilla Firefox/firefox.exe\\\" \\\"http://rainbow/docs/lgt/triplanar/\\\"\";" )
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Import vector shader asset" 
+        -enableBackground 0
+        -align "center" 
+        -label "file -import -loadReferenceDepth \"all\" -namespace \"vectorA\" -opt..." 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -imageOverlayLabel "vect" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "commandButton.png" 
+        -image1 "commandButton.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "file -import -loadReferenceDepth \"all\" -namespace \"VRay_vectorA\" -options \"v=0\" (`getenv MAYA_PPTOOLS`+\"/sceneTemplates/import_VRay_vectorA.mb\");" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -mi "Vector documentation" ( "system \"start \\\"C:/Program Files (x86)/Mozilla Firefox/firefox.exe\\\" \\\"http://rainbow/docs/lgt/vector/\\\"\";" )
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Import Vray Ies light" 
+        -enableBackground 0
+        -align "center" 
+        -label "vrayIesLgt" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/vrayIesLgt.png" 
+        -image1 "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/vrayIesLgt.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "if (`exists vrayIesLgt`==0) eval (\"source \\\"\"+`getenv MAYA_PPTOOLS`+\"/scripts/Toolbox/Lighting/vrayIesLgt.mel\\\"\");if (`exists vrayIesLgt`) vrayIesLgt;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Import VRay dome light" 
+        -enableBackground 0
+        -align "center" 
+        -label "vrayDomeLgt" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/vrayDomeLgt.png" 
+        -image1 "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/vrayDomeLgt.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "if (`exists vrayDomeLgt`==0) eval (\"source \\\"\"+`getenv MAYA_PPTOOLS`+\"/scripts/Toolbox/Lighting/vrayDomeLgt.mel\\\"\");if (`exists vrayDomeLgt`) vrayDomeLgt;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Import VRay sphere light" 
+        -enableBackground 0
+        -align "center" 
+        -label "vraySphereLgt" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/vraySphereLgt.png" 
+        -image1 "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/vraySphereLgt.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "if (`exists vraySphereLgt`==0) eval (\"source \\\"\"+`getenv MAYA_PPTOOLS`+\"/scripts/Toolbox/Lighting/vraySphereLgt.mel\\\"\");if (`exists vraySphereLgt`) vraySphereLgt;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Import VRay rectangle light" 
+        -enableBackground 0
+        -align "center" 
+        -label "vrayRectLgt" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/vrayRectLgt.png" 
+        -image1 "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/vrayRectLgt.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "if (`exists vrayRectLgt`==0) eval (\"source \\\"\"+`getenv MAYA_PPTOOLS`+\"/scripts/Toolbox/Lighting/vrayRectLgt.mel\\\"\");if (`exists vrayRectLgt`) vrayRectLgt;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "VRay bake global illumination step 1" 
+        -enableBackground 0
+        -align "center" 
+        -label "vrayGI1" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/vrayGI1.png" 
+        -image1 "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/vrayGI1.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "if (`exists vrayGI1`==0) eval (\"source \\\"\"+`getenv MAYA_PPTOOLS`+\"/scripts/Toolbox/Lighting/vrayGI1.mel\\\"\");if (`exists vrayGI1`) vrayGI1;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "VRay bake global illumination step 2" 
+        -enableBackground 0
+        -align "center" 
+        -label "vrayGI2" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/vrayGI2.png" 
+        -image1 "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/vrayGI2.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "if (`exists vrayGI2`==0) eval (\"source \\\"\"+`getenv MAYA_PPTOOLS`+\"/scripts/Toolbox/Lighting/vrayGI2.mel\\\"\");if (`exists vrayGI2`) vrayGI2;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "VRay bake global illumination step 3" 
+        -enableBackground 0
+        -align "center" 
+        -label "vrayGI3" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/vrayGI3.png" 
+        -image1 "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/vrayGI3.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "if (`exists vrayGI3`==0) eval (\"source \\\"\"+`getenv MAYA_PPTOOLS`+\"/scripts/Toolbox/Lighting/vrayGI3.mel\\\"\");if (`exists vrayGI3`) vrayGI3;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Slap Comp" 
+        -enableBackground 0
+        -align "center" 
+        -label "slapComp" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -imageOverlayLabel "SLAP" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "commandButton.png" 
+        -image1 "commandButton.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "import slapComp\nreload(slapComp)\nslapComp.slapComp()" 
+        -sourceType "python" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "VRay low resolution settings" 
+        -enableBackground 0
+        -align "center" 
+        -label "vrayLOW" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/vrayLOW.png" 
+        -image1 "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/vrayLOW.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "if (`exists vrayLOW`==0) eval (\"source \\\"\"+`getenv MAYA_PPTOOLS`+\"/scripts/Toolbox/Lighting/vrayLOW.mel\\\"\");if (`exists vrayLOW`) vrayLOW;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "VRay high resolution settings" 
+        -enableBackground 0
+        -align "center" 
+        -label "vrayHI" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/vrayHI.png" 
+        -image1 "//moon/pipeline/dev/maya/2012-x64/scripts/Toolbox/Lighting/vrayHI.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "if (`exists vrayHI`==0) eval (\"source \\\"\"+`getenv MAYA_PPTOOLS`+\"/scripts/Toolbox/Lighting/vrayHI.mel\\\"\");if (`exists vrayHI`) vrayHI;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+    ;
+
+} 

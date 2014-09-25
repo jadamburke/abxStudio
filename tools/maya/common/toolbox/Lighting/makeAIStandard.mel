@@ -1,0 +1,44 @@
+// makeAIStandard
+// Created by: adamb
+// Date: 2014/08/10 14:28:27
+
+global proc makeAIStandard(){
+	$sel = `ls -sl`;
+	string $nodesToGraph[];
+	for ($each in $sel){
+		if (size($sel)>0){
+			string $myShapeNode[] = `listRelatives -children -shapes $each`;
+			
+			for ($shape in $myShapeNode){
+
+				string $mySGs[] = `listConnections -type shadingEngine $shape`;
+
+				//connectAttr -force aiStandard1.outColor blinn2SG.aiSurfaceShader;
+				for ($every in $mySGs){
+					string $surfaceShader[] = `listConnections ($every + ".surfaceShader")`;
+					if (`attributeExists "aiSurfaceShader" $every`){
+						// if its not already attached to an arniold surf
+						if (size(`listConnections ($every+".aiSurfaceShader")`)==0){
+
+							string $newShader = `shadingNode -asShader aiStandard`;
+							connectAttr -f ($newShader+".outColor") ($every+".aiSurfaceShader");
+
+							string $textures[] = `listConnections ($surfaceShader[0]+".color")`;
+							float $rgbColor[] = {0,0,0};
+							if (size($textures)<1){
+								float $rgbColor[] = `getAttr ($surfaceShader[0]+".color")`;
+								setAttr ($newShader+".color") $rgbColor[0] $rgbColor[1] $rgbColor[2];
+							}
+							else{
+								string $plugs[] = `listConnections -p 1 ($surfaceShader[0]+".color")`;
+								connectAttr -f $plugs[0] ($newShader+".color");
+							}
+							//string $filePath = `getAttr ($textures[0]+".ftn")`;
+							//$objFileNode = $textures[0];
+						}
+					}
+				}
+			}
+		}
+	}
+}

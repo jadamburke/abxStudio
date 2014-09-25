@@ -1,0 +1,11 @@
+// requires maya "2012";
+startAttrPreset( "aiAOVFilter" );
+blendAttrStr "aiTranslator" "gaussian"; 
+blendAttrStr "aiUserOptions" ""; 
+blendAttrStr "aiTranslator" "gaussian"; 
+blendAttr "width" 2; 
+blendAttr "domain" 0; 
+blendAttr "minimum" 0; 
+blendAttr "maximum" 1; 
+blendAttr "scalarMode" 0; 
+endAttrPreset();

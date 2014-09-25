@@ -1,0 +1,227 @@
+#! ./Contents/MacOS/Nuke6.0v7 -nx
+version 6.0 v7
+Gizmo {
+ inputs 2
+ help "Use a 2D single channel image to add bump to a 3D render of normal vectors.  The result can be used to affect relighting.\n\nA UV render is required in order to remap the input image to the 3D render.  The intermediate step of converting the bump value to xy vectors happens in 2D and is then UV mapped.  This means the vector is correctly multiplied with the normal along the surface tangents and gives a better result.\n"
+ addUserKnob {20 BumpNormals}
+ addUserKnob {41 normal_in l "normal in" T Shuffle1.in}
+ addUserKnob {41 normal_out l "normal out" T ShuffleCopy2.out}
+ addUserKnob {41 bump_uv l "bump UV channels" T STMap3.uv}
+ addUserKnob {6 rematte l "re-matte with alpha" t "Premultiplied pixels may become non-zero so you can re-matte them with the alpha using this." +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {41 bump_channel l "bump channel" T Copy1.from0}
+ addUserKnob {41 strength l "bump strength" T Multiply1.value}
+ addUserKnob {41 blur_amount l "blur amount" T Blur1.size}
+}
+ Input {
+  inputs 0
+  name Input
+  xpos -114
+  ypos 113
+ }
+ Dot {
+  name Dot19
+  xpos -101
+  ypos 1062
+ }
+set N29e21a0 [stack 0]
+push $N29e21a0
+ Shuffle {
+  in none
+  out rgb
+  name Shuffle1
+  label "\[value in] to \[value out]"
+  xpos 103
+  ypos 973
+ }
+push $N29e21a0
+push $N29e21a0
+ Input {
+  inputs 0
+  name map
+  xpos 158
+  ypos 108
+  number 1
+ }
+set N29ef620 [stack 0]
+push $N29ef620
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 rgba.red
+  name Copy1
+  xpos 158
+  ypos 178
+  disable {{"!\[exists parent.input1]" i}}
+ }
+ Shuffle {
+  green red
+  blue red
+  alpha white
+  name Shuffle3
+  xpos 158
+  ypos 218
+ }
+ Multiply {
+  channels rgb
+  name Multiply1
+  xpos 158
+  ypos 259
+ }
+ Blur {
+  channels rgb
+  name Blur1
+  xpos 158
+  ypos 285
+ }
+ Dot {
+  name Dot3
+  xpos 192
+  ypos 344
+ }
+set N29ee120 [stack 0]
+ Position {
+  translate {-1 0}
+  name Position1
+  label "\[value translate]"
+  xpos 20
+  ypos 437
+ }
+push $N29ee120
+ Position {
+  translate {1 0}
+  name Position2
+  label "\[value translate]"
+  xpos 115
+  ypos 438
+ }
+ ChannelMerge {
+  inputs 2
+  A rgba.red
+  operation minus
+  B rgba.red
+  output rgba.red
+  maskChannelMask -rgba.alpha
+  name ChannelMerge1
+  xpos 71
+  ypos 481
+ }
+push $N29ee120
+ Position {
+  translate {0 -1}
+  name Position3
+  label "\[value translate]"
+  xpos 201
+  ypos 436
+ }
+push $N29ee120
+ Position {
+  translate {0 1}
+  name Position4
+  label "\[value translate]"
+  xpos 293
+  ypos 437
+ }
+ ChannelMerge {
+  inputs 2
+  A rgba.green
+  operation minus
+  B rgba.green
+  output rgba.green
+  maskChannelMask -rgba.alpha
+  name ChannelMerge2
+  xpos 243
+  ypos 483
+ }
+ ShuffleCopy {
+  inputs 2
+  red red
+  blue black
+  alpha black
+  name ShuffleCopy1
+  label "recombine x and y"
+  xpos 164
+  ypos 556
+ }
+ STMap {
+  inputs 2
+  channels rgb
+  name STMap3
+  xpos 164
+  ypos 743
+ }
+ CopyBBox {
+  inputs 2
+  name CopyBBox3
+  xpos 164
+  ypos 864
+ }
+ MergeExpression {
+  inputs 2
+  expr0 Ar+Br+Bg
+  expr1 Ag+Br+Bg
+  expr2 Ab+Br+Bg
+  maskChannelMask -rgba.alpha
+  name MergeExpression1
+  label "New Normal = Normal + (U * x_gradient) + (V * y_gradient)"
+  xpos 164
+  ypos 1022
+ }
+ Expression {
+  temp_name0 length
+  temp_expr0 sqrt((r*r)+(g*g)+(b*b))
+  expr0 r/length
+  expr1 g/length
+  expr2 b/length
+  name Normalize4
+  xpos 164
+  ypos 1071
+ }
+set N1ce29410 [stack 0]
+ Shuffle {
+  red black
+  green black
+  blue black
+  alpha black
+  name Shuffle2
+  xpos 254
+  ypos 1144
+ }
+push $N1ce29410
+ Keymix {
+  inputs 3
+  channels rgb
+  invertMask true
+  name Keymix1
+  xpos 164
+  ypos 1211
+  disable {{!rematte i}}
+ }
+push $N29e21a0
+ Copy {
+  inputs 2
+  from0 -rgba.alpha
+  to0 -rgba.alpha
+  channels rgb
+  name Copy2
+  xpos 164
+  ypos 1299
+ }
+push $N29e21a0
+ ShuffleCopy {
+  inputs 2
+  in rgb
+  red red
+  green green
+  blue blue
+  out none
+  name ShuffleCopy2
+  xpos 164
+  ypos 1397
+ }
+ Output {
+  name Output1
+  xpos 164
+  ypos 1472
+ }
+end_group

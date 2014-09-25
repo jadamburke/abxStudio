@@ -1,0 +1,57 @@
+default:
+  packages:
+    maya:
+      version: '2015'
+      modules:
+        arnold: '1.1.1.0'
+        crate: '1.1.145'
+    softimage:
+      version: '2015'
+    nuke:
+      version: '8.0v5'
+    nukex:
+      version: '8.0v5'
+    hiero:
+      version: '1.8v2'
+    aftereffects:
+      version: 'CC'
+    premiere:
+      version: 'CC 2014'
+    motionbuilder:
+      version: '2014'
+  order:
+  - maya
+  - softimage
+  - motionbuilder
+  - nuke
+  - nukex
+  - hiero
+  - aftereffects
+  - premiere
+
+modeling:
+  packages:
+    maya:
+      version: '2015'
+      modules:
+        arnold: '1.0.0.4'
+        crate: '1.1.145'
+    soft:
+      version: '2015'
+    nuke:
+      version: '8.0v5'
+    nukex:
+      version: '8.0v5'
+    hiero:
+      version: '1.8v2'
+
+edit:
+  packages:
+    nuke:
+      version: '8.0v5'
+    nukex:
+      version: '8.0v5'
+    hiero:
+      version: '1.8v1'
+    premiere:
+      version: 'CC 2014'

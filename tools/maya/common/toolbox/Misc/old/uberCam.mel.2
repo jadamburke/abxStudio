@@ -1,0 +1,218 @@
+//
+// uberCam.mel
+//
+// Clay Budin
+// clay_budin@hotmail.com
+// PandaPanther
+// Apr 03 12
+//
+
+string $uberCamVersionStr = "1.02b";
+
+float $uberCamData[];
+int $uberCamSceneFrames[];
+string $uberCamSceneNames[];
+string $uberCamBadScenes[];
+int $uberCamMinFrame, $uberCamMaxFrame;
+
+string $tsSceneList;
+
+global proc uberCamGUI ()  {
+	global string $uberCamVersionStr;
+	global string $tsSceneList;
+	if (`window -ex uberCamGUIWindow` != true)  {
+		string $window = `window -w 800 -title ("uberCam Generator v" + $uberCamVersionStr) uberCamGUIWindow`;
+		columnLayout;
+		$tsSceneList = `textScrollList -w 800 -numberOfRows 8 -allowMultiSelection true -dkc "uberCamGUIDeleteSelected" uberCamGUITScrlList`;
+		rowLayout -nc 8;
+		button -label "Add Scene(s)" -command "uberCamGUIAddScene";
+		text -label "   ";
+		button -label "Create uberCam" -command ("window -e -visible 0 " + $window + "; uberCamRun");
+		text -label "   ";
+		button -label "Cancel" -command ("window -e -visible 0 " + $window);
+		text -label "   ";
+		button -label "Delete Selected" -command "uberCamGUIDeleteSelected";
+		button -label "Clear List" -command ("textScrollList -e -removeAll " + $tsSceneList);
+		//text -label "	 ";
+		//button -label "Move Up" -en 0;
+		//button -label "Move Down" -en 0;
+		showWindow $window;
+	} else  {
+		showWindow uberCamGUIWindow;
+	}
+}
+
+global proc uberCamGUIAddScene ()  {
+	global string $tsSceneList;
+
+	string $multipleFilters = "Maya Files (*.ma *.mb);;Maya ASCII (*.ma);;Maya Binary (*.mb);;All Files (*.*)";
+	string $result[] = `fileDialog2 -fileFilter $multipleFilters -selectFileFilter "Maya Files" -dialogStyle 2 -fm 4 -cap "Choose scene files" -okc "Choose"`;
+	if (size($result) > 0)  {
+		string $sceneFile;
+		for ($sceneFile in $result)  {
+			textScrollList -e -append $sceneFile $tsSceneList;
+		}
+	}
+}
+
+global proc uberCamGUIDeleteSelected ()  {
+	global string $tsSceneList;
+	
+	int $delIdx[] = `textScrollList -q -sii $tsSceneList`;
+	for ($i = size($delIdx)-1; $i >= 0; --$i)
+		textScrollList -e -rii $delIdx[$i] $tsSceneList;
+}
+
+
+
+global proc uberCamGatherData ()  {
+	global float $uberCamData[];
+	global int $uberCamSceneFrames[];
+	global string $uberCamSceneNames[];
+	global string $uberCamBadScenes[];
+	global int $uberCamMinFrame, $uberCamMaxFrame;
+
+	global string $tsSceneList;
+	string $sceneList[] = `textScrollList -q -allItems $tsSceneList`;
+	string $scene;
+	
+	if (size($sceneList) == 0)  {
+		warning("No scenes chosen to generate uberCam from\n");
+		return;
+	}
+	
+    global int $gUseScenePanelConfig;
+    int $save_gUseScenePanelConfig = $gUseScenePanelConfig;
+    $gUseScenePanelConfig = false;
+
+	clear($uberCamData);
+	clear($uberCamSceneFrames);
+	clear($uberCamSceneNames);
+	clear($uberCamBadScenes);
+	$uberCamMinFrame = 100000000; $uberCamMaxFrame = -100000000;
+	int $idx = 0;
+	for ($scene in $sceneList)  {
+		print("uberCam: Opening scene file " + $scene + "\n");
+        string $shortScene = basename($scene, ".m.");
+		$uberCamSceneNames[size($uberCamSceneNames)] = $shortScene;
+
+		file -f -options "v=0" -prompt 0 -uc 0 -o $scene;
+		float $startT = `playbackOptions -q -min`;
+		float $endT = `playbackOptions -q -max`;
+		
+		$uberCamSceneFrames[size($uberCamSceneFrames)] = $startT;
+		$uberCamSceneFrames[size($uberCamSceneFrames)] = $endT;
+		if ($startT < $uberCamMinFrame) $uberCamMinFrame = $startT;
+		if ($endT > $uberCamMaxFrame) $uberCamMaxFrame = $endT;
+
+		if ($startT != 101)
+			$uberCamBadScenes[size($uberCamBadScenes)] = ("Scene: " + $shortScene + "  Does not start at frame 101");
+	   
+		string $camera = "renderCam";
+		if (! `objExists $camera`)  {
+			$camera = "master:renderCam";
+			if (! `objExists $camera`)  {
+				warning("Scene: " + $shortScene + "  Could not find renderCam...Using persp instead\n");
+				$uberCamBadScenes[size($uberCamBadScenes)] = ("Scene: " + $shortScene + "  Could not find renderCam");
+				$camera = "persp";
+			}
+		}
+
+		float $camAp[] = `getAttr ($camera + ".cameraAperture")`;
+		if ($camAp[0] != .98 || $camAp[1] != .735)  {
+			warning("Scene: " + $shortScene + "  Camera Film Gate not set to 35mm Full Aperture");
+			$uberCamBadScenes[size($uberCamBadScenes)] = ("Scene: " + $shortScene + "  Camera Film Gate not set to 35mm Full Aperture");
+		}
+
+		 setNamedPanelLayout "Single Perspective View";
+		 outlinerPanel -rp `getPanel -withFocus`;
+		
+		//for ($t in {$startT, ($startT + $endT)*.5, $endT})  {
+	   	for ($t = $startT; $t <= $endT; ++$t)  {
+			currentTime $t;
+			for ($at in {"tx", "ty", "tz", "rx", "ry", "rz", "fl"})
+				$uberCamData[$idx++] = `getAttr ($camera + "." + $at)`;
+		}
+	}
+
+	$gUseScenePanelConfig = $save_gUseScenePanelConfig;
+}
+
+global proc uberCamCreate ()  {
+	global float $uberCamData[];
+	global int $uberCamSceneFrames[];
+	global string $uberCamSceneNames[];
+	global int $uberCamMinFrame, $uberCamMaxFrame;
+	
+	if (size($uberCamSceneNames) == 0)
+		return;
+
+	file -f -new;
+	setAttr defaultResolution.pixelAspect 1.0;
+	setAttr defaultResolution.width 1920;
+	setAttr defaultResolution.height 1080;
+	
+	string $uberCam[] = `camera`;
+	rename $uberCam[0] "uberCam";
+	setAttr uberCam.cameraAperture .98 .735;
+	
+	int $uberFrame = 101;
+	int $frame;
+	int $cdIdx = 0, $sfIdx = 0;
+	for ($scene in $uberCamSceneNames)  {
+		string $sceneCam = ($scene + "_Cam");
+		string $cam[] = `camera`;
+		rename $cam[0] $sceneCam;
+		setAttr ($sceneCam + ".cameraAperture") .98 .735;
+		
+		int $startT = $uberCamSceneFrames[$sfIdx++];
+		int $endT = $uberCamSceneFrames[$sfIdx++];
+		int $midT = ($startT + $endT) * .5;
+		
+		for ($frame = $startT; $frame <= $endT; ++$frame)  {
+			if ($frame == $startT || $frame == $midT || $frame == $endT)  {
+				currentTime $uberFrame;
+				for ($at in {"tx", "ty", "tz", "rx", "ry", "rz", "fl"})  {
+					setKeyframe -v $uberCamData[$cdIdx++] -at $at "uberCam";
+				}
+				$cdIdx -= 7;
+				++$uberFrame;
+			}
+
+			currentTime $frame;
+			for ($at in {"tx", "ty", "tz", "rx", "ry", "rz", "fl"})  {
+				setKeyframe -v $uberCamData[$cdIdx++] -at $at $sceneCam;
+			}
+		}
+	}
+	clear($uberCamData);
+	clear($uberCamSceneFrames);
+	clear($uberCamSceneNames);
+		
+	playbackOptions -min 101 -max ($uberFrame-1) -ast $uberCamMinFrame -aet $uberCamMaxFrame;
+	currentTime 101;
+	select -r uberCam;
+}
+
+global proc uberCamRun ()  {
+	global string $uberCamBadScenes[];
+
+    print("uberCam: Begin.\n");
+
+	uberCamGatherData();
+	uberCamCreate();
+
+	if (size($uberCamBadScenes) > 0)  {
+		confirmDialog -title "Scene Warning" -button "OK"
+			-message ("The following scene files reported problems:\n\n" + stringArrayToString($uberCamBadScenes, "\n"));
+		clear($uberCamBadScenes);
+	}
+	
+	print("uberCam: Done.\n");
+}
+
+global proc uberCam ()  {
+	uberCamGUI();
+}
+
+

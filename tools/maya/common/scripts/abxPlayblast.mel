@@ -1,0 +1,159 @@
+
+global proc abxPlayblastUI (){
+
+
+	if (!`window -exists abxPlayblastUIWindow`){
+		window -title "Playblast UI" -width 1024 -height 680 -menuBar true abxPlayblastUIWindow;
+		string $ppResources = `getenv PP_RESOURCE`;
+		string $ppTools = `getenv MAYA_PPTOOLS`;
+
+		formLayout abxPlayblastUIWindowMainForm;
+		columnLayout abxPlayblastUIDetailsCol;
+			
+		setParent ..;
+
+		timePort -h 32 -bgc .2 .2 .2 abxPlayblastUITimePort;
+		rowLayout -nc 5 abxPlayblastUIPlaybackButtons;
+			symbolButton -w 32 -h 32 -image "timerew.png" -c "playButtonStart" ; 
+			symbolButton -w 32 -h 32 -image "timeend.png" -c "playButtonStepBackward" ; 
+			symbolButton -w 32 -h 32 -image "timeplay.png" -annotation (uiRes("m_timeSlider.kPlayForwardsAnnot")) -c "abxPlayblastUIPlayForward" abxPlayblastUIPlayButton; 
+			symbolButton -w 32 -h 32 -image "timestart.png" -c "playButtonStepForward" ; 
+			symbolButton -w 32 -h 32 -image "timefwd.png"  -c "playButtonEnd" ; 
+		setParent..;
+		
+		paneLayout -configuration "right4" abxPlayblastUIMainPane;
+		if (!`modelPanel -q -ex abxPlayblastUIViewportPanel`)
+			modelPanel -p abxPlayblastUIMainPane abxPlayblastUIViewportPanel;
+		else
+			modelPanel -e -p abxPlayblastUIMainPane abxPlayblastUIViewportPanel;
+		//formLayout -p abxPlayblastUIMainPane abxPlayblastUIViewportForm; // viewport pane
+		formLayout -p abxPlayblastUIMainPane abxPlayblastUIDevForm; // device pane
+		formLayout -p abxPlayblastUIMainPane abxPlayblastUILibForm; // camera list pane
+		formLayout -p abxPlayblastUIMainPane abxPlayblastUIDetailsForm; // details pane
+		setParent abxPlayblastUIDetailsForm;
+			columnLayout -cat "both" 0 -rs 2 -adj 1 abxPlayblastUIDtlColLyt;
+				separator -style "none" -h 5;
+				frameLayout -cll 1 -cl 1 -bs "etchedIn" -l "Cam Details" -bgc .2 .2 .2 abxPlayblastUIDefaultsLyt;
+					columnLayout -cat "both" 3 -rs 2 -adj true -bgc .4 .4 .4;
+						separator -style "none" -h 5;
+						floatFieldGrp -en1 1 -en2 1 -cw 1 90 -cw 2 60 -cw 3 60 -nf 2 -pre 3 -label "Start/End:" -v1 0 -v2 0 abxPlayblastUIDtlRange;
+						floatFieldGrp -en1 1 -en2 1 -cw 1 90 -cw 2 60 -cw 3 60 -nf 2 -pre 3 -label "Film Aperture:" -v1 0 -v2 0 abxPlayblastUIDtlAperture;
+						textFieldGrp -cw 1 90 -cw 2 122 -adj 2 -label "Lens" -text  "24fps" -editable false abxPlayblastUIDtlLens;
+						textFieldGrp -cw 1 90 -cw 2 122 -adj 2 -label "Date Created:" -text  "1.0" -editable false abxPlayblastUIDtlAspect;
+						textFieldGrp -cw 1 90 -cw 2 122 -adj 2 -label "User:" -text  "1.0" -editable false abxPlayblastUIDtlUsr;
+						textFieldGrp -cw 1 90 -cw 2 122 -adj 2 -label "Sample Rate:" -text  "default" -editable false abxPlayblastUIDtlSample;
+						separator -style "none" -h 5;
+					setParent..;
+				setParent..;
+				separator -style "none" -h 5;
+				frameLayout -cll 1 -cl 1 -bs "etchedIn" -l "Cam Tools" -bgc .2 .2 .2 abxPlayblastUIToolsLyt;
+					columnLayout -cat "both" 3 -rs 4 -adj true -bgc .4 .4 .4;
+						separator -style "none" -h 5;
+						rowLayout -numberOfColumns 3 -rat 2 "top" 0 -adj 1;
+							button -bgc .2 .2 .2 -w 100 -l "View" -al "center" -h 20 -c "";
+							button -bgc .2 .2 .2 -w 100 -l "Playblast" -al "center" -h 20 -c "";
+						setParent ..;
+						rowLayout -numberOfColumns 3 -rat 2 "top" 0 -adj 1;
+							button -bgc .2 .2 .2 -w 100 -l "Smooth" -al "center" -h 20 -c "";
+							button -bgc .2 .2 .2 -w 100 -l "Rename" -al "center" -h 20 -c "";
+						setParent ..;
+						rowLayout -numberOfColumns 3 -rat 2 "top" 0 -adj 1;
+							button -bgc .2 .2 .2 -w 100 -l "Delete" -al "center" -h 20 -c "";
+							button -en 1 -bgc .2 .2 .2 -w 100 -l "Init abxPlayblastCam" -al "center" -h 20 -c "abxPlayblastUISetupRecord";
+						setParent ..;
+						separator -style "none" -h 5;
+					
+
+		// buttons for adding stuff
+
+		setParent abxPlayblastUILibForm;
+			frameLayout -parent abxPlayblastUILibForm -cll 0 -bs "etchedIn" -l "Recorded Cameras" abxPlayblastUICamListFrmeLyt;
+				string $jobLister = `treeView -numberOfButtons 0 -abr true -enk true -idc "abxPlayblastUITreeViewDblClk" -sc "abxPlayblastUISetActiveJob " -cmc "abxPlayblastUICamUpdateMenu" abxPlayblastUICamList`;
+				string $pMenu = `popupMenu -parent $jobLister abxPlayblastUICamPopupMenu`;
+				abxPlayblastUIBuildCamMenu ($jobLister);
+			setParent ..;
+
+
+		string $pMenu = `popupMenu -parent $jobLister abxPlayblastUIPopupMenu`;		
+
+		// sets the angle and take option menus
+		abxPlayblastUIRefreshAngleTake();
+		
+
+		formLayout -e
+    		-af abxPlayblastUIMainPane top 0
+    		-af abxPlayblastUIMainPane left 20
+    		-af abxPlayblastUIMainPane bottom 35
+    		-af abxPlayblastUIMainPane right 20
+
+    		-attachNone abxPlayblastUIPlaybackButtons "left"
+    		-attachForm abxPlayblastUIPlaybackButtons "right" 20
+			-attachControl abxPlayblastUIPlaybackButtons "top" 0 abxPlayblastUIMainPane
+			-attachForm abxPlayblastUIPlaybackButtons "bottom" 10
+
+    		-attachForm abxPlayblastUITimePort "left" 20 
+    		-attachControl abxPlayblastUITimePort "right" 0 abxPlayblastUIPlaybackButtons
+			-attachControl abxPlayblastUITimePort "top" 0 abxPlayblastUIMainPane
+			-attachForm abxPlayblastUITimePort "bottom" 10
+			
+
+        	abxPlayblastUIWindowMainForm;
+
+		formLayout -e 
+			-af abxPlayblastUICamListFrmeLyt left 5
+			-af abxPlayblastUICamListFrmeLyt top 0
+			-af abxPlayblastUICamListFrmeLyt right 2
+			-af abxPlayblastUICamListFrmeLyt bottom 5
+			abxPlayblastUILibForm;
+
+
+		formLayout -e 
+			-af abxPlayblastUIDeviceLyt left 5
+			-af abxPlayblastUIDeviceLyt top 0
+			-af abxPlayblastUIDeviceLyt right 2
+			-af abxPlayblastUIDeviceLyt bottom 5
+			abxPlayblastUIDevForm;
+
+
+
+		//formLayout -e 
+		//	-af abxPlayblastUIListFrmeLyt left 2
+		//	-af abxPlayblastUIListFrmeLyt top 0
+		//	-af abxPlayblastUIListFrmeLyt right 5
+		//	-aof abxPlayblastUIListFrmeLyt bottom -150
+		//	-ac abxPlayblastUIDtlColLyt top 5 abxPlayblastUIListFrmeLyt
+		//	-af abxPlayblastUIDtlColLyt left 5
+		//	-af abxPlayblastUIDtlColLyt right 5
+		//	abxPlayblastUIDetailsForm;
+		
+		paneLayout -e -paneSize 1 80 100 abxPlayblastUIMainPane;
+		paneLayout -e -paneSize 2 20 10 -staticHeightPane 1 abxPlayblastUIMainPane;
+		paneLayout -e -paneSize 3 20 80  abxPlayblastUIMainPane;
+		paneLayout -e -paneSize 4 20 10  abxPlayblastUIMainPane;	
+
+		showWindow abxPlayblastUIWindow;
+
+		abxPlayblastUIPopulateList abxPlayblastUICamList;
+		// CB - don't defer this, user is waiting
+		//evalDeferred("abxPlayblastUISelectCurrentProject");
+		//eval("abxPlayblastUISelectCurrentProject");
+
+	}
+	else {
+
+		showWindow abxPlayblastUIWindow;
+
+		paneLayout -e -paneSize 1 80 100 abxPlayblastUIMainPane;
+		paneLayout -e -paneSize 2 20 10  abxPlayblastUIMainPane;
+		paneLayout -e -paneSize 3 20 80  abxPlayblastUIMainPane;
+		paneLayout -e -paneSize 4 20 10  abxPlayblastUIMainPane;	
+		//abxPlayblastUISelectCurrentProject;
+		abxPlayblastUIPopulateList abxPlayblastUICamList;
+	}
+
+	// setup script jobs
+	$gabxPlayblastUIjobId[size($gabxPlayblastUIjobId)] = `scriptJob -e "DagObjectCreated" abxPlayblastUINodeWatch`;
+	$gabxPlayblastUIjobId[size($gabxPlayblastUIjobId)] = `scriptJob -e "NameChanged" abxPlayblastUINodeWatch`;
+	$gabxPlayblastUIjobId[size($gabxPlayblastUIjobId)] = `scriptJob -e "NewSceneOpened" abxPlayblastUINodeWatch`;
+	$gabxPlayblastUIjobId[size($gabxPlayblastUIjobId)] = `scriptJob -e "SceneOpened" abxPlayblastUINodeWatch`;
+}

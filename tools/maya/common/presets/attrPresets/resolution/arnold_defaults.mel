@@ -1,0 +1,15 @@
+// requires maya "2012";
+startAttrPreset( "resolution" );
+// blendAttr "width" 1024; 
+// blendAttr "height" 576; 
+//blendAttr "pixelAspect" 0; 
+blendAttr "aspectLock" 0; 
+blendAttr "deviceAspectRatio" 1.777777791; 
+blendAttr "lockDeviceAspectRatio" 0; 
+blendAttr "dotsPerInch" 72; 
+blendAttr "oddFieldFirst" 0; 
+blendAttr "fields" 0; 
+blendAttr "zerothScanline" 0; 
+blendAttr "imageSizeUnits" 0; 
+blendAttr "pixelDensityUnits" 0; 
+endAttrPreset();

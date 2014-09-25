@@ -1,0 +1,7 @@
+// requires maya "2012";
+startAttrPreset( "container" );
+blendAttrStr "fileTextureName" "M:/backlot/images/textures/rocks/rockMapA1.tif"; 
+blendAttrStr "fileTextureName2" "M:/backlot/images/textures/rocks/rockMapA1.tif"; 
+blendAttrStr "fileTextureName1" "M:/backlot/images/textures/rocks/rockMapA1.tif"; 
+blendAttr "scaleX" 135; 
+endAttrPreset();

@@ -1,0 +1,1086 @@
+
+
+global int $gHydraUIjobId[];
+global string $gHydraUILastModelPanel;
+global string $gHydraUIActiveAngle;
+global string $gHydraUIActiveTake;
+
+global proc hydraUI () {
+	global int $gHydraUIjobId[];
+
+	if (!`window -exists hydraUIWindow`){
+		window -title "Hydra UI" -width 1024 -height 680 -menuBar true hydraUIWindow;
+		string $ppResources = `getenv PP_RESOURCE`;
+		string $ppTools = `getenv MAYA_PPTOOLS`;
+
+
+		//menu -label "Create";
+		//	menuItem -label "New Job" ;
+		//	menuItem -label "New Maya Project";
+
+		formLayout hydraUIWindowMainForm;
+		columnLayout hydraUIDetailsCol;
+			
+		setParent ..;
+
+		timePort -h 32 -bgc .2 .2 .2 hydraUITimePort;
+		rowLayout -nc 5 hydraUIPlaybackButtons;
+			symbolButton -w 32 -h 32 -image "timerew.png" -c "playButtonStart" ; 
+			symbolButton -w 32 -h 32 -image "timeend.png" -c "playButtonStepBackward" ; 
+			symbolButton -w 32 -h 32 -image "timeplay.png" -annotation (uiRes("m_timeSlider.kPlayForwardsAnnot")) -c "hydraUIPlayForward" hydraUIPlayButton; 
+			symbolButton -w 32 -h 32 -image "timestart.png" -c "playButtonStepForward" ; 
+			symbolButton -w 32 -h 32 -image "timefwd.png"  -c "playButtonEnd" ; 
+		setParent..;
+		//button -l "Refresh" -c "hydraUIRefreshDetailsUI \"\"" -al "center" -h 26 hydraUIBtnRefresh ;
+		//button -l "Close" -c "window -e -vis 0 hydraUIWindow;deleteUI hydraUIWindow;hydraUIKillAllScriptJobs" -al "center" -h 26 hydraUIBtnClose ;
+
+		
+		paneLayout -configuration "right4" hydraUIMainPane;
+		if (!`modelPanel -q -ex hydraUIViewportPanel`)
+			modelPanel -p hydraUIMainPane hydraUIViewportPanel;
+		else
+			modelPanel -e -p hydraUIMainPane hydraUIViewportPanel;
+		//formLayout -p hydraUIMainPane hydraUIViewportForm; // viewport pane
+		formLayout -p hydraUIMainPane hydraUIDevForm; // device pane
+		formLayout -p hydraUIMainPane hydraUILibForm; // camera list pane
+		formLayout -p hydraUIMainPane hydraUIDetailsForm; // details pane
+		setParent hydraUIDetailsForm;
+			columnLayout -cat "both" 0 -rs 2 -adj 1 hydraUIDtlColLyt;
+				separator -style "none" -h 5;
+				frameLayout -cll 1 -cl 1 -bs "etchedIn" -l "Cam Details" -bgc .2 .2 .2 hydraUIDefaultsLyt;
+					columnLayout -cat "both" 3 -rs 2 -adj true -bgc .4 .4 .4;
+						separator -style "none" -h 5;
+						floatFieldGrp -en1 1 -en2 1 -cw 1 90 -cw 2 60 -cw 3 60 -nf 2 -pre 3 -label "Start/End:" -v1 0 -v2 0 hydraUIDtlRange;
+						floatFieldGrp -en1 1 -en2 1 -cw 1 90 -cw 2 60 -cw 3 60 -nf 2 -pre 3 -label "Film Aperture:" -v1 0 -v2 0 hydraUIDtlAperture;
+						textFieldGrp -cw 1 90 -cw 2 122 -adj 2 -label "Lens" -text  "24fps" -editable false hydraUIDtlLens;
+						textFieldGrp -cw 1 90 -cw 2 122 -adj 2 -label "Date Created:" -text  "1.0" -editable false hydraUIDtlAspect;
+						textFieldGrp -cw 1 90 -cw 2 122 -adj 2 -label "User:" -text  "1.0" -editable false hydraUIDtlUsr;
+						textFieldGrp -cw 1 90 -cw 2 122 -adj 2 -label "Sample Rate:" -text  "default" -editable false hydraUIDtlSample;
+						separator -style "none" -h 5;
+					setParent..;
+				setParent..;
+				separator -style "none" -h 5;
+				frameLayout -cll 1 -cl 1 -bs "etchedIn" -l "Cam Tools" -bgc .2 .2 .2 hydraUIToolsLyt;
+					columnLayout -cat "both" 3 -rs 4 -adj true -bgc .4 .4 .4;
+						separator -style "none" -h 5;
+						rowLayout -numberOfColumns 3 -rat 2 "top" 0 -adj 1;
+							button -bgc .2 .2 .2 -w 100 -l "View" -al "center" -h 20 -c "";
+							button -bgc .2 .2 .2 -w 100 -l "Playblast" -al "center" -h 20 -c "";
+						setParent ..;
+						rowLayout -numberOfColumns 3 -rat 2 "top" 0 -adj 1;
+							button -bgc .2 .2 .2 -w 100 -l "Smooth" -al "center" -h 20 -c "";
+							button -bgc .2 .2 .2 -w 100 -l "Rename" -al "center" -h 20 -c "";
+						setParent ..;
+						rowLayout -numberOfColumns 3 -rat 2 "top" 0 -adj 1;
+							button -bgc .2 .2 .2 -w 100 -l "Delete" -al "center" -h 20 -c "";
+							button -en 1 -bgc .2 .2 .2 -w 100 -l "Init hydraCam" -al "center" -h 20 -c "hydraUISetupRecord";
+						setParent ..;
+						separator -style "none" -h 5;
+					
+
+		// buttons for adding stuff
+
+		//button -l "New Job" -c "hydraUICreateNewJobUI;" -al "center" -h 26 ;
+
+		setParent hydraUILibForm;
+			frameLayout -parent hydraUILibForm -cll 0 -bs "etchedIn" -l "Recorded Cameras" hydraUICamListFrmeLyt;
+				string $jobLister = `treeView -numberOfButtons 0 -abr true -enk true -idc "hydraUITreeViewDblClk" -sc "hydraUISetActiveJob " -cmc "hydraUICamUpdateMenu" hydraUICamList`;
+				string $pMenu = `popupMenu -parent $jobLister hydraUICamPopupMenu`;
+				hydraUIBuildCamMenu ($jobLister);
+			setParent ..;
+
+		
+
+
+
+		string $pMenu = `popupMenu -parent $jobLister hydraUIPopupMenu`;		
+
+		//hydraUIBuildMenu  $jobLister;
+
+		setParent hydraUIDevForm;
+			frameLayout -cll 1 -bs "etchedIn" -l "Hydra Device Control" -bgc .2 .2 .2 hydraUIDeviceLyt;
+				columnLayout -p hydraUIDeviceLyt -cat "both" 0 -rs 2 -adj 1 -bgc .4 .4 .4 hydraUIDevColLyt;
+
+					separator -style "none" -h 5;
+					optionMenuGrp -label "Active Device:" -columnWidth 2 80 -cw 3 100 -cc "hydraUISetDevice `optionMenuGrp -q -v hydraDeviceOM`" hydraDeviceOM;
+						string $hydraDevices[] =  `ls -type hydraDevice`;
+						for ($eac in $hydraDevices){
+							menuItem -label $eac;
+						}
+					frameLayout -lv 0 -bv 0 hydraUIDeviceAttrLyt;
+						if (size($hydraDevices)>0)
+							hydraUISetDevice $hydraDevices[0];
+					setParent..;
+					frameLayout -cll 1 -cl 1 -bs "etchedIn" -l "Filter Presets" -bgc .2 .2 .2;
+						columnLayout;
+							rowLayout -numberOfColumns 3 -rat 2 "top" 0 -adj 1;
+								button -bgc .2 .2 .2 -w 110 -l "Low All" -al "center" -h 20 -c "";
+								button -bgc .2 .2 .2 -w 110 -l "Low Falloff" -al "center" -h 20 -c "";
+								setParent ..;
+							rowLayout -numberOfColumns 3 -rat 2 "top" 0 -adj 1;
+								button -bgc .2 .2 .2 -w 110 -l "Med All" -al "center" -h 20 -c "";
+								button -bgc .2 .2 .2 -w 110 -l "Med Falloff" -al "center" -h 20 -c "";
+							setParent ..;
+							rowLayout -numberOfColumns 3 -rat 2 "top" 0 -adj 1;
+								button -bgc .2 .2 .2 -w 110 -l "Hi All" -al "center" -h 20 -c "";
+								button -bgc .2 .2 .2 -w 110 -l "Hi Falloff" -al "center" -h 20 -c "";
+							setParent ..;
+						setParent ..;
+					setParent ..;
+						
+					rowLayout -numberOfColumns 3 -rat 2 "top" 0 -adj 1;
+						button -bgc .2 .2 .2 -w 110 -l "Calibrate" -al "center" -h 20 -c "hydraCalibrate";
+						button -bgc .2 .2 .2 -w 110 -l "Look Thru HydraCam" -al "center" -h 20 -c "hydraUIViewHydraCam hydraCam";
+						
+					setParent ..;
+					rowLayout -numberOfColumns 3 -rat 2 "top" 0 -adj 1;
+						button -bgc .2 .2 .2 -w 110 -l "Toggle Roll" -al "center" -h 20 -c "";
+						button -en 1 -bgc .2 .2 .2 -w 110 -l "init HydraCam" -al "center" -h 20 -c "hydraUISetupRecord";
+					setParent ..;
+					separator -style "none" -h 10;
+					optionMenuGrp -label "Record Angle:" -columnWidth 2 80 -cw 3 100 -cc "hydraUISetAngle `optionMenuGrp -q -v hydraAngleOM`" hydraAngleOM;
+					optionMenuGrp -label "Record Take:" -columnWidth 2 80 -cw 3 100 -cc "hydraUISetTake `optionMenuGrp -q -v hydraTakeOM`" hydraTakeOM;
+					button -bgc .8 .2 .2 -w 200 -l "Ready Recording" -al "center" -h 40 -c "hydraUIMakeLive `optionMenuGrp -q -v hydraDeviceOM`";
+					frameLayout -cll 1 -cl 1 -bs "etchedIn" -l "Ignore Record Attrs" -bgc .2 .2 .2;
+						rowLayout -numberOfColumns 4 -rat 2 "top" 0 -adj 1;
+							text -l "Translate";
+							checkBox -l "X (truck)";
+							checkBox -l "Y (pedestal)";
+							checkBox -l "Z (dolly)";
+						setParent ..;
+						rowLayout -numberOfColumns 4 -rat 2 "top" 0 -adj 1;
+							text -l "Rotate";
+							checkBox -l "X (pan)";
+							checkBox -l "Y (tilt)";
+							checkBox -l "Z (roll)";
+						setParent ..;
+						rowLayout -numberOfColumns 2 -rat 2 "top" 0 -adj 1;
+							text -l "Focal Length";
+							checkBox -l "mm";
+						setParent ..;
+						rowLayout -numberOfColumns 2 -rat 2 "top" 0 -adj 1;
+							text -l "Focal Distance";
+							checkBox -l "mm";
+						setParent ..;
+					setParent ..;
+				setParent..;
+			setParent..;
+		setParent..;
+
+		// sets the angle and take option menus
+		hydraUIRefreshAngleTake();
+		
+
+		formLayout -e
+    		-af hydraUIMainPane top 0
+    		-af hydraUIMainPane left 20
+    		-af hydraUIMainPane bottom 35
+    		-af hydraUIMainPane right 20
+
+    		-attachNone hydraUIPlaybackButtons "left"
+    		-attachForm hydraUIPlaybackButtons "right" 20
+			-attachControl hydraUIPlaybackButtons "top" 0 hydraUIMainPane
+			-attachForm hydraUIPlaybackButtons "bottom" 10
+
+    		-attachForm hydraUITimePort "left" 20 
+    		-attachControl hydraUITimePort "right" 0 hydraUIPlaybackButtons
+			-attachControl hydraUITimePort "top" 0 hydraUIMainPane
+			-attachForm hydraUITimePort "bottom" 10
+			
+
+        	hydraUIWindowMainForm;
+
+		formLayout -e 
+			-af hydraUICamListFrmeLyt left 5
+			-af hydraUICamListFrmeLyt top 0
+			-af hydraUICamListFrmeLyt right 2
+			-af hydraUICamListFrmeLyt bottom 5
+			hydraUILibForm;
+
+
+		formLayout -e 
+			-af hydraUIDeviceLyt left 5
+			-af hydraUIDeviceLyt top 0
+			-af hydraUIDeviceLyt right 2
+			-af hydraUIDeviceLyt bottom 5
+			hydraUIDevForm;
+
+
+
+		//formLayout -e 
+		//	-af hydraUIListFrmeLyt left 2
+		//	-af hydraUIListFrmeLyt top 0
+		//	-af hydraUIListFrmeLyt right 5
+		//	-aof hydraUIListFrmeLyt bottom -150
+		//	-ac hydraUIDtlColLyt top 5 hydraUIListFrmeLyt
+		//	-af hydraUIDtlColLyt left 5
+		//	-af hydraUIDtlColLyt right 5
+		//	hydraUIDetailsForm;
+		
+		paneLayout -e -paneSize 1 80 100 hydraUIMainPane;
+		paneLayout -e -paneSize 2 20 10 -staticHeightPane 1 hydraUIMainPane;
+		paneLayout -e -paneSize 3 20 80  hydraUIMainPane;
+		paneLayout -e -paneSize 4 20 10  hydraUIMainPane;	
+
+		showWindow hydraUIWindow;
+
+		hydraUIPopulateList hydraUICamList;
+		// CB - don't defer this, user is waiting
+		//evalDeferred("hydraUISelectCurrentProject");
+		//eval("hydraUISelectCurrentProject");
+
+	}
+	else {
+
+		showWindow hydraUIWindow;
+
+		paneLayout -e -paneSize 1 80 100 hydraUIMainPane;
+		paneLayout -e -paneSize 2 20 10  hydraUIMainPane;
+		paneLayout -e -paneSize 3 20 80  hydraUIMainPane;
+		paneLayout -e -paneSize 4 20 10  hydraUIMainPane;	
+		//hydraUISelectCurrentProject;
+		hydraUIPopulateList hydraUICamList;
+	}
+
+	// setup script jobs
+	$gHydraUIjobId[size($gHydraUIjobId)] = `scriptJob -e "DagObjectCreated" hydraUINodeWatch`;
+	$gHydraUIjobId[size($gHydraUIjobId)] = `scriptJob -e "NameChanged" hydraUINodeWatch`;
+	$gHydraUIjobId[size($gHydraUIjobId)] = `scriptJob -e "NewSceneOpened" hydraUINodeWatch`;
+	$gHydraUIjobId[size($gHydraUIjobId)] = `scriptJob -e "SceneOpened" hydraUINodeWatch`;
+}
+
+
+global proc hydraUIBuildCamMenu (string $camLister) {
+
+
+	// delete the current popup menu items
+	string $popupMenus[] = `treeView -q -pma $camLister`;
+	string $labelMenuItem = ("hydraUICamListMenuLabel");
+	for ($each in $popupMenus){
+		menuItem -parent $each -label ("Dept:"+"TakeName") $labelMenuItem;
+		menuItem -parent $each -divider 1;
+		menuItem -parent $each -en 1 -label "Playblast" -c ("hydraUIPPPlayblastCamera  \"none\" 1") "hydraUICamMenuPlayblast";
+		menuItem -parent $each -en 1 -label "Playblast (Send to Edit)" -c ("hydraUIPPPlayblastCamera  \"none\" 2") "hydraUICamMenuPlayblastCommit";
+			
+	}
+}
+
+global proc int hydraUICamUpdateMenu (string $itemName) {
+
+	treeView -e -cs "hydraUICamList";
+	treeView -e -si $itemName 1 "hydraUICamList";
+	
+	string $itemNamesShort[] = stringToStringArray($itemName,"|");
+	menuItem -e -label $itemNamesShort[1] ("hydraUICamListMenuLabel");
+	menuItem -e -c ("hydraUIPPPlayblastCamera  \""+$itemNamesShort[1]+"\" 2") "hydraUICamMenuPlayblast";
+	menuItem -e -c ("hydraUIPPPlayblastCamera  \""+$itemNamesShort[1]+"\" 1") "hydraUICamMenuPlayblastCommit";
+
+	hydraUISetActiveJob($itemName,1);
+	return true;
+
+}
+
+global proc hydraUIPlayForward(){
+
+	$modelEditor = `modelPanel -q -me hydraUIViewportPanel`;
+	modelEditor -e -activeView $modelEditor;
+
+	if( `play -query -state` == 1 ) {
+		symbolButton -edit 
+			-image "timeplay.png" 
+			-annotation (uiRes("m_timeSlider.kPlayForwardsAnnot"))  hydraUIPlayButton; 
+
+	}
+	else{
+		symbolButton -edit 
+			-image "timestop.png" 
+			-annotation (uiRes("m_timeSlider.kStopPlaybackAnnot"))  hydraUIPlayButton; 
+	}
+	playButtonForward();
+
+}
+
+
+
+global proc int hydraUITreeViewDblClk (string $itemName){
+	hydraUIViewHydraCam ($itemName);
+	string $itemNamesShort[] = stringToStringArray($itemName,"|");
+	//if (`attributeExists "clipMin" $itemName`){
+		$clipMin = `getAttr ($itemName+".clipStart")`;
+		playbackOptions -e -min $clipMin;
+	//}
+	//if (`attributeExists "clipMax" $itemName`){
+		$clipMax = `getAttr ($itemName+".clipEnd")`;
+		playbackOptions -e -max $clipMax;
+	//}
+	
+	select $itemName;
+	return true;
+}
+
+
+global proc int hydraUISetActiveJob (string $takeName, int $state) {
+
+	if ($state == 1){
+		treeView -e -textColor $takeName .2 .2 .2 hydraUICamList;
+		hydraUIRefreshDetailsUI $takeName;
+	}
+	else {
+		treeView -e -textColor $takeName .8 .8 .8 hydraUICamList;
+	}
+	return  1;
+
+}
+global proc hydraUIRefreshDetailsUI (string $itemName){
+
+}
+
+
+
+// called when the hydra device is set in the UI
+global proc hydraUISetDevice(string $hydraNode){
+	// list the children in the layout control
+	string $attrCtrls[] = `frameLayout -q -ca hydraUIDeviceAttrLyt`;
+	for ($e in $attrCtrls){
+		deleteUI $e;
+	}
+	setParent hydraUIDeviceAttrLyt;
+	attrControlGrp -attribute ($hydraNode+".live");
+	attrControlGrp -attribute ($hydraNode+".hemiTracking");
+	attrControlGrp -attribute ($hydraNode+".frameRate");
+	attrControlGrp -attribute ($hydraNode+".filter");
+	
+}
+
+
+// called when the hydra device is set in the UI
+global proc hydraUISetAngle(string $hydraAngle){
+
+	global string $gHydraUIActiveAngle;
+	$gHydraUIActiveAngle = $hydraAngle;
+
+	// reset the take option menu
+	hydraUIRefreshAngleTake();
+}
+
+// called when the hydra device is set in the UI
+global proc hydraUISetTake(string $hydraTake){
+
+	global string $gHydraUIActiveTake;
+	$gHydraUIActiveTake = $hydraTake;
+}
+
+global proc string[] hydraUIGetAngles() {
+	$cameras = `ls -type camera "A*T*"`;
+	string $validAngles[];
+	for ($ea in $cameras){
+		string $angleName[] = stringToStringArray($ea,"_");
+		$validAngles[size($validAngles)] = $angleName[0];
+	}
+	string $noDuplicates[] = stringArrayRemoveDuplicates($validAngles);
+	return $noDuplicates;
+}
+
+global proc string[] hydraUIGetTakes (string $angle){
+	string $noDuplicates[];
+	if ($angle != "New Angle"){
+		$cameras = `ls -type camera ($angle+"_T*")`;
+		string $validTakes[];
+		for ($ea in $cameras){
+			string $parentTransform[] = `listRelatives -parent -type transform $ea`;
+			string $takeName[] = stringToStringArray($parentTransform[0],"_");
+			$validTakes[size($validTakes)] = $takeName[1];
+		}
+		$noDuplicates = stringArrayRemoveDuplicates($validTakes);
+	}
+	
+
+	return $noDuplicates;
+}
+
+global proc hydraUIRefreshAngleTake(){
+
+	//if (`optionMenu -q -exists hydraAngleOM`){
+	global string $gHydraUIActiveAngle;
+	if ($gHydraUIActiveAngle == "") $gHydraUIActiveAngle = "New Angle";
+
+	// delete existing menu items
+	string $menuItems[] = `optionMenuGrp -q -ill hydraAngleOM`;
+	for ($ea in $menuItems){
+		deleteUI $ea;
+	}
+	$menuItems = `optionMenuGrp -q -ill hydraTakeOM`;
+	for ($ea in $menuItems){
+		deleteUI $ea;
+	}
+
+	// create existing angles
+	string $hydraAngles[] =  hydraUIGetAngles();
+	setParent hydraAngleOM;
+	for ($ea in $hydraAngles){
+		menuItem -parent "hydraAngleOM|OptionMenu" -label $ea;
+	}
+	menuItem -parent "hydraAngleOM|OptionMenu" -label "New Angle";
+	// set the global angle
+	catch(eval("optionMenuGrp -e -v \""+$gHydraUIActiveAngle+"\" hydraAngleOM"));
+
+
+	// create existing takes
+	string $hydraTakes[] =  hydraUIGetTakes($gHydraUIActiveAngle);
+	setParent hydraTakeOM;
+	for ($ea in $hydraTakes){
+		menuItem -parent "hydraTakeOM|OptionMenu" -label $ea;
+	}
+	menuItem -parent "hydraTakeOM|OptionMenu" -label "New Take";
+//}
+
+}
+
+global proc hydraUIPopulateList (string $listControl) {
+	// get a list of cameras in the scene
+	treeView -e -removeAll $listControl;
+
+	string $camShapes[] = `ls -type camera`;
+	string $hydraCams[];
+	string $hydraAngles[];
+
+	// for each camera in scene
+	for ($each in $camShapes){
+
+		string $camXform[] = `listRelatives -f -parent $each`;
+
+		if (`attributeExists "showInHydraUI" $camXform[0]`){
+
+			string $niceName = hydraUICamNiceName($each);
+			string $nameTokens[] = stringToStringArray($niceName,"_");
+			if (size($nameTokens) == 2){
+				$hydraAngles[size($hydraAngles)] = $nameTokens[0];
+			}
+			else{
+				$hydraAngles[size($hydraAngles)] = "none";
+			}
+			$hydraCams[size($hydraCams)] = $camXform[0];
+		}
+	}
+
+	int $i = 0;
+	for ($i=0; $i<size($hydraCams);$i++){
+
+		string $niceName = hydraUICamNiceName($hydraCams[$i]);
+		string $parent = "";
+
+		if ($hydraAngles[$i] != "none")
+			$parent = $hydraAngles[$i];
+
+		// 
+		if (!`treeView -q -itemExists $parent $listControl` && $parent != ""){
+			$niceAngleName = ("Angle: "+`match "[0-9]+" $parent`);
+			treeView -e -addItem $parent "" $listControl;
+			treeView -e -selectionColor $parent .1 .1 .1  $listControl;
+
+			treeView -e -dl $parent $niceAngleName $listControl;
+			treeView -e -lbc $parent .1 .1 .1 $listControl;
+		}
+
+		treeView -e -addItem $hydraCams[$i] $parent $listControl;
+		treeView -e -selectionColor $hydraCams[$i] .8 .8 .8 -lbc $hydraCams[$i] .2 .2 .2 $listControl;
+		treeView -e -bti $hydraCams[$i] 1 "" -bti $hydraCams[$i] 2 "" -bti $hydraCams[$i] 3 "" -bti $hydraCams[$i] 4 "" $listControl;	
+		treeView -e -dl $hydraCams[$i] $niceName $listControl;
+
+		if ($i%2)
+			treeView -e -lbc $hydraCams[$i] .2 .2 .2 $listControl;
+		else 
+			treeView -e -lbc $hydraCams[$i] .24 .24 .24 $listControl;
+
+	}
+
+
+}
+
+global proc string hydraUICamNiceName (string $camName){
+	string $nameTokens[] = stringToStringArray ($camName,"|");
+	if (size($nameTokens) > 0){
+		return $nameTokens[size($nameTokens)-1];
+	}
+	else {
+		return "";	
+	}
+}
+
+
+global proc hydraUINodeWatch (){
+	print ("NEW NODE DETECTED: REFRESHING HYDRA UI\n");
+	if (`treeView -exists hydraUICamList`)
+		hydraUIPopulateList hydraUICamList;
+	hydraUIRefreshAngleTake();
+}
+
+global proc hydraUIKillAllScriptJobs() {
+	global int $gHydraUIjobId[];
+	
+	int $i;
+	for ($i=0;$i<size($gHydraUIjobId);$i++){
+	    scriptJob -kill $gHydraUIjobId[$i] -force;
+	}
+	clear($gHydraUIjobId);
+ }
+
+
+
+
+
+
+
+
+
+
+global proc hydraUIViewHydraCam (string $cameraName){
+
+	if (`objExists $cameraName`){
+		global string $gHydraUILastModelPanel;
+		$gHydraUILastModelPanel = "hydraUIViewportPanel";
+		string $activePanel = "hydraUIViewportPanel";//`getPanel -withFocus`; 
+		// if the viewport is the stereo panel then switch back to the normal modelPanel 
+		if ($activePanel == "StereoPanel") {
+			lookThroughModelPanel $cameraName StereoPanel;
+			$activePanel = `getPanel -withFocus`; 
+
+		}
+		if (`modelPanel -q -exists $activePanel`){
+			
+			$gHydraUILastModelPanel = $activePanel;
+
+			if (!`objExists $cameraName`){
+				error("Camera: "+$cameraName+" not found.");
+				return;
+			}
+			lookThroughModelPanel $cameraName $activePanel;
+		}
+		else if (`modelPanel -q -exists $gHydraUILastModelPanel`){
+			if (!`objExists $cameraName`){
+				error("Camera: "+$cameraName+" not found.");
+				return;
+			}
+			lookThroughModelPanel $cameraName $gHydraUILastModelPanel;
+		}
+		else {
+			
+				error ("Please set a 3d viewport to active and try again.\n");
+		}
+	}
+}
+
+
+
+
+
+global proc hydraUICycleThroughCameras (){
+
+	string $camShapes[] = `ls -type camera`;
+	string $hydraCams[] = {"hydraCam"};
+	string $currentCam = "";
+
+	// for each camera in scene
+	for ($each in $camShapes){
+		string $camXform[] = `listRelatives -f -parent $each`;
+		if (`attributeExists "showInHydraUI" $camXform[0]`){
+			$hydraCams[size($hydraCams)] = $camXform[0];
+		}
+	}
+
+	// get current view camera
+	global string $gHydraUILastModelPanel;
+	$gHydraUILastModelPane = "hydraUIViewportPanel";
+	if (`modelPanel -q -exists $gHydraUILastModelPanel`){
+		$currentCam = `modelPanel -q -cam $gHydraUILastModelPanel`;
+		$longName = `ls -long $currentCam`;
+		$currentCam  = $longName[0];
+	}
+
+	// search for it in the found hydraCams
+	int $foundIndex = 1;
+	for ($i=0;$i<size($hydraCams);$i++){
+		if ($hydraCams[$i] == $currentCam){
+			$foundIndex = $i+1;
+		}
+	}
+	if ($foundIndex > (size($hydraCams)-1))
+		$foundIndex = 0;
+
+	hydraUIViewHydraCam ($hydraCams[$foundIndex]);
+
+	// hilite camera in hydraUI
+
+}
+
+
+
+
+
+// ensures hydraDevice is live and deletes keyframes off of activeTake if needed
+global proc hydraUIMakeLive(string $hydraNode){
+
+	if (`objExists $hydraNode`){
+		setAttr ($hydraNode + ".live") 1;
+		hydraUIClearRecordCurves();
+		hydraUIViewHydraCam hydraCam;
+	}
+	else{
+		error ("Hydra Device: "+$hydraNode+ " does not exist. Please Rebuild Hydra Setup.");
+	}
+}
+
+
+
+
+global proc hydraUIPostTakeRecord(){
+
+	// this just clears the live thread and logging. should do this better way
+	//setAttr hydraDevice1.live 0;
+	hydraUIhydraCamDuplicate;
+	hydraUIClearRecordCurves;
+	evalDeferred("setAttr hydraDevice1.live 1");
+
+}
+
+
+
+global proc hydraUIDeviceButtonCB (float $buttonVal){
+
+	//$modelEditor = `modelPanel -q -me hydraUIViewportPanel`;
+	//modelEditor -e -activeView $modelEditor;
+
+    if ($buttonVal == 0.001){
+        print ("BUTTON 1 PRESSED\n");
+        // button 1 pressed (toggles playback)
+        hydraUIPlayForward();
+    }
+    else if ($buttonVal == 0.01){
+    	print ("BUTTON 2 PRESSED\n");
+        // button 2 pressed (was stop button)
+        
+    }
+    else if ($buttonVal == 0.1){
+    	print ("BUTTON 3 PRESSED\n");
+    	// button 3 pressed
+    	eval("hydraRecord");
+
+    }
+    else if ($buttonVal == 1){
+    	print ("BUTTON 4 PRESSED\n");
+        // button 4 pressed
+        hydraUIhydraCamDuplicate();
+        
+    }
+    else if ($buttonVal == 10){
+    	print ("BUTTON 5 PRESSED\n");
+        // start button pressed
+        
+    }
+    else if ($buttonVal == 100){
+    	print ("BUTTON BUMPER PRESSED\n");
+    	// bumper button pressed
+
+		// cycle through hydra cameras including 
+		hydraUICycleThroughCameras();
+        
+    }
+    else if ($buttonVal == 1000){
+    	print ("JOYSTICK BUTTON PRESSED\n");
+    	// joystick button pressed
+    	// go to nearest prime lens or next highest prime
+    	hydraUINearestPrime();
+    	
+    }
+
+
+}
+
+
+
+
+
+
+
+
+// specifying 0 for angle will create next available angle, 
+// specifying 0 for take will create next available take, explicit take number will overwrite
+global proc hydraUIhydraCamDuplicate(){
+
+	global string $gHydraUIActiveAngle;
+	global string $gHydraUIActiveTake;
+
+	if (`objExists "hydraCam"`){
+
+		string $hydraOrigin[] = `listRelatives -parent hydraRigOffset`;
+		string $angleName = "";
+		string $takeName = "";
+
+		if ($gHydraUIActiveAngle == "New Angle" || $gHydraUIActiveAngle == ""){
+			$angleName = "A01";
+			string $existingAngles[] = hydraUIGetAngles();
+			int $angleNum = 1;
+			while(stringArrayContains($angleName, $existingAngles)){
+				$angleNum++;
+				if ($angleNum < 10) $angleName = ("A0"+$angleNum);
+				else $angleName = ("A"+$angleNum);
+				if ($angleNum > 100) break;
+			}
+		}
+		else{
+			$angleName = $gHydraUIActiveAngle;
+		}
+		
+		if ($gHydraUIActiveTake == "New Take" || $gHydraUIActiveTake == ""){
+			$takeName = "T01";
+			string $existingTakes[] = hydraUIGetTakes($gHydraUIActiveAngle);
+			int $takeNum = 1;
+			while(stringArrayContains($takeName, $existingTakes)){
+				$takeNum++;
+				if ($takeNum < 10) $takeName = ("T0"+$takeNum);
+				else $takeName = ("T"+$takeNum);
+				if ($takeNum > 100) break;
+			}
+		}
+		else{
+			$takeName = $gHydraUIActiveTake;
+		}
+
+		// consider making this archive instead of delete the old camera
+		if (`objExists ($angleName+"_"+$takeName)`)
+			delete ($angleName+"_"+$takeName);
+
+		// create a duplicate camera of hydraCam
+		string $newRig[] = `duplicate hydraRigOffset`;
+		string $dupedRig = `rename $newRig[0] ($angleName+"_"+$takeName+"Rig")`;
+		string $newCam[] = `duplicate hydraCam`;
+		string $dupedCam = `rename $newCam[0] ($angleName+"_"+$takeName)`;
+		
+		//string $newCam[] = `listRelatives -children -fullPath -type transform $dupedRig`;//`duplicate hydraCam`;
+		string $newCamConst[] = `listRelatives -children -fullPath -type parentConstraint $dupedCam`;
+		string $dupedCamConst = `rename $newCamConst[0] ($angleName+"_"+$takeName+"_parentConstraint")`;
+		
+
+		// maps one attr to another
+		string $fromAttr[] = {"hydraTranslateX",
+							"hydraTranslateY",
+							"hydraTranslateZ",
+							"hydraRotateX",
+							"hydraRotateY",
+							"hydraRotateZ",
+							"hydraZoomX",
+							"hydraZoomY",
+							"hydraZoomZ"};
+
+		string $toAttr[] = {($dupedRig+".translateX"),
+							($dupedRig+".translateY"),
+							($dupedRig+".translateZ"),
+							($dupedRig+".rotateX"),
+							($dupedRig+".rotateY"),
+							($dupedRig+".rotateZ"),
+							($dupedCam+".focusDistance"),
+							($dupedCam+".focalLength"),
+							""};
+		int $i = 0;
+		for ($i=0;$i<size($fromAttr);$i++){
+			// if the toAttr is actually connected to the hydraActiveTake then copy the animation to it
+			string $inNodes[] = `listConnections -p 0 -s 1 ("hydraActiveTake"+"."+$fromAttr[$i])`;
+			string $animCurves[] = `ls -type animCurve $inNodes`;
+			string $newAnimCurves[] = `duplicate $animCurves[0]`;
+			if ($toAttr[$i] != ""){
+				connectAttr ($newAnimCurves[0]+".output") $toAttr[$i];
+			}
+			string $curveName = substituteAllString($toAttr[$i], ".", "_");
+			if ($curveName != ""){
+				string $dupedCurve = `rename $newAnimCurves[0] $curveName`;
+			}
+		}
+		// need to conver TU curves to TA for rotation values to avoid unit conversion
+
+		// add customAttrs
+		hydraUIAddCustomCamAttrs($dupedCam);
+
+		// create the angle group if it does not already exist
+		$angleGroupName = ($angleName+"Grp");
+
+		if (!`objExists $angleGroupName`){
+			$angleGroupName = `createNode -name $angleGroupName -ss transform `;
+			float $val[] = `getAttr ($hydraOrigin[0]+".translate")`;
+			setAttr ($angleGroupName+".translate") $val[0] $val[1] $val[2];
+			float $val[] = `getAttr ($hydraOrigin[0]+".rotate")`;
+			setAttr ($angleGroupName+".rotate") $val[0] $val[1] $val[2];
+			float $val[] = `getAttr ($hydraOrigin[0]+".scale")`;
+			setAttr ($angleGroupName+".scale") $val[0] $val[1] $val[2];
+		}
+		parent $dupedRig $angleGroupName;
+		parent $dupedCam $angleGroupName;
+
+		// hook up the duped constraint to the dupedrig
+		connectAttr ($dupedRig+".parentMatrix[0]") ($dupedCamConst+".target[0].targetParentMatrix");
+		connectAttr ($dupedRig+".scale") ($dupedCamConst+".target[0].targetScale");
+		connectAttr ($dupedRig+".rotateOrder") ($dupedCamConst+".target[0].targetRotateOrder");
+		connectAttr ($dupedRig+".rotate") ($dupedCamConst+".target[0].targetRotate");
+		connectAttr ($dupedRig+".rotatePivotTranslate") ($dupedCamConst+".target[0].targetRotateTranslate");
+		connectAttr ($dupedRig+".rotatePivot") ($dupedCamConst+".target[0].targetRotatePivot");
+		connectAttr ($dupedRig+".translate") ($dupedCamConst+".target[0].targetTranslate");
+
+		connectAttr ($dupedCamConst+".constraintRotateY") ($dupedCam+".rotateY");
+		connectAttr ($dupedCamConst+".constraintRotateX") ($dupedCam+".rotateX");
+		connectAttr ($dupedCamConst+".constraintTranslateX") ($dupedCam+".translateX");
+		connectAttr ($dupedCamConst+".constraintTranslateY") ($dupedCam+".translateY");
+		connectAttr ($dupedCamConst+".constraintTranslateZ") ($dupedCam+".translateZ");
+
+		// add values to store the hydraGroup's tranform
+		addAttr -ln "hydraOriginTranslate"  -at double3 $dupedCam;
+		    addAttr -ln "hydraOriginTranslateX" -at double -parent "hydraOriginTranslate" $dupedCam;
+		    addAttr -ln "hydraOriginTranslateY" -at double -parent "hydraOriginTranslate" $dupedCam;
+		    addAttr -ln "hydraOriginTranslateZ" -at double -parent "hydraOriginTranslate" $dupedCam;
+		float $val[] = `getAttr ($hydraOrigin[0]+".translate")`;
+		setAttr ($dupedCam+".hydraOriginTranslate") $val[0] $val[1] $val[2];
+
+		addAttr -ln "hydraOriginRotate"  -at double3 $dupedCam;
+		    addAttr -ln "hydraOriginRotateX" -at double -parent "hydraOriginRotate" $dupedCam;
+		    addAttr -ln "hydraOriginRotateY" -at double -parent "hydraOriginRotate" $dupedCam;
+		    addAttr -ln "hydraOriginRotateZ" -at double -parent "hydraOriginRotate" $dupedCam;
+		float $val[] = `getAttr ($hydraOrigin[0]+".rotate")`;
+		setAttr ($dupedCam+".hydraOriginRotate") $val[0] $val[1] $val[2];	
+
+		addAttr -ln "hydraOriginScale"  -at double3 $dupedCam;
+		    addAttr -ln "hydraOriginScaleX" -at double -parent "hydraOriginScale" $dupedCam;
+		    addAttr -ln "hydraOriginScaleY" -at double -parent "hydraOriginScale" $dupedCam;
+		    addAttr -ln "hydraOriginScaleZ" -at double -parent "hydraOriginScale" $dupedCam;
+		float $val[] = `getAttr ($hydraOrigin[0]+".scale")`;
+		setAttr ($dupedCam+".hydraOriginScale") $val[0] $val[1] $val[2];
+
+		// add values to store the hydra Rig's offset tranform
+		addAttr -ln "hydraRigTranslate"  -at double3 $dupedCam;
+		    addAttr -ln "hydraRigTranslateX" -at double -parent "hydraRigTranslate" $dupedCam;
+		    addAttr -ln "hydraRigTranslateY" -at double -parent "hydraRigTranslate" $dupedCam;
+		    addAttr -ln "hydraRigTranslateZ" -at double -parent "hydraRigTranslate" $dupedCam;
+
+		addAttr -ln "hydraRigRotate"  -at double3 $dupedCam;
+		    addAttr -ln "hydraRigRotateX" -at double -parent "hydraRigRotate" $dupedCam;
+		    addAttr -ln "hydraRigRotateY" -at double -parent "hydraRigRotate" $dupedCam;
+		    addAttr -ln "hydraRigRotateZ" -at double -parent "hydraRigRotate" $dupedCam;	
+
+		addAttr -ln "hydraRigScale"  -at double3 $dupedCam;
+		    addAttr -ln "hydraRigScaleX" -at double -parent "hydraRigScale" $dupedCam;
+		    addAttr -ln "hydraRigScaleY" -at double -parent "hydraRigScale" $dupedCam;
+		    addAttr -ln "hydraRigScaleZ" -at double -parent "hydraRigScale" $dupedCam;
+
+
+		hydraUISetAngle($angleName);
+	}
+}
+
+global proc hydraUIAddCustomCamAttrs(string $dupedCam){
+
+		string $curDate = python("time.time()");
+		if (!`attributeExists "showInHydraUI" $dupedCam`){
+			addAttr -ln "showInHydraUI"  -at bool $dupedCam;
+			setAttr ($dupedCam+".showInHydraUI") 1;
+		}
+		if (!`attributeExists "clipStart" $dupedCam`){
+			addAttr -ln "clipStart"  -at double $dupedCam;
+			setAttr -e -keyable 0 ($dupedCam+".clipStart") `playbackOptions -q -min`;
+		}
+		if (!`attributeExists "clipEnd" $dupedCam`){
+			addAttr -ln "clipEnd"  -at double  $dupedCam;
+			setAttr -e -keyable 0 ($dupedCam+".clipEnd") `playbackOptions -q -max`;
+		}
+		if (!`attributeExists "preRoll" $dupedCam`){
+			addAttr -ln "preRoll"  -at double $dupedCam;
+			setAttr -e -keyable 0 ($dupedCam+".preRoll");
+		}
+		if (!`attributeExists "postRoll" $dupedCam`){
+			addAttr -ln "postRoll"  -at double  $dupedCam;
+			setAttr -e -keyable 0 ($dupedCam+".postRoll") 0;
+		}
+		if (!`attributeExists "user" $dupedCam`){
+			addAttr -ln "user"  -dt "string"  $dupedCam;
+			setAttr -e -keyable 0 -type "string" ($dupedCam+".user") `getenv USER`;
+		}
+		if (!`attributeExists "dateRecorded" $dupedCam`){
+			addAttr -ln "dateRecorded"  -dt "string" $dupedCam;
+			setAttr -e -keyable 0 -type "string" ($dupedCam+".dateRecorded") $curDate;
+		}
+}
+
+global proc hydraUIClearRecordCurves(){
+
+	string $fromAttr[] = {"hydraTranslateX","hydraTranslateY","hydraTranslateZ","hydraRotateX","hydraRotateY","hydraRotateZ","hydraZoomX","hydraZoomY","hydraZoomZ"};
+	int $i = 0;
+	for ($i=0;$i<size($fromAttr);$i++){
+
+		string $inNodes[] = `listConnections -p 0 -s 1 ("hydraActiveTake"+"."+$fromAttr[$i])`;
+		string $animCurves[] = `ls -type animCurve $inNodes`;
+		if (size($animCurves)>0)
+			delete $animCurves[0];
+
+	}
+}
+
+global proc hydraUICreateRecordRig (){
+
+	string $foundHydra[] = `ls -type hydraDevice`;
+	if (size($foundHydra) == 0){
+		// create hydra nodes
+		// create hydraGroup
+		// create hydraCam
+		// create hydraActiveTake
+		// connect active take to hydradevice
+		// connect hydraCam to activeTake
+	}
+	else{
+		print ("Hydra Device already present in scene. Aborting setup");
+	}
+}
+
+global proc hydraUIDeleteRecordRig (){
+
+
+}
+
+
+
+global proc hydraUINearestPrime (){
+
+	float $primes[] = {12,14,16,18,21,25,27,32,35,40,50,65,75,85,100,135,150,180,200,250,300,350,400};
+	float $primesAppr[] = {14,16,18,21,25,27,32,35,40,50,65,75,100,135,150,180,200,250,300};
+	float $newPrime = 12.1;
+	if (`objExists hydraDevice1`){
+		$fl = `getAttr hydraDevice1.zoomY`;
+		float $each = 0;
+		for ($i=0;$i<size($primes)-1;$i++){
+			if ($fl >= $primes[$i] && $fl <= $primes[$i+1]){
+				$newPrime = $primes[$i+1];
+			}
+		}
+		setAttr hydraDevice1.zoomY $newPrime;
+		print ("Setting focalLength:"+$fl+" to nearest prime "+$newPrime+"\n");
+
+	}
+
+}
+
+global proc hydraUIPlaybastSelectedCams (){
+
+
+
+}
+
+// commit 0 = no, 1 = yes (no prompt), 2 = prompt user
+global proc hydraUIPPPlayblastCamera(string $cameraName, int $doCommit){
+
+	string $currentScene = `file -q -sn`;
+	string $currentSceneName = `basenameEx $currentScene`;
+	string $shotInfo[] = abxShotsGetFromPath($currentScene);
+	string $renderPath = ($shotInfo[0]+"/"+$shotInfo[1]+"/RENDER/"+$shotInfo[2]+"/");
+	string $pbPath  = ($renderPath+$shotInfo[3]+"/"+$shotInfo[3]+"_"+$shotInfo[4]+"/playblasts/"+$currentSceneName);
+
+	int $imgWidth = 1920;
+	int $imgHeight = 1080;
+	float $aspect = 1;
+	float $startFr = `playbackOptions -q -min`;
+	float $endFr = `playbackOptions -q -max`;
+
+	//string $camTransform[] = `listRelatives -parent $cameraName`;
+	//if (`objectType $camTransform[0]` ==  "transform"){
+		print ("Reading Clip Time from "+$cameraName+"\n");
+		if (`attributeExists "clipStart" $cameraName`)
+			$startFr = `getAttr ($cameraName+".clipStart")`;
+		if (`attributeExists "clipEnd" $cameraName`)
+			$endFr = `getAttr ($cameraName+".clipEnd")`;
+	//}
+
+	// check for project defaults file and get settings from there
+	if (`exists abxProjectGetShotDetails`){
+		string $prjDetails[] = abxProjectGetShotDetails(`workspace -q -rd`);
+		if (size($prjDetails)>7){
+			$lock = $prjDetails[0];
+			$fps = $prjDetails[1];
+			$imgWidth = $prjDetails[2];
+			$imgHeight = $prjDetails[3];
+			$hA = $prjDetails[5];
+			$hV =  $prjDetails[6];
+			$aspect = $prjDetails[4];
+			$sceneScale = $prjDetails[7];
+			$renderer = $prjDetails[8];
+		}	
+		else{
+			warning("Project Defaults File Not Found. Reverting to 1920 X 1080");
+		}
+	}
+	else {
+		warning("abxProject.mel not sourced. Skipping project defaults check.");
+	}
+
+	string $activePanel = `getPanel -withFocus`; 
+	// if the viewport is the stereo panel then switch back to the normal modelPanel 
+	select -clear;
+	if (`modelPanel -q -exists $activePanel`){
+
+		if (!`objExists $cameraName`){
+			$result = `confirmDialog -title "No renderCam Found" -message ("There is no camera called "+$cameraName+" found.") -button "OK" -defaultButton "OK" -cancelButton "OK" -dismissString "OK"`;
+			return;
+		}
+			//error ($cameraName+" does not exist. Please conform your scene or make your main camera named "+$cameraName+"\n");
+		
+		setAttr ($cameraName+".overscan") 1;
+
+		lookThroughModelPanel $cameraName $activePanel;
+		modelEditor -e -allObjects false -ignorePanZoom true $activePanel;
+		modelEditor -e -grid false -cameras false -strokes true -nurbsSurfaces true -polymeshes true -dynamics true -fluids true -nParticles true $activePanel;
+		// print (`playblast -ae`+"\n");\
+		ppPlayblastDoBlast2 $cameraName $pbPath ($currentSceneName+"_"+$cameraName) "png" $startFr $endFr $imgWidth $imgHeight $doCommit $shotInfo[3];
+
+	}
+	
+}
+
+global proc hydraUISetupRecord(){
+	 $r = `createNode record`;
+ connectAttr hydraActiveTake.hydraTranslateX ($r+".input");
+ $r = `createNode record`;
+ connectAttr hydraActiveTake.hydraTranslateY ($r+".input");
+ $r = `createNode record`;
+ connectAttr hydraActiveTake.hydraTranslateZ ($r+".input");
+ $r = `createNode record`;
+ connectAttr hydraActiveTake.hydraRotateX ($r+".input");
+ $r = `createNode record`;
+ connectAttr hydraActiveTake.hydraRotateY ($r+".input");
+ $r = `createNode record`;
+ connectAttr hydraActiveTake.hydraRotateZ ($r+".input");
+ $r = `createNode record`;
+ connectAttr hydraActiveTake.hydraZoomX ($r+".input");
+ $r = `createNode record`;
+ connectAttr hydraActiveTake.hydraZoomY ($r+".input");
+ $r = `createNode record`;
+ connectAttr hydraActiveTake.hydraZoomZ ($r+".input");
+
+}
+
+// freezes the animation curves in a scene and disables all time based evaluations accept for constraints
+global proc hydraUIFreezeAnim(){	
+
+	setState("all", 0);
+	setState "constraints" on;
+
+	if (`objExists "frozenTime"`) delete "frozenTime";
+
+	$frozenTime = `createNode -ss -n "frozenTime" time`;
+	setAttr ($frozenTime+".outTime") `currentTime -q`;
+	$curves = `ls -type animCurveTU -type animCurveTT -type animCurveTA -type animCurveTL`;
+	string $each;
+	for ($each in $curves){
+		catchQuiet(eval("connectAttr "+$frozenTime+".outTime "+$each+".input;"));
+	}
+
+}
+
+global proc hydraUIUnFreezeAnim(){
+
+	setState("all", 1);
+	if (`objExists "frozenTime"`) delete "frozenTime";
+
+}

@@ -1,0 +1,75 @@
+# OBJECT MODEL FOR READING A PROJECT FILE STRUCTURE
+# YAML cheat sheet for config, 
+# &ANCHOR
+
+job:
+    location:/
+    config:
+        location:/config
+    stages:
+        -planning
+
+
+stage:
+    -planning:
+        location:/planning
+    -pitch:
+        location:/pitch
+    -previs:
+        location:/previs
+    -production:
+        location:/shots
+    -finishing:
+        location:/deliverables
+
+
+sequence:
+    location:<stage_production>
+
+shot:
+    location:<sequence>
+    tasks:
+
+asset:
+    location:/assets
+    tasks:
+        -design
+        -model
+        -rig
+
+tasks:
+    default: &DEFAULT_TASK
+
+    edit:
+        <<: *DEFAULT_TASK 
+        location:/edit # leading slash signifies location is the root of the job
+        workFiles:/edit/work
+        publishFiles:/edit/publish
+        renderFiles:/edit/conform
+    model:
+        location:model
+
+task_stages:
+    -blocking
+    -splining
+    -polish
+
+
+deliverables:
+    default: &DEFAULT_DELIV
+        framerate:24
+        res:1920x1080
+        colorspace:srgb
+        duration:00:00:30:00
+        pixelAspect:1.0
+        startTC:00:00:00:00
+
+
+task_status:
+    -ignore
+    -on_hold
+    -not_started
+    -waiting_to_start
+    -in_progress
+    -completed
+    -finaled

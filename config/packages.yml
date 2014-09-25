@@ -1,0 +1,103 @@
+maya:
+    versions:
+        2014:
+            -
+        2015:[sp2ext1]
+    
+    path:
+        win32:C:/Program Files/Autodesk/Maya2015/bin
+        mac:/
+        linux:/
+    
+    modes:
+        ui:
+            win32:maya.exe
+            mac:/
+            linux:/
+        
+    
+    tasks:[modelshaderiganimeffectsclothhairmusclelight]
+    show: True
+    name:Autodesk Maya
+
+nuke:
+    versions:
+        7.0:[v2]
+        8.0:[v1v6]
+    
+    path:
+        win32:C:/Program Files/Nuke8.0v1
+        mac:/
+        linux:/
+    
+    modes:
+        ui:
+            win32:Nuke8.0.exe
+            mac:/
+            linux:/
+        
+    
+    tasks:[complightgradetrackroto]
+    show: True
+    name:Nuke
+
+hiero:
+    versions:
+        1.7:[v2]
+        1.8:[v2]
+    
+    path:
+        win32:C:/Program Files/The Foundry/Hiero1.8v2
+        mac:/
+        linux:/
+    
+    modes:
+        ui:
+            win32:hiero.exe
+            mac:/
+            linux:/
+        
+    
+    tasks:
+        -edit
+        -grade
+        -conform
+    show: True
+    name:Hiero
+
+premiere:
+    versions:[CCCC 2014]
+    path:
+        win32:C:\Program Files\Adobe\Adobe Premiere Pro 2014
+        mac:/
+        linux:/
+    
+    modes:
+        ui:
+            win32:hiero.exe
+            mac:/
+            linux:/
+        
+    
+    tasks:[editgradeconformmix]
+    show: False
+    name:Autodesk Maya
+
+aftereffects:
+    versions:[CCCC 2014]
+    path:
+        win32:C:\Program Files\Adobe\Adobe After Effects 2014
+        mac:/
+        linux:/
+    
+    modes:
+        ui:
+            win32:hiero.exe
+            mac:/
+            linux:/
+        
+    
+    tasks:[editgradeconformmix]
+    show: False
+    name:After Effects
+

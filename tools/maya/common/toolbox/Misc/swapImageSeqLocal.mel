@@ -1,0 +1,42 @@
+// swapImageSeqLocal
+// Created by: adamb
+// Date: 2014/08/09 14:12:33
+
+global proc swapImageSeqLocal(){
+    string $destinationPath = ("E:/mayaScratch");
+    $fileNodes = `ls -type file`;
+    //string $imageSeqs[];
+    int $isLocal = -1;
+ 
+
+    for ($each in $fileNodes){
+        if (`getAttr ($each+".useFrameExtension")` == 1){
+            //$imageSeqs[size($imageSeqs)] = $each;
+			string $texPath = `getAttr ($each+".ftn")`;
+			if (`attributeExists "networkPath" $each`){
+				if (`gmatch $texPath "//*"`){
+					 	
+						if ($isLocal == -1) {
+							$isLocal = 0;
+						}
+				}
+				else{
+					if ($isLocal == -1) {
+						
+						$isLocal = 1;
+					}
+				}
+				if ($isLocal == 1){
+					print ("Swapped "+$each+" to network path\n");
+					$netPath = `getAttr ($each+".networkPath")`;
+					setAttr -type "string" ($each+".ftn") $netPath;
+				}
+				else{
+					print ("Swapped "+$each+" to local path\n");
+					$localPath = `getAttr ($each+".localPath")`;
+					setAttr -type "string" ($each+".ftn") $localPath;
+				}
+			}
+		}
+    }
+}

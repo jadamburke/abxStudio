@@ -1,0 +1,38 @@
+// AIShaderSwapStandard
+// Created by: adamb
+// Date: 2014/08/15 03:08:24
+
+global proc AIShaderSwapStandard(){
+	$sel = `ls -sl`;
+	string $nodesToGraph[];
+	
+	string $newShader = `shadingNode -name "aiOverrideStandard1" -asShader aiStandard`;
+	for ($each in $sel){
+		if (size($sel)>0){
+			string $myShapeNode[] = `listRelatives -fullPath -type mesh -children -shapes $each`;
+			
+			for ($shape in $myShapeNode){
+
+				string $mySGs[] = `listConnections -type shadingEngine $shape`;
+
+				//connectAttr -force aiStandard1.outColor blinn2SG.aiSurfaceShader;
+				for ($every in $mySGs){
+					string $surfaceShader[] = `listConnections ($every + ".surfaceShader")`;
+					if (`attributeExists "aiSurfaceShader" $every`){
+						// if its not already attached to an arniold surf
+						if (size(`listConnections ($every+".surfaceShader")`)==0){
+              editRenderLayerAdjustment ($every+".surfaceShader"); 
+							//connectAttr -f ($newShader+".outColor") ($every+".surfaceShader");
+              catch(eval("connectAttr -f "+$newShader+".outColor"+" "+$every+".surfaceShader"));
+						}
+						else{
+						editRenderLayerAdjustment ($every+".surfaceShader"); 
+							//string $newShader = `shadingNode -asShader aiStandard`;
+							catch(eval("connectAttr -f "+$newShader+".outColor"+" "+$every+".surfaceShader"));
+						}
+					}
+				}
+			}
+		}
+	}
+}

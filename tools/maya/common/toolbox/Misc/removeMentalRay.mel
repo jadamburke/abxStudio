@@ -1,0 +1,56 @@
+// removeMentalRay
+// Created by: adamb
+// Date: 2014/07/09 13:25:24
+
+global proc removeMentalRay(){
+
+  if (`pluginInfo -q -loaded "Mayatomr"`){
+    $result = `confirmDialog -title "mentalRay Removal Warning" -message ("This action will Flush Undo's and potentially crash maya! This will also save the scene as a temp file to prevent file corruption.") -button "OK I'm ready for what may happen" -button "Abort" -defaultButton "Abort" -cancelButton "Abort" -dismissString "Abort"`;
+
+    if ($result =="OK I'm ready for what may happen"){
+      string $nodeTypes[] = `pluginInfo -q -dn "Mayatomr"`;
+      string $mrNodes[] = `ls -type $nodeTypes`;
+      for ($each in $mrNodes){
+        lockNode -l 0 $each;
+        delete $each;
+      }
+      flushUndo;
+
+    // remove the mr requirement
+      pluginInfo -e -remove "Mayatomr";
+
+      $pu = `pluginInfo -q -pu`;
+      $pluginsused = stringArrayToString($pu,",");
+      //print ("Plugins Still Loaded in Scene:"+$pluginsused+"\n");
+      flushUndo;
+      string $curFilePath = `file -q -sn`;
+      string $tempFolder = `getenv TEMP`;
+      string $fileType[] = `file -q -type`;
+      if ($fileType[0] == "mayaBinary") $fileType[0] = ".mb";
+      else if ($fileType[0] == "mayaAscii") $fileType[0] = ".ma";
+      file -rn ($tempFolder+"/mayaMRRemovalTestWrite"+$fileType[0]);
+      // save a test scene file to a temp location (if it fails then maya will crash but nothing else is lost)
+      file -save;
+
+
+
+      file -rn $curFilePath;
+
+
+      // for some reason these nodes are create after unregistering the plugin (bad api code)
+      if (`objExists mentalrayGlobals`) delete mentalrayGlobals;
+      if (`objExists mentalrayItemsList`) delete mentalrayItemsList;
+      if (`objExists miDefaultOptions`) delete miDefaultOptions;
+
+      $result = `confirmDialog -title "mentalRay Removal Warning" -message ("Test File Writing Successful. Save your scene file as usual, but its probably a good idea to restart maya.") -button "Thanks, I Promise to save and restart maya now!" -defaultButton "Thanks, I Promise to save and restart maya now!" -cancelButton "Thanks, I Promise to save and restart maya now!" -dismissString "Thanks, I Promise to save and restart maya now!"`;
+    }
+    // for some reason this needs to be called again
+  }
+  else{
+    $result = `confirmDialog -title "mentalRay Removal Warning" -message ("This Scene File doesn't have mental ray") -button "Thank god" -defaultButton "Thank god" -cancelButton "Thank god" -dismissString "Thank god"`;
+
+  }
+
+
+}
+

@@ -1,0 +1,47 @@
+--- ! abxStudio config
+studio:
+    vars:
+        MODE:pub
+        PP_JOB_SERVERS:\\pp-fs-nyc\production\
+        PP_RESOURCE:\\pp-fs-nyc\Personal\AdamB\abxStudio
+maya:
+    vars:
+        PP_MAYA:2015
+        MAYA_INSTALL_PATH:C:/Program Files/Autodesk/Maya%PP_MAYA%/
+        MAYA_PPTOOLS:%PP_RESOURCE%\maya\common
+        MAYA_PPTOOLS_VERSIONED:%PP_RESOURCE%\maya\%PP_MAYA%x64
+        MAYA_PPTOOLS_COMMON:%PP_RESOURCE%\maya\common
+        PP_MAYA_DIR:C:/Program Files/Autodesk/Maya%PP_MAYA%
+        MAYA_SCRIPT_PATH:%MAYA_PPTOOLS%\scripts
+        MAYA_PLUG_IN_PATH:%MAYA_PPTOOLS%\plugins
+        MAYA_SHELF_PATH:%MAYA_PPTOOLS%\shelves
+        MAYA_MODULE_PATH:%MAYA_PPTOOLS%\modules
+        MAYA_PRESET_PATH:%MAYA_PPTOOLS%\presets
+        PYTHONPATH:%PP_RESOURCE%\lib\python;%MAYA_PPTOOLS%\scripts
+
+    modules:
+        mentalray:
+            vars:
+                MAYA_MODULE_PATH:\\pp-fs-nyc\pipeline\pipeline\external\mentalray\maya\%PP_MAYA%\modules
+        arnold:
+            vars:
+            
+
+
+        vray:
+            vars:
+                PP_MAYA_VRAY:2.40.01
+                VRAY_AUTH_CLIENT_FILE_PATH:\\pp-fs-nyc\pipeline\pipeline\external\vray\maya\config
+                VRAY_FOR_MAYA%PP_MAYA%_MAIN_x64:\\pp-fs-nyc\pipeline\pipeline\external\vray\maya\%PP_MAYA_VRAY%\Maya%PP_MAYA%\maya_vray
+                VRAY_FOR_MAYA%PP_MAYA%_PLUGINS_x64:\\pp-fs-nyc\pipeline\pipeline\external\vray\maya\%PP_MAYA_VRAY%\Maya%PP_MAYA%\maya_vray\vrayplugins
+                VRAY_TOOLS_MAYA%PP_MAYA%_x64:\\pp-fs-nyc\pipeline\pipeline\external\vray\maya\%PP_MAYA_VRAY%\Maya%PP_MAYA%\vray\bin
+                MAYA_MODULE_PATH:%MAYA_MODULE_PATH%;\\pp-fs-nyc\pipeline\pipeline\external\vray\maya\%PP_MAYA_VRAY%\Maya%PP_MAYA%\maya_root\modules
+                PATH:%PATH%;\\pp-fs-nyc\pipeline\pipeline\external\vray\maya\%PP_MAYA_VRAY%\Maya%PP_MAYA%\maya_root\bin
+                MAYA_RENDER_DESC_PATH:%MAYA_RENDER_DESC_PATH%;\\pp-fs-nyc\pipeline\pipeline\external\vray\maya\%PP_MAYA_VRAY%\Maya%PP_MAYA%\maya_root\bin\rendererDesc
+
+
+        alembic:
+
+
+nuke:
+    vars:

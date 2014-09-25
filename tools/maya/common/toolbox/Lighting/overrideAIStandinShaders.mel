@@ -1,0 +1,15 @@
+// overrideAIStandinShaders
+// Created by: samm
+// Date: 2014/08/11 00:15:30
+
+global proc overrideAIStandinShaders(){
+{
+    $sel = `ls -sl`;
+    for ($each in $sel){
+        editRenderLayerAdjustment -layer BeautyKyoto ($each+".overrideShaders");
+        setAttr ($each+".overrideShaders") 0;
+
+    }
+    
+}
+}

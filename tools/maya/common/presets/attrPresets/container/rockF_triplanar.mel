@@ -1,0 +1,7 @@
+// requires maya "2012";
+startAttrPreset( "container" );
+blendAttrStr "fileTextureName" "M:/backlot/images/textures/cracks/cracked_lilned_concrete_9290263_tile.tif"; 
+blendAttrStr "fileTextureName2" "M:/backlot/images/textures/cracks/cracked_lilned_concrete_9290263_tile.tif"; 
+blendAttrStr "fileTextureName1" "M:/backlot/images/textures/cracks/cracked_lilned_concrete_9290263_tile.tif"; 
+blendAttr "scaleX" 90; 
+endAttrPreset();

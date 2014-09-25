@@ -1,0 +1,1581 @@
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Tue Sep 02 17:11:56 2014
+
+   Source : T:\pipelineny\aftereffects\UIPanels\
+     Dest : C:\Program Files\Adobe\Adobe After Effects CC\Support Files\Scripts\ScriptUI Panels\
+
+    Files : PPNY_Qube_Submitter.jsx
+	    
+  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                   1	T:\pipelineny\aftereffects\UIPanels\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         1         0         0         0
+   Files :         1         0         1         0         0         0
+   Bytes :     2.8 k         0     2.8 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Tue Sep 02 17:11:56 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Tue Sep 02 17:11:56 2014
+
+   Source : T:\pipelineny\aftereffects\Preferences\CC\12.1\
+     Dest : C:\Users\fernandog\AppData\Roaming\Adobe\After Effects\12.1\
+
+    Files : *.*
+	    
+  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                  15	T:\pipelineny\aftereffects\Preferences\CC\12.1\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC\12.1\DVADialogPrefs\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\logs\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC\12.1\ModifiedWorkspaces\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\OriginalUserWorkspaces\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\Shutdown\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\Startup\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         8         5         3         0         0         0
+   Files :        17         0        17         0         0         0
+   Bytes :   441.7 k         0   441.7 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Tue Sep 02 17:11:56 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Tue Sep 02 17:11:57 2014
+
+   Source : T:\pipelineny\aftereffects\UIPanels\
+     Dest : C:\Program Files\Adobe\Adobe After Effects CC 2014\Support Files\Scripts\ScriptUI Panels\
+
+    Files : PPNY_Qube_Submitter.jsx
+	    
+  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                   1	T:\pipelineny\aftereffects\UIPanels\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         1         0         0         0
+   Files :         1         0         1         0         0         0
+   Bytes :     2.8 k         0     2.8 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Tue Sep 02 17:11:57 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Tue Sep 02 17:11:57 2014
+
+   Source : T:\pipelineny\aftereffects\Preferences\CC2014\13.0\
+     Dest : C:\Users\fernandog\AppData\Roaming\Adobe\After Effects\13.0\
+
+    Files : *.*
+	    
+  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                  15	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\DVADialogPrefs\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\logs\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\ModifiedWorkspaces\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\OriginalUserWorkspaces\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\Shutdown\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\Startup\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         8         0         8         0         0         0
+   Files :        17         0        17         0         0         0
+   Bytes :   356.6 k         0   356.6 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Tue Sep 02 17:11:57 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Tue Sep 02 17:14:39 2014
+
+   Source : T:\pipelineny\aftereffects\UIPanels\
+     Dest : C:\Program Files\Adobe\Adobe After Effects CC\Support Files\Scripts\ScriptUI Panels\
+
+    Files : PPNY_Qube_Submitter.jsx
+	    
+  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                   1	T:\pipelineny\aftereffects\UIPanels\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         1         0         0         0
+   Files :         1         0         1         0         0         0
+   Bytes :     2.8 k         0     2.8 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Tue Sep 02 17:14:39 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Tue Sep 02 17:14:39 2014
+
+   Source : T:\pipelineny\aftereffects\Preferences\CC\12.1\
+     Dest : C:\Users\fernandog\AppData\Roaming\Adobe\After Effects\12.1\
+
+    Files : *.*
+	    
+  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                  15	T:\pipelineny\aftereffects\Preferences\CC\12.1\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC\12.1\DVADialogPrefs\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\logs\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC\12.1\ModifiedWorkspaces\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\OriginalUserWorkspaces\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\Shutdown\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\Startup\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         8         5         3         0         0         0
+   Files :        17         0        17         0         0         0
+   Bytes :   441.7 k         0   441.7 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Tue Sep 02 17:14:39 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Tue Sep 02 17:14:39 2014
+
+   Source : T:\pipelineny\aftereffects\UIPanels\
+     Dest : C:\Program Files\Adobe\Adobe After Effects CC 2014\Support Files\Scripts\ScriptUI Panels\
+
+    Files : PPNY_Qube_Submitter.jsx
+	    
+  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                   1	T:\pipelineny\aftereffects\UIPanels\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         1         0         0         0
+   Files :         1         0         1         0         0         0
+   Bytes :     2.8 k         0     2.8 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Tue Sep 02 17:14:39 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Tue Sep 02 17:14:40 2014
+
+   Source : T:\pipelineny\aftereffects\Preferences\CC2014\13.0\
+     Dest : C:\Users\fernandog\AppData\Roaming\Adobe\After Effects\13.0\
+
+    Files : *.*
+	    
+  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                  15	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\DVADialogPrefs\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\logs\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\ModifiedWorkspaces\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\OriginalUserWorkspaces\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\Shutdown\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\Startup\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         8         0         8         0         0         0
+   Files :        17         0        17         0         0         0
+   Bytes :   356.6 k         0   356.6 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Tue Sep 02 17:14:40 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Tue Sep 02 17:27:44 2014
+
+   Source : T:\pipelineny\aftereffects\UIPanels\
+     Dest : C:\Program Files\Adobe\Adobe After Effects CC\Support Files\Scripts\ScriptUI Panels\
+
+    Files : PPNY_Qube_Submitter.jsx
+	    
+  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                   1	T:\pipelineny\aftereffects\UIPanels\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         1         0         0         0
+   Files :         1         0         1         0         0         0
+   Bytes :     2.8 k         0     2.8 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Tue Sep 02 17:27:44 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Tue Sep 02 17:27:44 2014
+
+   Source : T:\pipelineny\aftereffects\Preferences\CC\12.1\
+     Dest : C:\Users\fernandog\AppData\Roaming\Adobe\After Effects\12.1\
+
+    Files : *.*
+	    
+  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                  15	T:\pipelineny\aftereffects\Preferences\CC\12.1\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC\12.1\DVADialogPrefs\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\logs\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC\12.1\ModifiedWorkspaces\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\OriginalUserWorkspaces\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\Shutdown\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\Startup\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         8         5         3         0         0         0
+   Files :        17         0        17         0         0         0
+   Bytes :   441.7 k         0   441.7 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Tue Sep 02 17:27:44 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Tue Sep 02 17:27:44 2014
+
+   Source : T:\pipelineny\aftereffects\UIPanels\
+     Dest : C:\Program Files\Adobe\Adobe After Effects CC 2014\Support Files\Scripts\ScriptUI Panels\
+
+    Files : PPNY_Qube_Submitter.jsx
+	    
+  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                   1	T:\pipelineny\aftereffects\UIPanels\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         1         0         0         0
+   Files :         1         0         1         0         0         0
+   Bytes :     2.8 k         0     2.8 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Tue Sep 02 17:27:44 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Tue Sep 02 17:27:44 2014
+
+   Source : T:\pipelineny\aftereffects\Preferences\CC2014\13.0\
+     Dest : C:\Users\fernandog\AppData\Roaming\Adobe\After Effects\13.0\
+
+    Files : *.*
+	    
+  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                  15	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\DVADialogPrefs\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\logs\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\ModifiedWorkspaces\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\OriginalUserWorkspaces\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\Shutdown\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\Startup\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         8         0         8         0         0         0
+   Files :        17         0        17         0         0         0
+   Bytes :   356.6 k         0   356.6 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Tue Sep 02 17:27:44 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Tue Sep 02 17:30:47 2014
+
+   Source : T:\pipelineny\aftereffects\UIPanels\
+     Dest : C:\Program Files\Adobe\Adobe After Effects CC\Support Files\Scripts\ScriptUI Panels\
+
+    Files : PPNY_Qube_Submitter.jsx
+	    
+  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                   1	T:\pipelineny\aftereffects\UIPanels\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         1         0         0         0
+   Files :         1         0         1         0         0         0
+   Bytes :     2.8 k         0     2.8 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Tue Sep 02 17:30:47 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Tue Sep 02 17:30:47 2014
+
+   Source : T:\pipelineny\aftereffects\Preferences\CC\12.1\
+     Dest : C:\Users\fernandog\AppData\Roaming\Adobe\After Effects\12.1\
+
+    Files : *.*
+	    
+  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                  15	T:\pipelineny\aftereffects\Preferences\CC\12.1\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC\12.1\DVADialogPrefs\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\logs\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC\12.1\ModifiedWorkspaces\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\OriginalUserWorkspaces\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\Shutdown\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\Startup\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         8         5         3         0         0         0
+   Files :        17         0        17         0         0         0
+   Bytes :   441.7 k         0   441.7 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Tue Sep 02 17:30:47 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Tue Sep 02 17:30:47 2014
+
+   Source : T:\pipelineny\aftereffects\UIPanels\
+     Dest : C:\Program Files\Adobe\Adobe After Effects CC 2014\Support Files\Scripts\ScriptUI Panels\
+
+    Files : PPNY_Qube_Submitter.jsx
+	    
+  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                   1	T:\pipelineny\aftereffects\UIPanels\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         1         0         0         0
+   Files :         1         0         1         0         0         0
+   Bytes :     2.8 k         0     2.8 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Tue Sep 02 17:30:47 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Tue Sep 02 17:30:47 2014
+
+   Source : T:\pipelineny\aftereffects\Preferences\CC2014\13.0\
+     Dest : C:\Users\fernandog\AppData\Roaming\Adobe\After Effects\13.0\
+
+    Files : *.*
+	    
+  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                  15	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\DVADialogPrefs\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\logs\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\ModifiedWorkspaces\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\OriginalUserWorkspaces\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\Shutdown\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\Startup\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         8         0         8         0         0         0
+   Files :        17         0        17         0         0         0
+   Bytes :   356.6 k         0   356.6 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Tue Sep 02 17:30:47 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 03 10:04:18 2014
+
+   Source : T:\pipelineny\aftereffects\UIPanels\
+     Dest : C:\Program Files\Adobe\Adobe After Effects CC\Support Files\Scripts\ScriptUI Panels\
+
+    Files : PPNY_Qube_Submitter.jsx
+	    
+  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                   1	T:\pipelineny\aftereffects\UIPanels\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         1         0         0         0
+   Files :         1         0         1         0         0         0
+   Bytes :     2.8 k         0     2.8 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Wed Sep 03 10:04:18 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 03 10:04:18 2014
+
+   Source : T:\pipelineny\aftereffects\Preferences\CC\12.1\
+     Dest : C:\Users\fernandog\AppData\Roaming\Adobe\After Effects\12.1\
+
+    Files : *.*
+	    
+  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                  15	T:\pipelineny\aftereffects\Preferences\CC\12.1\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC\12.1\DVADialogPrefs\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\logs\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC\12.1\ModifiedWorkspaces\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\OriginalUserWorkspaces\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\Shutdown\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\Startup\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         8         5         3         0         0         0
+   Files :        17         0        17         0         0         0
+   Bytes :   441.7 k         0   441.7 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Wed Sep 03 10:04:18 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 03 10:04:18 2014
+
+   Source : T:\pipelineny\aftereffects\UIPanels\
+     Dest : C:\Program Files\Adobe\Adobe After Effects CC 2014\Support Files\Scripts\ScriptUI Panels\
+
+    Files : PPNY_Qube_Submitter.jsx
+	    
+  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                   1	T:\pipelineny\aftereffects\UIPanels\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         1         0         0         0
+   Files :         1         0         1         0         0         0
+   Bytes :     2.8 k         0     2.8 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Wed Sep 03 10:04:18 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 03 10:04:18 2014
+
+   Source : T:\pipelineny\aftereffects\Preferences\CC2014\13.0\
+     Dest : C:\Users\fernandog\AppData\Roaming\Adobe\After Effects\13.0\
+
+    Files : *.*
+	    
+  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                  15	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\DVADialogPrefs\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\logs\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\ModifiedWorkspaces\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\OriginalUserWorkspaces\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\Shutdown\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\Startup\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         8         0         8         0         0         0
+   Files :        17         0        17         0         0         0
+   Bytes :   356.6 k         0   356.6 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Wed Sep 03 10:04:18 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 03 10:04:24 2014
+
+   Source : T:\pipelineny\aftereffects\UIPanels\
+     Dest : C:\Program Files\Adobe\Adobe After Effects CC\Support Files\Scripts\ScriptUI Panels\
+
+    Files : PPNY_Qube_Submitter.jsx
+	    
+  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                   1	T:\pipelineny\aftereffects\UIPanels\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         1         0         0         0
+   Files :         1         0         1         0         0         0
+   Bytes :     2.8 k         0     2.8 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Wed Sep 03 10:04:24 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 03 10:04:24 2014
+
+   Source : T:\pipelineny\aftereffects\Preferences\CC\12.1\
+     Dest : C:\Users\fernandog\AppData\Roaming\Adobe\After Effects\12.1\
+
+    Files : *.*
+	    
+  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                  15	T:\pipelineny\aftereffects\Preferences\CC\12.1\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC\12.1\DVADialogPrefs\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\logs\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC\12.1\ModifiedWorkspaces\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\OriginalUserWorkspaces\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\Shutdown\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\Startup\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         8         5         3         0         0         0
+   Files :        17         0        17         0         0         0
+   Bytes :   441.7 k         0   441.7 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Wed Sep 03 10:04:24 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 03 10:04:24 2014
+
+   Source : T:\pipelineny\aftereffects\UIPanels\
+     Dest : C:\Program Files\Adobe\Adobe After Effects CC 2014\Support Files\Scripts\ScriptUI Panels\
+
+    Files : PPNY_Qube_Submitter.jsx
+	    
+  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                   1	T:\pipelineny\aftereffects\UIPanels\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         1         0         0         0
+   Files :         1         0         1         0         0         0
+   Bytes :     2.8 k         0     2.8 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Wed Sep 03 10:04:24 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 03 10:04:24 2014
+
+   Source : T:\pipelineny\aftereffects\Preferences\CC2014\13.0\
+     Dest : C:\Users\fernandog\AppData\Roaming\Adobe\After Effects\13.0\
+
+    Files : *.*
+	    
+  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                  15	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\DVADialogPrefs\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\logs\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\ModifiedWorkspaces\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\OriginalUserWorkspaces\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\Shutdown\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\Startup\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         8         0         8         0         0         0
+   Files :        17         0        17         0         0         0
+   Bytes :   356.6 k         0   356.6 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Wed Sep 03 10:04:24 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 03 10:05:42 2014
+
+   Source : T:\pipelineny\aftereffects\UIPanels\
+     Dest : C:\Program Files\Adobe\Adobe After Effects CC\Support Files\Scripts\ScriptUI Panels\
+
+    Files : PPNY_Qube_Submitter.jsx
+	    
+  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                   1	T:\pipelineny\aftereffects\UIPanels\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         1         0         0         0
+   Files :         1         0         1         0         0         0
+   Bytes :     2.8 k         0     2.8 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Wed Sep 03 10:05:42 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 03 10:05:43 2014
+
+   Source : T:\pipelineny\aftereffects\Preferences\CC\12.1\
+     Dest : C:\Users\fernandog\AppData\Roaming\Adobe\After Effects\12.1\
+
+    Files : *.*
+	    
+  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                  15	T:\pipelineny\aftereffects\Preferences\CC\12.1\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC\12.1\DVADialogPrefs\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\logs\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC\12.1\ModifiedWorkspaces\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\OriginalUserWorkspaces\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\Shutdown\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\Startup\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         8         5         3         0         0         0
+   Files :        17         0        17         0         0         0
+   Bytes :   441.7 k         0   441.7 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Wed Sep 03 10:05:43 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 03 10:05:43 2014
+
+   Source : T:\pipelineny\aftereffects\UIPanels\
+     Dest : C:\Program Files\Adobe\Adobe After Effects CC 2014\Support Files\Scripts\ScriptUI Panels\
+
+    Files : PPNY_Qube_Submitter.jsx
+	    
+  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                   1	T:\pipelineny\aftereffects\UIPanels\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         1         0         0         0
+   Files :         1         0         1         0         0         0
+   Bytes :     2.8 k         0     2.8 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Wed Sep 03 10:05:43 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 03 10:05:43 2014
+
+   Source : T:\pipelineny\aftereffects\Preferences\CC2014\13.0\
+     Dest : C:\Users\fernandog\AppData\Roaming\Adobe\After Effects\13.0\
+
+    Files : *.*
+	    
+  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                  15	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\DVADialogPrefs\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\logs\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\ModifiedWorkspaces\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\OriginalUserWorkspaces\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\Shutdown\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\Startup\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         8         0         8         0         0         0
+   Files :        17         0        17         0         0         0
+   Bytes :   356.6 k         0   356.6 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Wed Sep 03 10:05:43 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 03 11:00:01 2014
+
+   Source : T:\pipelineny\aftereffects\UIPanels\
+     Dest : C:\Program Files\Adobe\Adobe After Effects CC\Support Files\Scripts\ScriptUI Panels\
+
+    Files : PPNY_Qube_Submitter.jsx
+	    
+  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                   1	T:\pipelineny\aftereffects\UIPanels\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         1         0         0         0
+   Files :         1         0         1         0         0         0
+   Bytes :     2.8 k         0     2.8 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Wed Sep 03 11:00:01 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 03 11:00:01 2014
+
+   Source : T:\pipelineny\aftereffects\Preferences\CC\12.1\
+     Dest : C:\Users\fernandog\AppData\Roaming\Adobe\After Effects\12.1\
+
+    Files : *.*
+	    
+  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                  15	T:\pipelineny\aftereffects\Preferences\CC\12.1\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC\12.1\DVADialogPrefs\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\logs\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC\12.1\ModifiedWorkspaces\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\OriginalUserWorkspaces\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\Shutdown\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\Startup\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         8         5         3         0         0         0
+   Files :        17         0        17         0         0         0
+   Bytes :   441.7 k         0   441.7 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Wed Sep 03 11:00:02 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 03 11:00:02 2014
+
+   Source : T:\pipelineny\aftereffects\UIPanels\
+     Dest : C:\Program Files\Adobe\Adobe After Effects CC 2014\Support Files\Scripts\ScriptUI Panels\
+
+    Files : PPNY_Qube_Submitter.jsx
+	    
+  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                   1	T:\pipelineny\aftereffects\UIPanels\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         1         0         0         0
+   Files :         1         0         1         0         0         0
+   Bytes :     2.8 k         0     2.8 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Wed Sep 03 11:00:02 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 03 11:00:02 2014
+
+   Source : T:\pipelineny\aftereffects\Preferences\CC2014\13.0\
+     Dest : C:\Users\fernandog\AppData\Roaming\Adobe\After Effects\13.0\
+
+    Files : *.*
+	    
+  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                  15	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\DVADialogPrefs\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\logs\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\ModifiedWorkspaces\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\OriginalUserWorkspaces\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\Shutdown\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\Startup\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         8         0         8         0         0         0
+   Files :        17         0        17         0         0         0
+   Bytes :   356.6 k         0   356.6 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Wed Sep 03 11:00:02 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 03 16:17:27 2014
+
+   Source : T:\pipelineny\aftereffects\UIPanels\
+     Dest : C:\Program Files\Adobe\Adobe After Effects CC\Support Files\Scripts\ScriptUI Panels\
+
+    Files : PPNY_Qube_Submitter.jsx
+	    
+  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                   1	T:\pipelineny\aftereffects\UIPanels\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         1         0         0         0
+   Files :         1         0         1         0         0         0
+   Bytes :     2.8 k         0     2.8 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Wed Sep 03 16:17:27 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 03 16:17:27 2014
+
+   Source : T:\pipelineny\aftereffects\Preferences\CC\12.1\
+     Dest : C:\Users\fernandog\AppData\Roaming\Adobe\After Effects\12.1\
+
+    Files : *.*
+	    
+  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                  15	T:\pipelineny\aftereffects\Preferences\CC\12.1\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC\12.1\DVADialogPrefs\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\logs\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC\12.1\ModifiedWorkspaces\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\OriginalUserWorkspaces\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\Shutdown\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\Startup\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         8         5         3         0         0         0
+   Files :        17         0        17         0         0         0
+   Bytes :   441.7 k         0   441.7 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Wed Sep 03 16:17:27 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 03 16:17:27 2014
+
+   Source : T:\pipelineny\aftereffects\UIPanels\
+     Dest : C:\Program Files\Adobe\Adobe After Effects CC 2014\Support Files\Scripts\ScriptUI Panels\
+
+    Files : PPNY_Qube_Submitter.jsx
+	    
+  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                   1	T:\pipelineny\aftereffects\UIPanels\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         1         0         0         0
+   Files :         1         0         1         0         0         0
+   Bytes :     2.8 k         0     2.8 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Wed Sep 03 16:17:27 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 03 16:17:27 2014
+
+   Source : T:\pipelineny\aftereffects\Preferences\CC2014\13.0\
+     Dest : C:\Users\fernandog\AppData\Roaming\Adobe\After Effects\13.0\
+
+    Files : *.*
+	    
+  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                  15	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\DVADialogPrefs\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\logs\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\ModifiedWorkspaces\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\OriginalUserWorkspaces\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\Shutdown\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\Startup\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         8         0         8         0         0         0
+   Files :        17         0        17         0         0         0
+   Bytes :   356.6 k         0   356.6 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Wed Sep 03 16:17:27 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Mon Sep 08 16:14:11 2014
+
+   Source : T:\pipelineny\aftereffects\UIPanels\
+     Dest : C:\Program Files\Adobe\Adobe After Effects CC\Support Files\Scripts\ScriptUI Panels\
+
+    Files : PPNY_Qube_Submitter.jsx
+	    
+  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                   1	T:\pipelineny\aftereffects\UIPanels\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         1         0         0         0
+   Files :         1         0         1         0         0         0
+   Bytes :     2.8 k         0     2.8 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Mon Sep 08 16:14:11 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Mon Sep 08 16:14:11 2014
+
+   Source : T:\pipelineny\aftereffects\Preferences\CC\12.1\
+     Dest : C:\Users\fernandog\AppData\Roaming\Adobe\After Effects\12.1\
+
+    Files : *.*
+	    
+  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                  15	T:\pipelineny\aftereffects\Preferences\CC\12.1\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC\12.1\DVADialogPrefs\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\logs\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC\12.1\ModifiedWorkspaces\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\OriginalUserWorkspaces\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\Shutdown\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\Startup\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         8         5         3         0         0         0
+   Files :        17         0        17         0         0         0
+   Bytes :   441.7 k         0   441.7 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Mon Sep 08 16:14:11 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Mon Sep 08 16:14:11 2014
+
+   Source : T:\pipelineny\aftereffects\UIPanels\
+     Dest : C:\Program Files\Adobe\Adobe After Effects CC 2014\Support Files\Scripts\ScriptUI Panels\
+
+    Files : PPNY_Qube_Submitter.jsx
+	    
+  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                   1	T:\pipelineny\aftereffects\UIPanels\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         1         0         0         0
+   Files :         1         0         1         0         0         0
+   Bytes :     2.8 k         0     2.8 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Mon Sep 08 16:14:11 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Mon Sep 08 16:14:11 2014
+
+   Source : T:\pipelineny\aftereffects\Preferences\CC2014\13.0\
+     Dest : C:\Users\fernandog\AppData\Roaming\Adobe\After Effects\13.0\
+
+    Files : *.*
+	    
+  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                  15	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\DVADialogPrefs\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\logs\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\ModifiedWorkspaces\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\OriginalUserWorkspaces\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\Shutdown\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\Startup\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         8         0         8         0         0         0
+   Files :        17         0        17         0         0         0
+   Bytes :   356.6 k         0   356.6 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Mon Sep 08 16:14:11 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Mon Sep 08 16:35:35 2014
+
+   Source : T:\pipelineny\aftereffects\UIPanels\
+     Dest : C:\Program Files\Adobe\Adobe After Effects CC\Support Files\Scripts\ScriptUI Panels\
+
+    Files : PPNY_Qube_Submitter.jsx
+	    
+  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                   1	T:\pipelineny\aftereffects\UIPanels\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         1         0         0         0
+   Files :         1         0         1         0         0         0
+   Bytes :     2.8 k         0     2.8 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Mon Sep 08 16:35:35 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Mon Sep 08 16:35:35 2014
+
+   Source : T:\pipelineny\aftereffects\Preferences\CC\12.1\
+     Dest : C:\Users\fernandog\AppData\Roaming\Adobe\After Effects\12.1\
+
+    Files : *.*
+	    
+  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                  15	T:\pipelineny\aftereffects\Preferences\CC\12.1\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC\12.1\DVADialogPrefs\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\logs\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC\12.1\ModifiedWorkspaces\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\OriginalUserWorkspaces\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\Shutdown\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\Startup\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         8         5         3         0         0         0
+   Files :        17         0        17         0         0         0
+   Bytes :   441.7 k         0   441.7 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Mon Sep 08 16:35:35 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Mon Sep 08 16:35:35 2014
+
+   Source : T:\pipelineny\aftereffects\UIPanels\
+     Dest : C:\Program Files\Adobe\Adobe After Effects CC 2014\Support Files\Scripts\ScriptUI Panels\
+
+    Files : PPNY_Qube_Submitter.jsx
+	    
+  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                   1	T:\pipelineny\aftereffects\UIPanels\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         1         0         0         0
+   Files :         1         0         1         0         0         0
+   Bytes :     2.8 k         0     2.8 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Mon Sep 08 16:35:35 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Mon Sep 08 16:35:35 2014
+
+   Source : T:\pipelineny\aftereffects\Preferences\CC2014\13.0\
+     Dest : C:\Users\fernandog\AppData\Roaming\Adobe\After Effects\13.0\
+
+    Files : *.*
+	    
+  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                  15	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\DVADialogPrefs\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\logs\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\ModifiedWorkspaces\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\OriginalUserWorkspaces\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\Shutdown\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\Startup\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         8         0         8         0         0         0
+   Files :        17         0        17         0         0         0
+   Bytes :   356.6 k         0   356.6 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Mon Sep 08 16:35:35 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 17 14:38:58 2014
+
+   Source : T:\pipelineny\aftereffects\UIPanels\
+     Dest : C:\Program Files\Adobe\Adobe After Effects CC\Support Files\Scripts\ScriptUI Panels\
+
+    Files : PPNY_Qube_Submitter.jsx
+	    
+  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                   1	T:\pipelineny\aftereffects\UIPanels\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         1         0         0         0
+   Files :         1         0         1         0         0         0
+   Bytes :     2.8 k         0     2.8 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Wed Sep 17 14:38:58 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 17 14:38:58 2014
+
+   Source : T:\pipelineny\aftereffects\Preferences\CC\12.1\
+     Dest : C:\Users\fernandog\AppData\Roaming\Adobe\After Effects\12.1\
+
+    Files : *.*
+	    
+  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                  15	T:\pipelineny\aftereffects\Preferences\CC\12.1\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC\12.1\DVADialogPrefs\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\logs\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC\12.1\ModifiedWorkspaces\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\OriginalUserWorkspaces\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\Shutdown\
+	  New Dir          0	T:\pipelineny\aftereffects\Preferences\CC\12.1\Scripts\Startup\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         8         5         3         0         0         0
+   Files :        17         0        17         0         0         0
+   Bytes :   441.7 k         0   441.7 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Wed Sep 17 14:38:58 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 17 14:38:58 2014
+
+   Source : T:\pipelineny\aftereffects\UIPanels\
+     Dest : C:\Program Files\Adobe\Adobe After Effects CC 2014\Support Files\Scripts\ScriptUI Panels\
+
+    Files : PPNY_Qube_Submitter.jsx
+	    
+  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                   1	T:\pipelineny\aftereffects\UIPanels\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         1         0         0         0
+   Files :         1         0         1         0         0         0
+   Bytes :     2.8 k         0     2.8 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Wed Sep 17 14:38:58 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 17 14:38:58 2014
+
+   Source : T:\pipelineny\aftereffects\Preferences\CC2014\13.0\
+     Dest : C:\Users\fernandog\AppData\Roaming\Adobe\After Effects\13.0\
+
+    Files : *.*
+	    
+  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                  15	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\DVADialogPrefs\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\logs\
+	                   1	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\ModifiedWorkspaces\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\OriginalUserWorkspaces\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\Shutdown\
+	                   0	T:\pipelineny\aftereffects\Preferences\CC2014\13.0\Scripts\Startup\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         8         0         8         0         0         0
+   Files :        17         0        17         0         0         0
+   Bytes :   356.6 k         0   356.6 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Wed Sep 17 14:38:59 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 24 18:47:53 2014
+
+   Source : \\pp-fs-nyc\pipeline\nyc\tools\aftereffects\UIPanels\
+     Dest : C:\Program Files\Adobe\Adobe After Effects CC\Support Files\Scripts\ScriptUI Panels\
+
+    Files : PPNY_Qube_Submitter.jsx
+	    
+  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                   1	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\UIPanels\
+	    New File  		    2959	PPNY_Qube_Submitter.jsx
+2014/09/24 18:47:54 ERROR 5 (0x00000005) Copying File \\pp-fs-nyc\pipeline\nyc\tools\aftereffects\UIPanels\PPNY_Qube_Submitter.jsx
+Access is denied.
+
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         1         0         0         0
+   Files :         1         0         0         0         1         0
+   Bytes :     2.8 k         0         0         0     2.8 k         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Wed Sep 24 18:47:54 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 24 18:47:54 2014
+
+   Source : \\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC\12.1\
+     Dest : C:\Users\adamb\AppData\Roaming\Adobe\After Effects\12.1\
+
+    Files : *.*
+	    
+  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                  15	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC\12.1\
+	                   1	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC\12.1\DVADialogPrefs\
+	                   0	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC\12.1\logs\
+	                   1	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC\12.1\ModifiedWorkspaces\
+	                   0	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC\12.1\OriginalUserWorkspaces\
+	                   0	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC\12.1\Scripts\
+	                   0	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC\12.1\Scripts\Shutdown\
+	                   0	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC\12.1\Scripts\Startup\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         8         0         8         0         0         0
+   Files :        17         0        17         0         0         0
+   Bytes :   441.7 k         0   441.7 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Wed Sep 24 18:47:54 2014
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 24 18:47:54 2014
+
+   Source : \\pp-fs-nyc\pipeline\nyc\tools\aftereffects\UIPanels\
+     Dest : C:\Program Files\Adobe\Adobe After Effects CC 2014\Support Files\Scripts\ScriptUI Panels\
+
+    Files : PPNY_Qube_Submitter.jsx
+	    
+  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+2014/09/24 18:47:54 ERROR 5 (0x00000005) Creating Destination Directory C:\Program Files\Adobe\Adobe After Effects CC 2014\Support Files\Scripts\ScriptUI Panels\
+Access is denied.
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wed Sep 24 18:47:54 2014
+
+   Source : \\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC2014\13.0\
+     Dest : C:\Users\adamb\AppData\Roaming\Adobe\After Effects\13.0\
+
+    Files : *.*
+	    
+  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
+
+------------------------------------------------------------------------------
+
+	                  15	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC2014\13.0\
+	                   1	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC2014\13.0\DVADialogPrefs\
+	  New Dir          0	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC2014\13.0\logs\
+	                   1	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC2014\13.0\ModifiedWorkspaces\
+	  New Dir          0	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC2014\13.0\OriginalUserWorkspaces\
+	  New Dir          0	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC2014\13.0\Scripts\
+	  New Dir          0	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC2014\13.0\Scripts\Shutdown\
+	  New Dir          0	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC2014\13.0\Scripts\Startup\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         8         5         3         0         0         0
+   Files :        17         0        17         0         0         0
+   Bytes :   356.6 k         0   356.6 k         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+   Ended : Wed Sep 24 18:47:54 2014

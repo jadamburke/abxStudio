@@ -1,0 +1,87 @@
+// NodeEditSelected
+// Created by: adamb
+// Date: 2014/08/10 11:34:36
+
+global proc nodeEditSelected(){
+
+	$sel = `ls -sl`;
+	string $nodesToGraph[];
+	for ($each in $sel){
+		if (size($sel)>0){
+			string $myShapeNode[] = `listRelatives -children -shapes $each`;
+			string $mySGs[] = `listConnections -type shadingEngine $myShapeNode[0]`;
+			string $surfaceShader[] = `listConnections ($mySGs[0] + ".surfaceShader")`;
+			//connectAttr -force aiStandard1.outColor blinn2SG.aiSurfaceShader;
+			if (`attributeExists "aiSurfaceShader" $mySGs[0]`){
+				string $aiSurfShaders[] = `listConnections ($mySGs[0] + ".aiSurfaceShader")`;
+				for ($every in $aiSurfShaders)
+					$nodesToGraph[size($nodesToGraph)] = $every;
+			}
+			for ($every in $surfaceShader){
+				$nodesToGraph[size($nodesToGraph)] = $every;
+			}
+			//string $textures[] = `listConnections ($surfaceShader[0]+".color")`;
+			//string $filePath = `getAttr ($textures[0]+".ftn")`;
+			//$objFileNode = $textures[0];
+
+		}
+	}
+
+	string $newin = nodeEditorWindowCustom($nodesToGraph);
+
+	//string $ncmd="nodeEditor -e -frameAll ";
+	//for ($each in $nodesToGraph){
+	//	$ncmd += ("-rn "+$each+" ");
+	//}
+	//$ncmd += (" -ups 1 -ds 1 "+$newin);
+	//print ($ncmd+"\n");
+	//evalDeferred($ncmd);
+
+
+}
+
+global proc string nodeEditorWindowCustom(string $rootNodes[])
+//
+// Description:
+//	This procedure creates a new window with a node editor and menu bar.
+//
+// Return:
+//  Name of the new nodeEditor.
+//
+{
+    // create a new nodeEditor panel
+    //
+    string $panelLabel = localizedPanelLabel("Node Editor");
+    string $whichPanel = `scriptedPanel -label $panelLabel -type nodeEditorPanel -unParent`;
+    string $nodeEd = editorNameFromPanel($whichPanel);
+
+    // tear if off to create a new window
+    scriptedPanel -e -to $whichPanel;
+
+	string $ncmd="nodeEditor -e -frameAll ";
+	for ($each in $rootNodes){
+		$ncmd += ("-rn "+$each+" ");
+	}
+	$ncmd += (" -ups 1 -ds 1 "+$nodeEd);
+	print ($ncmd+"\n");
+	evalEcho($ncmd);
+
+    // register this panel as needing save/restore of state
+    //
+    global string $gNodeEditorWindowPanels[];
+    if (!stringArrayContains($whichPanel, $gNodeEditorWindowPanels)) {
+        $gNodeEditorWindowPanels[`size $gNodeEditorWindowPanels`] = $whichPanel;
+    }
+
+    // create a scriptJob which will run when the window is deleted
+    //
+    string $panelControl = `panel -q -control $whichPanel`;
+    string $windowName = match("^[^|]*",$panelControl);
+    scriptJob -runOnce true -uiDeleted $windowName 
+        ("nodeEditorWindowClosed \""+$whichPanel+"\"");
+
+	evalDeferred ("setFocus \"" + editorNameFromPanel($whichPanel) + "\"");
+	evalDeferred ("nodeEditor -e  -frameAll "+$nodeEd);
+
+    return $nodeEd;
+}

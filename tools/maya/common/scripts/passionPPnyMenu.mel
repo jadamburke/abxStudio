@@ -1,0 +1,74 @@
+
+global proc passionPPnyMenu()
+{
+    global string $gPassionMainMenu;
+    global string $gMainWindow;
+
+
+        if(!`menu -exists $gPassionMainMenu`){
+            $gPassionMainMenu = `menu -p $gMainWindow -l "Passion" -tearOff true -allowOptionBoxes true mainPassionMenu`;
+        }
+
+        if (`menu -exists $gPassionMainMenu`) {
+            setParent -menu $gPassionMainMenu;
+            // custom menu items
+            if (int(`about -v`) >= 2015)
+                menuItem -divider true -dl "PASSION NY TOOLS";
+            else{
+                menuItem -divider true ;
+                menuItem -divider true ;
+                menuItem -label "Passion NY Tools" ;
+                menuItem -divider true ;
+            }
+
+
+                menuItem -label "New Scene" -sm true;
+                    menuItem -l "New Empty Scene" -c "ppNewScene;ppDoNewScene \"empty\"";
+                    menuItem -divider true ;
+                    menuItem -l "New Anm Scene" -c "ppNewScene;ppDoNewScene (\"anm\")";
+                    menuItem -l "New Lgt Scene" -c "ppNewScene;ppDoNewScene (\"lgt\")";
+                    menuItem -divider true ;
+                    menuItem -l "New Rig Scene" -c "ppNewScene;ppDoNewScene \"rig\"";
+
+                setParent -menu $gPassionMainMenu;
+                menuItem -en 1 -l  "New Camera" -sm true;
+                    menuItem -en 1 -l "Camera" -c "ppNewCam;ppDoNewCamVerbosity \"camera\" 1";
+                    menuItem -en 1 -l "Camera and Aim" -c "ppNewCam;ppDoNewCamVerbosity \"cameraAim\" 1";
+                    menuItem -en 1 -l "Camera, Aim and Up" -c "ppNewCam;ppDoNewCamVerbosity \"cameraAimUp\" 1";
+                    menuItem -divider true ;
+                    menuItem -en 1 -l "Camera Orbit" -c "ppNewCam;ppDoNewCamVerbosity \"orbitCam\" 1";
+                    menuItem -divider true ;
+                    //menuItem -l "StereoCam Tools" -c ("if (`exists ppStereoCam`==0) source \""+$ppScripts+"/scripts/production/ppStereoCam.mel\";if (`exists ppStereoCam`) ppStereoCam");
+                    //menuItem -divider true ;
+                    menuItem -l "renderCam for Track Shots" -c "ppNewCam;ppDoNewCamVerbosity \"renderCam4Track\" 1";    
+                setParent -menu $gPassionMainMenu;
+
+                menuItem -divider true ;
+
+                // Project Window
+                //menuItem -en 1 -l "Project Manager" -c ("if (`exists abxProject`==0) source \""+$gPPScripts+"/Toolbox/Pipeline/abxProject.mel\";if (`exists abxProject`) abxProject");
+                menuItem -en 1 -l "Project Manager" -c "abxProject";
+
+                // Assets Window
+                //menuItem  -l "Asset Manager" -c ("if (`exists abxAssets`==0) source \""+$gPPScripts+"/Toolbox/Pipeline/abxAssets.mel\";if (`exists abxAssets`) abxAssets");
+                menuItem  -l "Asset Manager" -c "abxAssets";
+
+                // Shots Window
+                //menuItem -en 1 -l "Shots Manager" -c ("if (`exists abxShots`==0) source \""+$gPPScripts+"/Toolbox/Pipeline/abxShots.mel\";if (`exists abxShots`) abxShots");
+                menuItem -en 1 -l "Shots Manager" -c "abxShots";
+
+                menuItem -divider true ;
+
+                menuItem -l "Scripts" -c "abxToybox";
+
+                menuItem -divider true ;
+                menuItem -l "Export Camera for Nuke" -c "ppNukeCamExport \"\"";
+                menuItem -l "Export Nulls on Selected" -c "ppNukeNullsExport \"\"";
+
+                menuItem -divider true ;
+
+                menuItem -l "Browse Job" -c "ppBrowseJob";
+                menuItem -l "Browse Maya Project" -c "ppBrowseProject";
+        }
+
+}

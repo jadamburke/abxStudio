@@ -1,0 +1,292 @@
+studiotools:
+  name: Studio Tools
+  show: false
+  env:
+    MODE: pub
+    PP_JOB_SERVERS: \\pp-fs-nyc\production\
+    PP_RESOURCE: \\pp-fs-nyc\pipeline\nyc
+  versions:
+    '1.0':
+      path:
+        linux: /
+        mac: /
+        win32: /
+aftereffects:
+  show: true
+  tasks:
+  - edit
+  - grade
+  - conform
+  - mix
+  versions:
+    'CC':
+      name: After Effects CC
+      env:
+        PP_AE: 'CC'
+      modes:
+        ui:
+          linux: /
+          mac: /
+          win32: ae_pipeline_init.bat
+      path:
+        linux: /
+        mac: /
+        win32: \\pp-fs-nyc\pipeline\nyc\tools\aftereffects
+    'CC 2014':
+      name: After Effects CC 2014
+      env:
+        PP_AE: 'CC 2014'
+      modes:
+        ui:
+          linux: /
+          mac: /
+          win32: ae_pipeline_init.bat
+      path:
+        linux: /
+        mac: /
+        win32: \\pp-fs-nyc\pipeline\nyc\tools\aftereffects
+maya:
+  env:
+    MAYA_PPTOOLS: '%PP_RESOURCE%\tools\maya\common'
+    MAYA_PPTOOLS_COMMON: '%PP_RESOURCE%\maya\common'
+    MAYA_MODULE_PATH: '%MAYA_PPTOOLS%\modules'
+    MAYA_PLUG_IN_PATH: '%MAYA_PPTOOLS%\plugins'
+    MAYA_PRESET_PATH: '%MAYA_PPTOOLS%\presets'
+    MAYA_SCRIPT_PATH: '%MAYA_PPTOOLS%\scripts'
+    MAYA_SHELF_PATH: '%MAYA_PPTOOLS%\shelves'
+    PYTHONPATH: '%PP_RESOURCE%\lib\python;%MAYA_PPTOOLS%\scripts'
+  show: true
+  versions:
+    '2014':
+      name: Autodesk Maya
+      env:
+        PP_MAYA: '2014'
+        MAYA_PPTOOLS_VERSIONED: '%PP_RESOURCE%\maya\%PP_MAYA%x64'
+        PP_MAYA_DIR: C:/Program Files/Autodesk/Maya%PP_MAYA%
+      modes:
+        ui:
+          linux: /
+          mac: /
+          win32: maya.exe
+      path:
+        linux: /
+        mac: /
+        win32: C:/Program Files/Autodesk/Maya2014/bin
+    '2015':
+      name: Autodesk Maya
+      env:
+        MAYA_PPTOOLS_VERSIONED: '%PP_RESOURCE%\maya\%PP_MAYA%x64'
+        PP_MAYA: '2015'
+        PP_MAYA_DIR: C:/Program Files/Autodesk/Maya%PP_MAYA%
+      modes:
+        ui:
+          linux: /
+          mac: /
+          win32: maya.exe
+      path:
+        linux: /
+        mac: /
+        win32: C:/Program Files/Autodesk/Maya2015/bin
+  tasks:
+  - model
+  - shade
+  - rig
+  - anim
+  - effects
+  - cloth
+  - hair
+  - muscle
+  - light
+softimage:
+  show: true
+  versions:
+    '2014':
+      name: Autodesk Softimage XSI
+      modes:
+        ui:
+          linux: /
+          mac: /
+          win32: XSI.exe
+      path:
+        linux: /
+        mac: /
+        win32: C:/Program Files/Autodesk/Softimage 2014 SP2/Application/bin
+    '2015':
+      name: Autodesk Maya
+      modes:
+        ui:
+          linux: /
+          mac: /
+          win32: XSI.exe
+      path:
+        linux: /
+        mac: /
+        win32: C:/Program Files/Autodesk/Softimage 2015/Application/bin
+  tasks:
+  - model
+  - shade
+  - rig
+  - anim
+  - effects
+  - cloth
+  - hair
+  - muscle
+  - light
+nuke:
+  env:
+    NUKE_PATH: '%PP_RESOURCE%\tools\nuke'
+    NUKE_DISK_CACHE: 'E:\Nuke'
+  show: true
+  tasks:
+  - comp
+  - light
+  - grade
+  - track
+  - roto
+  versions:
+    '7.0v8':
+      name: Nuke
+      modes:
+        ui:
+          linux: /
+          mac: /
+          win32: Nuke7.0.exe
+      path:
+        linux: /
+        mac: /
+        win32: C:/Program Files/Nuke7.0v8
+    '8.0v5':
+      name: Nuke
+      modes:
+        ui:
+          linux: /
+          mac: /
+          win32: Nuke8.0.exe
+      path:
+        linux: /
+        mac: /
+        win32: C:/Program Files/Nuke8.0v5
+nukex:
+  env:
+    NUKE_PATH: '%PP_RESOURCE%\nuke'
+    NUKE_DISK_CACHE: 'E:\Nuke'
+  show: true
+  tasks:
+  - comp
+  - light
+  - grade
+  - track
+  - roto
+  versions:
+    '7.0v8':
+      name: Nuke
+      modes:
+        ui:
+          linux: /
+          mac: /
+          win32: Nuke7.0.exe --nukex
+      path:
+        linux: /
+        mac: /
+        win32: C:/Program Files/Nuke7.0v8
+    '8.0v5':
+      name: Nuke
+      modes:
+        ui:
+          linux: /
+          mac: /
+          win32: Nuke8.0.exe --nukex
+      path:
+        linux: /
+        mac: /
+        win32: C:/Program Files/Nuke8.0v5
+    '9.0v1':
+      name: Nuke
+      modes:
+        ui:
+          linux: /
+          mac: /
+          win32: Nuke9.0.exe --nukex
+      path:
+        linux: /
+        mac: /
+        win32: C:/Program Files/Nuke9.0v1
+premiere:
+  show: true
+  tasks:
+  - edit
+  - grade
+  - conform
+  - mix
+  versions:
+    'CC':
+      name: Premiere
+      modes:
+        ui:
+          linux: /
+          mac: /
+          win32: Adobe Premiere Pro.exe
+      path:
+        linux: /
+        mac: /
+        win32: C:\Program Files\Adobe\Adobe Premiere Pro CC
+    'CC 2014':
+      name: Premiere
+      modes:
+        ui:
+          linux: /
+          mac: /
+          win32: Adobe Premiere Pro.exe
+      path:
+        linux: /
+        mac: /
+        win32: C:\Program Files\Adobe\Adobe Premiere Pro CC 2014
+hiero:
+  name: Hiero
+  show: true
+  env:
+    HIERO_PLUGIN_PATH: '%PP_RESOURCE%/hiero'
+  tasks:
+  - edit
+  - grade
+  - conform
+  versions:
+    '1.7v2':
+      modes:
+        ui:
+          linux: /
+          mac: /
+          win32: hiero.exe
+      path:
+        linux: /
+        mac: /
+        win32: C:/Program Files/The Foundry/Hiero1.7v2
+    '1.8v2':
+      modes:
+        ui:
+          linux: /
+          mac: /
+          win32: hiero.exe
+      path:
+        linux: /
+        mac: /
+        win32: C:/Program Files/The Foundry/Hiero1.8v2
+
+motionbuilder:
+  name: Mobu
+  show: true
+  tasks:
+  - rig
+  - anim
+  versions:
+    '2014':
+      modes:
+        ui:
+          linux: /
+          mac: /
+          win32: motionbuilder.exe
+      path:
+        linux: /
+        mac: /
+        win32: C:\Program Files\Autodesk\MotionBuilder 2014\bin\x64
+

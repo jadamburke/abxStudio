@@ -1,0 +1,7 @@
+// requires maya "2012";
+startAttrPreset( "container" );
+blendAttrStr "fileTextureName" "M:/backlot/images/textures/cliff/RockGrassy0093_1_L_tile.tif"; 
+blendAttrStr "fileTextureName2" "M:/backlot/images/textures/cliff/RockGrassy0093_1_L_tile.tif"; 
+blendAttrStr "fileTextureName1" "M:/backlot/images/textures/cliff/RockGrassy0093_1_L_tile.tif"; 
+blendAttr "scaleX" 50; 
+endAttrPreset();

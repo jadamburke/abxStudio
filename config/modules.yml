@@ -1,0 +1,113 @@
+mentalray:
+  name: Mental Ray
+  show: false
+  packages:
+    maya:
+      env:
+        MAYA_MODULE_PATH: '%PP_RESOURCE%\bin\mentalray\maya\%PP_MAYA%\modules'
+      versions:
+        '2015':
+          path:
+            linux: /
+            mac: /
+            win32: /
+          versions:
+          - '2013'
+          - '2014'
+
+arnold:
+  name: Arnold
+  show: false
+  env:
+    ARNOLD_LICENSE_HOST: 'ppny-lic'
+    ARNOLD_LICENSE_PORT: '5060'
+  packages:
+    maya:
+      env:
+        MAYA_RENDER_DESC_PATH: '%PP_RESOURCE%\bin\arnold\maya\%PP_MTOA%\win\%PP_MAYA%'
+        MAYA_PLUG_IN_PATH: '%PP_RESOURCE%\bin\arnold\maya\%PP_MTOA%\win\%PP_MAYA%\plug-ins'
+        MAYA_SCRIPT_PATH: '%PP_RESOURCE%\bin\arnold\maya\%PP_MTOA%\win\%PP_MAYA%\scripts'
+        MAYA_MODULE_PATH: '%PP_RESOURCE%\bin\arnold\maya\%PP_MTOA%\win\%PP_MAYA%'
+      versions:
+        1.0.0.RC1:
+          env:
+            PP_MTOA: '1.0.0.RC1'
+          path:
+            linux: /
+            mac: /
+            win32: /
+          versions:
+          - '2013'
+          - '2014'
+        1.1.0.4:
+          env:
+            PP_MTOA: '1.1.0.4'
+          path:
+            linux: /
+            mac: /
+            win32: /
+          versions:
+          - '2015'
+        1.1.1.0:
+          env:
+            PP_MTOA: '1.1.1.0'
+          path:
+            linux: /
+            mac: /
+            win32: /
+          versions:
+          - '2015'
+crate:
+  name: Exocortex Crate
+  show: false
+  env:
+    EXOCORTEX_LICENSE: '5053@dmc4'
+  packages:
+    maya:
+      versions:
+        '1.1.145':
+          env:
+            MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/alembic/ExocortexCrateSuite/1.1.145/Windows/Maya%PP_MAYA%'
+          path:
+            linux: /
+            mac: /
+            win32: '%PP_RESOURCE%/bin/alembic/ExocortexCrateSuite/1.1.145'
+          versions:
+          - '2014'
+          - '2015'
+    soft:
+      versions:
+        '1.1.145':
+          versions:
+          - '2014'
+          - '2015'
+    3dsmax:
+      versions:
+        '1.1.145':
+          versions:
+          - '2013'
+          - '2014'
+          - '2015'
+vray:
+  name: VRay
+  show: false
+  packages:
+    maya:
+      versions:
+        '2.40.01':
+          env:
+            PP_MAYA_VRAY: '2.40.01'
+            VRAY_AUTH_CLIENT_FILE_PATH: '%PP_RESOURCE%/bin/vray/maya/config'
+            VRAY_FOR_MAYA%PP_MAYA%_MAIN_x64: '%PP_RESOURCE%/bin/vray/maya/%PP_MAYA_VRAY%/Maya%PP_MAYA%/maya_vray'
+            VRAY_FOR_MAYA%PP_MAYA%_PLUGINS_x64: '%PP_RESOURCE%/bin/vray/maya/%PP_MAYA_VRAY%/Maya%PP_MAYA%/maya_vray/vrayplugins'
+            VRAY_TOOLS_MAYA%PP_MAYA%_x64: '%PP_RESOURCE%/bin/vray/maya/%PP_MAYA_VRAY%/Maya%PP_MAYA%/vray/bin'
+            MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/vray/maya/%PP_MAYA_VRAY%/Maya%PP_MAYA%/maya_root/modules'
+            PATH: '%PP_RESOURCE%/bin/vray/maya/%PP_MAYA_VRAY%/Maya%PP_MAYA%/maya_root/bin'
+            MAYA_RENDER_DESC_PATH: '%PP_RESOURCE%/bin/vray/maya/%PP_MAYA_VRAY%/Maya%PP_MAYA%/maya_root/bin/rendererDesc'
+          path:
+            linux: /
+            mac: /
+            win32: '%PP_RESOURCE%/bin/vray/maya/2.40.01'
+          versions:
+          - '2014'
+

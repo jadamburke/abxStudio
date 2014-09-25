@@ -1,0 +1,14 @@
+// slowReset.mel
+// Created by: jason
+// Date: 2013/12/13 16:55:29
+
+global proc slowReset(){
+
+python("import slowReset");
+python("reload(slowReset)");
+python("slowReset.resetWindow()");
+
+
+
+
+}

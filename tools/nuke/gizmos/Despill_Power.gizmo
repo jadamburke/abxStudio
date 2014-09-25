@@ -1,0 +1,575 @@
+#! C:/Program Files/Nuke8.0v1/nuke-8.0.v1.dll -nx
+version 8.0 v1
+Gizmo {
+ inputs 3
+ tile_color 0x396ea3ff
+ note_font "Helvetica Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_color 0xffffffff
+ addUserKnob {20 User l "Power Despill"}
+ addUserKnob {4 scolor l "Screen Color" M {Green Blue Red}}
+ addUserKnob {4 method l Method M {Average Minimum Maximum}}
+ addUserKnob {26 ghffh l "Spill Correction"}
+ addUserKnob {41 add l offset T Grade1.add}
+ addUserKnob {41 gamma T Grade1.gamma}
+ addUserKnob {41 saturation T Saturation2.saturation}
+ addUserKnob {6 Grade1_disable l disable +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {6 luma l "Keep Luminance?" +STARTLINE}
+ luma true
+ addUserKnob {41 mix l "Luma mix" T Merge7.mix}
+ addUserKnob {6 Merge5_disable l "Use BG input?" +STARTLINE}
+ addUserKnob {41 mix_1 l "BG mix" T Merge5.mix}
+ addUserKnob {26 hhhh l Output}
+ addUserKnob {4 alphaout l "Alpha Output" M {Original "Despill Matte" White Black}}
+ addUserKnob {8 Dissolve1_which l "Overall mix"}
+ Dissolve1_which 1
+}
+ Constant {
+  inputs 0
+  channels alpha
+  name black
+  xpos 80
+  ypos 764
+ }
+ Dot {
+  name Dot11
+  xpos 114
+  ypos 846
+ }
+ Dot {
+  name Dot12
+  xpos -51
+  ypos 846
+ }
+ Invert {
+  name Invert2
+  xpos 80
+  ypos 869
+ }
+ Input {
+  inputs 0
+  name src
+  selected true
+  xpos -324
+  ypos -307
+ }
+ Dot {
+  name Dot5
+  xpos -290
+  ypos -256
+ }
+set N481aec40 [stack 0]
+ Shuffle {
+  red green
+  blue green
+  alpha green
+  name gggg
+  xpos -324
+  ypos -229
+ }
+set N481aefb0 [stack 0]
+ Dot {
+  name Dot18
+  xpos -540
+  ypos -218
+ }
+set N481af320 [stack 0]
+push $N481aec40
+ Shuffle {
+  red blue
+  green blue
+  alpha blue
+  name bbbb
+  xpos -219
+  ypos -229
+ }
+set N481af690 [stack 0]
+ Dot {
+  name Dot19
+  xpos -461
+  ypos -222
+ }
+set N481afa00 [stack 0]
+ Merge2 {
+  inputs 2
+  operation max
+  name Merge19
+  xpos -490
+  ypos -199
+ }
+push $N481af320
+push $N481afa00
+ Merge2 {
+  inputs 2
+  operation min
+  name Merge20
+  xpos -535
+  ypos -198
+ }
+push $N481af320
+push $N481afa00
+ Merge2 {
+  inputs 2
+  operation average
+  name Merge21
+  xpos -574
+  ypos -200
+ }
+ Switch {
+  inputs 3
+  which {{parent.method}}
+  name Switch5
+  xpos -553
+  ypos -162
+ }
+push $N481aec40
+ Shuffle {
+  green red
+  blue red
+  alpha red
+  name rrrr
+  xpos -424
+  ypos -232
+ }
+set N481b07c0 [stack 0]
+ Merge2 {
+  inputs 2
+  operation from
+  name Merge9
+  xpos -547
+  ypos -91
+ }
+ Clamp {
+  maximum_enable false
+  name Clamp2
+  xpos -547
+  ypos -67
+ }
+set N481b0ea0 [stack 0]
+push $N481b07c0
+ Dot {
+  name Dot16
+  xpos -93
+  ypos -188
+ }
+set N481b1210 [stack 0]
+push $N481aefb0
+ Dot {
+  name Dot17
+  xpos -14
+  ypos -192
+ }
+set N481b1580 [stack 0]
+ Merge2 {
+  inputs 2
+  operation max
+  name Merge16
+  xpos -43
+  ypos -169
+ }
+push $N481b1210
+push $N481b1580
+ Merge2 {
+  inputs 2
+  operation min
+  name Merge17
+  xpos -88
+  ypos -168
+ }
+push $N481b1210
+push $N481b1580
+ Merge2 {
+  inputs 2
+  operation average
+  name Merge18
+  xpos -127
+  ypos -170
+ }
+ Switch {
+  inputs 3
+  which {{parent.method}}
+  name Switch4
+  xpos -107
+  ypos -139
+ }
+push $N481af690
+ Merge2 {
+  inputs 2
+  operation from
+  name Merge12
+  xpos -128
+  ypos -77
+ }
+ Clamp {
+  maximum_enable false
+  name Clamp3
+  xpos -128
+  ypos -53
+ }
+set N481b26b0 [stack 0]
+push $N481b07c0
+ Dot {
+  name Dot14
+  xpos -346
+  ypos -185
+ }
+set N481b2a20 [stack 0]
+push $N481af690
+ Dot {
+  name Dot15
+  xpos -267
+  ypos -189
+ }
+set N481b2d90 [stack 0]
+ Merge2 {
+  inputs 2
+  operation max
+  name Merge15
+  xpos -296
+  ypos -166
+ }
+push $N481b2a20
+push $N481b2d90
+ Merge2 {
+  inputs 2
+  operation min
+  name Merge14
+  xpos -341
+  ypos -165
+ }
+push $N481b2a20
+push $N481b2d90
+ Merge2 {
+  inputs 2
+  operation average
+  name Merge1
+  xpos -380
+  ypos -167
+ }
+ Switch {
+  inputs 3
+  which {{parent.method}}
+  name Switch3
+  xpos -360
+  ypos -136
+ }
+push $N481aefb0
+ Merge2 {
+  inputs 2
+  operation from
+  name Merge2
+  xpos -314
+  ypos -78
+ }
+ Clamp {
+  maximum_enable false
+  name Clamp1
+  xpos -314
+  ypos -54
+ }
+set N481b3ec0 [stack 0]
+ Switch {
+  inputs 3
+  which {{parent.scolor i}}
+  name Switch1
+  xpos -137
+  ypos 241
+ }
+ set C47b9f8f0 [stack 0]
+ Dot {
+  name Dot6
+  xpos -103
+  ypos 265
+ }
+set N481b4230 [stack 0]
+ Dot {
+  name Dot1
+  xpos -103
+  ypos 551
+ }
+set N481b45a0 [stack 0]
+ Dot {
+  name Dot20
+  xpos -103
+  ypos 621
+ }
+set N481b4910 [stack 0]
+push $N481aec40
+ Dot {
+  name Dot3
+  xpos -616
+  ypos -256
+ }
+ Dot {
+  name Dot4
+  xpos -616
+  ypos 417
+ }
+set N481b4ff0 [stack 0]
+ Dot {
+  name Dot8
+  xpos -616
+  ypos 762
+ }
+set N481b5360 [stack 0]
+ Dot {
+  name Dot13
+  xpos -616
+  ypos 827
+ }
+set N481b56d0 [stack 0]
+ Dot {
+  name Dot9
+  xpos -616
+  ypos 877
+ }
+ Shuffle {
+  name Shuffle1
+  xpos -475
+  ypos 874
+ }
+ Switch {
+  inputs 3
+  which {{parent.alphaout i}}
+  name Switch2
+  xpos -137
+  ypos 874
+ }
+ Dot {
+  name Dot10
+  xpos -103
+  ypos 923
+ }
+push $N481b56d0
+ Input {
+  inputs 0
+  name mask
+  xpos -57
+  ypos 705
+  number 2
+ }
+ Invert {
+  name Invert1
+  xpos -57
+  ypos 754
+ }
+push $N481b5360
+push $N481b4910
+ Grade {
+  channels alpha
+  whitepoint 0.165
+  name Grade2
+  xpos -190
+  ypos 646
+ }
+push $N481b4910
+push $N481b45a0
+ Input {
+  inputs 0
+  name bg
+  xpos -2
+  ypos -27
+  number 1
+ }
+ Blur {
+  name Blur1
+  xpos -2
+  ypos 190
+ }
+push $N481b4230
+ Merge2 {
+  inputs 2
+  operation multiply
+  name Merge4
+  xpos -2
+  ypos 262
+ }
+ Dot {
+  name Dot7
+  xpos 32
+  ypos 495
+ }
+push $N481b4ff0
+push $N481af690
+push $N481aefb0
+push $N481b0ea0
+push $N481b07c0
+ Merge2 {
+  inputs 2
+  operation from
+  name Merge10
+  xpos -525
+  ypos -7
+ }
+ Copy {
+  inputs 2
+  from0 rgba.green
+  to0 rgba.green
+  name Copy5
+  xpos -534
+  ypos 48
+ }
+ Copy {
+  inputs 2
+  from0 rgba.blue
+  to0 rgba.blue
+  name Copy6
+  xpos -537
+  ypos 116
+ }
+push $N481aefb0
+push $N481b07c0
+push $N481b26b0
+push $N481af690
+ Merge2 {
+  inputs 2
+  operation from
+  name Merge13
+  xpos -157
+  ypos -11
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 rgba.red
+  name Copy4
+  xpos -157
+  ypos 24
+ }
+ Copy {
+  inputs 2
+  from0 rgba.green
+  to0 rgba.green
+  name Copy7
+  xpos -167
+  ypos 87
+ }
+push $N481af690
+push $N481b3ec0
+push $N481aefb0
+ Merge2 {
+  inputs 2
+  operation from
+  name Merge3
+  xpos -384
+  ypos 1
+ }
+push $N481b07c0
+ Copy {
+  inputs 2
+  from0 rgba.green
+  to0 rgba.green
+  name Copy1
+  xpos -436
+  ypos 48
+ }
+ Copy {
+  inputs 2
+  from0 rgba.blue
+  to0 rgba.blue
+  name Copy2
+  xpos -367
+  ypos 115
+ }
+clone $C47b9f8f0 {
+  inputs 3
+  xpos -287
+  ypos 240
+  selected false
+ }
+ Dot {
+  name Dot2
+  xpos -253
+  ypos 417
+ }
+set N481b9b90 [stack 0]
+ Merge2 {
+  inputs 2
+  operation minus
+  name Merge6
+  xpos -418
+  ypos 414
+ }
+ Saturation {
+  saturation 0
+  mode Maximum
+  name Saturation1
+  xpos -418
+  ypos 450
+ }
+push $N481b9b90
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge7
+  xpos -287
+  ypos 450
+  disable {{1-parent.luma i x43 1}}
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge5
+  xpos -287
+  ypos 492
+  disable {{1-parent.Merge5_disable}}
+ }
+ Add {
+  inputs 1+1
+  name Add1
+  xpos -287
+  ypos 541
+ }
+ Grade {
+  inputs 1+1
+  black_clamp false
+  name Grade1
+  xpos -287
+  ypos 618
+  disable {{parent.Grade1_disable i}}
+ }
+ Saturation {
+  inputs 1+1
+  name Saturation2
+  xpos -287
+  ypos 653
+  disable {{parent.Grade1.disable x319 1}}
+ }
+set N481bb3a0 [stack 0]
+ Keymix {
+  inputs 3
+  name Keymix1
+  xpos -287
+  ypos 754
+ }
+ Dissolve {
+  inputs 2
+  which {{1-parent.Dissolve1_which i}}
+  name Dissolve1
+  xpos -287
+  ypos 819
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy3
+  xpos -287
+  ypos 915
+ }
+ Output {
+  name Output1
+  xpos -287
+  ypos 969
+ }
+push $N481bb3a0
+push $N481bb3a0
+ Viewer {
+  inputs 2
+  input_number 1
+  input_process false
+  name Viewer1
+  xpos 146
+  ypos -19
+ }
+end_group

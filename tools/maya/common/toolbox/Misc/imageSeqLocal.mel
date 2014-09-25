@@ -1,0 +1,105 @@
+// imageSeqLocal
+// Created by: adamb
+// Date: 2014/08/09 10:21:28
+
+global proc imageSeqLocal(){
+
+    string $destinationPath = ("E:/mayaScratch");
+    $fileNodes = `ls -type file`;
+    string $imageSeqs[];
+    string $isLocal = -1;
+
+    for ($each in $fileNodes){
+        if (`getAttr ($each+".useFrameExtension")` == 1){
+            $imageSeqs[size($imageSeqs)] = $each;
+			string $texPath = `getAttr ($each+".ftn")`;
+			if (`gmatch $texPath "//*"`){
+				// set the swap mode to the first file node's location
+				
+
+				if (!`attributeExists "networkPath" $each`)
+					addAttr -longName "networkPath" -dt "string" $each;
+				else
+					if ($isLocal == -1) $isLocal = 0;
+				if (!`attributeExists "localPath" $each`)
+					addAttr -longName "localPath" -dt "string" $each;
+
+				string $networkDirName = dirname($texPath);
+				string $networkFileName = basenameEx($texPath);
+				int $len = size($texPath);
+				string $localPath = ($destinationPath+substring($texPath,2,$len));
+				string $localDirName = dirname($localPath);	
+				string $localFileName = basenameEx($localPath);	
+
+				setAttr -type "string" ($each+".networkPath") $texPath;
+				setAttr -type "string" ($each+".localPath") $localPath;
+
+
+				string $tokenBuffer[];
+				tokenize $networkFileName "." $tokenBuffer;
+				string $delin = ".";
+				if (size($tokenBuffer) < 2){
+					$delin = "_";
+					tokenize $networkFileName "_" $tokenBuffer;
+					$networkFileName = $tokenBuffer[0];
+					for ($i=1;$i<(size($tokenBuffer)-1);$i++){
+						$networkFileName += ("_"+$tokenBuffer[$i]);
+					}
+				}
+				else{
+					$networkFileName = $tokenBuffer[0];
+				}
+				string $filesToCopy[] = evalEcho("getFileList -folder \""+$networkDirName+"/\" -filespec \""+$networkFileName+$delin+"*\"");
+				print ("// Copying Files...\n");
+				print $filesToCopy;
+
+				sysFile -makeDir ($localDirName);
+				
+				int $amount = 0;
+				int $index = 0;
+				progressWindow
+					-title ("Copying All Image Sequences To Local ("+$destinationPath+")")
+       			-progress $amount
+					-status "Preparing to Copy"
+					-isInterruptable true;
+
+				string $fileNameMinuxExt;
+				
+				for ($every in $filesToCopy){
+					$fileNameMinusExt = basenameEx($every);
+					if (!`filetest -r ($localDirName+"/"+$fileNameMinusExt+".iff")`){
+						
+						//print("c:/\"Program Files\"/Autodesk/Maya2015/bin/imconvert.exe \""+$networkDirName+"/"+$every+"\" \""+$localDirName+"/"+$fileNameMinusExt+".iff\"\n");
+						//system("c:/\"Program Files\"/Autodesk/Maya2015/bin/imconvert.exe \""+$networkDirName+"/"+$every+"\" \""+$localDirName+"/"+$fileNameMinusExt+".iff\"");
+
+						print("c:/\"Program Files\"/Autodesk/Maya2015/bin/imconvert.exe \""+$networkDirName+"/"+$every+"\" -resize 50% \""+$localDirName+"/"+$fileNameMinusExt+".iff\"\n");
+						system("c:/\"Program Files\"/Autodesk/Maya2015/bin/imconvert.exe \""+$networkDirName+"/"+$every+"\" -resize 50% \""+$localDirName+"/"+$fileNameMinusExt+".iff\"");
+
+					}
+					//system("c:/\"Program Files\"/Autodesk/Maya2012/bin/imconvert.exe -scale .125 \""+$dir+"/"+$every+"\" \""+$localDirName+"/"+$every+"\"");
+
+					//sysFile -copy ($localDirName+"/"+$every) ($networkDirName+"/"+$every);
+					$index++;
+					$amount = (float($index)/float(size($filesToCopy)))*100;
+					progressWindow -edit -progress $amount -status ("Copying: "+$amount+"%");
+					
+				}
+				$fileNameMinusExt = basenameEx($texPath);
+				progressWindow -endProgress;
+				setAttr -type "string" ($each+".ftn") ($localDirName+"/"+$fileNameMinusExt+".iff");
+				setAttr -type "string" ($each+".localPath") ($localDirName+"/"+$fileNameMinusExt+".iff");
+
+
+				//setAttr -type "string" ($each+".ftn") $localPath;
+
+				
+			}
+			else {
+				if (`attributeExists "networkPath" $each`)
+					if ($isLocal == -1) $isLocal = 1;
+			}
+        }
+    }
+    
+}
+

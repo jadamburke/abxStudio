@@ -1,0 +1,7 @@
+// requires maya "2012";
+startAttrPreset( "container" );
+blendAttrStr "fileTextureName" "M:/backlot/images/textures/rocks/hrt_slate_8_tile.jpg"; 
+blendAttrStr "fileTextureName2" "M:/backlot/images/textures/rocks/hrt_slate_8_tile.jpg"; 
+blendAttrStr "fileTextureName1" "M:/backlot/images/textures/rocks/hrt_slate_8_tile.jpg"; 
+blendAttr "scaleX" 40; 
+endAttrPreset();

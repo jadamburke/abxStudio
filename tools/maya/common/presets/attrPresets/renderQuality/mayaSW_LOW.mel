@@ -1,0 +1,24 @@
+// requires maya "2012";
+startAttrPreset( "renderQuality" );
+blendAttr "reflections" 1; 
+blendAttr "refractions" 6; 
+blendAttr "shadows" 2; 
+
+blendAttr "edgeAntiAliasing" 3; 
+blendAttr "useMultiPixelFilter" 0; 
+
+
+
+
+blendAttr "shadingSamples" 1; 
+blendAttr "maxShadingSamples" 1; 
+
+
+
+
+
+
+
+
+
+endAttrPreset();

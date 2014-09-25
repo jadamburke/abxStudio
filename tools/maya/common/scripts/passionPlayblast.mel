@@ -1,0 +1,438 @@
+global proc passionPlayblast (){
+
+	updateTimeSliderMenu "MayaWindow|toolBar6|MainTimeSliderLayout|formLayout9|TimeSliderMenu";
+	if (`menu -exists "TimeSliderMenu"`){
+		if (`menuItem -q -exists "ppAutoPlayblastMenuItem"`){
+			if (`menuItem -q -exists "ppAutoPlayblastMenuItem"`)
+				deleteUI -menuItem "ppAutoPlayblastMenuItem";
+			if (`menuItem -q -exists "ppAutoPlayblastMenuItem2"`)
+				deleteUI -menuItem "ppAutoPlayblastMenuItem2";
+			if (`menuItem -q -exists "ppAutoPlayblastDivItem"`)
+				deleteUI -menuItem "ppAutoPlayblastDivItem";
+			if (`menuItem -q -exists "ppAutoPlayblastDivItem2"`)
+				deleteUI -menuItem "ppAutoPlayblastDivItem2";
+			if (`menuItem -q -exists "ppAutoPlayblastMenuItem3"`)
+				deleteUI -menuItem "ppAutoPlayblastMenuItem3";
+		}
+		else{
+			setParent -menu TimeSliderMenu;
+			menuItem -divider true ppAutoPlayblastDivItem;
+			menuItem -label "Passion Playblast GreenScreen" -c "ppPlayblastDoCurrentScene 2 0 1" ppAutoPlayblastMenuItem3;
+			menuItem -divider true ppAutoPlayblastDivItem2;
+			menuItem -label "Passion Playblast As Is(Sends to Edit)" -c "ppPlayblastDoCurrentScene 2 1 0" ppAutoPlayblastMenuItem;
+			menuItem -label "Passion Playblast Geo Only(Sends to Edit)" -c "ppPlayblastDoCurrentScene 2 0 0" ppAutoPlayblastMenuItem2;
+
+
+		}
+	}	
+
+}
+
+global proc ppPlayblastAddCustomCamAttrs(string $dupedCam){
+
+		if (!`attributeExists "clipStart" $dupedCam`){
+			addAttr -ln "clipStart"  -at double $dupedCam;
+			setAttr -e -keyable 0 ($dupedCam+".clipStart") `playbackOptions -q -min`;
+		}
+		if (!`attributeExists "clipEnd" $dupedCam`){
+			addAttr -ln "clipEnd"  -at double  $dupedCam;
+			setAttr -e -keyable 0 ($dupedCam+".clipEnd") `playbackOptions -q -max`;
+		}
+		if (!`attributeExists "preRoll" $dupedCam`){
+			addAttr -ln "preRoll"  -at double $dupedCam;
+			setAttr -e -keyable 0 ($dupedCam+".preRoll");
+		}
+		if (!`attributeExists "postRoll" $dupedCam`){
+			addAttr -ln "postRoll"  -at double  $dupedCam;
+			setAttr -e -keyable 0 ($dupedCam+".postRoll") 0;
+		}
+
+}
+
+global proc ppPlayblastDoCurrentScene(string $doCommit, int $asIs, int $greenscreen){
+
+	
+	// determine the shot
+	string $currentScene = `file -q -sn`;
+	string $currentSceneName = `basenameEx $currentScene`;
+
+	// 0:Server 1:Job 2:ShotFolder 3:Seq 4:Shot 5:dept 6:subDept 7:take 8:version 9:ext 10:subshot
+	string $shotInfo[] = abxShotsGetFromPath($currentScene);
+	
+	//set the playblast variables
+	string $renderPath = ("//"+$shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$shotInfo[5]+"/render/");
+	string $shotName = "";
+	if ($greenscreen == 1) $shotName ="GS_";
+	$shotName += $shotInfo[3]+"_"+$shotInfo[4];
+	string $pbPath  = ($renderPath+$currentSceneName);
+	
+	//$currentSceneName = ($shotInfo[3]+"_"+$shotInfo[4]+"_Animation_v"+$vNum);
+	//string $renderPath = (`workspace -q -rd`+"../../RENDER/"+$shotFolderGuess+"/");
+
+	int $imgWidth = 1920;
+	int $imgHeight = 1080;
+	float $aspect = 1;
+	float $hA = 0;
+	float $hV = 0;
+
+	// check for project defaults file and get settings from there
+	if (`exists abxProjectGetShotDetails`){
+		string $prjDetails[] = abxProjectGetShotDetails(`workspace -q -rd`);
+		if (size($prjDetails)>7){
+			$lock = $prjDetails[0];
+			$fps = $prjDetails[1];
+			$imgWidth = $prjDetails[2];
+			$imgHeight = $prjDetails[3];
+			$hA = $prjDetails[5];
+			$hV =  $prjDetails[6];
+			$aspect = $prjDetails[4];
+			$sceneScale = $prjDetails[7];
+			$renderer = $prjDetails[8];
+		}	
+		else{
+			warning("Project Defaults File Not Found. Reverting to 1920 X 1080");
+		}
+	}
+	else {
+		warning("abxProject.mel not sourced. Skipping project defaults check.");
+	}
+
+
+	evalEcho("setAttr defaultResolution.width "+$imgWidth);
+	evalEcho("setAttr defaultResolution.height "+$imgHeight);
+	evalEcho("setAttr defaultResolution.pixelAspect "+$aspect);
+	evalEcho("setAttr defaultResolution.deviceAspectRatio "+(float($imgWidth)/float($imgHeight)));
+
+
+	string $cameraName = "";
+	if (`objExists "master:renderCam"`)
+		$cameraName = "master:renderCam";
+	else if (`objExists "renderCam"`)
+		$cameraName = "renderCam";
+	else 
+		$cameraName = "renderCam";
+
+
+	string $activePanel = `getPanel -withFocus`; 
+	// if the viewport is the stereo panel then switch back to the normal modelPanel 
+	if ($activePanel == "StereoPanel") {
+		lookThroughModelPanel $cameraName StereoPanel;
+		$activePanel = `getPanel -withFocus`; 
+
+	}
+	select -clear;
+	if (`modelPanel -q -exists $activePanel`){
+
+		if (!`objExists $cameraName`){
+			$result = `confirmDialog -title "No renderCam Found" -message "There is no 'renderCam' found. Please rename your main camera to 'renderCam' (case-sensitive) and make sure the camera shape node is named renderCamShape" -button "OK" -defaultButton "OK" -cancelButton "OK" -dismissString "OK"`;
+			return;
+		}
+			//error ($cameraName+" does not exist. Please conform your scene or make your main camera named "+$cameraName+"\n");
+		
+		setAttr ($cameraName+".overscan") 1;
+		setAttr ($cameraName+".filmFit") 1;
+		setAttr ($cameraName+".filmFit") 1;
+
+		if ($hA > 0)
+				setAttr ($cameraName+".horizontalFilmAperture") $hA;
+		if ($hV > 0)	
+				setAttr ($cameraName+".verticalFilmAperture") $hV;
+
+		lookThroughModelPanel $cameraName $activePanel;
+		if ($asIs == false){
+			modelEditor -e -allObjects false -ignorePanZoom true $activePanel;
+			modelEditor -e -hud true -grid false -cameras false -imagePlane true -strokes true -nurbsSurfaces true -polymeshes true -dynamics true -fluids true -nParticles true $activePanel;
+		}
+		if ($greenscreen == 1){
+			displayRGBColor "background" 0 10 0;
+			displayPref -displayGradient 0;
+			modelEditor -e -imagePlane false $activePanel;
+
+		}
+		// print (`playblast -ae`+"\n");
+	}
+	else {
+			error ("Please select a viewport to playblast\n");
+	}
+
+	// frame range check
+	ppPlayblastCheckFrameRange($pbPath);
+	
+	if ($shotInfo[3] == ""){
+		
+		print("LOOKING FOR:"+$pbPath+".mov\n");
+		if (`file -q -exists ($pbPath+".mov")`){
+			$result = `confirmDialog -title "ppPlayblast" -message ("A Playblast for "+$currentSceneName+" Already Exists. Please increment your scene version and try again.") -button "Abort Playblast" -button "Force Overwrite" -defaultButton "Abort Playblast" -dismissString "Abort Playblast"`;
+			if ($result == "Force Overwrite"){
+				ppPlayblastDoBlast2 $cameraName $pbPath $currentSceneName "png" `playbackOptions -q -min` `playbackOptions -q -max` $imgWidth $imgHeight $doCommit $shotInfo[3];
+			}
+		}
+		else{		
+			ppPlayblastDoBlast2 $cameraName $pbPath $currentSceneName "png" `playbackOptions -q -min` `playbackOptions -q -max` $imgWidth $imgHeight $doCommit $shotInfo[3];
+		}
+	}
+	else {
+
+		//string $pbPath  = ($renderPath+$shotInfo[3]+"/"+$shotInfo[3]+"_"+$shotInfo[4]+"/playblasts/"+$currentSceneName);
+		print("LOOKING FOR:"+$pbPath+".mov\n");
+		if (`file -q -exists ($pbPath+".mov")`){
+			$result = `confirmDialog -title "ppPlayblast" -message ("A Playblast for "+$currentSceneName+" Already Exists. Please increment your scene version and try again.") -button "Abort Playblast" -button "Force Overwrite" -defaultButton "Abort Playblast" -dismissString "Abort Playblast"`;
+			if ($result == "Force Overwrite"){
+				ppPlayblastDoBlast2 $cameraName $pbPath $currentSceneName "png" `playbackOptions -q -min` `playbackOptions -q -max` $imgWidth $imgHeight $doCommit $shotInfo[3];
+			}
+		}
+		else{
+			ppPlayblastDoBlast2 $cameraName $pbPath $currentSceneName "png" `playbackOptions -q -min` `playbackOptions -q -max` $imgWidth $imgHeight $doCommit $shotInfo[3];
+		}
+	}
+
+	modelEditor -e -ignorePanZoom false $activePanel;
+}
+
+global proc string ppPlayblastGetPadded (int $inNumber){
+
+	string $result = "";
+	if ($inNumber < 10)
+		$result = ("000"+$inNumber);
+	else if ($inNumber < 100)
+		$result = ("00"+$inNumber);
+	else if ($inNumber < 1000)
+		$result = ("0"+$inNumber);
+	else 
+		$result = ($inNumber);
+
+	return $result;
+}
+
+
+global proc ppPlayblastDoBlast2 (string $cameraName, string $pbPath, string $pbName, string $ext, int $startFr, int $endFr,int $imgWidth,int $imgHeight, int $doCommit, string $seqName){
+
+	string $cmd;
+	string $cmd2;
+	string $cmd3;
+
+
+	int $percent = 50;
+
+	if ($imgHeight < 720 || $imgWidth < 640){
+		$percent = 100;
+	}
+	if ($imgHeight < 250 || $imgWidth < 450){
+		$imgHeight = $imgHeight * 2;
+		$imgWidth = $imgWidth * 2;
+	}
+	if ($imgHeight > 2048 || $imgWidth > 2048){
+		$percent = 25;
+	}
+
+	int $fps = 24;
+	// need to get project frame rate
+		// check for project defaults file and get settings from there
+	if (`exists abxProjectGetShotDetails`){
+		string $prjDetails[] = abxProjectGetShotDetails(`workspace -q -rd`);
+		if (size($prjDetails)>7){
+			$fps = $prjDetails[1];
+		}	
+		else{
+			warning("Project Defaults File Not Found. Reverting to 1920 X 1080");
+		}
+	}
+	else {
+		warning("abxProject.mel not sourced. Skipping project defaults check.");
+	}
+
+	//$localFolder = ("C:/users/"+`getenv USER`+"/Desktop/playblasts");
+	//if (!`filetest -d $localFolder`)
+		//sysFile -makeDir $localFolder;
+
+	string $pbFullPath = ($pbPath+"/"+$pbName);
+	//string $pbTempFullPath = ($localFolder+"/"+$pbName);
+	string $pbTempFullPath = ($pbPath+"/"+$pbName);
+	string $pbTempPath = $pbPath;
+	string $startFrame = `ppPlayblastGetPadded $startFr`;
+	string $endFrame = `ppPlayblastGetPadded $endFr`;
+	
+	string $ppResource = `getenv PP_RESOURCE`;
+	string $fileViewPath = ($ppResource+"/bin/win32/djv/djv-083-pre2_winxp-x86/bin/djv_view.exe");
+
+	// DJV_convert file converter flags (does not support audio) but can do arbitrary image sequences
+	string $fileConvertPath = ($ppResource+"/bin/win32/djv/djv-083-pre2_winxp-x86/bin/djv_convert.exe");
+	string $fileConvertFlags = "-save quicktime codec jpeg";
+
+	// FFMPEG file Converter and flags, can convert between movie formats but is bad at image sequences
+	string $fileConvertPathAlt = ($ppResource+"/bin/win32/ffmpeg/ffmpeg-20120424-git-3bbf3f7-win64-static/bin/ffmpeg");
+	string $fileConvertFlagsAlt = "-y -i";
+	string $fileConvertFlagsAlt2 = ("-vcodec libx264 -b:v 10000k -f mov -g 1 -r "+$fps);
+
+
+	string $camShapes[] = `listRelatives -s $cameraName`;
+	string $cameraShape = $camShapes[0];
+
+
+		string $tokenBuffer[];
+		tokenize $pbPath "/" $tokenBuffer;
+		string $pbNameFolder = $tokenBuffer[size($tokenBuffer)-1];
+		int $subSize = size($pbPath) - (size($pbNameFolder)+1);
+		string $movServerPath = `substring $pbPath 1 $subSize`;
+		string $movPath = $pbTempPath;//`substring $pbTempPath 1 $subSize`;
+
+		//string $sourcePath = ($pbTempFullPath+"."+$startFrame+"."+$ext);
+		string $sourcePath = ($pbTempFullPath+".avi");
+		string $convertSourcePath = ($pbTempFullPath+".avi");
+		string $destMovPath = ($movPath+"/"+$pbName+".mov");
+
+				
+		string $sysCmd = ($fileViewPath+" \\\""+$sourcePath+"\\\"");
+		string $sysCmdAlt = ($fileViewPath+" \\\""+$destMovPath+"\\\"");
+		string $sysCmd2 = ($fileConvertPath+" "+$fileConvertFlags+" \\\""+$convertSourcePath+"\\\" \\\""+$destMovPath+"\\\"");
+
+		string $sysCmd2Alt = ($fileConvertPathAlt+" "+$fileConvertFlagsAlt+" \\\""+$convertSourcePath+"\\\" "+$fileConvertFlagsAlt2+" \\\""+$destMovPath+"\\\"");
+
+			global string $gPlayBackSlider;
+			string $soundNode =  `timeControl -q -sound $gPlayBackSlider`;
+			
+			if ($imgHeight < 480 || $imgWidth < 640){
+				$cmd += "print (`playblast -ae`+\"\\n\");playblastHUDResize \"small\";";
+			}
+			else{
+				$cmd += "print (`playblast -ae`+\"\\n\");playblastHUDResize \"large\";";
+				$cmd += "headsUpDisplay -e -vis 0 HUDViewAxis;";
+			}
+
+			//playblast  -format image -filename "//pp-fs-nyc/Production/0124_Pediasure/Movies/Animation_Preview/DM/04_00/DM_04_00_Block_TK01_v001" -sequenceTime 0 -clearCache 1 -viewer 1 -showOrnaments 1 -fp 4 -percent 50 -compression "png" -quality 70;
+
+			if ($soundNode != "")
+				$cmd += ("playblast -st "+$startFr+" -et "+$endFr+" -format image -sound \""+$soundNode+"\"  -filename \""+$pbTempPath+"/"+$pbName+"\" -sequenceTime 0  -clearCache 1 -viewer 1 -showOrnaments 1 -fp 4 -percent "+$percent+" -compression \"png\" -quality 70 -widthHeight "+$imgWidth+" "+$imgHeight+";\n");
+			else
+				$cmd += ("playblast -st "+$startFr+" -et "+$endFr+" -format image -filename \""+$pbTempPath+"/"+$pbName+"\" -sequenceTime 0 -clearCache 1 -viewer 1 -showOrnaments 1 -fp 4 -percent "+$percent+" -compression \"png\" -quality 70 -widthHeight "+$imgWidth+" "+$imgHeight+";\n");
+
+
+			$cmd += ("displayRGBColor \"background\" .27 .27 .27;displayPref -displayGradient 1;");
+			// get local desktop path
+			//$localFolder = ("C:/users/"+`getenv USER`+"/Desktop/playblasts");
+			//if (!`filetest -d $localFolder`)
+			//	sysFile -makeDir $localFolder;
+			//$localFile = $destMovPath;//($localFolder+"/"+`basename $destMovPath ""`);
+			
+			// convert the file to a quicktime h264
+			//$cmd += ("system(\""+$sysCmd2Alt+"\");\n");
+
+			// copies the new quicktime to the users desktop so it can be opened
+			//$cmd += ("sysFile -cp \""+$localFile+"\" \""+$destMovPath+"\";\n");
+
+			// copies the new quicktime to the server location $pbpath
+			//$cmd += ("if (!`filetest -r \""+$movServerPath+"\"`) sysFile -makeDir \""+$movServerPath+"\";\n");
+			//$cmd += ("sysFile -cp \""+$movServerPath+"/"+$pbName+".mov"+"\" \""+$localFile+"\";\n");
+
+			// loads up the converted quicktime
+			//$cmd += ("system(\"load "+$localFile+"\");\n");
+
+			//print ("system("+$sysCmd2+"\");
+			//print ("ppPlayblastsCommitToEditorAlt \""+$pbPath+"\" \""+$destMovPath+"\";");
+			if($doCommit != 0) {
+				//$cmd += ("ppPlayblastsCommitToEditorAlt \""+$pbPath+"\" \""+$convertSourcePath+"\" "+$doCommit+" \""+$seqName+"\";");
+			}
+            else {
+            	// deletes the .avi file if since it is no longer needed. if commit did happen it would only be deleted after converting for commit to edit
+				//$cmd += ("system(\"del \\\""+encodeString(toNativePath($sourcePath))+"\\\"\");\n");
+            	//$cmd += ("system(\"del /Q \\\""+$pbTempFullPath+"\\\"\");\n");
+	        	//$cmd += ("system(\"rmdir \\\""+$pbTempFullPath+"\\\"\");\n");
+            }			
+
+			//if ($imgHeight < 720 || $imgWidth < 640){
+				$cmd += "playblastHUDResize \"small\";";
+				$cmd += "headsUpDisplay -e -vis 1 HUDViewAxis;";
+				$cmd += ("ppPlayblastThumbnailUpdate \""+`file -q -sn`+"\""); 
+			//}			
+
+			// run the playblast command as deferred evaluation
+			print ($cmd);
+			eval($cmd);
+}
+
+
+global proc ppPlayblastCheckFrameRange(string $filePath){
+
+
+	float $currentS = `playbackOptions -q -min`;
+	float $currentE = `playbackOptions -q -max`;	
+
+	$result = "Set Offical Frame Range";
+
+	//string $tokenBuffer[];
+	//string $sceneName = `basenameEx $pbPath`;
+	//print ("$pbPath="+$pbPath+"\n");
+	//string $scenesPath = `match "/RENDER/_[a-zA-Z0-9_]+" $pbPath`;
+	//print ("$scenesPath="+$scenesPath+"\n");
+
+	// 0:Server 1:Job 2:ShotFolder 3:Seq 4:Shot 5:dept 6:subDept 7:take 8:version 9:ext
+	string $shotInfo[] = abxShotsGetFromPath($filePath);
+	// 0:abxShotsVersion 1:shotName 2:resolution 3:frameRate 4:startFrame 5:endFrame 6:camVersion 7:camDate 8:anmStatus 9:fxStatus 10:lgtStatus 11:cmpStatus 12:notes 13:lens 14:thumbframe 15:assets 16:flags 
+    string $shotDetails[] = abxShotsGetShotDetails(($shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]), $shotInfo[2]);
+
+	//if (size($scenesPath)>0){
+
+		//tokenize $scenesPath "/" $tokenBuffer;
+	string $shotFolder = $shotInfo[2];
+	//tokenize $sceneName "_" $tokenBuffer;
+	string $shotName = ($shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]); //($tokenBuffer[0]+"/"+$tokenBuffer[0]+"_"+$tokenBuffer[1]);
+
+	// get the detail
+	float $start;
+	float $end;		
+	//string $shotDetails[] = abxShotsGetShotDetails($shotName, $shotFolder);
+	if (size($shotDetails)>3){
+		$start = $shotDetails[2];
+		$end = $shotDetails[3];
+	}
+
+	// check for initial frame range
+	string $result;
+	if ($start < 1 || $end < 1 || $end < $start){
+		$result = `confirmDialog -title "Offical Frame Range Missing" -message ($shotName+" has no offical frame range specified. Would you like to set it to your current frame range? ("+$currentS+"-"+$currentE+")") -button "Set Offical Frame Range" -button "Skip" -defaultButton "Skip " -cancelButton "Skip" -dismissString "Skip"`;
+		if ($result == "Set Offical Frame Range"){
+			evalEcho("abxShotsSetFrameRange \""+$shotFolder+"\" \""+$shotName+"\" \""+$currentS+"\" \""+$currentE+"\"");
+			$start = $currentS;
+			$end = $currentE;
+		}
+	}
+	if ($result != "Skip"){
+		if ($currentS != $start || $currentE != $end) {
+			$result = "Match Offical Frame Range";
+			$result = `confirmDialog -title "Frame Range Mismatch" -message ("Your current frame range ("+$currentS+"-"+$currentE+") does not match the offical frame range ("+$start+"-"+$end+") for Shot:"+$shotName) -button "Match Offical Frame Range" -button "Abort Playblast" -defaultButton "Match Offical Frame Range" -cancelButton "Abort Playblast" -dismissString "Abort Playblast"`;
+			if ($result == "Match Offical Frame Range"){
+				playbackOptions -e -min $start;
+				playbackOptions -e -max $end;	
+			}
+			else {
+				error ("User Aborted Playblast due to frame range not matching offical frame range for the shot");
+			}
+		}
+	}
+	//}
+}
+
+global proc ppPlayblastThumbnailUpdate(string $filePath){
+
+	float $currentS = `playbackOptions -q -min`;
+	float $currentE = `playbackOptions -q -max`;	
+	float $midFrame = int(($currentE - $currentS) * .5)+$currentS;
+	// 0:Server 1:Job 2:ShotFolder 3:Seq 4:Shot 5:dept 6:subDept 7:take 8:version 9:ext
+	string $shotInfo[] = abxShotsGetFromPath($filePath);
+	// 0:abxShotsVersion 1:shotName 2:resolution 3:frameRate 4:startFrame 5:endFrame 6:camVersion 7:camDate 8:anmStatus 9:fxStatus 10:lgtStatus 11:cmpStatus 12:notes 13:lens 14:thumbframe 15:assets 16:flags 
+    string $shotDetails[] = abxShotsGetShotDetails(($shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]), $shotInfo[2]);
+    //print ("SHOTDETAILS\n");
+    //print ($shotDetails);
+    float $thumbFrame = int($shotInfo[14]);
+
+    if (size($shotDetails)>14){
+    	if ($thumbFrame > 0 && $thumbFrame < 10000){
+    		currentTime -e $thumbFrame;
+    	}
+    	else {
+    		currentTime -e $midFrame;
+    	}
+    	abxShotsCaptureThumbnail "";
+	}
+
+}

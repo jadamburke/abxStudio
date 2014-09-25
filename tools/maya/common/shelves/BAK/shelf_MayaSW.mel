@@ -1,0 +1,192 @@
+global proc shelf_MayaSW () {
+    global string $gBuffStr;
+    global string $gBuffStr0;
+    global string $gBuffStr1;
+
+
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Enable hypershade swatches from updating" 
+        -enableBackground 0
+        -align "center" 
+        -label "enableSwatchRefresh" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "/Volumes/res/studio/pub/maya/common/scripts/Toolbox/Lighting/enableSwatchRefresh.png" 
+        -image1 "/Volumes/res/studio/pub/maya/common/scripts/Toolbox/Lighting/enableSwatchRefresh.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "if (`exists enableSwatchRefresh`==0) eval (\"source \\\"\"+`getenv MAYA_PPTOOLS`+\"/scripts/Toolbox/Lighting/enableSwatchRefresh.mel\\\"\");if (`exists enableSwatchRefresh`) enableSwatchRefresh;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Disables hypershade swatches from updating" 
+        -enableBackground 0
+        -align "center" 
+        -label "disableSwatchRefresh" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "/Volumes/res/studio/pub/maya/common/scripts/Toolbox/Lighting/disableSwatchRefresh.png" 
+        -image1 "/Volumes/res/studio/pub/maya/common/scripts/Toolbox/Lighting/disableSwatchRefresh.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "if (`exists disableSwatchRefresh`==0) eval (\"source \\\"\"+`getenv MAYA_PPTOOLS`+\"/scripts/Toolbox/Lighting/disableSwatchRefresh.mel\\\"\");if (`exists disableSwatchRefresh`) disableSwatchRefresh;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Select all in namespace" 
+        -enableBackground 0
+        -align "center" 
+        -label "selectAllInNamespace" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -imageOverlayLabel "SAIN" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "/Volumes/res/studio/pub/maya/common/scripts/Toolbox/Lighting/selectAllInNamespace.png" 
+        -image1 "/Volumes/res/studio/pub/maya/common/scripts/Toolbox/Lighting/selectAllInNamespace.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "if (`exists selectAllInNamespace`==0) eval (\"source \\\"\"+`getenv MAYA_PPTOOLS`+\"/scripts/Toolbox/Lighting/selectAllInNamespace.mel\\\"\");if (`exists selectAllInNamespace`) selectAllInNamespace;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Set scene to 30FPS" 
+        -enableBackground 0
+        -align "center" 
+        -label "setTo30FPS" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "/Volumes/res/studio/pub/maya/common/scripts/Toolbox/Lighting/setTo30FPS.png" 
+        -image1 "/Volumes/res/studio/pub/maya/common/scripts/Toolbox/Lighting/setTo30FPS.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "if (`exists setTo30FPS`==0) eval (\"source \\\"\"+`getenv MAYA_PPTOOLS`+\"/scripts/Toolbox/Lighting/setTo30FPS.mel\\\"\");if (`exists setTo30FPS`) setTo30FPS;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Slap Comp" 
+        -enableBackground 0
+        -align "center" 
+        -label "slapComp" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -imageOverlayLabel "SLAP" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "commandButton.png" 
+        -image1 "commandButton.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "import slapComp\nreload(slapComp)\nslapComp.slapComp()" 
+        -sourceType "python" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Maya software low resolution settings" 
+        -enableBackground 0
+        -align "center" 
+        -label "mayaSW_LOW" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "/Volumes/res/studio/pub/maya/common/scripts/Toolbox/Lighting/mayaSW_LOW.png" 
+        -image1 "/Volumes/res/studio/pub/maya/common/scripts/Toolbox/Lighting/mayaSW_LOW.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "if (`exists mayaSW_LOW`==0) eval (\"source \\\"\"+`getenv MAYA_PPTOOLS`+\"/scripts/Toolbox/Lighting/mayaSW_LOW.mel\\\"\");if (`exists mayaSW_LOW`) mayaSW_LOW;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Maya software high resolution settings" 
+        -enableBackground 0
+        -align "center" 
+        -label "mayaSW_HI" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "/Volumes/res/studio/pub/maya/common/scripts/Toolbox/Lighting/mayaSW_HI.png" 
+        -image1 "/Volumes/res/studio/pub/maya/common/scripts/Toolbox/Lighting/mayaSW_HI.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "if (`exists mayaSW_HI`==0) eval (\"source \\\"\"+`getenv MAYA_PPTOOLS`+\"/scripts/Toolbox/Lighting/mayaSW_HI.mel\\\"\");if (`exists mayaSW_HI`) mayaSW_HI;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+
+} 

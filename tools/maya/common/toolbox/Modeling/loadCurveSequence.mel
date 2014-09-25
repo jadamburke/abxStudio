@@ -1,0 +1,333 @@
+// loadCurveSequence
+// Created by: adamb
+// Date: 2014/07/29 10:07:12
+
+global proc loadCurveSequence(){
+
+string $file[] = `fileDialog2 -fileFilter "All Files (*.*)" -caption "Open" -fileMode 1`;//-dir $browserPath`;
+
+// browser for a png file in the sequence
+string $filePath = $file[0];
+string $folderPath = dirname($filePath);
+string $ext = fileExtension($filePath);
+string $basename = basenameEx($filePath);
+// get the frameNum off the path
+string $frameNum = `match "[0-9]+$" $basename`;
+int $framePad = size($frameNum);
+int $subStrEnd = size($basename) - $framePad;
+string $basenamePrefix = `substring $basename 1 $subStrEnd`;
+
+	if ($ext == "png"){
+
+		string $objFileNode ="";
+		string $obj = "";
+
+		$sel = `ls -sl`;
+		if (size($sel)>0){
+			$obj = $sel[0];
+			string $myShapeNode[] = `listRelatives -children -shapes $obj`;
+			string $mySGs[] = `listConnections -type shadingEngine $myShapeNode[0]`;
+			string $surfaceShader[] = `listConnections ($mySGs[0] + ".surfaceShader")`;
+			string $textures[] = `listConnections ($surfaceShader[0]+".color")`;
+			string $filePath = `getAttr ($textures[0]+".ftn")`;
+			$objFileNode = $textures[0];
+
+		}
+
+		// assume the .ai sequence is in a subfolder called /ai
+		string $aiFolderPath = ($folderPath+"/ai/");
+		if (!`filetest -d $aiFolderPath`)
+			error("no \"ai\" subfolder exists here "+$aiFolderPath);
+
+
+		//create a file node in maya
+		$newFileNode = `createNode file -n ($basenamePrefix+"File")`;
+		setAttr -type "string" ($newFileNode+".ftn") $filePath;
+		setAttr ($newFileNode+".useFrameExtension") 1;
+		setAttr ($newFileNode+".frameOffset") 0;
+		if ($objFileNode != "")
+			connectAttr -f ($objFileNode+".frameExtension") ($newFileNode+".frameExtension");
+		//getAttr file1.cfnp computed file name path
+
+		//getAttr file1.frameExtension
+
+		string $fileList[] = `getFileList -fs ($basenamePrefix+"*."+$ext) -folder $folderPath`;
+
+		
+		//string $eachBasename = basenameEx($each);
+		string $aiFilePath = ($aiFolderPath+$basename+".ai");
+		print ("Loading AI file from here:"+$aiFilePath+"\n");
+		string $result[] = illustratorCurvesBevelAlt($aiFilePath);
+		string $newIllustratorNode = $result[0];
+		string $bevelNode = $result[1];
+		string $newSurface = $result[2];
+
+		// store the prefixpaths to save on expression junk
+		addAttr -ln "folderPath"  -dt "string"  $newIllustratorNode;
+		addAttr -ln "filenamePrefix"  -dt "string"  $newIllustratorNode;
+		addAttr -ln "padding"  -at long  -dv 1 $newIllustratorNode;
+		setAttr -type "string" ($newIllustratorNode+".folderPath") $aiFolderPath;
+		setAttr -type "string" ($newIllustratorNode+".filenamePrefix") $basenamePrefix;
+		setAttr  ($newIllustratorNode+".padding") $framePad;
+
+		// set Bevel node attrs
+
+		setAttr ($bevelNode+".width") 0.2;
+		setAttr ($bevelNode+".depth") 0.2;
+		setAttr ($bevelNode+".extrudeDepth") 3;
+
+
+		// create an expression to drive the illustrator node;
+		string $expMel = "";
+		$expMel += "string $computedFileName = \"\";\n";
+		$expMel += ("string $dirName = `getAttr \""+$newIllustratorNode+".folderPath\"`;\n");
+		$expMel += ("int $frameExt = "+$newFileNode+".frameExtension;\n");
+		$expMel += ("int $frameOffset = "+$newFileNode+".frameOffset;\n");
+		$expMel += ("string $prefix = `getAttr \""+$newIllustratorNode+".filenamePrefix\"`;\n");
+		$expMel += "string $frameExtPadded = $frameExt + $frameOffset;\n";
+		$expMel += ("int $paddedZeros = "+$newIllustratorNode+".padding;\n");
+		$expMel += "while (size($frameExtPadded)<$paddedZeros) $frameExtPadded = (\"0\"+$frameExtPadded);\n";
+		$expMel += "string $computedFileName = ($dirName+$prefix+$frameExtPadded+\".ai\");\n";
+		$expMel += "if (`filetest -r $computedFileName`)\n";
+		$expMel += ("setAttr -type \"string\" \""+$newIllustratorNode+".illustratorFilename\" $computedFileName;\n");
+
+			
+		expression -s $expMel -o "" -ae 1 -uc all ;
+
+
+		if ($obj != ""){
+			// create a shader and attach it to the original file node
+			string $newShader = `shadingNode -asShader blinn`;
+			string $newSG = `sets -renderable true -noSurfaceShader true -empty -name $newShader`;
+			connectAttr -f ($newShader+".outColor") ($newSG+".surfaceShader");
+			sets -e -forceElement $newSG $newSurface;
+
+			// connect to a new projection node
+			string $newProjection = `shadingNode -asTexture projection`;
+			string $newPlace3D = `shadingNode -asUtility place3dTexture`;
+			connectAttr ($newPlace3D+".wim[0]") ($newProjection+".pm");
+			string $newLT = `shadingNode -asTexture layeredTexture`;
+			// Result: layeredTexture1 // 
+			//defaultNavigation -force true -connectToExisting -source ($newLT[0]) -destination ($newProjection[0]+".image");
+			connectAttr -force ($newLT+".outColor") ($newProjection+".image");
+			// Result: Connected layeredTexture1.outColor to projection1.image. // 
+			// Result: createRenderNodeWindow //
+			connectAttr -f ($objFileNode+".outColor") ($newLT+".inputs[0].color");
+			connectAttr -f ($objFileNode+".outAlpha") ($newLT+".inputs[0].alpha");
+			// connect the shader textures
+			connectAttr -f ($newProjection+".outColor") ($newShader+".color");
+			connectAttr -f ($newProjection+".outTransparency") ($newShader+".transparency");
+
+			setAttr ($newLT+".inputs[1].color") -type "double3" 1 0.939832 0.815;
+			setAttr ($newLT+".inputs[1].alpha") 1;
+			setAttr ($newLT+".inputs[1].blendMode") 1;
+
+			// get the image resolution so the aspect ratio is correct for the place3D
+			float $width = `getAttr ($objFileNode+".osx")`;
+			float $height = `getAttr ($objFileNode+".osy")`;
+
+			float $ratio = $width/$height;
+			// scale up the place3D to a close approximate
+			setAttr ($newPlace3D+".translateX") 10.873;
+			setAttr ($newPlace3D+".translateY") 14.027;
+			setAttr ($newPlace3D+".translateZ") 0;
+			setAttr ($newPlace3D+".scaleX") ($ratio*14.729);
+			setAttr ($newPlace3D+".scaleY") 14.729;
+			setAttr ($newPlace3D+".scaleZ") 14.729;
+
+			// group the surface and place 3D and name it
+			string $newGroup = `createNode -n "Char_Extrude_GRP" -ss transform`;
+			parent $newSurface $newGroup;
+			parent $newPlace3D $newGroup;
+			parent -r $newGroup $obj;
+
+			setAttr ($newGroup+".translate") -.34 0 .444;
+			setAttr ($newGroup+".rotate") -90 0 0;
+			setAttr ($newGroup+".scale") .031 .031 .031;
+
+		}
+
+
+// create a bevel and assign an expression to drive the sequence
+
+	}
+	else{
+		error("Please specify a PNG image sequence");
+	}
+
+}
+
+
+//getAttr file21.outSizeX;
+//getAttr file21.outSizeY;
+
+//file -import -type "Adobe(R) Illustrator(R)"  -ignoreVersion -ra true -mergeNamespacesOnClash false -rpr "YK_01_00_shirota_v003_00000" -options "sc=1.0;group=on"  -pr "//pp-fs-nyc/production/0128_Yakult/Shots/YK/01_00/cel/render/Shirota/YK_01_00_shirota_v003/ai/YK_01_00_shirota_v003_00000.ai";
+//setAttr "bevelPlus1.extrudeDepth" 2;
+
+//setAttr "place3dTexture1.translateX" 10.761;
+//setAttr "place3dTexture1.translateY" 13.895;
+//setAttr "place3dTexture1.translateZ" 0.115;
+//setAttr "place3dTexture1.scaleX" 33.533;
+//setAttr "place3dTexture1.scaleY" 18.871;
+//setAttr "place3dTexture1.scaleZ" 18.871;
+
+//shadingNode -asUtility place2dTexture;
+//connectAttr -f place2dTexture2.coverage file2.coverage;
+//connectAttr -f place2dTexture2.translateFrame file2.translateFrame;
+//connectAttr -f place2dTexture2.rotateFrame file2.rotateFrame;
+//connectAttr -f place2dTexture2.mirrorU file2.mirrorU;
+//connectAttr -f place2dTexture2.mirrorV file2.mirrorV;
+//connectAttr -f place2dTexture2.stagger file2.stagger;
+//connectAttr -f place2dTexture2.wrapU file2.wrapU;
+//connectAttr -f place2dTexture2.wrapV file2.wrapV;
+//connectAttr -f place2dTexture2.repeatUV file2.repeatUV;
+//connectAttr -f place2dTexture2.offset file2.offset;
+//connectAttr -f place2dTexture2.rotateUV file2.rotateUV;
+//connectAttr -f place2dTexture2.noiseUV file2.noiseUV;
+//connectAttr -f place2dTexture2.vertexUvOne file2.vertexUvOne;
+//connectAttr -f place2dTexture2.vertexUvTwo file2.vertexUvTwo;
+//connectAttr -f place2dTexture2.vertexUvThree file2.vertexUvThree;
+//connectAttr -f place2dTexture2.vertexCameraOne file2.vertexCameraOne;
+//connectAttr place2dTexture2.outUV file2.uv;
+//connectAttr place2dTexture2.outUvFilterSize file2.uvFilterSize;
+//
+
+
+
+global proc string[] illustratorCurvesBevelAlt(string $filename)
+{
+	// create Adobe(R) Illustrator(R) node and pass in file name value
+	string $illustratorNode = evalEcho("createNode makeIllustratorCurves -n \"illustratorForBevel#\"");
+	evalEcho("setAttr -type \"string\" " + $illustratorNode + ".illustratorFilename \"" + $filename + "\";");
+
+	// create bevel node and the two profile curves
+	string $bevelNode = evalEcho("createNode bevelPlus");
+	string $innerStyleCurveNode = evalEcho("createNode styleCurve -n \"innerStyleCurve#\"");
+	string $outerStyleCurveNode = evalEcho("createNode styleCurve -n \"outerStyleCurve#\"");
+
+	// set style curve attributes
+	int $outerBevelCurve = `optionVar -q outerStyleBevelCurve`;
+	evalEcho("setAttr " + $outerStyleCurveNode + ".style " + $outerBevelCurve + ";");
+
+	int $sameAsOuter = `optionVar -q innerStyleSameAsOuter`;
+	if($sameAsOuter) {
+		evalEcho("setAttr " + $innerStyleCurveNode + ".style " + $outerBevelCurve + ";");
+	} else {
+		int $innerBevelCurve = `optionVar -q innerStyleBevelCurve`;
+		evalEcho("setAttr " + $innerStyleCurveNode + ".style " + $innerBevelCurve + ";");
+	}
+
+
+	// get bevel attributes
+	float $bevelPlusWidth = `optionVar -q bevelPlusWidth` ;	
+	float $bevelPlusDepth = `optionVar -q bevelPlusDepth` ;
+	float $bevelPlusExtrudeHt = `optionVar -q bevelPlusExtrudeHeight` ;
+	int $bevelPlusCaps = `optionVar -q bevelPlusCaps` ;
+	int $bevelPlusInsideCurves = `optionVar -q bevelPlusInsideCurves` ;
+	int $bevelPlusSides = `optionVar -q bevelPlusNSides` ;
+	float $tol = `optionVar -q bevelPlusTolerance` ;
+	if( `optionVar -q bevelPlusUseGlobalTol` ) {
+		$tol = `optionVar -q positionalTolerance`;
+	}
+
+	// and set bevel attributes
+	evalEcho("setAttr " + $bevelNode + ".width " + $bevelPlusWidth + ";");
+	evalEcho("setAttr " + $bevelNode + ".depth " + $bevelPlusDepth + ";");
+	evalEcho("setAttr " + $bevelNode + ".extrudeDepth " + $bevelPlusExtrudeHt + ";");
+	evalEcho("setAttr " + $bevelNode + ".capSides " + $bevelPlusCaps + ";");
+	evalEcho("setAttr " + $bevelNode + ".numberOfSides " + $bevelPlusSides + ";");
+	evalEcho("setAttr " + $bevelNode + ".tolerance " + $tol + ";");
+	evalEcho("setAttr " + $bevelNode + ".bevelInside " + $bevelPlusInsideCurves + ";");
+
+	// Note: the tolerance attribute is only used for planarTrim when
+	// the output of bevel is NURBS, so we do not need to set it here
+
+	// normalsOutwards always true (for >=v7.0 files)
+	evalEcho("setAttr " + $bevelNode + ".normalsOutwards true");
+
+	// get all the poly tessellation attributes
+	int $pFormat = `optionVar -q bevelPlusPolyFormat`;
+	int $pCount = `optionVar -q bevelPlusPolyCount`;
+	int $pUseChordRatio = `optionVar -q bevelPlusPolyUseChordRatio`;
+	float $pChordRatio = `optionVar -q bevelPlusPolyChordRatio`;
+	int $pUseChordHeight = `optionVar -q bevelPlusPolyUseChordHeight`;
+	float $pChordHeight = `optionVar -q bevelPlusPolyChordHeight`;
+	int $pTypeU = `optionVar -q bevelPlusPolyTypeU`;
+	int $pNumberU = `optionVar -q bevelPlusPolyNumberU`;
+	int $pTypeV = `optionVar -q bevelPlusPolyTypeV`;
+	int $pNumberV = `optionVar -q bevelPlusPolyNumberV`;
+
+	// disable chord height settings. These settings cause the poly
+	// mesh to have non-quad faces, which is undesirable and also
+	// causes problems with bevel caps
+	evalEcho("setAttr " + $bevelNode + ".polyOutUseChordHeight false");
+	evalEcho("setAttr " + $bevelNode + ".polyOutUseChordHeightRatio false");
+
+	evalEcho("setAttr " + $bevelNode + ".orderedCurves true");
+	
+	// create final output mesh node
+	string $meshNode = evalEcho("createNode mesh");
+	string $surfaceNode[] = `listRelatives -p $meshNode`;
+
+	// connect all inputs to bevel node, including the array of curves from the text node
+	string $cmd;
+	$cmd += ("connectAttr " + $illustratorNode + ".outputCurves "  + $bevelNode + ".inputCurves;\n");
+	$cmd += ("connectAttr " + $illustratorNode + ".count "        + $bevelNode + ".count;\n");
+	$cmd += ("connectAttr " + $illustratorNode + ".position "     + $bevelNode + ".position;\n");
+	$cmd += ("connectAttr " + $innerStyleCurveNode + ".outCurve " + $bevelNode + ".innerStyleCurve;\n");
+	$cmd += ("connectAttr " + $outerStyleCurveNode + ".outCurve " + $bevelNode + ".outerStyleCurve;\n");
+
+	// connect the bevel node to the final mesh
+	$cmd += ("connectAttr " + $bevelNode + ".outputPoly " + $meshNode + ".inMesh;\n");
+
+	// connect the final mesh to the initial shading group
+	$cmd += ("sets -edit -forceElement initialShadingGroup " + $meshNode + ";\n");
+
+	// and position the pivot appropriately
+	// $cmd += ("CenterPivot;\n");
+	
+	// select the poly object for cleanup
+	$cmd += ("select " + $meshNode + ";\n");
+	
+	// do other bevellish stuff  (from performBevelPlus)
+	string $errorCheck = " int $intArr[] = `polyEvaluate -v`; ";
+	$errorCheck += "int $numVerts = 0; ";
+	$errorCheck += "if (size($intArr) > 0) $numVerts = $intArr[0]; ";
+
+	// delete created nodes, if bevel is not formed
+	string $errorCheckMsg = (uiRes("m_performCreateIllustratorCurves.kErrorFailedToCreateBevel"));
+	$errorCheck += "if ($numVerts == 0) { catch(error(\"";
+	$errorCheck += $errorCheckMsg + "\")); ";
+	$errorCheck += "delete " + $illustratorNode + " " + $bevelNode + " " + $surfaceNode[0] + " ";
+	$errorCheck += $innerStyleCurveNode + " " + $outerStyleCurveNode + " ; ";
+	$errorCheck += "} ";
+	
+	$errorCheck += "else if ($numVerts > 0) { ";
+	$cmd += $errorCheck;
+	
+	//select all faces with 0 map area and more than 4 sides - these
+	//will be the caps
+	//see polyCleanupArgList.mel for a complete list of the arguments
+	$cmd = $cmd + "polyCleanupArgList 3 { \"0\",\"2\",\"1\",\"0\",";
+	$cmd = $cmd + "\"1\",\"0\",\"0\",\"0\",\"0\",\"1e-005\",\"0\",\"";
+	$cmd = $cmd + "1e-005\",\"1\",\"0\",\"0\",\"-1\",\"0\" };\n";
+	$cmd = $cmd + "polyProjection -ch 1 -type Planar -ibd off -icx 0.5 ";
+	$cmd = $cmd + "-icy 0.5 -ra 0 -isu 1 -isv 1 -md z ;\n";
+	$cmd = $cmd + "select -r `listConnections -t \"shape\"`;\n";
+	
+	$cmd = $cmd + "};\n";
+	
+	// finally switch back to object mode
+	$cmd = $cmd + "changeSelectMode -object;\n";
+	
+	// let it rip
+	evalEcho $cmd;
+	
+	// leave Adobe(R) Illustrator(R) node selected on the assumption the user will want
+	// to work with the Adobe(R) Illustrator(R) attributes first
+	if (`exists $illustratorNode`) {
+		select $illustratorNode;
+	}
+	
+	return {$illustratorNode,$bevelNode,$surfaceNode[0]};
+}

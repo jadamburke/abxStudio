@@ -1,0 +1,45 @@
+AE.IncludeReverseFudgeInLayerStartTime	true	true
+AEDebugDatabaseVersion	2	0
+AEResolveQTDataRefs	true	
+AME.amewrapper.donothide	false	false
+AddTimestampToLogFileNames	false	false
+AddUTCTimestampToTraces	false	false
+AllowDynamicLinkToOwnProjectType	false	false
+AnywhereSupported	true	true
+CreateLogFilesThatDoNotExist	false	false
+DVA_syncWindowEnablement	false	false
+DvaMarshalRPCLogging	false	false
+DynamicLinkAutoQuit	true	true
+DynamicLinkVideoRenderInfinite	false	false
+EnableCacheWorkAreaInBackground2	true	true
+EnableHiDPIViewer	true	true
+EnbableSmallBlockAllocatorForES	false	false
+ExporterQT.DNxHDNativeSupportEnabled	false	false
+IgnoreOpenGLSniffer	false	false
+InitMediaCore2	true	true
+LegacyQTCodecsAndGamma	false	
+LogTimeInTicks	true	true
+MC.AudioRenderer.ComplexityBeforeRender	200	200
+MC.BE.AddDocIDOnImport	true	true
+ML.EnableDiskCache	false	false
+ML.LoadTestingPluginsAtStartup	false	false
+MPSelfLinkLog	false	false
+MaxLogSize	0	0
+MediaCoreAsyncFrameCount3	10	10
+MemoryAccountDirect2	true	true
+MemoryFudgeBuffer2	262144000	262144000
+MemoryYoYoLog	false	false
+QT.DisableQuickTime32	false	false
+QT.EnableNativeExports	true	true
+QT32ServerManager.StartupTimeout	30000	30000
+SimulateRotoBrushLowMemory	false	false
+Sync Settings Disabled	false	false
+SyncServiceStaging	false	false
+TraceAsync	false	false
+TraceSyslog		
+UseOGLSwapBuffer	true	true
+UseSWFWelcomeScreen	false	false
+VirtualAllocFrames	true	true
+VirtualAllocMinSizeInK3	300	300
+enabledynamiclink2	true	true
+showAllParamsInAMEDialog	false	false
