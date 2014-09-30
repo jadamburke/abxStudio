@@ -306,13 +306,13 @@ global proc qube_addUI()
 
     if (getApplicationVersionAsFloat() >= 2009) { // contains renderpass added in Maya 2009
         menuItem    -label "Render arnold..."
-                -c `substitute "QUBEGUI_ARGS" $qube_cmdTemplate (" --submitDict \\\"{'name':'MtoA batchrender \"+basenameEx(getVersionScenePath())+\"', 'prototype':'cmdrange', 'package':{'simpleCmdType':'Maya BatchRender (file)','mayaExe':'//pp-fs-nyc/pipeline/pipeline/alpha/lib/PP_Alpha/apps/maya/ppMayaBatch_Arnold.bat', 'scenefile':'\"+getVersionScenePath()+\"', '-proj':'\"+`workspace -q -rd`+\"', '-rd':'\"+`getQubeRenderPath`+\"', 'range':'\"+`playbackOptions -q -min`+\"-\"+`playbackOptions -q -max`+\"','camera_all':'\"+stringArrayToString(`listCameras -p -o`, \" \")+\"', 'renderLayer_all':'\"+stringArrayToString(`ls -type renderLayer`, \" \")+\"','renderPass_all':'\"+stringArrayToString(`ls -type renderPass`, \" \")+\"'}}\\\"")`
+                -c `substitute "QUBEGUI_ARGS" $qube_cmdTemplate (" --submitDict \\\"{'name':'MtoA batchrender \"+basenameEx(getVersionScenePath())+\"', 'prototype':'cmdrange', 'env':{\"+`getQubeEnvString`+\"}, 'package':{'simpleCmdType':'Maya BatchRender (file)','mayaExe':'"+$mayaLoc+"/bin/render.exe', 'scenefile':'\"+getVersionScenePath()+\"', '-proj':'\"+`workspace -q -rd`+\"', '-rd':'\"+`getQubeRenderPath`+\"', 'range':'\"+`playbackOptions -q -min`+\"-\"+`playbackOptions -q -max`+\"','camera_all':'\"+stringArrayToString(`listCameras -p -o`, \" \")+\"', 'renderLayer_all':'\"+stringArrayToString(`ls -type renderLayer`, \" \")+\"','renderPass_all':'\"+stringArrayToString(`ls -type renderPass`, \" \")+\"'}}\\\"")`
                 -annotation "Render current scene with file renderer through Qube using the appropriate Mayabatch SimpleCmd that exposes all commandline render options"
                 -echoCommand true
                  qube_submitSimpleCmdRender_ar;
     } else {
         menuItem    -label "Render arnold..."
-                -c `substitute "QUBEGUI_ARGS" $qube_cmdTemplate (" --submitDict \\\"{'name':'MtoA batchrender \"+basenameEx(getVersionScenePath())+\"', 'prototype':'cmdrange', 'package':{'simpleCmdType':'Maya BatchRender (file)','mayaExe':'//pp-fs-nyc/pipeline/pipeline/alpha/lib/PP_Alpha/apps/maya/ppMayaBatch_Arnold.bat', 'scenefile':'\"+getVersionScenePath()+\"', '-proj':'\"+`workspace -q -rd`+\"', 'range':'\"+`playbackOptions -q -min`+\"-\"+`playbackOptions -q -max`+\"','camera_all':'\"+stringArrayToString(`listCameras -p -o`, \" \")+\"', 'renderLayer_all':'\"+stringArrayToString(`ls -type renderLayer`, \" \")+\"'}}\\\"")`
+                -c `substitute "QUBEGUI_ARGS" $qube_cmdTemplate (" --submitDict \\\"{'name':'MtoA batchrender \"+basenameEx(getVersionScenePath())+\"', 'prototype':'cmdrange', 'env':{\"+`getQubeEnvString`+\"}, 'package':{'simpleCmdType':'Maya BatchRender (file)','mayaExe':'"+$mayaLoc+"/bin/render.exe', '-proj':'\"+`workspace -q -rd`+\"', 'range':'\"+`playbackOptions -q -min`+\"-\"+`playbackOptions -q -max`+\"','camera_all':'\"+stringArrayToString(`listCameras -p -o`, \" \")+\"', 'renderLayer_all':'\"+stringArrayToString(`ls -type renderLayer`, \" \")+\"'}}\\\"")`
                 -annotation "Render current scene with file renderer through Qube using the appropriate Mayabatch SimpleCmd that exposes all commandline render options"
                 -echoCommand true
                  qube_submitSimpleCmdRender_ar;
@@ -525,4 +525,32 @@ global proc string getHistoryVersion(string $version){
 	//if (size($hVer)==1) $hVer = "00" + $hVer;
 	//else if (size($hVer)==2) $hVer = "0" + $hVer;
 	return $version;
+}
+
+global proc string getQubeEnvString(){
+	$result = system("set");
+	string $cmd = "";
+	string $lines[] = stringToStringArray($result,"\n");
+	string $line;
+	string $seperator = "";
+	string $user = "user";
+	for ($line in $lines){
+		// make sure to skip user data
+		if (`gmatch $line "*=*"`){
+			if ($user == "" || !`gmatch $line ("*"+$user+"*")` ){
+				string $keyVal[] = stringToStringArray($line,"=");
+				$cmd += ($seperator+" '"+$keyVal[0]+"':'"+$keyVal[1]+"'");
+				if ($seperator == ""){
+					$seperator = ",";
+				}
+			}
+		}
+	}
+	
+	return encodeString($cmd);
+}
+
+global proc string getMayaBinary(){
+
+	return (`getenv "PP_MAYA_DIR"`+"/bin/maya.exe");
 }

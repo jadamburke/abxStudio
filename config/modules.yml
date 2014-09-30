@@ -57,6 +57,18 @@ arnold:
             win32: /
           versions:
           - '2015'
+    softimage:
+      versions:
+        3.2.0:
+          env:
+            XSI_PLUGINS: '%PP_ROOT%\bin\arnold\softimage\%PP_SITOA%\%PP_SOFTIMAGE%'
+            PP_SITOA: '3.2.0'
+          path:
+            linux: /
+            mac: /
+            win32: /
+          versions:
+          - '2015'
 crate:
   name: Exocortex Crate
   show: false

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xsi_file type="LayoutStateFile" xsi_version="13.0.114.0" syntax_version="1.0">
+	<sections>
+	<optional_state>
+		<item name="main_shelf" value="hidden"></item>
+		<item name="mcp" value="visible"></item>
+		<item name="module_menu" value="visible"></item>
+		<item name="panel_switcher" value="visible"></item>
+		<item name="playback" value="visible"></item>
+		<item name="sendtostatus" value="hidden"></item>
+		<item name="timeline" value="visible"></item>
+		<item name="timerange" value="visible"></item>
+	</optional_state>
+	<user_tray_state>
+		<item name="constraint_panel" value="expanded"></item>
+		<item name="edit_panel" value="expanded"></item>
+		<item name="selection_panel" value="expanded"></item>
+		<item name="snap_panel" value="expanded"></item>
+		<item name="transformation_panel" value="expanded"></item>
+	</user_tray_state>
+	</sections>
+</xsi_file>

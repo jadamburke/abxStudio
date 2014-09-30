@@ -40,6 +40,10 @@ class Launcher(QMainWindow):
         pixmapPasion = QPixmap(os.path.join( RES, "passion-pink.ico"))
         self.setWindowIcon(QIcon(pixmapPasion))
 
+
+        #tabWidget = QTabWidget()
+        #tab1 = QWidget()
+        #tab2 = QWidget()
         vertical = QVBoxLayout()
         vertical.addSpacing(15)
         title = "Passion Studio Tools "
@@ -51,9 +55,6 @@ class Launcher(QMainWindow):
         frame.setFrameStyle(QFrame.NoFrame)
         self.setCentralWidget(frame)
 
-        # project
-        #projectGroup = QGroupBox('Select a Project')
-        #vertical.addWidget(projectGroup)
 
         # launchers
         buttonsGroup = QGroupBox('Software')
@@ -62,7 +63,7 @@ class Launcher(QMainWindow):
         buttonsGrid = GridLayout(rows=2, cols=4)
         buttonsGroup.setLayout( buttonsGrid)
 
-        iconsize = QSize(128, 128)
+        iconsize = QSize(96, 96)
         self.appLayouts = {}
 
         for package in WORKGRP['default']['order']:
@@ -72,6 +73,22 @@ class Launcher(QMainWindow):
                 self.appLayouts[package].setIconSize(iconsize)
                 self.connect(self.appLayouts[package], SIGNAL("clicked()"), self.launchApp)
                 buttonsGrid.addWidgetAuto(self.appLayouts[package])
+
+                # launchers
+        utilsGroup = QGroupBox('Utilities')
+        vertical.addWidget( utilsGroup)
+        utilsGrid = GridLayout(rows=1, cols=8)
+        utilsGroup.setLayout( utilsGrid)
+
+        self.utilLayouts = {}
+
+        for package in UTILITIES:
+            if UTILITIES[package]['show']:
+                self.utilLayouts[package] = QPushButton(package)
+                self.utilLayouts[package].setIcon(QIcon(os.path.join(RES, (package+".png"))))
+                self.utilLayouts[package].setIconSize(iconsize)
+                self.connect(self.utilLayouts[package], SIGNAL("clicked()"), self.launchUtil)
+                utilsGrid.addWidgetAuto(self.utilLayouts[package])
 
 
 
@@ -94,11 +111,25 @@ class Launcher(QMainWindow):
                 process_env.load_workgroup_config_file(filepath=(CONFIG+'/workgroups.yml'), workgroup='default', app=app)
                 process_env.printout()
                 executable = os.path.join(APPS[app]['versions'][version]['path'][sys.platform], APPS[app]['versions'][version]['modes']['ui'][sys.platform])
+                executable = process_env.expandvars(executable)
                 print executable
                 env = dict(os.environ.items() + self.studioenv.vars.items() + process_env.vars.items())
                 Popen(executable, env=env)
 
         return
+
+    def launchUtil (self, util=None, version=None):
+        sender = self.sender()
+
+        for name, button in self.utilLayouts.iteritems():
+            if sender == button:
+                util = name
+                version = UTILITIES[util]['versions'].keys()[0]
+
+        executable = os.path.join(UTILITIES[util]['versions'][version]['path'][sys.platform], UTILITIES[util]['versions'][version]['modes']['ui'][sys.platform])
+        print executable
+        env = dict(os.environ.items() + self.studioenv.vars.items())
+        Popen(executable, env=env)
 
 
 if __name__ == '__main__':

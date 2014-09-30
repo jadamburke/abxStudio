@@ -1,0 +1,2190 @@
+shaderdefcache100
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\softimage.msl
+	"msl_soft_txt2d_image.1.0"	""	"Soft Txt2D Image"
+	"msl_soft_txt3d_vein.1.0"	""	"Soft Txt3D Vein"
+	"msl_soft_Matrix4ToMatrix3.1.0"	""	"Soft Matrix4ToMatrix3"
+	"msl_soft_vector_switch.1.0"	""	"Soft Vector Switch"
+	"msl_soft_interp_linear.1.0"	""	"Soft Interp Linear"
+	"msl_soft_Matrix3Passthrough.1.0"	""	"Soft Matrix3Passthrough"
+	"msl_soft_QuaternionSwitch.1.0"	""	"Soft QuaternionSwitch"
+	"msl_soft_transparency.1.0"	""	"Soft Transparency"
+	"msl_soft_color_correction.1.0"	""	"Soft Color Correction"
+	"msl_soft_scalar_to_color.1.0"	""	"Soft Scalar To Color"
+	"msl_soft_vector_math_vector.1.0"	""	"Soft Vector Math Vector"
+	"msl_soft_hsva_combine.1.0"	""	"Soft Hsva Combine"
+	"msl_soft_Vector2ToScalar.1.0"	""	"Soft Vector2ToScalar"
+	"msl_soft_map_lookup_boolean.1.0"	""	"Soft Map Lookup Boolean"
+	"msl_soft_vector_to_scalar.1.0"	""	"Soft Vector To Scalar"
+	"msl_soft_txt3d_snowv2.1.0"	""	"Soft Txt3D Snowv2"
+	"msl_soft_bump_basis.1.0"	""	"Soft Bump Basis"
+	"msl_soft_vector_math_scalar.1.0"	""	"Soft Vector Math Scalar"
+	"msl_soft_hls_adjust.1.0"	""	"Soft Hls Adjust"
+	"msl_soft_Vector2Passthrough.1.0"	""	"Soft Vector2Passthrough"
+	"msl_soft_scalar_to_integer.1.0"	""	"Soft Scalar To Integer"
+	"msl_soft_light_point.1.0"	""	"Soft Light Point"
+	"msl_soft_texture_terrain.1.0"	""	"Soft Texture Terrain"
+	"msl_soft_veinbase.1.0"	""	"Soft Veinbase"
+	"msl_soft_sky_material.1.0"	""	"Soft Sky Material"
+	"msl_soft_txt3d_flagstonev2.1.0"	""	"Soft Txt3D Flagstonev2"
+	"msl_soft_vertex_color_alpha.1.0"	""	"Soft Vertex Color Alpha"
+	"msl_soft_scalar_invert.1.0"	""	"Soft Scalar Invert"
+	"msl_soft_txt2d_fabricv2.1.0"	""	"Soft Txt2D Fabricv2"
+	"msl_soft_Vector2ToColor.1.0"	""	"Soft Vector2ToColor"
+	"terrain.1.0"	"MetaSL/texture"	"terrain"
+	"msl_soft_texture_cloud.1.0"	""	"Soft Texture Cloud"
+	"msl_soft_normal_map.1.0"	""	"Soft Normal Map"
+	"msl_soft_color_to_scalar.1.0"	""	"Soft Color To Scalar"
+	"msl_soft_Vector3Passthrough.1.0"	""	"Soft Vector3Passthrough"
+	"msl_soft_zbump.1.0"	""	"Soft Zbump"
+	"msl_soft_txt3d_woodv2.1.0"	""	"Soft Txt3D Woodv2"
+	"msl_soft_state_vector.1.0"	""	"Soft State Vector"
+	"msl_soft_Vector4ToVector2.1.0"	""	"Soft Vector4ToVector2"
+	"msl_soft_Vector2Switch.1.0"	""	"Soft Vector2Switch"
+	"msl_soft_txt2d_gradientv2.1.0"	""	"Soft Txt2D Gradientv2"
+	"msl_soft_color_mixer.1.0"	""	"Soft Color Mixer"
+	"msl_soft_texture_snow.1.0"	""	"Soft Texture Snow"
+	"msl_soft_texture_wood.1.0"	""	"Soft Texture Wood"
+	"msl_soft_txt3d_rockv2.1.0"	""	"Soft Txt3D Rockv2"
+	"msl_soft_vector_to_scalars.1.0"	""	"Soft Vector To Scalars"
+	"msl_soft_incidence.1.0"	""	"Soft Incidence"
+	"msl_soft_light_null.1.0"	""	"Soft Light Null"
+	"msl_soft_txt2d_terrainv2.1.0"	""	"Soft Txt2D Terrainv2"
+	"msl_soft_architectural.1.0"	""	"Soft Architectural"
+	"msl_soft_blinn.1.0"	""	"Soft Blinn"
+	"msl_soft_txt2d_grid.1.0"	""	"Soft Txt2D Grid"
+	"msl_soft_txt3d_checkerboardv2.1.0"	""	"Soft Txt3D Checkerboardv2"
+	"msl_soft_env_cubic1.1.0"	""	"Soft Env Cubic1"
+	"msl_soft_txt2d_gridv2.1.0"	""	"Soft Txt2D Gridv2"
+	"msl_soft_QuaternionToVector4.1.0"	""	"Soft QuaternionToVector4"
+	"msl_soft_scalar_multi_switch.1.0"	""	"Soft Scalar Multi Switch"
+	"msl_soft_integer_to_scalar.1.0"	""	"Soft Integer To Scalar"
+	"msl_soft_txt3d_rockv2bump.1.0"	""	"Soft Txt3D Rockv2bump"
+	"msl_soft_color_smoothrange.1.0"	""	"Soft Color Smoothrange"
+	"msl_soft_txt2d_ripplev2.1.0"	""	"Soft Txt2D Ripplev2"
+	"msl_soft_color_multi_switch.1.0"	""	"Soft Color Multi Switch"
+	"msl_soft_color_invert.1.0"	""	"Soft Color Invert"
+	"msl_soft_constant.1.0"	""	"Soft Constant"
+	"msl_soft_Vector4Passthrough.1.0"	""	"Soft Vector4Passthrough"
+	"msl_soft_txt3d_wood.1.0"	""	"Soft Txt3D Wood"
+	"msl_soft_color_to_boolean.1.0"	""	"Soft Color To Boolean"
+	"msl_soft_atten_linear.1.0"	""	"Soft Atten Linear"
+	"msl_soft_txt2d_gradientv2bump.1.0"	""	"Soft Txt2D Gradientv2bump"
+	"msl_soft_scalar_to_boolean.1.0"	""	"Soft Scalar To Boolean"
+	"msl_soft_twosided.1.0"	""	"Soft Twosided"
+	"msl_soft_txt2d_gradient.1.0"	""	"Soft Txt2D Gradient"
+	"msl_soft_texture_vein.1.0"	""	"Soft Texture Vein"
+	"msl_soft_channel_picker.1.0"	""	"Soft Channel Picker"
+	"msl_soft_texture_lattice.1.0"	""	"Soft Texture Lattice"
+	"msl_soft_color_2mix.1.0"	""	"Soft Color 2mix"
+	"msl_soft_txt2d_ripple.1.0"	""	"Soft Txt2D Ripple"
+	"msl_soft_color_average.1.0"	""	"Soft Color Average"
+	"msl_soft_Vector3ToVector4.1.0"	""	"Soft Vector3ToVector4"
+	"msl_soft_boolean_to_color.1.0"	""	"Soft Boolean To Color"
+	"msl_soft_color_math_curve.1.0"	""	"Soft Color Math Curve"
+	"msl_soft_txt2d_imagev2bump.1.0"	""	"Soft Txt2D Imagev2bump"
+	"msl_soft_setnormal.1.0"	""	"Soft Setnormal"
+	"msl_soft_txt2d_ripplev2bump.1.0"	""	"Soft Txt2D Ripplev2bump"
+	"msl_soft_texture_fabric.1.0"	""	"Soft Texture Fabric"
+	"msl_soft_Matrix3Switch.1.0"	""	"Soft Matrix3Switch"
+	"msl_soft_txt3d_veinv2.1.0"	""	"Soft Txt3D Veinv2"
+	"msl_soft_Color4Passthrough.1.0"	""	"Soft Color4Passthrough"
+	"msl_soft_color_to_vector.1.0"	""	"Soft Color To Vector"
+	"msl_soft_texture_rock.1.0"	""	"Soft Texture Rock"
+	"msl_soft_texture_vector.1.0"	""	"Soft Texture Vector"
+	"msl_soft_moviescreen.1.0"	""	"Soft Moviescreen"
+	"msl_soft_Vector4ToScalar.1.0"	""	"Soft Vector4ToScalar"
+	"msl_soft_Vector3ToVector2.1.0"	""	"Soft Vector3ToVector2"
+	"msl_soft_light_infinite.1.0"	""	"Soft Light Infinite"
+	"msl_soft_BA_fast_math.1.0"	""	"Soft BA Fast Math"
+	"msl_soft_txt3d_marble.1.0"	""	"Soft Txt3D Marble"
+	"msl_soft_Vector4ToVector3.1.0"	""	"Soft Vector4ToVector3"
+	"snow.1.0"	"MetaSL/texture"	"snow"
+	"msl_soft_map_lookup_vector.1.0"	""	"Soft Map Lookup Vector"
+	"msl_soft_txt3d_checkerboard.1.0"	""	"Soft Txt3D Checkerboard"
+	"msl_soft_txt3d_flagstone.1.0"	""	"Soft Txt3D Flagstone"
+	"marble.1.0"	"MetaSL/texture"	"marble"
+	"msl_soft_color_combine.1.0"	""	"Soft Color Combine"
+	"msl_soft_Color4Switch.1.0"	""	"Soft Color4Switch"
+	"msl_soft_color_to_scalars.1.0"	""	"Soft Color To Scalars"
+	"msl_soft_aniward.1.0"	""	"Soft Aniward"
+	"msl_soft_scalar_math_exponent.1.0"	""	"Soft Scalar Math Exponent"
+	"wood.1.0"	"MetaSL/texture"	"wood"
+	"msl_soft_color_8mix.1.0"	""	"Soft Color 8mix"
+	"msl_soft_color_balance.1.0"	""	"Soft Color Balance"
+	"msl_soft_ScalarPassthrough.1.0"	""	"Soft ScalarPassthrough"
+	"msl_soft_texture2d_ripple.1.0"	""	"Soft Texture2D Ripple"
+	"rock.1.0"	"MetaSL/texture"	"rock"
+	"msl_soft_BooleanSwitch.1.0"	""	"Soft BooleanSwitch"
+	"msl_soft_vector_multi_switch.1.0"	""	"Soft Vector Multi Switch"
+	"msl_soft_scalar_math_unary.1.0"	""	"Soft Scalar Math Unary"
+	"msl_soft_display_fixup.1.0"	""	"Soft Display Fixup"
+	"msl_soft_txt3d_marblev2bump.1.0"	""	"Soft Txt3D Marblev2bump"
+	"msl_soft_rgba_keyer.1.0"	""	"Soft Rgba Keyer"
+	"msl_soft_texture_marble.1.0"	""	"Soft Texture Marble"
+	"msl_soft_space_conversion.1.0"	""	"Soft Space Conversion"
+	"msl_soft_mixer_layer_enable.1.0"	""	"Soft Mixer Layer Enable"
+	"zbumpuv.1.0"	"MetaSL/texture"	"zbumpuv"
+	"msl_soft_texture_cell.1.0"	""	"Soft Texture Cell"
+	"msl_soft_txt3d_fractal.1.0"	""	"Soft Txt3D Fractal"
+	"msl_soft_color_math_unary.1.0"	""	"Soft Color Math Unary"
+	"msl_soft_txt3d_cell.1.0"	""	"Soft Txt3D Cell"
+	"msl_soft_txt2d_terrain.1.0"	""	"Soft Txt2D Terrain"
+	"msl_soft_diffuse_reflection.1.0"	""	"Soft Diffuse Reflection"
+	"msl_soft_QuaternionPassthrough.1.0"	""	"Soft QuaternionPassthrough"
+	"msl_soft_state_scalar.1.0"	""	"Soft State Scalar"
+	"msl_soft_txt3d_marblev2.1.0"	""	"Soft Txt3D Marblev2"
+	"msl_soft_color_alpha.1.0"	""	"Soft Color Alpha"
+	"msl_soft_color_switch.1.0"	""	"Soft Color Switch"
+	"msl_soft_siutilsdecomposetransform.1.0"	""	"Soft Siutilsdecomposetransform"
+	"msl_soft_scalar_math_basic.1.0"	""	"Soft Scalar Math Basic"
+	"msl_soft_texture_polkadot.1.0"	""	"Soft Texture Polkadot"
+	"msl_soft_integer_to_color.1.0"	""	"Soft Integer To Color"
+	"msl_soft_BooleanPassthrough.1.0"	""	"Soft BooleanPassthrough"
+	"msl_soft_fractalbase.1.0"	""	"Soft Fractalbase"
+	"msl_soft_shadowmaterial.1.0"	""	"Soft Shadowmaterial"
+	"msl_soft_environment.1.0"	""	"Soft Environment"
+	"msl_soft_txt3d_cloudv2bump.1.0"	""	"Soft Txt3D Cloudv2bump"
+	"msl_soft_color_split.1.0"	""	"Soft Color Split"
+	"msl_soft_hlsa_combine.1.0"	""	"Soft Hlsa Combine"
+	"msl_soft_txt2d_fabricv2bump.1.0"	""	"Soft Txt2D Fabricv2bump"
+	"msl_soft_siutilscreatetransform.1.0"	""	"Soft Siutilscreatetransform"
+	"msl_soft_color_math_logic.1.0"	""	"Soft Color Math Logic"
+	"msl_soft_scalar_inrange.1.0"	""	"Soft Scalar Inrange"
+	"msl_soft_color_rgb_to_hsv.1.0"	""	"Soft Color Rgb To Hsv"
+	"msl_soft_map_lookup_scalar.1.0"	""	"Soft Map Lookup Scalar"
+	"msl_soft_Vector3Switch.1.0"	""	"Soft Vector3Switch"
+	"msl_soft_bump_map.1.0"	""	"Soft Bump Map"
+	"msl_soft_remap.1.0"	""	"Soft Remap"
+	"msl_soft_scalar_math_curve.1.0"	""	"Soft Scalar Math Curve"
+	"msl_soft_txt3d_checkerboardv2bump.1.0"	""	"Soft Txt3D Checkerboardv2bump"
+	"msl_soft_txt2d_gridv2bump.1.0"	""	"Soft Txt2D Gridv2bump"
+	"msl_soft_mib_reflect.1.0"	""	"Soft Mib Reflect"
+	"msl_soft_txt2d_image_scalarbump.1.0"	""	"Soft Txt2D Image Scalarbump"
+	"msl_soft_txt2d_image_scalar.1.0"	""	"Soft Txt2D Image Scalar"
+	"msl_soft_ScalarSwitch.1.0"	""	"Soft ScalarSwitch"
+	"msl_soft_illum_constant.1.0"	""	"Soft Illum Constant"
+	"msl_soft_txt3d_woodv2bump.1.0"	""	"Soft Txt3D Woodv2bump"
+	"msl_soft_uvwgen.1.0"	""	"Soft Uvwgen"
+	"msl_soft_cook_torrance.1.0"	""	"Soft Cook Torrance"
+	"msl_soft_Matrix3ToMatrix4.1.0"	""	"Soft Matrix3ToMatrix4"
+	"msl_soft_bump.1.0"	""	"Soft Bump"
+	"msl_soft_texture_turbulence.1.0"	""	"Soft Texture Turbulence"
+	"msl_soft_txt3d_cellv2.1.0"	""	"Soft Txt3D Cellv2"
+	"msl_soft_lambert.1.0"	""	"Soft Lambert"
+	"msl_soft_color_math_exponent.1.0"	""	"Soft Color Math Exponent"
+	"msl_soft_txt3d_flagstonev2bump.1.0"	""	"Soft Txt3D Flagstonev2bump"
+	"msl_soft_map_lookup_integer.1.0"	""	"Soft Map Lookup Integer"
+	"msl_soft_txt3d_rock.1.0"	""	"Soft Txt3D Rock"
+	"msl_soft_txt3d_cloudv2.1.0"	""	"Soft Txt3D Cloudv2"
+	"msl_soft_color_hsv_to_rgb.1.0"	""	"Soft Color Hsv To Rgb"
+	"msl_soft_atten_exp.1.0"	""	"Soft Atten Exp"
+	"msl_soft_light_spot.1.0"	""	"Soft Light Spot"
+	"msl_soft_Vector4Switch.1.0"	""	"Soft Vector4Switch"
+	"msl_soft_ripplebase.1.0"	""	"Soft Ripplebase"
+	"fabric.1.0"	"MetaSL/texture"	"fabric"
+	"msl_soft_scalars_to_vector.1.0"	""	"Soft Scalars To Vector"
+	"msl_soft_txt3d_snowv2bump.1.0"	""	"Soft Txt3D Snowv2bump"
+	"msl_soft_boolean_negate.1.0"	""	"Soft Boolean Negate"
+	"msl_soft_getnormal.1.0"	""	"Soft Getnormal"
+	"msl_soft_Matrix4Passthrough.1.0"	""	"Soft Matrix4Passthrough"
+	"msl_soft_color_math_basic.1.0"	""	"Soft Color Math Basic"
+	"msl_soft_phong.1.0"	""	"Soft Phong"
+	"gradient.1.0"	"MetaSL/texture"	"gradient"
+	"msl_soft_ambient_occlusion.1.0"	""	"Soft Ambient Occlusion"
+	"msl_soft_texture_wave.1.0"	""	"Soft Texture Wave"
+	"msl_soft_strauss.1.0"	""	"Soft Strauss"
+	"msl_soft_txt3d_fractalv2bump.1.0"	""	"Soft Txt3D Fractalv2bump"
+	"msl_soft_IntegerSwitch.1.0"	""	"Soft IntegerSwitch"
+	"msl_soft_env_cubic6.1.0"	""	"Soft Env Cubic6"
+	"msl_soft_mib_color_intensity.1.0"	""	"Soft Mib Color Intensity"
+	"msl_soft_txt3d_fractalv2.1.0"	""	"Soft Txt3D Fractalv2"
+	"msl_soft_vector_to_color.1.0"	""	"Soft Vector To Color"
+	"msl_soft_IntegerPassthrough.1.0"	""	"Soft IntegerPassthrough"
+	"msl_soft_boolean_math_logic.1.0"	""	"Soft Boolean Math Logic"
+	"msl_soft_texproj_lookup.1.0"	""	"Soft Texproj Lookup"
+	"msl_soft_txt3d_veinv2bump.1.0"	""	"Soft Txt3D Veinv2bump"
+	"msl_soft_txt2d_imagev2.1.0"	""	"Soft Txt2D Imagev2"
+	"msl_soft_txt2d_image_implicit.1.0"	""	"Soft Txt2D Image Implicit"
+	"msl_soft_color_rayswitch_v3.1.0"	""	"Soft Color Rayswitch V3"
+	"msl_soft_texture_gradient.1.0"	""	"Soft Texture Gradient"
+	"msl_soft_transparency_mixer.1.0"	""	"Soft Transparency Mixer"
+	"msl_soft_material_moviescreen.1.0"	""	"Soft Material Moviescreen"
+	"msl_soft_txt3d_snow.1.0"	""	"Soft Txt3D Snow"
+	"msl_soft_txt2d_fabric.1.0"	""	"Soft Txt2D Fabric"
+	"msl_soft_txt2d_terrainv2bump.1.0"	""	"Soft Txt2D Terrainv2bump"
+	"msl_soft_txt3d_cloud.1.0"	""	"Soft Txt3D Cloud"
+	"msl_soft_txt3d_cellv2bump.1.0"	""	"Soft Txt3D Cellv2bump"
+	"msl_soft_texture_flagstone.1.0"	""	"Soft Texture Flagstone"
+	"msl_soft_Vector2ToVector3.1.0"	""	"Soft Vector2ToVector3"
+	"msl_soft_scalar_switch.1.0"	""	"Soft Scalar Switch"
+	"msl_soft_Vector2ToVector4.1.0"	""	"Soft Vector2ToVector4"
+	"msl_soft_texture_fractal.1.0"	""	"Soft Texture Fractal"
+	"msl_soft_Vector4ToColor.1.0"	""	"Soft Vector4ToColor"
+	"msl_soft_Vector4ToQuaternion.1.0"	""	"Soft Vector4ToQuaternion"
+	"msl_soft_color_inrange.1.0"	""	"Soft Color Inrange"
+	"msl_soft_scalar_math_logic.1.0"	""	"Soft Scalar Math Logic"
+	"msl_soft_scalar_smoothrange.1.0"	""	"Soft Scalar Smoothrange"
+	"msl_soft_Matrix4Switch.1.0"	""	"Soft Matrix4Switch"
+	"msl_soft_env_spherical.1.0"	""	"Soft Env Spherical"
+	"msl_soft_TextureSwitch.1.0"	""	"Soft TextureSwitch"
+	"msl_soft_map_lookup_color.1.0"	""	"Soft Map Lookup Color"
+	"msl_soft_callbump.1.0"	""	"Soft Callbump"
+	"msl_soft_mirrorball.1.0"	""	"Soft Mirrorball"
+	"msl_soft_checkerboard.1.0"	""	"Soft Checkerboard"
+	"msl_soft_texture2d_grid.1.0"	""	"Soft Texture2D Grid"
+	"msl_soft_bumpmap_compound.1.0"	""	"Soft Bumpmap Compound"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\GLSL\GLSLProgram.spdl
+	"GLSLProgram.1.0"	""	"GLSL Shader"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\GLSL\GLSLUniform.spdl
+	"GLSLUniform.1.0"	""	"GLSL Uniform"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\lume\Lume_Glare.spdl
+	"Lume_Glare.1.0"	""	"Lume Glare"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_add_clipping.spdl
+	"sib_color_add_clipping.1.0"	""	"sib_color_add_clipping"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx\DXVSLightTracker.spdl
+	"DXVSLightTracker.1.0"	""	"DXVSLightTracker"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx\DXCubicCrossTexture.spdl
+	"DXCubicCrossTexture.1.0"	""	"DXCubicCrossTexture"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\opengl\OGL13Shade.spdl
+	"OGL13Shade.1.0"	""	"OGL13Shade"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_gradient.spdl
+	"sib_color_gradient.1.0"	""	"Color Gradient"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\layer_soft_light.msl
+	"Layer_soft_light.1.0"	"MetaSL/Layer"	"Soft Light"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\BA_particle_info.spdl
+	"BA_particle_info.1.0"	""	"Particle Info"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_8mix.spdl
+	"sib_color_8mix.1.0"	""	"Color 8 Channel Mixer"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\pt_get_color.spdl
+	"pt_get_color.1.0"	""	"Particle Get Color"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\dither.cgfx
+	"dither.1.0"	""	"dither"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\material-strauss.spdl
+	"material-strauss.1.0"	""	"Strauss"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\layer_difference.msl
+	"Layer_difference.1.0"	"MetaSL/Layer"	"Difference"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\pt_gradient.spdl
+	"pt_gradient.1.0"	""	"Particle Gradient"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_math_curve.spdl
+	"sib_color_math_curve.1.0"	""	"Color Curve Math"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\opengl\OGLShade.spdl
+	"OGLShade.1.0"	""	"RTShader_OGLShade"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_boolean_to_color.spdl
+	"sib_boolean_to_color.1.0"	""	"Boolean To Color"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_geo_hair_illum.spdl
+	"sib_geo_hair_illum.1.0"	""	"Hair Gradient Material"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\NOISE.TEX.spdl
+	"NOISE_TEX.1.0"	""	"oz_2d_noise"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\soft_point.spdl
+	"soft_point.1.0"	""	"soft_point"
+Parser	mentalray	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\mi\builtin_object_light.mi
+	"builtin_object_light.1.0"	"mental ray@1000/Material@200"	"builtin_object_light"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\environment_map_angular.msl
+	"Environment_map_angular.1.0"	"MetaSL/Environment"	"Map Angular"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\Cg\CgBoolean.spdl
+	"CgBoolean.1.0"	""	"CgBoolean"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\lume\Lume_Distortion.spdl
+	"Lume_Distortion.1.0"	""	"Lume Distortion"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\opengl\OGL13Texture.spdl
+	"OGL13Texture.1.0"	""	"OGL Texture"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\layer_lighten.msl
+	"Layer_lighten.1.0"	"MetaSL/Layer"	"Lighten"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mip_rayswitch.spdl
+	"mip_rayswitch.1.0"	""	"mip Rayswitch"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_scalar_smoothrange.spdl
+	"sib_scalar_smoothrange.1.0"	""	"Scalar Smooth Range"
+Parser	mentalray	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\mi\paint.mi
+	"mi_metallic_paint.1.0"	"mental ray@1000/Material@200"	"mi_metallic_paint"
+	"mi_bump_flakes.1.0"	"mental ray@1000/Texture@100"	"mi_bump_flakes"
+	"mi_car_paint_phen_x.1.0"	"mental ray@1000/Material@200"	"mi_car_paint_phen_x"
+	"mi_metallic_paint_x.1.0"	"mental ray@1000/Material@200"	"mi_metallic_paint_x"
+	"mi_metallic_paint_output_mixer.1.0"	"mental ray@1000/Texture@100"	"mi_metallic_paint_output_mixer"
+	"mi_car_paint_phen.1.0"	"mental ray@1000/Material@200"	"mi_car_paint_phen"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\bsdf_cook_torrance.msl
+	"Bsdf_cook_torrance.1.0"	"MetaSL/Bsdf"	"Cook Torrance"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\math_float.msl
+	"Math_float_compress.1.0"	"MetaSL/Math/Float"	"Compress"
+	"Math_float_modf.1.0"	"MetaSL/Math/Float"	"Modf"
+	"Math_float_mix.1.0"	"MetaSL/Math/Float"	"Mix"
+	"Math_float_expand.1.0"	"MetaSL/Math/Float"	"Expand"
+	"Math_float_threshold.1.0"	"MetaSL/Math/Float"	"Threshold"
+	"Math_float_invert.1.0"	"MetaSL/Math/Float"	"Invert"
+	"Math_float_sincos.1.0"	"MetaSL/Math/Float"	"Sincos"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\misss_fast_simple_phen.spdl
+	"misss_fast_simple_phen.1.0"	""	"misss Fast Simple"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_bump.spdl
+	"sib_bump.1.0"	""	"Bump Add"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\math_scalar.msl
+	"Math_scalar_expand.1.0"	"MetaSL/Math/Scalar"	"Expand"
+	"Math_scalar_threshold.1.0"	"MetaSL/Math/Scalar"	"Threshold"
+	"Math_scalar_compress.1.0"	"MetaSL/Math/Scalar"	"Compress"
+	"Math_scalar_mix.1.0"	"MetaSL/Math/Scalar"	"Mix"
+	"Math_scalar_invert.1.0"	"MetaSL/Math/Scalar"	"Invert"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\normals_relief_map.msl
+	"Normals_relief_map.1.0"	"MetaSL/Normals"	"Relief Map"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\simple_phong.spdl
+	"simple_phong.1.0"	""	"Simple Phong"
+Parser	HLSLParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\HLSL\BumpReflectHLSL.fx
+	"BumpReflectHLSL.1.0"	"Realtime@200/HLSL"	"BumpReflectHLSL"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mip_mirrorball.spdl
+	"mip_mirrorball.1.0"	""	"mip Mirrorball"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\opengl\nVMeta.spdl
+	"nVMeta.1.0"	""	"RTShader_nVMeta"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\BA_particle_gradient_phen.spdl
+	"BA_particle_gradient_phen.1.0"	""	"Particle Gradient"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_to_boolean.spdl
+	"sib_color_to_boolean.1.0"	""	"Color To Boolean"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_vector_switch.spdl
+	"sib_vector_switch.1.0"	""	"Vector Switch"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt3d-vein_v2.spdl
+	"txt3d-vein_v2.1.0"	""	"txt3d-vein_v2"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\checker3d.cgfx
+	"checker3d.1.0"	"Realtime@200/CgFX"	"checker3d"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\comp_set_alpha.msl
+	"Comp_set_alpha.1.0"	"MetaSL/Comp"	"Set Alpha"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\environment_map_cubic.msl
+	"Environment_map_cubic.1.0"	"MetaSL/Environment"	"Map Cubic"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx\DXShade.spdl
+	"DXShade.1.0"	""	"DXShade"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_color_alpha.spdl
+	"mib_color_alpha.1.0"	""	"mib Color Alpha"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_thickness.spdl
+	"sib_thickness.1.0"	""	"Thickness"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Addons\Syflex30X50\Application\spdl\syTurbulence.spdl
+	"syTurbulence.1.0"	""	"syTurbulence"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_env_cubic6.spdl
+	"sib_env_cubic6.1.0"	""	"Six Map Cubic Environment"
+Parser	XSIRTCOMPOUND	C:\Program Files\Autodesk\Softimage 2015\Addons\ICEFlowBuilder\Data\RTCompounds\Cigarette Smoke.xsirtcompound
+	"Cigarette Smoke.1.0"	"Particle"	"Cigarette Smoke"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\mix_4_layers.cgfx
+	"mix_4_layers.1.0"	"Realtime@200/CgFX"	"mix_4_layers"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\math_vector3.msl
+	"Math_vector3_threshold.1.0"	"MetaSL/Math/Vector3"	"Threshold"
+	"Math_vector3_expand.1.0"	"MetaSL/Math/Vector3"	"Expand"
+	"Math_vector3_compress.1.0"	"MetaSL/Math/Vector3"	"Compress"
+	"Math_vector3_invert.1.0"	"MetaSL/Math/Vector3"	"Invert"
+	"Math_vector3_mix.1.0"	"MetaSL/Math/Vector3"	"Mix"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx\DXPSColorConst.spdl
+	"DXPSColorConst.1.0"	""	"DXPSColorConst"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx\DXTextureFile.spdl
+	"DXTextureFile.1.0"	""	"DXTextureFile"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx\DXPixelShader.spdl
+	"DXPixelShader.1.0"	""	"DXPixelShader"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mi_metallic_paint.spdl
+	"mi_metallic_paint.1.0"	""	"mi Metallic Paint"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\bg_color.out.spdl
+	"bg_color_out.1.0"	""	"ari_bg_color"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx\DXTexture.spdl
+	"DXTexture.1.0"	""	"DXTexture"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_dielectric.spdl
+	"mib_dielectric.1.0"	""	"mib Dielectric"
+Parser	XSIRTCOMPOUND	C:\Program Files\Autodesk\Softimage 2015\Addons\ICEFlowBuilder\Data\RTCompounds\Age Percentage.xsirtcompound
+	"Age Percentage.1.0"	"Particle"	"Age Percentage"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_to_scalar_old.spdl
+	"sib_color_to_scalar_old.1.0"	""	"Color To Scalar Obsolete"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\lume\Lume_EdgeShadow.spdl
+	"Lume_EdgeShadow.1.0"	""	"Lume EdgeShadow"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\pt_metashader.spdl
+	"pt_metashader.1.0"	""	"Particle Metashader"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\uvDetective.cgfx
+	"uvDetective.1.0"	"Realtime@200/CgFX"	"uvDetective"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mip_grayball.spdl
+	"mip_grayball.1.0"	""	"mip Grayball"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\illumination_ashikhmin_shirley.msl
+	"Illumination_ashikhmin_shirley.1.0"	"MetaSL/Illumination"	"Ashikhmin Shirley"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_rendermap_gather.spdl
+	"sib_rendermap_gather.1.0"	""	"Rendermap Gatherer"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_uvwgen.spdl
+	"sib_uvwgen.1.0"	""	"UVW Generator"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\Cg\CgLightTracker.spdl
+	"CgLightTracker.1.0"	""	"Cg Light Tracker"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\map_lookup_vector.spdl
+	"map_lookup_vector.1.0"	""	"Vector Map Lookup"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt2d-gradiant.spdl
+	"txt2d-gradiant.1.0"	""	"txt2d-gradiant"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\soft_spot.spdl
+	"soft_spot.1.0"	""	"soft_spot"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_illum_aniward.spdl
+	"sib_illum_aniward.1.0"	""	"Anisotropic"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt2d-grid.spdl
+	"txt2d-grid.1.0"	""	"Grid"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\comp_over.msl
+	"Comp_over.1.0"	"MetaSL/Comp"	"Over"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\Cg\CgVector.spdl
+	"CgVector.1.0"	""	"Cg Vector"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx10\DX10Draw.spdl
+	"DX10Draw.1.0"	""	"DX10 Draw"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\TERRAIN.TEX.spdl
+	"TERRAIN_TEX.1.0"	""	"oz_2d_terrain"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\opengl\nVCubic.spdl
+	"nVCubic.1.0"	""	"RTShader_nVCubic"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\component_phong.msl
+	"Component_phong.1.0"	"MetaSL/Component"	"Phong"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\math_vector2.msl
+	"Math_vector2_mix.1.0"	"MetaSL/Math/Vector2"	"Mix"
+	"Math_vector2_threshold.1.0"	"MetaSL/Math/Vector2"	"Threshold"
+	"Math_vector2_expand.1.0"	"MetaSL/Math/Vector2"	"Expand"
+	"Math_vector2_invert.1.0"	"MetaSL/Math/Vector2"	"Invert"
+	"Math_vector2_compress.1.0"	"MetaSL/Math/Vector2"	"Compress"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\texture_lookup.msl
+	"Texture_lookup_1d.1.0"	"MetaSL/Texture"	"Lookup 1D"
+	"Texture_lookup_cube.1.0"	"MetaSL/Texture"	"Lookup Cube"
+	"Texture_lookup_3d.1.0"	"MetaSL/Texture"	"Lookup 3D"
+	"Texture_lookup_2d.1.0"	"MetaSL/Texture"	"Lookup 2D"
+	"Texture_lookup_2d_alpha.1.0"	"MetaSL/Texture"	"Lookup 2D Alpha"
+Parser	mentalray	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\mi\basehair.mi
+	"mib_illum_hair_x.1.0"	"mental ray@1000/Material@200"	"mib_illum_hair_x"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\generator_outline.msl
+	"Generator_outline.1.0"	"MetaSL/Generator"	"Outline"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_scalar_switch.spdl
+	"sib_scalar_switch.1.0"	""	"Scalar Switch"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\CHECKER.TEX.spdl
+	"CHECKER_TEX.1.0"	""	"oz_2d_checker"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\opengl\OGL13TexCoord.spdl
+	"OGL13TexCoord.1.0"	""	"OGL13TexCoord"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_attribute_boolean.spdl
+	"sib_attribute_boolean.1.0"	""	"Boolean Attribute"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_exposure_gamma.spdl
+	"sib_color_exposure_gamma.1.0"	""	"Color Gamma Exposure"
+Parser	mentalray	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\mi\base.mi
+	"mib_color_alpha.1.0"	"mental ray@1000/Texture@100"	"mib_color_alpha"
+	"mib_texture_lookup.1.0"	"mental ray@1000/Texture@100"	"mib_texture_lookup"
+	"mib_map_get_integer.1.0"	"mental ray@1000/Texture@100"	"mib_map_get_integer"
+	"mib_amb_occlusion.1.0"	"mental ray@1000/Texture@100"	"mib_amb_occlusion"
+	"mib_illum_ward_deriv.1.0"	"mental ray@1000/Material@200"	"mib_illum_ward_deriv"
+	"mib_color_intensity.1.0"	"mental ray@1000/Texture@100"	"mib_color_intensity"
+	"mib_continue.1.0"	"mental ray@1000/Texture@100"	"mib_continue"
+	"mib_map_get_vector.1.0"	"mental ray@1000/Texture@100"	"mib_map_get_vector"
+	"mib_texture_wave.1.0"	"mental ray@1000/Texture@100"	"mib_texture_wave"
+	"mib_fg_occlusion.1.0"	"mental ray@1000/Texture@100"	"mib_fg_occlusion"
+	"mib_geo_sphere.1.0"	"mental ray@1000/Geometry@400"	"mib_geo_sphere"
+	"mib_light_infinite.1.0"	"mental ray@1000/Light@300"	"mib_light_infinite"
+	"mib_lookup_background.1.0"	"mental ray@1000/Texture@100"	"mib_lookup_background"
+	"mib_geo_cube.1.0"	"mental ray@1000/Geometry@400"	"mib_geo_cube"
+	"mib_lookup_cube1.1.0"	"mental ray@1000/Environment@200"	"mib_lookup_cube1"
+	"mib_texture_turbulence.1.0"	"mental ray@1000/Texture@100"	"mib_texture_turbulence"
+	"mib_bent_normal_env.1.0"	"mental ray@1000/Texture@100"	"mib_bent_normal_env"
+	"mib_photon_basic.1.0"	"mental ray@1000/Photon@200"	"mib_photon_basic"
+	"mib_bump_map2.1.0"	"mental ray@1000/Texture@100"	"mib_bump_map2"
+	"mib_lens_stencil.1.0"	"mental ray@1000/Lens@300"	"mib_lens_stencil"
+	"mib_geo_torus.1.0"	"mental ray@1000/Geometry@400"	"mib_geo_torus"
+	"mib_blackbody.1.0"	"mental ray@1000/Light@300"	"mib_blackbody"
+	"mib_texture_rotate.1.0"	"mental ray@1000/Texture@100"	"mib_texture_rotate"
+	"mib_shadow_transparency.1.0"	"mental ray@1000/Shadow@200"	"mib_shadow_transparency"
+	"mib_illum_ward.1.0"	"mental ray@1000/Material@200"	"mib_illum_ward"
+	"mib_fast_occlusion.1.0"	"mental ray@1000/Texture@100"	"mib_fast_occlusion"
+	"mib_map_get_color.1.0"	"mental ray@1000/Texture@100"	"mib_map_get_color"
+	"mib_glossy_reflection.1.0"	"mental ray@1000/Material@200"	"mib_glossy_reflection"
+	"mib_texture_filter_lookup_3.1.0"	"mental ray@1000/Texture@100"	"mib_texture_filter_lookup_3"
+	"mib_color_average.1.0"	"mental ray@1000/Texture@100"	"mib_color_average"
+	"mib_texture_remap.1.0"	"mental ray@1000/Texture@100"	"mib_texture_remap"
+	"mib_texture_filter_lookup_2.1.0"	"mental ray@1000/Texture@100"	"mib_texture_filter_lookup_2"
+	"mib_geo_instance_mlist.1.0"	"mental ray@1000/Geometry@400"	"mib_geo_instance_mlist"
+	"mib_refract.1.0"	"mental ray@1000/Texture@100"	"mib_refract"
+	"mib_dielectric.1.0"	"mental ray@1000/Material@200"	"mib_dielectric"
+	"mib_texture_lookup2.1.0"	"mental ray@1000/Texture@100"	"mib_texture_lookup2"
+	"mib_geo_instance.1.0"	"mental ray@1000/Geometry@400"	"mib_geo_instance"
+	"mib_illum_blinn.1.0"	"mental ray@1000/Material@200"	"mib_illum_blinn"
+	"mib_reflect.1.0"	"mental ray@1000/Texture@100"	"mib_reflect"
+	"mib_lookup_cube6.1.0"	"mental ray@1000/Environment@200"	"mib_lookup_cube6"
+	"mib_map_get_integer_array.1.0"	"mental ray@1000/Texture@100"	"mib_map_get_integer_array"
+	"mib_light_point.1.0"	"mental ray@1000/Light@300"	"mib_light_point"
+	"mib_opacity.1.0"	"mental ray@1000/Texture@100"	"mib_opacity"
+	"mib_ray_marcher.1.0"	"mental ray@1000/Material@200"	"mib_ray_marcher"
+	"mib_texture_polkasphere.1.0"	"mental ray@1000/Texture@100"	"mib_texture_polkasphere"
+	"mib_geo_cylinder.1.0"	"mental ray@1000/Geometry@400"	"mib_geo_cylinder"
+	"mib_illum_hair.1.0"	"mental ray@1000/Material@200"	"mib_illum_hair"
+	"mib_bump_map.1.0"	"mental ray@1000/Texture@100"	"mib_bump_map"
+	"mib_illum_lambert.1.0"	"mental ray@1000/Material@200"	"mib_illum_lambert"
+	"mib_texture_checkerboard.1.0"	"mental ray@1000/Texture@100"	"mib_texture_checkerboard"
+	"mib_color_interpolate.1.0"	"mental ray@1000/Texture@100"	"mib_color_interpolate"
+	"mib_illum_phong.1.0"	"mental ray@1000/Material@200"	"mib_illum_phong"
+	"mib_bump_basis.1.0"	"mental ray@1000/Texture@100"	"mib_bump_basis"
+	"mib_glossy_refraction.1.0"	"mental ray@1000/Material@200"	"mib_glossy_refraction"
+	"mib_color_spread.1.0"	"mental ray@1000/Texture@100"	"mib_color_spread"
+	"mib_cie_d.1.0"	"mental ray@1000/Light@300"	"mib_cie_d"
+	"mib_twosided.1.0"	"mental ray@1000/Texture@100"	"mib_twosided"
+	"mib_texture_vector.1.0"	"mental ray@1000/Texture@100"	"mib_texture_vector"
+	"mib_passthrough_bump_map.1.0"	"mental ray@1000/Texture@100"	"mib_passthrough_bump_map"
+	"mib_lightmap_write.1.0"	"mental ray@1000/Lightmap@400"	"mib_lightmap_write"
+	"mib_lookup_spherical.1.0"	"mental ray@1000/Environment@200"	"mib_lookup_spherical"
+	"mib_lookup_cylindrical.1.0"	"mental ray@1000/Environment@200"	"mib_lookup_cylindrical"
+	"mib_texture_filter_lookup.1.0"	"mental ray@1000/Texture@100"	"mib_texture_filter_lookup"
+	"mib_texture_polkadot.1.0"	"mental ray@1000/Texture@100"	"mib_texture_polkadot"
+	"mib_transparency.1.0"	"mental ray@1000/Texture@100"	"mib_transparency"
+	"mib_refraction_index.1.0"	"mental ray@1000/Texture@100"	"mib_refraction_index"
+	"mib_illum_cooktorr.1.0"	"mental ray@1000/Material@200"	"mib_illum_cooktorr"
+	"mib_volume.1.0"	"mental ray@1000/Volume@300"	"mib_volume"
+	"mib_color_mix.1.0"	"mental ray@1000/Texture@100"	"mib_color_mix"
+	"mib_geo_cone.1.0"	"mental ray@1000/Geometry@400"	"mib_geo_cone"
+	"mib_geo_square.1.0"	"mental ray@1000/Geometry@400"	"mib_geo_square"
+	"mib_geo_add_uv_texsurf.1.0"	"mental ray@1000/Geometry@400"	"mib_geo_add_uv_texsurf"
+	"mib_light_spot.1.0"	"mental ray@1000/Light@300"	"mib_light_spot"
+	"mib_light_photometric.1.0"	"mental ray@1000/Light@300"	"mib_light_photometric"
+	"mib_lens_clamp.1.0"	"mental ray@1000/Lens@300"	"mib_lens_clamp"
+	"mib_lightmap_sample.1.0"	"mental ray@1000/Texture@100"	"mib_lightmap_sample"
+	"mib_map_get_scalar.1.0"	"mental ray@1000/Texture@100"	"mib_map_get_scalar"
+	"mib_map_get_transform.1.0"	"mental ray@1000/Texture@100"	"mib_map_get_transform"
+	"mib_map_get_scalar_array.1.0"	"mental ray@1000/Texture@100"	"mib_map_get_scalar_array"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\metal.cgfx
+	"metal.1.0"	"Realtime@200/CgFX"	"metal"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\March_Smoke.vol.spdl
+	"March_Smoke_vol.1.0"	""	"oz_V_march_smoke"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\layer_hue.msl
+	"Layer_hue.1.0"	"MetaSL/Layer"	"Hue"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_illum_shadowmaterial.spdl
+	"sib_illum_shadowmaterial.1.0"	""	"Shadow Material"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\Static_Cling.mat.spdl
+	"Static_Cling_mat.1.0"	""	"static_cling"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\shadow_matte.mat.spdl
+	"shadow_matte_mat.1.0"	""	"ari_shadow_matte"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\illumination_glass.msl
+	"Illumination_glass.1.0"	"MetaSL/Illumination"	"Glass"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_glossy_reflection.spdl
+	"mib_glossy_reflection.1.0"	""	"mib Glossy Reflection"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\layer_overlay.msl
+	"Layer_overlay.1.0"	"MetaSL/Layer"	"Overlay"
+Parser	mentalray	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\mi\layering.mi
+	"mila_emission.1.0"	"mental ray@1000/Texture@100"	"mila_emission"
+	"mila_material.1.0"	"mental ray@1000/Material@200"	"mila_material"
+	"mila_flakes_adapter.1.0"	""	"mila_flakes_adapter"
+	"mila_diffuse_reflection.1.0"	"mental ray@1000/Texture@100"	"mila_diffuse_reflection"
+	"mila_glossy_transmission.1.0"	"mental ray@1000/Texture@100"	"mila_glossy_transmission"
+	"mila_glossy_reflection.1.0"	"mental ray@1000/Texture@100"	"mila_glossy_reflection"
+	"mila_bump_flakes.1.0"	"mental ray@1000/Texture@100"	"mila_bump_flakes"
+	"mila_transparency.1.0"	"mental ray@1000/Texture@100"	"mila_transparency"
+	"mila_layer.1.0"	"mental ray@1000/Texture@100"	"mila_layer"
+	"mila_diffuse_transmission.1.0"	"mental ray@1000/Texture@100"	"mila_diffuse_transmission"
+	"mila_get_normal.1.0"	"mental ray@1000/Texture@100"	"mila_get_normal"
+	"mila_mix.1.0"	"mental ray@1000/Texture@100"	"mila_mix"
+	"mila_adapter.1.0"	"mental ray@1000/Texture@100"	"mila_adapter"
+	"mila_specular_reflection.1.0"	"mental ray@1000/Texture@100"	"mila_specular_reflection"
+	"mila_specular_transmission.1.0"	"mental ray@1000/Texture@100"	"mila_specular_transmission"
+	"mila_scatter.1.0"	"mental ray@1000/Texture@100"	"mila_scatter"
+	"mila_get_roughness.1.0"	"mental ray@1000/Texture@100"	"mila_get_roughness"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\standin_surface_shaders.msl
+	"standin_surface_for_volume.1.0"	"MetaSL/Standin"	"Surface For Volume"
+	"standin_surface_for_environment.1.0"	"MetaSL/Standin"	"Surface For Environment"
+	"standin_surface_for_lights.1.0"	"MetaSL/Standin"	"Surface For Lights"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mia_roundcorners.spdl
+	"mia_roundcorners.1.0"	""	"mia Round Corners"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_texture_rotate.spdl
+	"mib_texture_rotate.1.0"	""	"mib Texture Rotate"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\opengl\OGLShadowMap.spdl
+	"OGLShadowMap.1.0"	""	"OGLShadowMap"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\xsibase\XSIColorMixer.spdl
+	"XSIColorMixer.1.0"	""	"Color Mixer"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_geo_instance_mlist.spdl
+	"mib_geo_instance_mlist.1.0"	""	"mib Geo Instance Mlist"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\material-phong.spdl
+	"material-phong.1.0"	""	"Phong"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_file_output_helper.spdl
+	"sib_file_output_helper.1.0"	""	"sib_file_output_helper"
+Parser	mentalray	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\mi\sibase.mi
+	"sib_slate.1.0"	"mental ray@1000/Lens@300"	"sib_slate"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\layer_saturation.msl
+	"Layer_saturation.1.0"	"MetaSL/Layer"	"Saturation"
+Parser	mentalray	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\mi\subsurface.mi
+	"misss_fast_shader2_x.1.0"	"mental ray@1000/Material@200"	"misss_fast_shader2_x"
+	"misss_fast_skin_phen_d.1.0"	"mental ray@1000/Material Phenomena@500"	"misss_fast_skin_phen_d"
+	"misss_mia_skin2_phen_d.1.0"	"mental ray@1000/Material Phenomena@500"	"misss_mia_skin2_phen_d"
+	"misss_fast_shader.1.0"	"mental ray@1000/Material@200"	"misss_fast_shader"
+	"misss_mia_skin2_surface_phen.1.0"	"mental ray@1000/Material@200"	"misss_mia_skin2_surface_phen"
+	"misss_mia_skin2_phen.1.0"	"mental ray@1000/Material Phenomena@500"	"misss_mia_skin2_phen"
+	"misss_fast_skin_phen.1.0"	"mental ray@1000/Material Phenomena@500"	"misss_fast_skin_phen"
+	"misss_call_shader.1.0"	"mental ray@1000/Material@200"	"misss_call_shader"
+	"misss_physical_phen.1.0"	"mental ray@1000/Material Phenomena@500"	"misss_physical_phen"
+	"misss_lightmap_phen.1.0"	"mental ray@1000/Lightmap@400"	"misss_lightmap_phen"
+	"misss_lambert_gamma.1.0"	"mental ray@1000/Texture@100"	"misss_lambert_gamma"
+	"misss_skin_specular.1.0"	"mental ray@1000/Material@200"	"misss_skin_specular"
+	"misss_fast_shader_x.1.0"	"mental ray@1000/Material@200"	"misss_fast_shader_x"
+	"misss_set_normal.1.0"	"mental ray@1000/Material@200"	"misss_set_normal"
+	"misss_lightmap_write.1.0"	"mental ray@1000/Lightmap@400"	"misss_lightmap_write"
+	"misss_fast_shader2.1.0"	"mental ray@1000/Material@200"	"misss_fast_shader2"
+	"misss_fast_simple_phen.1.0"	"mental ray@1000/Material Phenomena@500"	"misss_fast_simple_phen"
+	"misss_physical.1.0"	"mental ray@1000/Material@200"	"misss_physical"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\Cg\CgColor.spdl
+	"CgColor.1.0"	""	"Cg Color"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt3d-fractal_v2.spdl
+	"txt3d-fractal_v2.1.0"	""	"txt3d-fractal_v2"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx\DXFX2.spdl
+	"DXFX2.1.0"	""	"DirectXFX"
+Parser	XSIRTCOMPOUND	C:\Program Files\Autodesk\Softimage 2015\Addons\CrowdFX\Data\RTCompounds\GLSL Actor Envelope.xsirtcompound
+	"GLSL Actor Envelope.1.0"	"Realtime/OpenGL"	"GLSL Actor Envelope"
+Parser	mentalray	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\mi\lume.mi
+	"Distortion.1.0"	"mental ray@1000/Lens@300"	"Distortion"
+	"Ocean.1.0"	"mental ray@1000/Displacement@400"	"Ocean"
+	"WaterSurfaceShadow.1.0"	"mental ray@1000/Shadow@200"	"WaterSurfaceShadow"
+	"EdgeShadow.1.0"	"mental ray@1000/Shadow@200"	"EdgeShadow"
+	"Facade.1.0"	"mental ray@1000/Material@200"	"Facade"
+	"Illumination.1.0"	"mental ray@1000/Light@300"	"Illumination"
+	"Glow.1.0"	"mental ray@1000/Material@200"	"Glow"
+	"Mist.1.0"	"mental ray@1000/Volume@300"	"Mist"
+	"Beam.1.0"	"mental ray@1000/Volume@300"	"Beam"
+	"Landscape.1.0"	"mental ray@1000/Texture@100"	"Landscape"
+	"Edge.1.0"	"mental ray@1000/Material@200"	"Edge"
+	"Glare.1.0"	"mental ray@1000/Output@400"	"Glare"
+	"Stain.1.0"	"mental ray@1000/Material@200"	"Stain"
+	"Lume_Glow_Material__Lambertian_.1.0"	"mental ray@1000/Material@200"	"Lume_Glow_Material__Lambertian_"
+	"Adjustments.1.0"	"mental ray@1000/Output@400"	"Adjustments"
+	"Wet.1.0"	"mental ray@1000/Material@200"	"Wet"
+	"Metal.1.0"	"mental ray@1000/Material@200"	"Metal"
+	"Translucency.1.0"	"mental ray@1000/Material@200"	"Translucency"
+	"BumpCapture.1.0"	"mental ray@1000/Output@400"	"BumpCapture"
+	"Glass.1.0"	"mental ray@1000/Material@200"	"Glass"
+	"Night.1.0"	"mental ray@1000/Lens@300"	"Night"
+	"WrapAround.1.0"	"mental ray@1000/Lens@300"	"WrapAround"
+	"Submerge.1.0"	"mental ray@1000/Volume@300"	"Submerge"
+	"WaterSurface.1.0"	"mental ray@1000/Material@200"	"WaterSurface"
+	"Lume_Metal_Material__Phong_.1.0"	"mental ray@1000/Material@200"	"Lume_Metal_Material__Phong_"
+	"Lume_Translucent_Material__Lambertian_.1.0"	"mental ray@1000/Material@200"	"Lume_Translucent_Material__Lambertian_"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\map_lookup_boolean.spdl
+	"map_lookup_boolean.1.0"	""	"Boolean Map Lookup"
+Parser	XSIRTCOMPOUND	C:\Program Files\Autodesk\Softimage 2015\Data\RTCompounds\Particle Gradient FCurve.xsirtcompound
+	"Particle Gradient FCurve.1.0"	"Particle"	"Particle Gradient FCurve"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\ShadowPassAccumulate.cgfx
+	"ShadowPassAccumulate.1.0"	""	"ShadowPassAccumulate"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\bsdf_builtins.msl
+	"Bsdf_lambert.1.0"	"MetaSL/Bsdf"	"Lambert"
+	"Bsdf_oren_nayar.1.0"	"MetaSL/Bsdf"	"Oren Nayar"
+	"Bsdf_phong.1.0"	"MetaSL/Bsdf"	"Phong"
+	"Bsdf_ashikhmin_shirley.1.0"	"MetaSL/Bsdf"	"Ashikhmin Shirley"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx\DXDraw.spdl
+	"DXDraw.1.0"	""	"DXDraw"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\Env_Horizon_Map.mat.spdl
+	"Env_Horizon_Map_mat.1.0"	""	"oz_env_g_horizon_map"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\dense.vol.spdl
+	"dense_vol.1.0"	""	"Constant Density"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Addons\Syflex30X50\Application\spdl\syCloth.spdl
+	"syCloth.1.0"	""	"syCloth"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx\DXHLSLVector.spdl
+	"DXHLSLVector.1.0"	""	"DXHLSLVector"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_color_interpolate.spdl
+	"mib_color_interpolate.1.0"	""	"mib Color Interpolate"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_light_spot.spdl
+	"mib_light_spot.1.0"	""	"mib Light Spot"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_dielectric_ior.spdl
+	"sib_dielectric_ior.1.0"	""	"Dielectric"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\xsibase\XSINormalMap3.spdl
+	"XSINormalMap3.1.0"	""	"XSINormalMap3"
+Parser	mentalray	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\mi\builtin_bsdf.mi
+	"builtin_bsdf_architectural.1.0"	"mental ray@1000/Material@200"	"builtin_bsdf_architectural"
+	"builtin_bsdf_ashikhmin.1.0"	"mental ray@1000/Material@200"	"builtin_bsdf_ashikhmin"
+	"builtin_bsdf_lambert.1.0"	"mental ray@1000/Material@200"	"builtin_bsdf_lambert"
+	"builtin_bsdf_architectural_comp.1.0"	"mental ray@1000/Material@200"	"builtin_bsdf_architectural_comp"
+	"builtin_bsdf_carpaint.1.0"	"mental ray@1000/Material@200"	"builtin_bsdf_carpaint"
+	"builtin_bsdf_mirror.1.0"	"mental ray@1000/Material@200"	"builtin_bsdf_mirror"
+	"builtin_bsdf_phong.1.0"	"mental ray@1000/Material@200"	"builtin_bsdf_phong"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_color_spread.spdl
+	"mib_color_spread.1.0"	""	"mib Color Spread"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_light_point.spdl
+	"mib_light_point.1.0"	""	"mib Light Point"
+Parser	XSIRTCOMPOUND	C:\Program Files\Autodesk\Softimage 2015\Addons\ICEFlowBuilder\Data\RTCompounds\ICE Sprite.xsirtcompound
+	"ICE Sprite.1.0"	"Particle"	"ICE Sprite"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\boolean_in_raster_position_range.msl
+	"Boolean_in_raster_position_range.1.0"	"MetaSL/Boolean"	"In Raster Position Range"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\math_float3.msl
+	"Math_float3_mix.1.0"	"MetaSL/Math/Float3"	"Mix"
+	"Math_float3_expand.1.0"	"MetaSL/Math/Float3"	"Expand"
+	"Math_float3_invert.1.0"	"MetaSL/Math/Float3"	"Invert"
+	"Math_float3_threshold.1.0"	"MetaSL/Math/Float3"	"Threshold"
+	"Math_float3_compress.1.0"	"MetaSL/Math/Float3"	"Compress"
+	"Math_float3_sincos.1.0"	"MetaSL/Math/Float3"	"Sincos"
+	"Math_float3_modf.1.0"	"MetaSL/Math/Float3"	"Modf"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mia_exposure_simple.spdl
+	"mia_exposure_simple.1.0"	""	"mia Exposure Simple"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_geo_cone.spdl
+	"mib_geo_cone.1.0"	""	"mib Geo Cone"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx\DXShadowMap.spdl
+	"DXShadowMap.1.0"	""	"DXShadowMap"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_texture2d_terrain.spdl
+	"sib_texture2d_terrain.1.0"	""	"Terrain"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\ThinFilm.cgfx
+	"ThinFilm.1.0"	"Realtime@200/CgFX"	"ThinFilm"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\pt_shape.spdl
+	"pt_shape.1.0"	""	"Particle Shape"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_attribute_transform.spdl
+	"sib_attribute_transform.1.0"	""	"Transform Attribute"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\3D_Projection.tx3.spdl
+	"3D_Projection_tx3.1.0"	""	"oz_3d_projection"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\generator_color_ramp.msl
+	"Generator_color_ramp.1.0"	"MetaSL/Generator"	"Color Ramp"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\bsdf_carpaint.msl
+	"Bsdf_carpaint.1.0"	"MetaSL/Bsdf"	"Carpaint"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\illumination_phong.msl
+	"Illumination_phong.1.0"	"MetaSL/Illumination"	"Phong"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\texture_coordinate.msl
+	"texture_coordinate_2d_scale.1.0"	"MetaSL/Texture"	"Coordinate 2D Scale"
+	"State_texture_coordinate_2d.1.0"	"MetaSL/State"	"Texture Coordinate 2D"
+	"State_texture_coordinate_3d.1.0"	"MetaSL/State"	"Texture Coordinate 3D"
+	"Texture_coordinate_2d_parallax.1.0"	"MetaSL/Texture"	"Coordinate 2D Parallax"
+	"Texture_coordinate_2d_rotate.1.0"	"MetaSL/Texture"	"Coordinate 2D Rotate"
+	"Texture_coordinate_2d_distort.1.0"	"MetaSL/Texture"	"Coordinate 2D Distort"
+	"State_texture_coordinate_4d.1.0"	"MetaSL/State"	"Texture Coordinate 4D"
+	"Texture_coordinate_2d_offset.1.0"	"MetaSL/Texture"	"Coordinate 2D Offset"
+	"State_texture_coordinate_1d.1.0"	"MetaSL/State"	"Texture Coordinate 1D"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Addons\Syflex30X50\Application\spdl\syDamp.spdl
+	"syDamp.1.0"	""	"syDamp"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_illum_lambert.spdl
+	"sib_illum_lambert.1.0"	""	"Lambert"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\transform_normal.msl
+	"Transform_internal_to_camera_normal.1.0"	"MetaSL/Transform"	"Internal To Camera Normal"
+	"Transform_internal_to_raster_normal.1.0"	"MetaSL/Transform"	"Internal To Raster Normal"
+	"Transform_internal_to_object_normal.1.0"	"MetaSL/Transform"	"Internal To Object Normal"
+	"Transform_internal_to_world_normal.1.0"	"MetaSL/Transform"	"Internal To World Normal"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_texture_turbulence.spdl
+	"mib_texture_turbulence.1.0"	""	"mib Texture Turbulence"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_to_vector_old.spdl
+	"sib_color_to_vector_old.1.0"	""	"Color To Vector Obsolete"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\trispec.mat.spdl
+	"trispec_mat.1.0"	""	"ari_trispec"
+Parser	HLSLParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\HLSL\lambSkin.fx
+	"lambSkin.1.0"	"Realtime@200/HLSL"	"lambSkin"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx\DXVSMatrix.spdl
+	"DXVSMatrix.1.0"	""	"DXVSMatrix"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\BA_fractal4d2_scl.spdl
+	"BA_fractal4d2_scl.1.0"	""	"Fractal Scalar"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mia_material.spdl
+	"mia_material.1.0"	""	"mia Material"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_boolean_math_logic.spdl
+	"sib_boolean_math_logic.1.0"	""	"Boolean Logic Math"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_correction.spdl
+	"sib_color_correction.1.0"	""	"Color Correction"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_incidence_v3.spdl
+	"sib_incidence_v3.1.0"	""	"Incidence2"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\simple_aniward.spdl
+	"simple_aniward.1.0"	""	"Simple Anisotropic"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\ShadowPassBlur.cgfx
+	"ShadowPassBlur.1.0"	""	"ShadowPassBlur"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_invert.spdl
+	"sib_color_invert.1.0"	""	"sib_color_invert"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_state_scalar.spdl
+	"sib_state_scalar.1.0"	""	"Scalar State"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_vector_passthrough.spdl
+	"sib_vector_passthrough.1.0"	""	"Vector Passthrough"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\comp_switch_matte.msl
+	"Comp_switch_matte.1.0"	"MetaSL/Comp"	"Switch Matte"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\BA_particle_density3.spdl
+	"BA_particle_density3.1.0"	""	"Particle Density"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\map_lookup_scalar.spdl
+	"map_lookup_scalar.1.0"	""	"Scalar Map Lookup"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\Env_Sphere.tx3.spdl
+	"Env_Sphere_tx3.1.0"	""	"oz_env_r_sphere"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx10\DX10FX.spdl
+	"DX10FX.1.0"	""	"DX10 FX"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_storeinchannel.spdl
+	"sib_color_storeinchannel.1.0"	""	"Color Render Channel"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx\DXTexCoord.spdl
+	"DXTexCoord.1.0"	""	"DXTexCoord"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mip_matteshadow.spdl
+	"mip_matteshadow.1.0"	""	"mip Matte Shadow"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_combine.spdl
+	"sib_color_combine.1.0"	""	"Scalars To Color"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\opengl\nVBumpDraw.spdl
+	"nVBumpDraw.1.0"	""	"RTShader_nVBumpDraw"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\pt_shaderdata.spdl
+	"pt_shaderdata.1.0"	""	"pt_userdata"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\soft_color_3d.spdl
+	"soft_color_3d.1.0"	""	"soft_color_3d"
+Parser	mentalray	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\mi\physics.mi
+	"path_material.1.0"	"mental ray@1000/Material@200"	"path_material"
+	"transmat.1.0"	"mental ray@1000/Material@200"	"transmat"
+	"dgs_material.1.0"	"mental ray@1000/Material@200"	"dgs_material"
+	"oversampling_lens.1.0"	"mental ray@1000/Lens@300"	"oversampling_lens"
+	"dielectric_material.1.0"	"mental ray@1000/Material@200"	"dielectric_material"
+	"physical_lens_dof.1.0"	"mental ray@1000/Lens@300"	"physical_lens_dof"
+	"dgs_material_photon.1.0"	"mental ray@1000/Photon@200"	"dgs_material_photon"
+	"transmat_photon.1.0"	"mental ray@1000/Photon@200"	"transmat_photon"
+	"physical_light.1.0"	"mental ray@1000/Light@300"	"physical_light"
+	"dielectric_material_photon.1.0"	"mental ray@1000/Photon@200"	"dielectric_material_photon"
+	"parti_volume.1.0"	"mental ray@1000/Volume@300"	"parti_volume"
+	"parti_volume_photon.1.0"	"mental ray@1000/Photon Volume@400"	"parti_volume_photon"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\bsdf_architectural_comp.msl
+	"Bsdf_architectural_comp.1.0"	"MetaSL/Bsdf"	"Architectural Comp"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\math_integer.msl
+	"Math_int4_exp.1.0"	"MetaSL/Math/Int4"	"Exp"
+	"Math_int2_fmod.1.0"	"MetaSL/Math/Int2"	"Fmod"
+	"Math_int3_exp.1.0"	"MetaSL/Math/Int3"	"Exp"
+	"Math_int_expand.1.0"	"MetaSL/Math/Int"	"Expand"
+	"Math_int4_fmod.1.0"	"MetaSL/Math/Int4"	"Fmod"
+	"Math_int_mod.1.0"	"MetaSL/Math/Int"	"Mod"
+	"Math_int2_exp2.1.0"	"MetaSL/Math/Int2"	"Exp2"
+	"Math_int2_exp.1.0"	"MetaSL/Math/Int2"	"Exp"
+	"Math_int_mix.1.0"	"MetaSL/Math/Int"	"Mix"
+	"Math_int_threshold.1.0"	"MetaSL/Math/Int"	"Threshold"
+	"Math_int_exp.1.0"	"MetaSL/Math/Int"	"Exp"
+	"Math_int_fmod.1.0"	"MetaSL/Math/Int"	"Fmod"
+	"Math_int3_exp2.1.0"	"MetaSL/Math/Int3"	"Exp2"
+	"Math_int_compress.1.0"	"MetaSL/Math/Int"	"Compress"
+	"Math_int4_exp2.1.0"	"MetaSL/Math/Int4"	"Exp2"
+	"Math_int_invert.1.0"	"MetaSL/Math/Int"	"Invert"
+	"Math_int3_fmod.1.0"	"MetaSL/Math/Int3"	"Fmod"
+	"Math_int_exp2.1.0"	"MetaSL/Math/Int"	"Exp2"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\Cg\CgProgram.spdl
+	"CgProgram.1.0"	""	"Cg Program"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_bumptree.spdl
+	"sib_bumptree.1.0"	""	"Bump Image"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_mix8.spdl
+	"sib_color_mix8.1.0"	""	"sib_color_mix8"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_lightning.spdl
+	"sib_lightning.1.0"	""	"Lightning"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Addons\Syflex30X50\Application\spdl\sySpring.spdl
+	"sySpring.1.0"	""	"sySpring"
+Parser	XSIRTCOMPOUND	C:\Program Files\Autodesk\Softimage 2015\Data\RTCompounds\Particle Strand Gradient.xsirtcompound
+	"Particle Strand Gradient.1.0"	"Particle"	"Particle Strand Gradient"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\BA_cell_scl.spdl
+	"BA_cell_scl.1.0"	""	"Cell Scalar"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_vector_multi_switch.spdl
+	"sib_vector_multi_switch.1.0"	""	"Vector Multi-Switch"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_texture_polkadot.spdl
+	"mib_texture_polkadot.1.0"	""	"mib Texture Polkadot"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\material-cooktorr.spdl
+	"material-cooktorr.1.0"	""	"Cook-Torrance"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\material-lambert.spdl
+	"material-lambert.1.0"	""	"Lambert"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\generator_noise.msl
+	"Generator_noise_4d.1.0"	"MetaSL/Generator"	"Noise 4D"
+	"Generator_turbulence.1.0"	"MetaSL/Generator"	"Turbulence"
+	"Generator_cloud.1.0"	"MetaSL/Generator"	"Cloud"
+	"Generator_wood.1.0"	"MetaSL/Generator"	"Wood"
+	"Generator_noise.1.0"	"MetaSL/Generator"	"Noise"
+	"Generator_fractal.1.0"	"MetaSL/Generator"	"Fractal"
+	"Generator_marble.1.0"	"MetaSL/Generator"	"Marble"
+	"Generator_cellular.1.0"	"MetaSL/Generator"	"Cellular"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\math_vector4.msl
+	"Math_vector4_threshold.1.0"	"MetaSL/Math/Vector4"	"Threshold"
+	"Math_vector4_expand.1.0"	"MetaSL/Math/Vector4"	"Expand"
+	"Math_vector4_mix.1.0"	"MetaSL/Math/Vector4"	"Mix"
+	"Math_vector4_compress.1.0"	"MetaSL/Math/Vector4"	"Compress"
+	"Math_vector4_invert.1.0"	"MetaSL/Math/Vector4"	"Invert"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_reflect.spdl
+	"mib_reflect.1.0"	""	"mib Reflection"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\texture_lookup_filtered.msl
+	"Texture_lookup_2d_filtered.1.0"	"MetaSL/Texture"	"Lookup 2D Filtered"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt3d-flagstone_v2.spdl
+	"txt3d-flagstone_v2.1.0"	""	"txt3d-flagstone_v2"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\soft_color.spdl
+	"soft_color.1.0"	""	"soft_color"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\layer_color_dodge.msl
+	"Layer_color_dodge.1.0"	"MetaSL/Layer"	"Color Dodge"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx\DXCubicTexture.spdl
+	"DXCubicTexture.1.0"	""	"DXCubicTexture"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_illum_phong.spdl
+	"mib_illum_phong.1.0"	""	"mib Illum Phong"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_lens_depth.spdl
+	"sib_lens_depth.1.0"	""	"Lens Depth"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\DOFPass.cgfx
+	"DOFPass.1.0"	""	"DOFPass"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mip_card_opacity.spdl
+	"mip_card_opacity.1.0"	""	"mip Card Opacity"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\conversion.msl
+	"Conversion_float3_to_floats.1.0"	"MetaSL/Conversion"	"Float3 To Floats"
+	"Conversion_floats_to_float3.1.0"	"MetaSL/Conversion"	"Floats To Float3"
+	"Conversion_float_to_int.1.0"	"MetaSL/Conversion"	"Float To Int"
+	"Conversion_float4_to_floats.1.0"	"MetaSL/Conversion"	"Float4 To Floats"
+	"Conversion_bool_to_int.1.0"	"MetaSL/Conversion"	"Bool To Int"
+	"Conversion_int_to_bool.1.0"	"MetaSL/Conversion"	"Int To Bool"
+	"Conversion_floats_to_float4.1.0"	"MetaSL/Conversion"	"Floats To Float4"
+	"Conversion_float_to_color.1.0"	"MetaSL/Conversion"	"Float To Color"
+	"Conversion_color_to_float3.1.0"	"MetaSL/Conversion"	"Color To Float3"
+	"Conversion_color_to_floats.1.0"	"MetaSL/Conversion"	"Color To Floats"
+	"Conversion_float3_to_color.1.0"	"MetaSL/Conversion"	"Float3 To Color"
+	"Conversion_color_to_float.1.0"	"MetaSL/Conversion"	"Color To Float"
+	"Conversion_floats_to_float2.1.0"	"MetaSL/Conversion"	"Floats To Float2"
+	"Conversion_int_to_float.1.0"	"MetaSL/Conversion"	"Int To Float"
+	"Conversion_float2_to_floats.1.0"	"MetaSL/Conversion"	"Float2 To Floats"
+	"Conversion_floats_to_color.1.0"	"MetaSL/Conversion"	"Floats To Color"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_cclutdata_gamma.spdl
+	"sib_cclutdata_gamma.1.0"	""	"sib_cclutdata_gamma"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_scalar_math_exponent.spdl
+	"sib_scalar_math_exponent.1.0"	""	"Scalar Exponent Math"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_texture_cloud.spdl
+	"sib_texture_cloud.1.0"	""	"Cloud"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\soft_displace.spdl
+	"soft_displace.1.0"	""	"soft_displace"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx\DXHLSLMatrix.spdl
+	"DXHLSLMatrix.1.0"	""	"DXHLSLMatrix"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_boolean_passthrough.spdl
+	"sib_boolean_passthrough.1.0"	""	"Boolean Passthrough"
+Parser	XSIRTCOMPOUND	C:\Program Files\Autodesk\Softimage 2015\Data\RTCompounds\Particle Shaper.xsirtcompound
+	"Particle Shaper.1.0"	"Particle"	"Particle Shaper"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\comp_select_color.msl
+	"Comp_color_select.1.0"	"MetaSL/Comp"	"Color Select"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mia_exposure_photographic.spdl
+	"mia_exposure_photographic.1.0"	""	"mia Photographic Exposure"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\opengl\OGLT2D.spdl
+	"OGLT2D.1.0"	""	"RTShader_OGLT2D"
+Parser	XSIRTCOMPOUND	C:\Program Files\Autodesk\Softimage 2015\Addons\ICEFlowBuilder\Data\RTCompounds\Basic Fire.xsirtcompound
+	"Basic Fire.1.0"	"Particle"	"Basic Fire"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\normals_bump_map.msl
+	"Normals_offset_uv.1.0"	"MetaSL/Normals"	"Offset Uv"
+	"Normals_height_bumpmap.1.0"	"MetaSL/Normals"	"Height Bumpmap"
+	"Normals_perturb_normal.1.0"	"MetaSL/Normals"	"Perturb Normal"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_scalar_mix_color.spdl
+	"sib_scalar_mix_color.1.0"	""	"Color Blend"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx10\RealTime\DX10Texture.spdl
+	"DX10Texture.1.0"	""	"DX10 Texture"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_color_intensity.spdl
+	"mib_color_intensity.1.0"	""	"mib Color Intensity"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\Flares_Stars.len.spdl
+	"Flares_Stars_len.1.0"	""	"cam_stars"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\March_Fractal.vol.spdl
+	"March_Fractal_vol.1.0"	""	"oz_V_march_fractal"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\bsdf_glass.msl
+	"Bsdf_glass.1.0"	"MetaSL/Bsdf"	"Glass"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\material-ward.spdl
+	"material-ward.1.0"	""	"Anisotropic"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\DOFBasePassLens.cgfx
+	"DOFBasePassLens.1.0"	""	"DOFBasePassLens"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_light_txtgen.spdl
+	"sib_light_txtgen.1.0"	""	"Light UV Generator"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_texture_fractal.spdl
+	"sib_texture_fractal.1.0"	""	"Fractal"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\FABRIC.TEX.spdl
+	"FABRIC_TEX.1.0"	""	"oz_2d_fabric"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt2d-image.spdl
+	"txt2d-image.1.0"	""	"Image"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\EZ_Atmosphere.mat.spdl
+	"EZ_Atmosphere_mat.1.0"	""	"ozlib_env_ez_atm"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\WATER.TEX.spdl
+	"WATER_TEX.1.0"	""	"oz_2d_water"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\velvet.mat.spdl
+	"velvet_mat.1.0"	""	"ari_velvet"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\MrWiggle.cgfx
+	"MrWiggle.1.0"	"Realtime@200/CgFX"	"MrWiggle"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\layer_linear_burn.msl
+	"Layer_linear_burn.1.0"	"MetaSL/Layer"	"Linear Burn"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_transparency_matte.spdl
+	"sib_color_transparency_matte.1.0"	""	"Color Matte"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\layer_vivid_light.msl
+	"Layer_vivd_light.1.0"	"MetaSL/Layer"	"Vivd Light"
+	"Layer_vivid_light.1.0"	"MetaSL/Layer"	"Vivid Light"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\Cg\CgInteger.spdl
+	"CgInteger.1.0"	""	"CgInteger"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_photon_matte.spdl
+	"sib_photon_matte.1.0"	""	"Photon Irradiance"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sitoon\sitoon_paint_ambient.spdl
+	"sitoon_paint_ambient.1.0"	""	"Toon Paint Ambient"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_texture2d_ripple.spdl
+	"sib_texture2d_ripple.1.0"	""	"Ripple"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt3d-rock_v3.spdl
+	"txt3d-rock_v3.1.0"	""	"Rock"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\light_spot.msl
+	"Light_spot.1.0"	"MetaSL/Light"	"Spot"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\opengl\OGLMulti.spdl
+	"OGLMulti.1.0"	""	"RTShader_OGLMulti"
+Parser	HLSLParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\HLSL\MrWiggle.fx
+	"MrWiggle.1.0"	"Realtime@200/HLSL"	"MrWiggle"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx10\DX10Blend.spdl
+	"DX10Blend.1.0"	""	"DX10 Blend"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\layer_dissolve.msl
+	"Layer_dissolve.1.0"	"MetaSL/Layer"	"Dissolve"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx\DXHLSLProgram.spdl
+	"DXHLSLProgram.1.0"	""	"DXHLSLProgram"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_to_scalar.spdl
+	"sib_color_to_scalar.1.0"	""	"Color To Scalar"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mia_physicalsun.spdl
+	"mia_physicalsun.1.0"	""	"mia Physical Sun"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\rgba_keyer.spdl
+	"rgba_keyer.1.0"	""	"Color Keyer"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt3d-cloud.spdl
+	"txt3d-cloud.1.0"	""	"Cloud"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_atten_linear.spdl
+	"sib_atten_linear.1.0"	""	"Attenuation Linear"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_channel_picker.spdl
+	"sib_channel_picker.1.0"	""	"Color Pick Channel"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_split.spdl
+	"sib_color_split.1.0"	""	"Color Split"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt3d-rock.spdl
+	"txt3d-rock.1.0"	""	"txt3d-rock"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\generator_brick.msl
+	"Generator_brick.1.0"	"MetaSL/Generator"	"Brick"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_savestate_vector.spdl
+	"sib_savestate_vector.1.0"	""	"Vector Save State"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\Cg\CgScalar.spdl
+	"CgScalar.1.0"	""	"CgScalar"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_mix_color.spdl
+	"sib_color_mix_color.1.0"	""	"sib_color_mix_color"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\xsibase\XSIVDM.spdl
+	"XSIVDM.1.0"	""	"Vector Displacement Map"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt3d-cellular_v2.spdl
+	"txt3d-cellular_v2.1.0"	""	"txt3d-cellular_v2"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\soft_light.spdl
+	"soft_light.1.0"	""	"Light"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\color_balance.msl
+	"Color_gamma.1.0"	"MetaSL/Color"	"Gamma"
+	"Color_contrast.1.0"	"MetaSL/Color"	"Contrast"
+	"Color_saturation.1.0"	"MetaSL/Color"	"Saturation"
+	"Color_brightness.1.0"	"MetaSL/Color"	"Brightness"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Addons\Syflex30X50\Application\spdl\syWind.spdl
+	"syWind.1.0"	""	"syWind"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\layer_multiply.msl
+	"Layer_multiply.1.0"	"MetaSL/Layer"	"Multiply"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_bump_basis.spdl
+	"mib_bump_basis.1.0"	""	"mib Bump Basis"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_attribute_integer.spdl
+	"sib_attribute_integer.1.0"	""	"Integer Attribute"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\layer_color_burn.msl
+	"Layer_color_burn.1.0"	"MetaSL/Layer"	"Color Burn"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\layer_darken.msl
+	"Layer_darken.1.0"	"MetaSL/Layer"	"Darken"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\translucent.mat.spdl
+	"translucent_mat.1.0"	""	"translucent_material"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\xsibase\XSINormalMap.spdl
+	"XSINormalMap.1.0"	""	"Normal Map Texture"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx\DXShadowReceiver.spdl
+	"DXShadowReceiver.1.0"	""	"DXShadowReceiver"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_rendermap_postprocess.spdl
+	"sib_rendermap_postprocess.1.0"	""	"Rendermap Post-Processing"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_vector_math_vector.spdl
+	"sib_vector_math_vector.1.0"	""	"Vector-Vector Math"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_attribute_image.spdl
+	"sib_attribute_image.1.0"	""	"sib_attribute_image"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_attribute_vector.spdl
+	"sib_attribute_vector.1.0"	""	"Vector Attribute"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\soft_fog.spdl
+	"soft_fog.1.0"	""	"soft_fog"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\blit.cgfx
+	"blit.1.0"	""	"blit"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\layer_hard_light.msl
+	"Layer_hard_light.1.0"	"MetaSL/Layer"	"Hard Light"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\layer_pin_light.msl
+	"Layer_pin_light.1.0"	"MetaSL/Layer"	"Pin Light"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_geo_square.spdl
+	"mib_geo_square.1.0"	""	"mib Geo Square"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\opengl\nVDraw.spdl
+	"nVDraw.1.0"	""	"RTShader_nVDraw"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_vector_storeinchannel.spdl
+	"sib_vector_storeinchannel.1.0"	""	"Vector Render Channel"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\contour.out.spdl
+	"contour_out.1.0"	""	"si_contour"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\light-linear.spdl
+	"light-linear.1.0"	""	"light-linear"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_bumpmap_gen.spdl
+	"sib_bumpmap_gen.1.0"	""	"Bump Generator"
+Parser	XSIRTCOMPOUND	C:\Program Files\Autodesk\Softimage 2015\Data\RTCompounds\Particle Renderer.xsirtcompound
+	"Particle Renderer.1.0"	"Particle"	"Particle Renderer"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_texture_snow.spdl
+	"sib_texture_snow.1.0"	""	"Snow"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx10\DX10Rasterizer.spdl
+	"DX10Rasterizer.1.0"	""	"DX10 Rasterizer"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\lume\Lume_Metal.spdl
+	"Lume_Metal.1.0"	""	"Lume Metal"
+Parser	mentalray	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\mi\mrptex.mi
+	"mib_ptex_lookup.1.0"	"mental ray@1000/Material@200"	"mib_ptex_lookup"
+	"mib_ptex_lookup_x.1.0"	""	"mib_ptex_lookup_x"
+Parser	HLSLParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\HLSL\plastic.fx
+	"plastic.1.0"	"Realtime@200/HLSL"	"plastic"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\misss_physical.spdl
+	"misss_physical.1.0"	""	"misss Physical"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\BA_fast_math.spdl
+	"BA_fast_math.1.0"	""	"Scalar Multi-Math"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\component_cook_torrance.msl
+	"Component_cook_torrance.1.0"	"MetaSL/Component"	"Cook Torrance"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\TraversalCallback.spdl
+	"TraversalCallback.1.0"	""	"TraversalCallback"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_rayswitch.spdl
+	"sib_color_rayswitch.1.0"	""	"Raytype Switch"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\transform_point.msl
+	"Transform_internal_to_world.1.0"	"MetaSL/Transform"	"Internal To World"
+	"Transform_internal_to_object.1.0"	"MetaSL/Transform"	"Internal To Object"
+	"Transform_internal_to_raster.1.0"	"MetaSL/Transform"	"Internal To Raster"
+	"Transform_internal_to_camera.1.0"	"MetaSL/Transform"	"Internal To Camera"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_passthrough.spdl
+	"sib_color_passthrough.1.0"	""	"Color Passthrough"
+Parser	mentalray	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\mi\useribl.mi
+	"user_ibl_env.1.0"	"mental ray@1000/Light@300"	"user_ibl_env"
+	"user_ibl_rect.1.0"	"mental ray@1000/Light@300"	"user_ibl_rect"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt2d-scalarimage-explicit.spdl
+	"txt2d-scalarimage-explicit.1.0"	""	"Scalar Image"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sitoon\sitoon_paint_and_host.spdl
+	"sitoon_paint_and_host.1.0"	""	"Toon Paint and Host"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\light_directional.msl
+	"Light_directional.1.0"	"MetaSL/Light"	"Directional"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\soft_vertex_color.spdl
+	"soft_vertex_color.1.0"	""	"soft_vertex_color"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\lume\Lume_Beam.spdl
+	"Lume_Beam.1.0"	""	"Lume Beam"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_lookup_background.spdl
+	"mib_lookup_background.1.0"	""	"mib Lookup Background"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_bias.spdl
+	"sib_color_bias.1.0"	""	"sib_color_bias"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\xsibase\XSIMaterialColor.spdl
+	"XSIMaterialColor.1.0"	""	"Material Colorizer"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_attribute_scalar.spdl
+	"sib_attribute_scalar.1.0"	""	"Scalar Attribute"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mip_rayswitch_advanced.spdl
+	"mip_rayswitch_advanced.1.0"	""	"mip Rayswitch Advanced"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_vector_math_scalar.spdl
+	"sib_vector_math_scalar.1.0"	""	"Vector-Scalar Math"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\3D_SNOW.TX3.spdl
+	"3D_SNOW_TX3.1.0"	""	"oz_3d_snow"
+Parser	mentalray	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\mi\userdata.mi
+	"mib_data_get_shader_bool.1.0"	"mental ray@1000/Texture@100"	"mib_data_get_shader_bool"
+	"mib_data_get_texture.1.0"	"mental ray@1000/Texture@100"	"mib_data_get_texture"
+	"mib_data_get_bool.1.0"	"mental ray@1000/Texture@100"	"mib_data_get_bool"
+	"mib_data_get_int.1.0"	"mental ray@1000/Texture@100"	"mib_data_get_int"
+	"mib_data_get_color.1.0"	"mental ray@1000/Texture@100"	"mib_data_get_color"
+	"mib_data_get_string.1.0"	"mental ray@1000/Texture@100"	"mib_data_get_string"
+	"mib_data_get_shader_int.1.0"	"mental ray@1000/Texture@100"	"mib_data_get_shader_int"
+	"mib_data_get_shader.1.0"	"mental ray@1000/Texture@100"	"mib_data_get_shader"
+	"mib_data_get_shader_scalar.1.0"	"mental ray@1000/Texture@100"	"mib_data_get_shader_scalar"
+	"mib_data_get_scalar.1.0"	"mental ray@1000/Texture@100"	"mib_data_get_scalar"
+	"mib_data_get_vector.1.0"	"mental ray@1000/Texture@100"	"mib_data_get_vector"
+	"mib_data_get_shader_vector.1.0"	"mental ray@1000/Texture@100"	"mib_data_get_shader_vector"
+	"mib_data_get_shader_color.1.0"	"mental ray@1000/Texture@100"	"mib_data_get_shader_color"
+Parser	HLSLParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\HLSL\ultimap_preview.fx
+	"ultimap_preview.1.0"	"Realtime@200/HLSL"	"ultimap_preview"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_photon_basic.spdl
+	"mib_photon_basic.1.0"	""	"mib Photon Basic"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\Bionic_Lens.len.spdl
+	"Bionic_Lens_len.1.0"	""	"Bionic_Lens"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\soft_vertex_color_alpha2.spdl
+	"soft_vertex_color_alpha2.1.0"	""	"soft_vertex_color_alpha2"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_dof.spdl
+	"sib_dof.1.0"	""	"Depth Of Field"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_scalar_inrange.spdl
+	"sib_scalar_inrange.1.0"	""	"Scalar In Range"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\3D_ROCK.TX3.spdl
+	"3D_ROCK_TX3.1.0"	""	"oz_3d_rock"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\Cylindric.len.spdl
+	"Cylindric_len.1.0"	""	"Cylindric"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_2mix.spdl
+	"sib_color_2mix.1.0"	""	"Color 2 Channel Mixer"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\xsibase\XSIAmbientOcclusion.spdl
+	"XSIAmbientOcclusion.1.0"	""	"Ambient Occlusion"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\math_float4.msl
+	"Math_float4_mix.1.0"	"MetaSL/Math/Float4"	"Mix"
+	"Math_float4_threshold.1.0"	"MetaSL/Math/Float4"	"Threshold"
+	"Math_float4_compress.1.0"	"MetaSL/Math/Float4"	"Compress"
+	"Math_float4_sincos.1.0"	"MetaSL/Math/Float4"	"Sincos"
+	"Math_float4_expand.1.0"	"MetaSL/Math/Float4"	"Expand"
+	"Math_float4_invert.1.0"	"MetaSL/Math/Float4"	"Invert"
+	"Math_float4_modf.1.0"	"MetaSL/Math/Float4"	"Modf"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\light_planar.msl
+	"Light_planar.1.0"	"MetaSL/Light"	"Planar"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_vector_to_scalar.spdl
+	"sib_vector_to_scalar.1.0"	""	"Vector To Scalar"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_zbump.spdl
+	"sib_zbump.1.0"	""	"Bump Map"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Addons\Syflex30X50\Application\spdl\syPin.spdl
+	"syPin.1.0"	""	"syPin"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\layer_blend.msl
+	"Layer_blend.1.0"	"MetaSL/Layer"	"Blend"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\Cg\CgFX.spdl
+	"CgFX.1.0"	""	"Cg Program"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\opengl\nVPPAtt.spdl
+	"nVPPAtt.1.0"	""	"RTShader_nVPPAtt"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_illum_moviescreen.spdl
+	"sib_illum_moviescreen.1.0"	""	"Flat Shading"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\Env_Horizon_Day.tx3.spdl
+	"Env_Horizon_Day_tx3.1.0"	""	"oz_env_r_horizon_day"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_texture_vein.spdl
+	"sib_texture_vein.1.0"	""	"Vein"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\Cptn_Nemo.mat.spdl
+	"Cptn_Nemo_mat.1.0"	""	"cptn_nemo"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\default_shaders.msl
+	"default_volume.1.0"	"MetaSL/Default"	"Volume"
+	"default_light.1.0"	"MetaSL/Default"	"Light"
+	"default_environment.1.0"	"MetaSL/Default"	"Environment"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\generator_blink.msl
+	"Generator_blink.1.0"	"MetaSL/Generator"	"Blink"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mia_physicalsky.spdl
+	"mia_physicalsky.1.0"	""	"mia Physical Sky"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\misss_lightmap_write.spdl
+	"misss_lightmap_write.1.0"	""	"misss Lightmap Write"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_shadow_basic.spdl
+	"sib_shadow_basic.1.0"	""	"Shadow"
+Parser	XSIRTCOMPOUND	C:\Program Files\Autodesk\Softimage 2015\Data\RTCompounds\SimpleSSS.xsirtcompound
+	"SimpleSSS.1.2"	"SSS Compounds"	"SimpleSSS"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_lookup_cylindrical.spdl
+	"mib_lookup_cylindrical.1.0"	""	"mib Lookup Cylindrical"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_rgb_to_hsv.spdl
+	"sib_color_rgb_to_hsv.1.0"	""	"RGB To HSV"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\soft_vertex_color_alpha.spdl
+	"soft_vertex_color_alpha.1.0"	""	"soft_vertex_color_alpha"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\generator_blend_ramp.msl
+	"Generator_blend_ramp.1.0"	"MetaSL/Generator"	"Blend Ramp"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_boolean_negate.spdl
+	"sib_boolean_negate.1.0"	""	"Boolean Invert"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\conversion_scalar_color.msl
+	"Conversion_color_to_vector3.1.0"	"MetaSL/Conversion"	"Color To Vector3"
+	"Conversion_scalar_to_color.1.0"	"MetaSL/Conversion"	"Scalar To Color"
+	"Conversion_scalars_to_vector3.1.0"	"MetaSL/Conversion"	"Scalars To Vector3"
+	"Conversion_vector3_to_scalars.1.0"	"MetaSL/Conversion"	"Vector3 To Scalars"
+	"Conversion_integer_to_scalar.1.0"	"MetaSL/Conversion"	"Integer To Scalar"
+	"Conversion_vector4_to_scalars.1.0"	"MetaSL/Conversion"	"Vector4 To Scalars"
+	"Conversion_vector2_to_scalars.1.0"	"MetaSL/Conversion"	"Vector2 To Scalars"
+	"Conversion_boolean_to_integer.1.0"	"MetaSL/Conversion"	"Boolean To Integer"
+	"Conversion_scalars_to_vector4.1.0"	"MetaSL/Conversion"	"Scalars To Vector4"
+	"Conversion_vector3_to_color.1.0"	"MetaSL/Conversion"	"Vector3 To Color"
+	"Conversion_color_to_scalar.1.0"	"MetaSL/Conversion"	"Color To Scalar"
+	"Conversion_color_to_scalars.1.0"	"MetaSL/Conversion"	"Color To Scalars"
+	"Conversion_scalar_to_integer.1.0"	"MetaSL/Conversion"	"Scalar To Integer"
+	"Conversion_scalars_to_color.1.0"	"MetaSL/Conversion"	"Scalars To Color"
+	"Conversion_scalars_to_vector2.1.0"	"MetaSL/Conversion"	"Scalars To Vector2"
+	"Conversion_integer_to_boolean.1.0"	"MetaSL/Conversion"	"Integer To Boolean"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sitoon\sitoon_paint_highlight.spdl
+	"sitoon_paint_highlight.1.0"	""	"Toon Paint Highlight"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\pt_shapeshader.spdl
+	"pt_shapeshader.1.0"	""	"pt_shapeshader"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\xsibase\XSIModelMap.spdl
+	"XSIModelMap.1.0"	""	"Model Map"
+Parser	HLSLParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\HLSL\goochy.fx
+	"goochy.1.0"	"Realtime@200/HLSL"	"goochy"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_opacity.spdl
+	"mib_opacity.1.0"	""	"mib Opacity"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_math_basic.spdl
+	"sib_color_math_basic.1.0"	""	"Color Basic Math"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\glow_fx.spdl
+	"glow_fx.1.0"	""	"oz_p_dglow"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_smoothrange.spdl
+	"sib_color_smoothrange.1.0"	""	"Color Smooth Range"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_to_scalars.spdl
+	"sib_color_to_scalars.1.0"	""	"Color To Scalars"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\ultimap_preview.cgfx
+	"ultimap_preview.1.0"	"Realtime@200/CgFX"	"ultimap_preview"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_cuber.spdl
+	"sib_cuber.1.0"	""	"sib_cuber"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_scalar_math_unary.spdl
+	"sib_scalar_math_unary.1.0"	""	"Scalar Unary Math"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Addons\Syflex30X50\Application\spdl\syZipper.spdl
+	"syZipper.1.0"	""	"syZipper"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_lookup_cube1.spdl
+	"mib_lookup_cube1.1.0"	""	"mib Lookup Cube 1"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_color_average.spdl
+	"mib_color_average.1.0"	""	"mib Color Average"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\soft_material.spdl
+	"soft_material.1.0"	""	"soft_material"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_illum_cooktorr.spdl
+	"mib_illum_cooktorr.1.0"	""	"mib Illum Cooktorr"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_lens_fixup.spdl
+	"sib_lens_fixup.1.0"	""	"sib_lens_fixup"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_savestate_scalar.spdl
+	"sib_savestate_scalar.1.0"	""	"Scalar Save State"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\3D_CLOUD.TX3.spdl
+	"3D_CLOUD_TX3.1.0"	""	"oz_3d_cloud"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\Env_Cubic.mat.spdl
+	"Env_Cubic_mat.1.0"	""	"oz_env_g_cubic"
+Parser	HLSLParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\HLSL\ThinFilm.fx
+	"ThinFilm.1.0"	"Realtime@200/HLSL"	"ThinFilm"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\soft_layered_fog.spdl
+	"soft_layered_fog.1.0"	""	"soft_layered_fog"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\surface_components.msl
+	"Surface_components.1.0"	"MetaSL/Surface"	"Components"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_texture_filter_lookup.spdl
+	"mib_texture_filter_lookup.1.0"	""	"mib Texture Filtered Lookup"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sitoon\sitoon_paint_rounded.spdl
+	"sitoon_paint_rounded.1.0"	""	"Toon Paint Rounded"
+Parser	mentalray	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\mi\architectural.mi
+	"mia_exposure_photographic.1.0"	"mental ray@1000/Lens@300"	"mia_exposure_photographic"
+	"mia_lens_bokeh.1.0"	"mental ray@1000/Lens@300"	"mia_lens_bokeh"
+	"mia_exposure_simple.1.0"	"mental ray@1000/Lens@300"	"mia_exposure_simple"
+	"mia_exposure_photographic_rev.1.0"	"mental ray@1000/Texture@100"	"mia_exposure_photographic_rev"
+	"mia_physicalsun.1.0"	"mental ray@1000/Light@300"	"mia_physicalsun"
+	"mia_light_surface.1.0"	"mental ray@1000/Texture@100"	"mia_light_surface"
+	"mia_roundcorners.1.0"	"mental ray@1000/Texture@100"	"mia_roundcorners"
+	"mia_portal_light.1.0"	"mental ray@1000/Light@300"	"mia_portal_light"
+	"mia_material.1.0"	"mental ray@1000/Material@200"	"mia_material"
+	"mia_ciesky.1.0"	"mental ray@1000/Environment@200"	"mia_ciesky"
+	"mia_material_x.1.0"	"mental ray@1000/Material@200"	"mia_material_x"
+	"mia_physicalsky.1.0"	"mental ray@1000/Environment@200"	"mia_physicalsky"
+	"mia_envblur.1.0"	"mental ray@1000/Environment@200"	"mia_envblur"
+	"mia_photometric_light.1.0"	"mental ray@1000/Light@300"	"mia_photometric_light"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\Cg\CgMatrix.spdl
+	"CgMatrix.1.0"	""	"Cg Matrix"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx\DXHLSLColor.spdl
+	"DXHLSLColor.1.0"	""	"DXHLSLColor"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_illum_lambert.spdl
+	"mib_illum_lambert.1.0"	""	"mib Illum Lambert"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt2d-fabric.spdl
+	"txt2d-fabric.1.0"	""	"Fabric"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\material-constant.spdl
+	"material-constant.1.0"	""	"Constant"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_scalars_to_vector.spdl
+	"sib_scalars_to_vector.1.0"	""	"Scalars To Vector"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_bump_basis.spdl
+	"sib_bump_basis.1.0"	""	"Bump Basis"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\generator_waves.msl
+	"Generator_sine_wave.1.0"	"MetaSL/Generator"	"Sine Wave"
+	"Generator_square_wave.1.0"	"MetaSL/Generator"	"Square Wave"
+	"Generator_saw_tooth.1.0"	"MetaSL/Generator"	"Saw Tooth"
+	"Generator_noise_wave.1.0"	"MetaSL/Generator"	"Noise Wave"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\toon_wire.mat.spdl
+	"toon_wire_mat.1.0"	""	"ari_toon_wire_mat"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Addons\PointOven\Application\spdl\POXSI.spdl
+	"POXSI.1.0"	""	"POXSI"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\3D_Marble.tx3.spdl
+	"3D_Marble_tx3.1.0"	""	"oz_3d_marble"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\component_ward.msl
+	"Component_ward.1.0"	"MetaSL/Component"	"Ward"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mia_lens_bokeh.spdl
+	"mia_lens_bokeh.1.0"	""	"mia Lens Bokeh"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_illum_blinn.spdl
+	"mib_illum_blinn.1.0"	""	"mib Illum Blinn"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Addons\Syflex30X50\Application\spdl\syPropertiesSkin.spdl
+	"syPropertiesSkin.1.0"	""	"syPropertiesSkin"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\opengl\nVToon.spdl
+	"nVToon.1.0"	""	"RTShader_nVToon"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_gain.spdl
+	"sib_color_gain.1.0"	""	"sib_color_gain"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\Hot_Stuff.mat.spdl
+	"Hot_Stuff_mat.1.0"	""	"Hot_Stuff"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_bump_map.spdl
+	"mib_bump_map.1.0"	""	"mib Bump Map"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_texture2d_fabric.spdl
+	"sib_texture2d_fabric.1.0"	""	"Fabric"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\Bionic_Light.lit.spdl
+	"Bionic_Light_lit.1.0"	""	"Bionic_Light"
+Parser	mentalray	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\mi\abcimport.mi
+	"abcimport.1.0"	"mental ray@1000/Geometry@400"	"abcimport"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\opengl\nVidiaShadowShader.spdl
+	"nVidiaShadowShader.1.0"	""	"nVidiaShadow"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_cclutdata_1d.spdl
+	"sib_cclutdata_1d.1.0"	""	"sib_cclutdata_1d"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_scalar_invert.spdl
+	"sib_scalar_invert.1.0"	""	"Scalar Invert"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sitoon\sitoon_host.spdl
+	"sitoon_host.1.0"	""	"Toon Host"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx\DXFX.spdl
+	"DXFX.1.0"	""	"DirectX_FX_Draw"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_ray_marcher.spdl
+	"mib_ray_marcher.1.0"	""	"mib Ray Marcher"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_light_infinite.spdl
+	"mib_light_infinite.1.0"	""	"mib Light Infinite"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_hair_instancing.spdl
+	"sib_hair_instancing.1.0"	""	"Hair Instancing Shader"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\math_float2.msl
+	"Math_float2_threshold.1.0"	"MetaSL/Math/Float2"	"Threshold"
+	"Math_float2_sincos.1.0"	"MetaSL/Math/Float2"	"Sincos"
+	"Math_float2_modf.1.0"	"MetaSL/Math/Float2"	"Modf"
+	"Math_float2_expand.1.0"	"MetaSL/Math/Float2"	"Expand"
+	"Math_float2_mix.1.0"	"MetaSL/Math/Float2"	"Mix"
+	"Math_float2_compress.1.0"	"MetaSL/Math/Float2"	"Compress"
+	"Math_float2_invert.1.0"	"MetaSL/Math/Float2"	"Invert"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\volume_fog_linear.msl
+	"Volume_fog_linear.1.0"	"MetaSL/Volume"	"Fog Linear"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_flatten_depth.spdl
+	"sib_flatten_depth.1.0"	""	"Flatten Depth"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_scalar_storeinchannel.spdl
+	"sib_scalar_storeinchannel.1.0"	""	"Scalar Render Channel"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\dof.out.spdl
+	"dof_out.1.0"	""	"si_depth_of_field"
+Parser	XSIRTCOMPOUND	C:\Program Files\Autodesk\Softimage 2015\Data\RTCompounds\SkinSSS.xsirtcompound
+	"SkinSSS.1.2"	"SSS Compounds"	"SkinSSS"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\illumination_cook_torrance.msl
+	"Illumination_cook_torrance.1.0"	"MetaSL/Illumination"	"Cook Torrance"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\normals_make_normal.msl
+	"Normals_make_normal.1.0"	"MetaSL/Normals"	"Make Normal"
+	"Normals_bumpmap.1.0"	"MetaSL/Normals"	"Bumpmap"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\opengl\OGLCom.spdl
+	"OGLCom.1.0"	""	"RTShader_OGLCom"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\layer_exclusion.msl
+	"Layer_exclusion.1.0"	"MetaSL/Layer"	"Exclusion"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\texture_lookup_ext.msl
+	"Texture_lookup2d_ext.1.0"	"MetaSL/Texture"	"Lookup2D Ext"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_lightmap_color_sampler.spdl
+	"sib_lightmap_color_sampler.1.0"	""	"Color Sampler"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\Texture_Projection.tex.spdl
+	"Texture_Projection_tex.1.0"	""	"cam_proj_tex"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\texture_soft_cube.msl
+	"Texture_lookup_2d_soft_cube.1.0"	"MetaSL/Texture"	"Lookup 2D Soft Cube"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\opengl\OGLParticle.spdl
+	"OGLParticle.1.0"	""	"OpenGL Particle Shader"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_env_spherical.spdl
+	"sib_env_spherical.1.0"	""	"Spherical Environment"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\Env_Atmosphere.mat.spdl
+	"Env_Atmosphere_mat.1.0"	""	"ozlib_env_g_atm"
+Parser	HLSLParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\HLSL\DebugValues.fx
+	"DebugValues.1.0"	"Realtime@200/HLSL"	"DebugValues"
+Parser	mentalray	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\mi\production.mi
+	"mip_mirrorball.1.0"	"mental ray@1000/Texture@100"	"mip_mirrorball"
+	"mip_matteshadow_mtl.1.0"	"mental ray@1000/Material Phenomena@500"	"mip_matteshadow_mtl"
+	"mip_fgshooter.1.0"	"mental ray@1000/Lens@300"	"mip_fgshooter"
+	"mip_rayswitch_environment.1.0"	"mental ray@1000/Texture@100"	"mip_rayswitch_environment"
+	"mip_gamma_gain.1.0"	"mental ray@1000/Texture@100"	"mip_gamma_gain"
+	"mip_matteshadow.1.0"	"mental ray@1000/Material@200"	"mip_matteshadow"
+	"mip_motionblur.1.0"	"mental ray@1000/Output@400"	"mip_motionblur"
+	"mip_motion_vector.1.0"	"mental ray@1000/Output@400"	"mip_motion_vector"
+	"mip_rayswitch.1.0"	"mental ray@1000/Material@200"	"mip_rayswitch"
+	"mip_binaryproxy.1.0"	"mental ray@1000/Geometry@400"	"mip_binaryproxy"
+	"mip_rayswitch_advanced.1.0"	"mental ray@1000/Material@200"	"mip_rayswitch_advanced"
+	"mip_card_opacity.1.0"	"mental ray@1000/Material@200"	"mip_card_opacity"
+	"mip_cameramap.1.0"	"mental ray@1000/Material@200"	"mip_cameramap"
+	"mip_grayball.1.0"	"mental ray@1000/Texture@100"	"mip_grayball"
+	"mip_render_subset.1.0"	"mental ray@1000/Lens@300"	"mip_render_subset"
+	"mip_rayswitch_stage.1.0"	"mental ray@1000/Material@200"	"mip_rayswitch_stage"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\ShadowPassLightDepth.cgfx
+	"ShadowPassLightDepth.1.0"	""	"ShadowPassLightDepth"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\component_ashikhmin_shirley.msl
+	"Component_ashikhmin_shirley.1.0"	"MetaSL/Component"	"Ashikhmin Shirley"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\layer_linear_dodge.msl
+	"Layer_linear_dodge.1.0"	"MetaSL/Layer"	"Linear Dodge"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx\DXVSColor.spdl
+	"DXVSColor.1.0"	""	"DXVSColor"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\misss_fast_skin_phen.spdl
+	"misss_fast_skin_phen.1.0"	""	"misss Fast Skin"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\bsdf_mirror.msl
+	"Bsdf_mirror.1.0"	"MetaSL/Bsdf"	"Mirror"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\COLGEN.TEX.spdl
+	"COLGEN_TEX.1.0"	""	"oz_2d_colgen"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\illumination_carpaint.msl
+	"Illumination_carpaint.1.0"	"MetaSL/Illumination"	"Carpaint"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mi_bump_flakes.spdl
+	"mi_bump_flakes.1.0"	""	"mi Bump Flakes"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\toon.mat.spdl
+	"toon_mat.1.0"	""	"ari_toon_mat"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\component_falloff.msl
+	"Component_falloff.1.0"	"MetaSL/Component"	"Falloff"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\surface_direct_indirect.msl
+	"Surface_direct_indirect.1.0"	"MetaSL/Surface"	"Direct Indirect"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_integer_passthrough.spdl
+	"sib_integer_passthrough.1.0"	""	"Integer Passthrough"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_texproj_lookup.spdl
+	"sib_texproj_lookup.1.0"	""	"Projection Lookup"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\cage.cgfx
+	"cage.1.0"	"Realtime@200/CgFX"	"cage"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_geo_cylinder.spdl
+	"mib_geo_cylinder.1.0"	""	"mib Geo Cylinder"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\comp_matte_div.msl
+	"Comp_matte_div.1.0"	"MetaSL/Comp"	"Matte Div"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\opengl\OGL13CubicCrossTexture.spdl
+	"OGL13CubicCrossTexture.1.0"	""	"OGL13CubicCrossTexture"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_inrange.spdl
+	"sib_color_inrange.1.0"	""	"Color In Range"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\DebugValues.cgfx
+	"DebugValues.1.0"	"Realtime@200/CgFX"	"DebugValues"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\light_bsdf_photometric.msl
+	"Light_bsdf_photometric.1.0"	"MetaSL/Light"	"Bsdf Photometric"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx\DXVertexShader.spdl
+	"DXVertexShader.1.0"	""	"DXVertexShader"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx\DXVSVector.spdl
+	"DXVSVector.1.0"	""	"DXVSVector"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_texture_vector.spdl
+	"mib_texture_vector.1.0"	""	"mib Texture Vector"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_scalar_to_boolean.spdl
+	"sib_scalar_to_boolean.1.0"	""	"Scalar To Boolean"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt3d-cellular_v3.spdl
+	"txt3d-cellular_v3.1.0"	""	"Cell"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\material-moviescreen.spdl
+	"material-moviescreen.1.0"	""	"Flat Shading"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_hls_adjust.spdl
+	"sib_color_hls_adjust.1.0"	""	"Color HLS Adjust"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\DOFBasePassSimple.cgfx
+	"DOFBasePassSimple.1.0"	""	"DOFBasePassSimple"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_geo_cube.spdl
+	"mib_geo_cube.1.0"	""	"mib Geo Cube"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\simple_strauss.spdl
+	"simple_strauss.1.0"	""	"Simple Strauss"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt2d-imagebump.spdl
+	"txt2d-imagebump.1.0"	""	"Bump Image"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mia_envblur.spdl
+	"mia_envblur.1.0"	""	"mia Environment Blur"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mip_motionblur.spdl
+	"mip_motionblur.1.0"	""	"mip Motionblur"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\DOFBlurH.cgfx
+	"DOFBlurH.1.0"	""	"DOFBlurH"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\ENV_BALL.MAT.spdl
+	"ENV_BALL_MAT.1.0"	""	"oz_env_g_ball"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\light_photometric.msl
+	"Light_photometric.1.0"	"MetaSL/Light"	"Photometric"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_savestate_color.spdl
+	"sib_savestate_color.1.0"	""	"Color Save State"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\Env_Sphere.mat.spdl
+	"Env_Sphere_mat.1.0"	""	"oz_env_g_sphere"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_hsv_to_rgb.spdl
+	"sib_color_hsv_to_rgb.1.0"	""	"HSV To RGB"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt2d-terrain.spdl
+	"txt2d-terrain.1.0"	""	"Terrain"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\3D_Fractal.tx3.spdl
+	"3D_Fractal_tx3.1.0"	""	"oz_3d_fractal"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx10\DX10DepthStencil.spdl
+	"DX10DepthStencil.1.0"	""	"DX10 DepthStencil"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\illumination_oren_nayar.msl
+	"Illumination_oren_nayar.1.0"	"MetaSL/Illumination"	"Oren Nayar"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Addons\Syflex30X50\Application\spdl\syCache.spdl
+	"syCache.1.0"	""	"syCache"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Addons\Syflex30X50\Application\spdl\syCollide.spdl
+	"syCollide.1.0"	""	"syCollide"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_render_hair.spdl
+	"sib_render_hair.1.0"	""	"Hair Material"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt2d-gradient_v2.spdl
+	"txt2d-gradient_v2.1.0"	""	"Gradient"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\normals_parallax.msl
+	"Normals_parallax.1.0"	"MetaSL/Normals"	"Parallax"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_illum_ward_deriv.spdl
+	"mib_illum_ward_deriv.1.0"	""	"mib Illum Ward Deriv"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_scalar_passthrough.spdl
+	"sib_scalar_passthrough.1.0"	""	"Scalar Passthrough"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\mi_mill_native.msl
+	"MI_mill_plane_geometry.1.0"	"MetaSL/texture"	"Plane"
+	"MI_mill_light_spot_geometry.1.0"	"MetaSL/texture"	"Spot Light"
+	"MI_mill_torus_geometry.1.0"	"MetaSL/texture"	"Torus"
+	"MI_mill_custom_geometry.1.0"	"MetaSL/texture"	"Object"
+	"MI_mill_geom_base.1.0"	"MetaSL/MI"	"Mill Geom Base"
+	"MI_mill_scene_element.1.0"	"MetaSL/texture"	"Scene Element"
+	"MI_mill_box_geometry.1.0"	"MetaSL/texture"	"Box"
+	"MI_mill_render_scene.1.0"	"MetaSL/texture"	"Scene"
+	"MI_mill_light_point_geometry.1.0"	"MetaSL/texture"	"Point Light"
+	"MI_mill_sphere_geometry.1.0"	"MetaSL/texture"	"Sphere"
+	"MI_mill_terrain_geometry.1.0"	"MetaSL/texture"	"Terrain"
+	"MI_mill_light_direct_geometry.1.0"	"MetaSL/texture"	"Directional Light"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt2d-ripple_v3.spdl
+	"txt2d-ripple_v3.1.0"	""	"Ripple"
+Parser	HLSLParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\HLSL\metal.fx
+	"metal.1.0"	"Realtime@200/HLSL"	"metal"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mia_light_surface.spdl
+	"mia_light_surface.1.0"	""	"mia Light Surface"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_texture_marble.spdl
+	"sib_texture_marble.1.0"	""	"Marble"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx10\DX10HLSLProgram.spdl
+	"DX10HLSLProgram.1.0"	""	"DX10 HLSL Program"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\GRID.TEX.spdl
+	"GRID_TEX.1.0"	""	"oz_2d_grid"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\map_lookup_integer.spdl
+	"map_lookup_integer.1.0"	""	"Integer Map Lookup"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_sprite.spdl
+	"sib_sprite.1.0"	""	"Sprite"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\comp_mixer_color.msl
+	"Comp_color_mixer.1.0"	"MetaSL/Comp"	"Color Mixer"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\Env_Horizon_Map.tx3.spdl
+	"Env_Horizon_Map_tx3.1.0"	""	"oz_env_r_horizon_map"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mi_car_paint_phen.spdl
+	"mi_car_paint_phen.1.0"	""	"mi Car Paint"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\Env_Horizon_Night.mat.spdl
+	"Env_Horizon_Night_mat.1.0"	""	"oz_env_g_horizon_night"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\opengl\OGL13Draw.spdl
+	"OGL13Draw.1.0"	""	"OGL13Draw"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\phen_texture3d_fractal.spdl
+	"phen_texture3d_fractal.1.0"	""	"Fractal 3D"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_basemapeval.spdl
+	"sib_basemapeval.1.0"	""	"sib_basemapeval"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\FLARES.LEN.spdl
+	"FLARES_LEN.1.0"	""	"oz_len_flares"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\directx10\RealTime\DX10Sampler.spdl
+	"DX10Sampler.1.0"	""	"DX10 Sampler"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\generator_checker.msl
+	"Generator_checker.1.0"	"MetaSL/Generator"	"Checker"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_X_color.spdl
+	"sib_color_X_color.1.0"	""	"sib_color_X_color"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_interp_linear.spdl
+	"sib_interp_linear.1.0"	""	"Scalar Change Range"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\DOFBlurV.cgfx
+	"DOFBlurV.1.0"	""	"DOFBlurV"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_texture2d_grid.spdl
+	"sib_texture2d_grid.1.0"	""	"Grid"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt3d-fractal_v3.spdl
+	"txt3d-fractal_v3.1.0"	""	"Fractal"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\pt_get_vector.spdl
+	"pt_get_vector.1.0"	""	"Particle Get Vector"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_scalar_bias.spdl
+	"sib_scalar_bias.1.0"	""	"Scalar Bias"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\generator_gradient2d.msl
+	"Generator_gradient2d.1.0"	"MetaSL/Generator"	"Gradient2D"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\lume\Lume_Adjustments.spdl
+	"Lume_Adjustments.1.0"	""	"Lume Adjustments"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_scalar_math_curve.spdl
+	"sib_scalar_math_curve.1.0"	""	"Scalar Curve Math"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\opengl\OGLTCTrans.spdl
+	"OGLTCTrans.1.0"	""	"RTShader_OGLTCTrans"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\lume\Lume_Edge.spdl
+	"Lume_Edge.1.0"	""	"Lume Edge"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\softimage_compounds.xmsl
+	"msl_soft_color_transparency_matte.1.0"	""	"Soft Color Transparency Matte"
+	"msl_soft_scalar_transparency_matte.1.0"	""	"Soft Scalar Transparency Matte"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\transform_vector.msl
+	"Transform_internal_to_world_vector.1.0"	"MetaSL/Transform"	"Internal To World Vector"
+	"Transform_internal_to_camera_vector.1.0"	"MetaSL/Transform"	"Internal To Camera Vector"
+	"Transform_internal_to_raster_vector.1.0"	"MetaSL/Transform"	"Internal To Raster Vector"
+	"Transform_internal_to_object_vector.1.0"	"MetaSL/Transform"	"Internal To Object Vector"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\soft_staticblur.spdl
+	"soft_staticblur.1.0"	""	"soft_staticblur"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\xmasball.mat.spdl
+	"xmasball_mat.1.0"	""	"ari_xmasball"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\illumination_shadowcatcher.msl
+	"Illumination_shadowcatcher.1.0"	"MetaSL/Illumination"	"Shadowcatcher"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\layer_luminosity.msl
+	"Layer_luminosity.1.0"	"MetaSL/Layer"	"Luminosity"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\misss_skin_specular.spdl
+	"misss_skin_specular.1.0"	""	"misss Skin Specular"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_math_unary.spdl
+	"sib_color_math_unary.1.0"	""	"Color Unary Math"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_switch_opp.spdl
+	"sib_color_switch_opp.1.0"	""	"Color Switcher"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\layer_color.msl
+	"Layer_color.1.0"	"MetaSL/Layer"	"Color"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_scalar_math_basic.spdl
+	"sib_scalar_math_basic.1.0"	""	"Scalar Basic Math"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\Env_Atmosphere.tx3.spdl
+	"Env_Atmosphere_tx3.1.0"	""	"ozlib_env_r_atm"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\GRADIENT.TEX.spdl
+	"GRADIENT_TEX.1.0"	""	"oz_2d_gradient"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt2d-image-explicit.spdl
+	"txt2d-image-explicit.1.0"	""	"Image"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\DUSTY.MAT.spdl
+	"DUSTY_MAT.1.0"	""	"dusty"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_lookup_cube6.spdl
+	"mib_lookup_cube6.1.0"	""	"mib Lookup Cube 6"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\FUR.OUT.spdl
+	"FUR_OUT.1.0"	""	"oz_p_fur"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_boolean_storeinchannel.spdl
+	"sib_boolean_storeinchannel.1.0"	""	"Boolean Render Channel"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_balance.spdl
+	"sib_color_balance.1.0"	""	"Color Balance"
+Parser	HLSLParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\HLSL\brix.fx
+	"brix.1.0"	"Realtime@200/HLSL"	"brix"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_texture_remap.spdl
+	"mib_texture_remap.1.0"	""	"mib Texture Remap"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\light-exponent.spdl
+	"light-exponent.1.0"	""	"light-exponent"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\pt_blob.spdl
+	"pt_blob.1.0"	""	"Particle Blob"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\pt_billboard.spdl
+	"pt_billboard.1.0"	""	"Particle Billboard"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mip_cameramap.spdl
+	"mip_cameramap.1.0"	""	"mip Cameramap"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_getnormal.spdl
+	"sib_getnormal.1.0"	""	"Extract Normal"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_texture_wood.spdl
+	"sib_texture_wood.1.0"	""	"Wood"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt3d-rock_v2.spdl
+	"txt3d-rock_v2.1.0"	""	"txt3d-rock_v2"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_refract.spdl
+	"mib_refract.1.0"	""	"mib Refraction"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_geo_instance.spdl
+	"mib_geo_instance.1.0"	""	"mib Geo Instance"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_integer_to_scalar.spdl
+	"sib_integer_to_scalar.1.0"	""	"Integer To Scalar"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_twosided.spdl
+	"mib_twosided.1.0"	""	"mib Two Sided"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\material-blinn.spdl
+	"material-blinn.1.0"	""	"Blinn"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\toon_soft.mat.spdl
+	"toon_soft_mat.1.0"	""	"ari_toon_si_mat"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\light_area.msl
+	"Light_area.1.0"	"MetaSL/Light"	"Area"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mia_material_phen.spdl
+	"mia_material_phen.1.0"	""	"mia Material"
+Parser	HLSLParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\HLSL\checker3d.fx
+	"checker3d.1.0"	"Realtime@200/HLSL"	"checker3d"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mia_portal_light.spdl
+	"mia_portal_light.1.0"	""	"mia Portal Light"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\misss_lambert_gamma.spdl
+	"misss_lambert_gamma.1.0"	""	"misss Lambert Gamma"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Addons\Syflex30X50\Application\spdl\syCollideSph.spdl
+	"syCollideSph.1.0"	""	"syCollideSph"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_color_mix.spdl
+	"mib_color_mix.1.0"	""	"mib Color Mix"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_diffuse_refraction_phen.spdl
+	"sib_diffuse_refraction_phen.1.0"	""	"Refraction"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_scalar_math_logic.spdl
+	"sib_scalar_math_logic.1.0"	""	"Scalar Logic Math"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\xsibase\XSINormalMap2.spdl
+	"XSINormalMap2.1.0"	""	"Normal Map"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_hsva_combine.spdl
+	"sib_hsva_combine.1.0"	""	"Combine HSVA"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\BA_particle_gradientcontrol.spdl
+	"BA_particle_gradientcontrol.1.0"	""	"Particle Gradient Control"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_geo_sphere.spdl
+	"mib_geo_sphere.1.0"	""	"mib Geo Sphere"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_vector_to_color_old.spdl
+	"sib_vector_to_color_old.1.0"	""	"Vector To Color Obsolete"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\durer.cgfx
+	"durer.1.0"	"Realtime@200/CgFX"	"durer"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\component_reflection.msl
+	"Component_reflection.1.0"	"MetaSL/Component"	"Reflection"
+	"Component_refraction.1.0"	"MetaSL/Component"	"Refraction"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\Env_Cubic.tx3.spdl
+	"Env_Cubic_tx3.1.0"	""	"oz_env_r_cubic"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_getnormal_vector.spdl
+	"sib_getnormal_vector.1.0"	""	"sib_getnormal_vector"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_vector_to_color.spdl
+	"sib_vector_to_color.1.0"	""	"Vector To Color"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mip_motion_vector.spdl
+	"mip_motion_vector.1.0"	""	"mip Motion Vector"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_illum_ward.spdl
+	"mib_illum_ward.1.0"	""	"mib Illum Ward"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_light.spdl
+	"sib_light.1.0"	""	"Light"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Addons\Syflex30X50\Application\spdl\syNail.spdl
+	"syNail.1.0"	""	"syNail"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_env_cubic1.spdl
+	"sib_env_cubic1.1.0"	""	"Single Map Cubic Environment"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_texture_checkerboard.spdl
+	"mib_texture_checkerboard.1.0"	""	"mib Texture Checkerboard"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\layer_hard_mix.msl
+	"Layer_hard_mix.1.0"	"MetaSL/Layer"	"Hard Mix"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\misss_call_shader.spdl
+	"misss_call_shader.1.0"	""	"misss Call Shader"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_lookup_spherical.spdl
+	"mib_lookup_spherical.1.0"	""	"mib Lookup Spherical"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_transparency.spdl
+	"sib_transparency.1.0"	""	"Transparency"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\lightning.vol.spdl
+	"lightning_vol.1.0"	""	"lightning"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_to_vector.spdl
+	"sib_color_to_vector.1.0"	""	"Color To Vector"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sitoon\sitoon_paint.spdl
+	"sitoon_paint.1.0"	""	"Toon Paint"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\lambSkin.cgfx
+	"lambSkin.1.0"	"Realtime@200/CgFX"	"lambSkin"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_texture_polkasphere.spdl
+	"mib_texture_polkasphere.1.0"	""	"mib Texture Polkasphere"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_attribute_color.spdl
+	"sib_attribute_color.1.0"	""	"Color Attribute"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt3d-flagstone.spdl
+	"txt3d-flagstone.1.0"	""	"txt3d-flagstone"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\comp_matte_mult.msl
+	"Comp_matte_mult.1.0"	"MetaSL/Comp"	"Matte Mult"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_shadow_transparency.spdl
+	"mib_shadow_transparency.1.0"	""	"mib Shadow Transparency"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\3D_WOOD.TX3.spdl
+	"3D_WOOD_TX3.1.0"	""	"oz_3d_wood"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_vector_to_scalars.spdl
+	"sib_vector_to_scalars.1.0"	""	"Vector To Scalars"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\misss_fast_shader.spdl
+	"misss_fast_shader.1.0"	""	"misss Fast Shader"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\BA_volume_cloud.spdl
+	"BA_volume_cloud.1.0"	""	"Particle Volume Cloud"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\pt_sphere.spdl
+	"pt_sphere.1.0"	""	"Particle Sphere"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\component_illumination_base.msl
+	"Component_illumination_base.1.0"	"MetaSL/Component"	"Illumination Base"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_texture_lookup.spdl
+	"mib_texture_lookup.1.0"	""	"mib Texture Lookup"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_math_exponent.spdl
+	"sib_color_math_exponent.1.0"	""	"Color Exponent Math"
+Parser	HLSLParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\HLSL\clock.fx
+	"clock.1.0"	"Realtime@200/HLSL"	"clock"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_dielectric.spdl
+	"sib_dielectric.1.0"	""	"Dielectric"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\layer_linear_light.msl
+	"Layer_linear_light.1.0"	"MetaSL/Layer"	"Linear Light"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\math_color.msl
+	"Math_color_compress.1.0"	"MetaSL/Math/Color"	"Compress"
+	"Math_color_expand.1.0"	"MetaSL/Math/Color"	"Expand"
+	"Math_color_invert.1.0"	"MetaSL/Math/Color"	"Invert"
+	"Math_color_sincos.1.0"	"MetaSL/Math/Color"	"Sincos"
+	"Math_color_threshold.1.0"	"MetaSL/Math/Color"	"Threshold"
+	"Math_color_mix.1.0"	"MetaSL/Math/Color"	"Mix"
+	"Math_color_modf.1.0"	"MetaSL/Math/Color"	"Modf"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_bump_map.spdl
+	"sib_bump_map.1.0"	""	"Basic Bump Map"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_vertex_color_alpha.spdl
+	"sib_vertex_color_alpha.1.0"	""	"Vertex Color"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mib_texture_wave.spdl
+	"mib_texture_wave.1.0"	""	"mib Texture Wave"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\pt_sprite.spdl
+	"pt_sprite.1.0"	""	"Particle Sprite"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_math_logic.spdl
+	"sib_color_math_logic.1.0"	""	"Color Logic Math"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_illum_blinn.spdl
+	"sib_illum_blinn.1.0"	""	"Blinn"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\opengl\OGLDraw.spdl
+	"OGLDraw.1.0"	""	"RTShader_OGLDraw"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_depth_cue.spdl
+	"sib_depth_cue.1.0"	""	"Depth Cue"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\rh_renderer.spdl
+	"rh_renderer.1.0"	""	"Hair Shading"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Addons\Syflex30X50\Application\spdl\syAir.spdl
+	"syAir.1.0"	""	"syAir"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_txt2dremap_kalid.spdl
+	"sib_txt2dremap_kalid.1.0"	""	"Kaleidoscopic UV Remap"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_texture2d_bulge.spdl
+	"sib_texture2d_bulge.1.0"	""	"Bulge"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\halo.out.spdl
+	"halo_out.1.0"	""	"si_halo"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\mibase\mip_rayswitch_environment.spdl
+	"mip_rayswitch_environment.1.0"	""	"mip Rayswitch Environment"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\map_lookup_color.spdl
+	"map_lookup_color.1.0"	""	"Color Map Lookup"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_texture_cell.spdl
+	"sib_texture_cell.1.0"	""	"Cell"
+Parser	RendererUserPorts
+	".1.0"	""	""
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\opengl\OGL13CubicTexture.spdl
+	"OGL13CubicTexture.1.0"	""	"OGL13CubicTexture"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_scalar_gain.spdl
+	"sib_scalar_gain.1.0"	""	"Scalar Gain"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt3d-wood.spdl
+	"txt3d-wood.1.0"	""	"Wood"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\bsdf_architectural.msl
+	"Bsdf_architectural.1.0"	"MetaSL/Bsdf"	"Architectural"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\light_point.msl
+	"Light_point.1.0"	"MetaSL/Light"	"Point"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_X_scalar.spdl
+	"sib_color_X_scalar.1.0"	""	"sib_color_X_scalar"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\illumination_thinglass.msl
+	"Illumination_thinglass.1.0"	"MetaSL/Illumination"	"Thinglass"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_multi_switch.spdl
+	"sib_color_multi_switch.1.0"	""	"Color Multi-Switch"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_cclutdata_3d.spdl
+	"sib_cclutdata_3d.1.0"	""	"sib_cclutdata_3d"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_texture_flagstone.spdl
+	"sib_texture_flagstone.1.0"	""	"Flagstone"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\pt_get_scalar.spdl
+	"pt_get_scalar.1.0"	""	"Particle Get Scalar"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_state_vector.spdl
+	"sib_state_vector.1.0"	""	"Vector State"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_atten_exp.spdl
+	"sib_atten_exp.1.0"	""	"Attenuation Exponential"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Addons\Syflex30X50\Application\spdl\syCollidePla.spdl
+	"syCollidePla.1.0"	""	"syCollidePla"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_hlsa_combine.spdl
+	"sib_hlsa_combine.1.0"	""	"Combine HLSA"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_color_switch.spdl
+	"sib_color_switch.1.0"	""	"Color Switcher"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\Bionic_Volume.vol.spdl
+	"Bionic_Volume_vol.1.0"	""	"Bionic_Volume"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_composite.spdl
+	"sib_composite.1.0"	""	"Composite"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\generator_gradient3d.msl
+	"Generator_gradient3d.1.0"	"MetaSL/Generator"	"Gradient3D"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\AOPass.cgfx
+	"AOPass.1.0"	""	"AOPass"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\bsdf_thinglass.msl
+	"Bsdf_thinglass.1.0"	"MetaSL/Bsdf"	"Thinglass"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_diffuse_reflection.spdl
+	"sib_diffuse_reflection.1.0"	""	"Reflection"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\comp_reorder.msl
+	"Comp_reorder.1.0"	"MetaSL/Comp"	"Reorder"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\layer_add.msl
+	"Layer_add.1.0"	"MetaSL/Layer"	"Add"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_diffuse_refraction.spdl
+	"sib_diffuse_refraction.1.0"	""	"Refratction"
+Parser	HLSLParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\HLSL\uvDetective.fx
+	"uvDetective.1.0"	"Realtime@200/HLSL"	"uvDetective"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\strauss.mat.spdl
+	"strauss_mat.1.0"	""	"ari_strauss"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Addons\Syflex30X50\Application\spdl\syProperties.spdl
+	"syProperties.1.0"	""	"syProperties"
+Parser	HLSLParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\HLSL\DebugSpaces.fx
+	"DebugSpaces.1.0"	"Realtime@200/HLSL"	"DebugSpaces"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sitoon\sitoon_node_texlook.spdl
+	"sitoon_node_texlook.1.0"	""	"Toon Image Lookup"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_environment.spdl
+	"sib_environment.1.0"	""	"Environment"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\Image_mutilate.tex.spdl
+	"Image_mutilate_tex.1.0"	""	"oz_2d_imute"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\DOFNew.cgfx
+	"DOFNew.1.0"	""	"DOFNew"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Addons\Syflex30X50\Application\spdl\syVolume.spdl
+	"syVolume.1.0"	""	"syVolume"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_fisheye.spdl
+	"sib_fisheye.1.0"	""	"Fisheye"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\peekaboo.mat.spdl
+	"peekaboo_mat.1.0"	""	"ari_peekaboo"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_fur.spdl
+	"sib_fur.1.0"	""	"Simple Fur"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\DebugSpaces.cgfx
+	"DebugSpaces.1.0"	"Realtime@200/CgFX"	"DebugSpaces"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\volume_fog_exponential.msl
+	"Volume_fog_exponential.1.0"	"MetaSL/Volume"	"Fog Exponential"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\RIPPLE.TEX.spdl
+	"RIPPLE_TEX.1.0"	""	"oz_2d_ripple"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_integer_to_color.spdl
+	"sib_integer_to_color.1.0"	""	"Integer To Color"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\DGLOW.OUT.spdl
+	"DGLOW_OUT.1.0"	""	"oz_p_dglow"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_fx_lens.spdl
+	"sib_fx_lens.1.0"	""	"Lens Effects"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\environment_map_spherical.msl
+	"Environment_map_spherical.1.0"	"MetaSL/Environment"	"Map Spherical"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_gradiant.spdl
+	"sib_gradiant.1.0"	""	"Gradient"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt3d-flagstone_v3.spdl
+	"txt3d-flagstone_v3.1.0"	""	"Flagstone"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_illum_cooktorr.spdl
+	"sib_illum_cooktorr.1.0"	""	"Cook-Torrance"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_illum_phong.spdl
+	"sib_illum_phong.1.0"	""	"Phong"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_illum_photon.spdl
+	"sib_illum_photon.1.0"	""	"Photon Material"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt3d-snow.spdl
+	"txt3d-snow.1.0"	""	"Snow"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_illum_strauss.spdl
+	"sib_illum_strauss.1.0"	""	"Strauss"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\Image_keyer.tex.spdl
+	"Image_keyer_tex.1.0"	""	"oz_2d_stencil"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\real_camera.len.spdl
+	"real_camera_len.1.0"	""	"siLens"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_illum_translucent.spdl
+	"sib_illum_translucent.1.0"	""	"Translucent"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Addons\Syflex30X50\Application\spdl\sySelfCollide.spdl
+	"sySelfCollide.1.0"	""	"sySelfCollide"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\DOFLens.cgfx
+	"DOFLens.1.0"	""	"DOFLens"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_illum_trispec.spdl
+	"sib_illum_trispec.1.0"	""	"Specular Triple"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\soft_infinite.spdl
+	"soft_infinite.1.0"	""	"soft_infinite"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_incidence.spdl
+	"sib_incidence.1.0"	""	"sib_incidence"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_texture_lattice.spdl
+	"sib_texture_lattice.1.0"	""	"Lattice"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_texture3Dwarp.spdl
+	"sib_texture3Dwarp.1.0"	""	"3DWarp UV"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_incidence_v2.spdl
+	"sib_incidence_v2.1.0"	""	"Incidence"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_integer_storeinchannel.spdl
+	"sib_integer_storeinchannel.1.0"	""	"Integer Render Channel"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_lens_flare.spdl
+	"sib_lens_flare.1.0"	""	"Lens Effects"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_matte.spdl
+	"sib_matte.1.0"	""	"Matte"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_refraction_index.spdl
+	"sib_refraction_index.1.0"	""	"Refraction Index"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\lens_depth_of_field.spdl
+	"lens_depth_of_field.1.0"	""	"lens_depth_of_field"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_renderchannel_options.spdl
+	"sib_renderchannel_options.1.0"	""	"pt_renderchannel_options"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt3d-fractal.spdl
+	"txt3d-fractal.1.0"	""	"txt3d-fractal"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\goochy.cgfx
+	"goochy.1.0"	"Realtime@200/CgFX"	"goochy"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\DOFDownsample.cgfx
+	"DOFDownsample.1.0"	""	"DOFDownsample"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_rv_distort.spdl
+	"sib_rv_distort.1.0"	""	"RealVis Distortion"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_volumic_light.spdl
+	"sib_volumic_light.1.0"	""	"Volumic"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\soft_env_sphere.spdl
+	"soft_env_sphere.1.0"	""	"soft_env_sphere"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_scalar_multi_switch.spdl
+	"sib_scalar_multi_switch.1.0"	""	"Scalar Multi-Switch"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_scalar_to_color.spdl
+	"sib_scalar_to_color.1.0"	""	"Scalar To Color"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Addons\Syflex30X50\Application\spdl\syGravity.spdl
+	"syGravity.1.0"	""	"syGravity"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_scalar_to_integer.spdl
+	"sib_scalar_to_integer.1.0"	""	"Scalar To Integer"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_scalar_transparency_matte.spdl
+	"sib_scalar_transparency_matte.1.0"	""	"Scalar Matte"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\brix.cgfx
+	"brix.1.0"	"Realtime@200/CgFX"	"brix"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_setnormal.spdl
+	"sib_setnormal.1.0"	""	"Set Normal"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_slide_proj_light.spdl
+	"sib_slide_proj_light.1.0"	""	"Slide Projector"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\frosty.mat.spdl
+	"frosty_mat.1.0"	""	"ari_frosty"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_space_conversion.spdl
+	"sib_space_conversion.1.0"	""	"Vector Transform"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_texture_lookup.spdl
+	"sib_texture_lookup.1.0"	""	"Image Lookup"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\environment_map_fisheye.msl
+	"Environment_map_fisheye.1.0"	"MetaSL/Environment"	"Map Fisheye"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_texture_rock.spdl
+	"sib_texture_rock.1.0"	""	"Rock"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Addons\Syflex30X50\Application\spdl\syPropertiesFlesh.spdl
+	"syPropertiesFlesh.1.0"	""	"syPropertiesFlesh"
+Parser	HLSLParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\HLSL\durer.fx
+	"durer.1.0"	"Realtime@200/HLSL"	"durer"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\generator_water.msl
+	"Generator_water_normal.1.0"	"MetaSL/Generator"	"Water Normal"
+	"Generator_water.1.0"	"MetaSL/Generator"	"Water"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\ShadowPassGlobalPos.cgfx
+	"ShadowPassGlobalPos.1.0"	""	"ShadowPassGlobalPos"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\sib_vector_to_scalar_old.spdl
+	"sib_vector_to_scalar_old.1.0"	""	"Vector To Scalar Obsolete"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\soft_vertex_color_alpha3.spdl
+	"soft_vertex_color_alpha3.1.0"	""	"soft_vertex_color_alpha3"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\simple_blinn.spdl
+	"simple_blinn.1.0"	""	"Simple Blinn"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\ENV_BALL.TX3.spdl
+	"ENV_BALL_TX3.1.0"	""	"oz_env_r_ball"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\simple_cooktorr.spdl
+	"simple_cooktorr.1.0"	""	"Simple Cook-Torrance"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt2d-ripple.spdl
+	"txt2d-ripple.1.0"	""	"txt2d-ripple"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt2d-ripple_v2.spdl
+	"txt2d-ripple_v2.1.0"	""	"txt2d-ripple_v2"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\bg_pic.out.spdl
+	"bg_pic_out.1.0"	""	"ari_bg_pic"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt3d-vein_v3.spdl
+	"txt3d-vein_v3.1.0"	""	"Vein"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt3d-cellular.spdl
+	"txt3d-cellular.1.0"	""	"txt3d-cellular"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt3d-checkerboard.spdl
+	"txt3d-checkerboard.1.0"	""	"Checkerboard"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt3d-marble.spdl
+	"txt3d-marble.1.0"	""	"Marble"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sibase\txt3d-vein.spdl
+	"txt3d-vein.1.0"	""	"txt3d-vein"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sitoon\sitoon_ink.spdl
+	"sitoon_ink.1.0"	""	"Toon Ink"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\bilateralfilter.cgfx
+	"bilateralfilter.1.0"	""	"bilateralfilter"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sitoon\sitoon_node_mix.spdl
+	"sitoon_node_mix.1.0"	""	"Toon Mixer"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\sitoon\sitoon_paint_rimlight.spdl
+	"sitoon_paint_rimlight.1.0"	""	"Toon Paint Rimlight"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\3D_Lattice.tx3.spdl
+	"3D_Lattice_tx3.1.0"	""	"oz_3d_lattice"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\auto_dof.out.spdl
+	"auto_dof_out.1.0"	""	"si_auto_depth_of_field"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\BULGE.TEX.spdl
+	"BULGE_TEX.1.0"	""	"oz_2d_bulge"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\Env_Horizon_Day.mat.spdl
+	"Env_Horizon_Day_mat.1.0"	""	"oz_env_g_horizon_day"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\sprite.len.spdl
+	"sprite_len.1.0"	""	"ari_sprite"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Addons\Syflex30X50\Application\spdl\syMimic.spdl
+	"syMimic.1.0"	""	"syMimic"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\Env_Horizon_Night.tx3.spdl
+	"Env_Horizon_Night_tx3.1.0"	""	"oz_env_r_horizon_night"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\FRACTAL.TEX.spdl
+	"FRACTAL_TEX.1.0"	""	"oz_2d_fractal"
+Parser	HLSLParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\HLSL\cage.fx
+	"cage.1.0"	"Realtime@200/HLSL"	"cage"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\clock.cgfx
+	"clock.1.0"	"Realtime@200/CgFX"	"clock"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\illumination_lambert.msl
+	"Illumination_lambert.1.0"	"MetaSL/Illumination"	"Lambert"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\NSTEREO.LEN.spdl
+	"NSTEREO_LEN.1.0"	""	"nstereo"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\component_oren_nayar.msl
+	"Component_oren_nayar.1.0"	"MetaSL/Component"	"Oren Nayar"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\smoke.vol.spdl
+	"smoke_vol.1.0"	""	"smoke"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\AOAverage.cgfx
+	"AOAverage.1.0"	""	"AOAverage"
+Parser	Softimage	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\spdl\soft3d\toon.len.spdl
+	"toon_len.1.0"	""	"ari_toon_lens"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\illumination_architectural_comp.msl
+	"Illumination_architectural_comp.1.0"	"MetaSL/Illumination"	"Architectural Comp"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\generator_gradient1d.msl
+	"Generator_gradient1d.1.0"	"MetaSL/Generator"	"Gradient1D"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\layer_posterize.msl
+	"Layer_posterize.1.0"	"MetaSL/Layer"	"Posterize"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\illumination_ward.msl
+	"Illumination_ward.1.0"	"MetaSL/Illumination"	"Ward"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\environment_map_spherical_x.msl
+	"Environment_map_spherical_x.1.0"	"MetaSL/Environment"	"Map Spherical X"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\layer_screen.msl
+	"Layer_screen.1.0"	"MetaSL/Layer"	"Screen"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\environment_map_ball.msl
+	"Environment_map_ball.1.0"	"MetaSL/Environment"	"Map Ball"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\generator_dots.msl
+	"Generator_dots.1.0"	"MetaSL/Generator"	"Dots"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\illumination_architectural.msl
+	"Illumination_architectural.1.0"	"MetaSL/Illumination"	"Architectural"
+Parser	MetaSL	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\msl\normals_parallax_uv.msl
+	"Normals_parallax_uv.1.0"	"MetaSL/Normals"	"Parallax Uv"
+Parser	CgFXParser	C:\Program Files\Autodesk\Softimage 2015\Application\phenolib\cgfx\plastic.cgfx
+	"plastic.1.0"	"Realtime@200/CgFX"	"plastic"
+Plugin	SIUtilityShaders
+	"Vector2ToVector3.1.0"	"Processing@400/Conversion/"	"Vector2 To Vector3"
+		"shaderlocation"	"3"	"3"
+	"QuaternionPassthrough.1.0"	"Processing@400/Share"	"Quaternion Passthrough"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"Share.bmp"
+	"ScalarSwitch.1.0"	"Processing@400/Switch/"	"Scalar Array Switch"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"Switch.bmp"
+	"Vector2Switch.1.0"	"Processing@400/Switch/"	"Vector2 Array Switch"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"Switch.bmp"
+	"Vector4Passthrough.1.0"	"Processing@400/Share"	"Vector4 Passthrough"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"Share.bmp"
+	"ScalarPassthrough.1.0"	"Processing@400/Share"	"Scalar Passthrough"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"Share.bmp"
+	"Vector2Passthrough.1.0"	"Processing@400/Share"	"Vector2 Passthrough"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"Share.bmp"
+	"Color4Switch.1.0"	"Processing@400/Switch/"	"Color4 Array Switch"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"Switch.bmp"
+	"Vector4ToQuaternion.1.0"	"Processing@400/Conversion/"	"Vector4 To Quaternion"
+		"shaderlocation"	"3"	"3"
+	"Vector2ToColor.1.0"	"Processing@400/Conversion/"	"Vector2 To Color"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"CV_Vector_Color.bmp"
+	"BooleanPassthrough.1.0"	"Processing@400/Share"	"Boolean Passthrough"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"Share.bmp"
+	"Vector3Switch.1.0"	"Processing@400/Switch/"	"Vector3 Array Switch"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"Switch.bmp"
+	"Vector3ToVector4.1.0"	"Processing@400/Conversion/"	"Vector3 To Vector4"
+		"shaderlocation"	"3"	"3"
+	"Vector2ToScalar.1.0"	"Processing@400/Conversion/"	"Vector2 To Scalar"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"CV_Vector_Scalar.bmp"
+	"Vector4ToVector2.1.0"	"Processing@400/Conversion/"	"Vector4 To Vector2"
+		"shaderlocation"	"3"	"3"
+	"Vector4ToVector3.1.0"	"Processing@400/Conversion/"	"Vector4 To Vector3"
+		"shaderlocation"	"3"	"3"
+	"CreateTransform.1.0"	"Processing@400/Math/@500"	"Create Transform"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"Math.bmp"
+	"Vector4ToColor.1.0"	"Processing@400/Conversion/"	"Vector4 To Color"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"CV_Vector_Color.bmp"
+	"Matrix3ToMatrix4.1.0"	"Processing@400/Conversion/"	"Matrix3 To Matrix4"
+		"shaderlocation"	"3"	"3"
+	"Matrix4Switch.1.0"	"Processing@400/Switch/"	"Matrix4 Array Switch"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"Switch.bmp"
+	"IntegerSwitch.1.0"	"Processing@400/Switch/"	"Integer Array Switch"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"Switch.bmp"
+	"LensBackground.1.0"	"Lens@300/"	"Lens Background Color"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"lens.bmp"
+	"DecomposeTransform.1.0"	"Processing@400/Math/@500"	"Decompose Transform"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"Math.bmp"
+	"IntegerPassthrough.1.0"	"Processing@400/Share"	"Integer Passthrough"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"Share.bmp"
+	"Vector4Switch.1.0"	"Processing@400/Switch/"	"Vector4 Array Switch"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"Switch.bmp"
+	"ReferenceSwitch.1.0"	"Processing@400/Switch/"	"Reference Array Switch"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"Switch.bmp"
+	"TransformState.1.0"	"Data@400/Shading State/@100"	"Transform State"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"State.bmp"
+	"TextureSwitch.1.0"	"Processing@400/Switch/"	"Texture Array Switch"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"Switch.bmp"
+	"QuaternionSwitch.1.0"	"Processing@400/Switch/"	"Quaternion Array Switch"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"Switch.bmp"
+	"Color4Passthrough.1.0"	"Processing@400/Share"	"Color4 Passthrough"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"Share.bmp"
+	"Vector4ToScalar.1.0"	"Processing@400/Conversion/"	"Vector4 To Scalar"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"CV_Vector_Scalar.bmp"
+	"Matrix3Passthrough.1.0"	"Processing@400/Share"	"Matrix3 Passthrough"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"Share.bmp"
+	"Vector3ToVector2.1.0"	"Processing@400/Conversion/"	"Vector3 To Vector2"
+		"shaderlocation"	"3"	"3"
+	"PointCloudLookup.1.0"	"Data@400/Attribute/"	"Point Cloud Lookup"
+		"shaderlocation"	"3"	"3"
+	"Matrix3Switch.1.0"	"Processing@400/Switch/"	"Matrix3 Array Switch"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"Switch.bmp"
+	"QuaternionToVector4.1.0"	"Processing@400/Conversion/"	"Quaternion To Vector4"
+		"shaderlocation"	"3"	"3"
+	"Vector2ToVector4.1.0"	"Processing@400/Conversion/"	"Vector2 To Vector4"
+		"shaderlocation"	"3"	"3"
+	"BooleanSwitch.1.0"	"Processing@400/Switch/"	"Boolean Array Switch"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"Switch.bmp"
+	"Vector3Passthrough.1.0"	"Processing@400/Share"	"Vector3 Passthrough"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"Share.bmp"
+	"Matrix4Passthrough.1.0"	"Processing@400/Share"	"Matrix4 Passthrough"
+		"shaderlocation"	"3"	"3"
+		"thumbnail"	"8"	"Share.bmp"
+	"Matrix4ToMatrix3.1.0"	"Processing@400/Conversion/"	"Matrix4 To Matrix3"
+		"shaderlocation"	"3"	"3"
+Plugin	HWParsers
+	"MetaSLMaterial.1.0"	""	"MetaSLMaterial"

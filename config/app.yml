@@ -4,7 +4,7 @@ studiotools:
   env:
     MODE: pub
     PP_JOB_SERVERS: \\pp-fs-nyc\production\
-    PP_RESOURCE: \\pp-fs-nyc\pipeline\nyc
+    PP_RESOURCE: '%PP_ROOT%'
   versions:
     '1.0':
       path:
@@ -31,7 +31,7 @@ aftereffects:
       path:
         linux: /
         mac: /
-        win32: \\pp-fs-nyc\pipeline\nyc\tools\aftereffects
+        win32: '%PP_ROOT%\tools\aftereffects'
     'CC 2014':
       name: After Effects CC 2014
       env:
@@ -44,7 +44,7 @@ aftereffects:
       path:
         linux: /
         mac: /
-        win32: \\pp-fs-nyc\pipeline\nyc\tools\aftereffects
+        win32: '%PP_ROOT%\tools\aftereffects'
 maya:
   env:
     MAYA_PPTOOLS: '%PP_RESOURCE%\tools\maya\common'
@@ -98,26 +98,38 @@ maya:
   - muscle
   - light
 softimage:
+  env:
+    PP_XSI_WORKGRP: '%PP_ROOT%\tools\softimage\common'
+    SI_HOME: 'C:\Program Files\Autodesk\Softimage 2015'
+    XSI_HOME: '%SI_HOME%'
+    XSI_BINDIR: '%XSI_HOME%\Application\bin'
+    PYTHONPATH: '%PP_ROOT%\lib\python'
+    XSI_PLUGINS: '%PP_ROOT%\tools\softimage\common'
   show: true
   versions:
     '2014':
       name: Autodesk Softimage XSI
+      env:
+        SI_HOME: 'C:/Program Files/Autodesk/Softimage 2014 SP2/Application/bin'
       modes:
         ui:
           linux: /
           mac: /
-          win32: XSI.exe
+          win32:  'xsi.exe'
       path:
         linux: /
         mac: /
         win32: C:/Program Files/Autodesk/Softimage 2014 SP2/Application/bin
     '2015':
-      name: Autodesk Maya
+      name:  Autodesk Softimage XSI
+      env:
+        PP_SOFTIMAGE: '2015'
+        SI_HOME: 'C:/Program Files/Autodesk/Softimage 2015/Application/bin'
       modes:
         ui:
           linux: /
           mac: /
-          win32: XSI.exe
+          win32: 'xsi.exe'
       path:
         linux: /
         mac: /
@@ -168,7 +180,7 @@ nuke:
         win32: C:/Program Files/Nuke8.0v5
 nukex:
   env:
-    NUKE_PATH: '%PP_RESOURCE%\nuke'
+    NUKE_PATH: '%PP_ROOT%\tools\nuke'
     NUKE_DISK_CACHE: 'E:\Nuke'
   show: true
   tasks:
@@ -245,7 +257,7 @@ hiero:
   name: Hiero
   show: true
   env:
-    HIERO_PLUGIN_PATH: '%PP_RESOURCE%/hiero'
+    HIERO_PLUGIN_PATH: '%PP_RESOURCE%/tools/hiero'
   tasks:
   - edit
   - grade
@@ -289,4 +301,3 @@ motionbuilder:
         linux: /
         mac: /
         win32: C:\Program Files\Autodesk\MotionBuilder 2014\bin\x64
-

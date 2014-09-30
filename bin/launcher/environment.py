@@ -153,6 +153,18 @@ class StudioEnvironment():
                 del self.vars[key]
                 #del os.environ[key]
 
+    def expandvars(self,path):
+
+        # expand any local var as well as previosly declared system environtment vars
+        var_subst = re.search('%(.+?)%', path)
+        if var_subst:
+            if var_subst.group(1) in self.vars:
+                path = path.replace(('%'+var_subst.group(1)+'%'), self.vars[var_subst.group(1)])
+            if var_subst.group(1) in os.environ:
+                path = path.replace(('%'+var_subst.group(1)+'%'), os.environ[var_subst.group(1)])
+        path = os.path.expandvars(path)
+        return path
+
     def remove(self, var):
         del self.vars[var]
         #del os.environ[var]
