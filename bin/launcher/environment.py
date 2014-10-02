@@ -50,7 +50,7 @@ class StudioEnvironment():
         self.parse_subst()
         return
 
-    def load_module_config(self, dataMap, module, version):
+    def load_module_config(self, dataMap, module=None, package=None, version=None):
         print ("loading module: "+module+","+version)
         if module in dataMap:
             for key, value in dataMap.iteritems():
@@ -62,14 +62,15 @@ class StudioEnvironment():
                     # add module/package env vars
                     if 'packages' in dataMap[key]:
                         for app, data in dataMap[key]['packages'].iteritems():
-                            if 'env' in dataMap[key]['packages'][app]:
-                                for var, val in dataMap[key]['packages'][app]['env'].iteritems():
-                                    self.add(var, val)
-                            if 'versions' in dataMap[key]['packages'][app]:
-                                if version in dataMap[key]['packages'][app]['versions']:
-                                    if 'env' in dataMap[key]['packages'][app]['versions'][version]:
-                                        for var, val in dataMap[key]['packages'][app]['versions'][version]['env'].iteritems():
-                                            self.add(var, val)
+                            if app == package or package == None:
+                                if 'env' in dataMap[key]['packages'][app]:
+                                    for var, val in dataMap[key]['packages'][app]['env'].iteritems():
+                                        self.add(var, val)
+                                if 'versions' in dataMap[key]['packages'][app]:
+                                    if version in dataMap[key]['packages'][app]['versions']:
+                                        if 'env' in dataMap[key]['packages'][app]['versions'][version]:
+                                            for var, val in dataMap[key]['packages'][app]['versions'][version]['env'].iteritems():
+                                                self.add(var, val)
 
         #if dataMap[]
         self.parse_subst()
@@ -96,7 +97,7 @@ class StudioEnvironment():
                                     self.load_app_config(dataMap=APPS, app=package, version=dataMap[key]['packages'][package]['version'])
                                 if 'modules' in dataMap[key]['packages'][package]:
                                     for m, mv in dataMap[key]['packages'][package]['modules'].iteritems():
-                                        self.load_module_config(dataMap=MODULES, module=m, version=mv)
+                                        self.load_module_config(dataMap=MODULES, module=m, package=app, version=mv)
                                         if 'env' in dataMap[key]['packages'][app]['modules']:
                                             for var, val in dataMap[key]['packages'][package]['modules']['env'].iteritems():
                                                 self.add(var, val)

@@ -9,6 +9,7 @@ default:
       version: '2015'
       modules:
         arnold: '3.2.0'
+        crate: '1.1.145'
     nuke:
       version: '8.0v5'
     nukex:

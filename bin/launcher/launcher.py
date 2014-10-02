@@ -82,6 +82,8 @@ class Launcher(QMainWindow):
 
         self.utilLayouts = {}
 
+        iconsize = QSize(48,48)
+
         for package in UTILITIES:
             if UTILITIES[package]['show']:
                 self.utilLayouts[package] = QPushButton(package)

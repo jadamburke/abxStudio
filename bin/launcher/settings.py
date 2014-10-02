@@ -60,6 +60,25 @@ WORKGRP = yaml.safe_load(f)
 f.close()
 
 UTILITIES = {
+    'email': {
+        'show': True,
+        'versions':{
+            '1':{
+                'modes':{
+                    'ui':{
+                        'linux': '/',
+                        'mac': '/',
+                        'win32': 'chrome.exe https://owa.passion-email.com/owa'
+                    }
+                },
+                'path':{
+                    'linux': '/',
+                    'mac': '/',
+                    'win32': 'C:/Program Files (x86)/Google/Chrome/Application'
+                }
+            }
+        }
+    },
     'qube' : {
         'show': True,
         'versions':{

@@ -152,11 +152,18 @@ function qube_render_xsibatch_getEnv()
         var encStr = oEnum.item().replace(/\\/g,"\\\\");
         var oSelItem = encStr.split("=") ;
         if (oSelItem[0] != "")
-        envDictString += (sep+" '"+oSelItem[0]+"':'"+oSelItem[1]+"'") 
-        if (sep == "")
-            sep = ",";
+        {
+            if (oSelItem[0].indexOf("ARNOLD") != -1 || oSelItem[0].indexOf("PLUGINS") != -1){
+                //var key = oSelItem[0].replace(/\([A-z1-9]+\)/g,"_");
+                var key = oSelItem[0];
+                var val = oSelItem[1];
+                envDictString += (sep+" '"+key+"':'"+val+"'") 
+                if (sep == "")
+                    sep = ",";
+            }
+        }
         
     } 
     LogMessage(envDictString);
-    return envDictString
+    return envDictString;
 }

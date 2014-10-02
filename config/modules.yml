@@ -69,6 +69,7 @@ arnold:
             win32: /
           versions:
           - '2015'
+
 crate:
   name: Exocortex Crate
   show: false
@@ -79,17 +80,23 @@ crate:
       versions:
         '1.1.145':
           env:
-            MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/alembic/ExocortexCrateSuite/1.1.145/Windows/Maya%PP_MAYA%'
+            MAYA_MODULE_PATH: '%PP_ROOT%/bin/alembic/ExocortexCrateSuite1.1.145/Windows/Maya%PP_MAYA%'
           path:
             linux: /
             mac: /
-            win32: '%PP_RESOURCE%/bin/alembic/ExocortexCrateSuite/1.1.145'
+            win32: '%PP_ROOT%/bin/alembic/ExocortexCrateSuite1.1.145'
           versions:
           - '2014'
           - '2015'
-    soft:
+    softimage:
       versions:
         '1.1.145':
+          env:
+            XSI_PLUGINS: '%PP_ROOT%/bin/alembic/ExocortexCrateSuite1.1.145/Windows/Softimage%PP_SOFTIMAGE%'
+          path:
+            linux: /
+            mac: /
+            win32: '%PP_ROOT%/bin/alembic/ExocortexCrateSuite1.1.145'
           versions:
           - '2014'
           - '2015'

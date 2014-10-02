@@ -537,11 +537,13 @@ global proc string getQubeEnvString(){
 	for ($line in $lines){
 		// make sure to skip user data
 		if (`gmatch $line "*=*"`){
-			if ($user == "" || !`gmatch $line ("*"+$user+"*")` ){
-				string $keyVal[] = stringToStringArray($line,"=");
-				$cmd += ($seperator+" '"+$keyVal[0]+"':'"+$keyVal[1]+"'");
-				if ($seperator == ""){
-					$seperator = ",";
+			if ($user == "" || !`gmatch $line ("*"+$user+"*")`){
+				if (`gmatch $line ("*MAYA_*")` || `gmatch $line ("*ARNOLD*")`){
+					string $keyVal[] = stringToStringArray($line,"=");
+					$cmd += ($seperator+" '"+$keyVal[0]+"':'"+$keyVal[1]+"'");
+					if ($seperator == ""){
+						$seperator = ",";
+					}
 				}
 			}
 		}
