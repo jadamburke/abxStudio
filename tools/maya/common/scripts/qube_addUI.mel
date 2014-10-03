@@ -538,7 +538,7 @@ global proc string getQubeEnvString(){
 		// make sure to skip user data
 		if (`gmatch $line "*=*"`){
 			if ($user == "" || !`gmatch $line ("*"+$user+"*")`){
-				if (`gmatch $line ("*MAYA_*")` || `gmatch $line ("*ARNOLD*")`){
+				if (`gmatch $line ("*MAYA_MODULE_PATH*")` || `gmatch $line ("*PLUG_IN*")` || `gmatch $line ("*MAYA_SCRIPT_PATH*")` || `gmatch $line ("*ARNOLD*")` || `gmatch $line ("*MAYA_RENDER_DESC_PATH*")`|| `gmatch $line ("*EXOCORTEX*")`){
 					string $keyVal[] = stringToStringArray($line,"=");
 					$cmd += ($seperator+" '"+$keyVal[0]+"':'"+$keyVal[1]+"'");
 					if ($seperator == ""){
@@ -548,7 +548,7 @@ global proc string getQubeEnvString(){
 			}
 		}
 	}
-	
+	//return "";
 	return encodeString($cmd);
 }
 
