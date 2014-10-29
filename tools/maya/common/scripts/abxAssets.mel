@@ -94,7 +94,7 @@ global proc abxAssets () {
 
 		//print ("treeLister="+$assetLister+"\n");
 		menu -label "View";
-			menuItem -label "Refresh" -c ("abxAssetsPopulateUIList "+$assetTreeView);
+			menuItem -label "Refresh" -c ("abxAssetsPopulateTreeView;");
 		menu -label "Tools";
 			menuItem -en 1 -label "Check For Reference Updates" -c "abxAssetsCheckAllRefsForUpdate";
 			menuItem -en 1 -sm 1 -label "Assembly";
@@ -398,9 +398,12 @@ global proc abxAssetsPopulateUIList (string $treeLister) {
 }
 
 global proc abxAssetsPopulateTreeView (){
+
 	string $projectPath = `workspace -q -rd`;
-	string $backlotPath = "//MONKEY/resources/backlot";
+	string $backlotPath = "//pp-fs-nyc/resource_library/AssetBacklot";
 	string $listControl = "abxAssetsTreeView";
+
+	treeView -e -ra $listControl;
 
 	string $assetFolders[] = `getFileList -folder ($projectPath+"/assets/")`;
 
@@ -3607,6 +3610,7 @@ global proc abxAssetsCreateNew (string $assetPath, string $type){
 	string $thumbIcon = "out_character.png";
 
 	catchQuiet(eval("treeLister -e -add "+$assetLib+"/"+$assetType+"/"+$assetName+" \""+$thumbIcon+"\" \"abxAssetsSetActiveAsset(\\\""+$assetLib+"/"+$assetType+"/"+$assetName+"\\\")\" abxAssetsTreeLister"));
+	abxAssetsPopulateTreeView;
 
 	// add other job dept paths
 

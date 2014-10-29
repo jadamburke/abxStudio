@@ -1394,13 +1394,15 @@ global proc abxShotsCreateDetailUI (){
 			-tabLabel abxShotsAnimFrmLyt "Anim"
 			-tabLabel abxShotsEffectsFrmLyt "Effects"
 			-tabLabel abxShotsLightFrmLyt "Light"
-			-tabLabel abxShotsPrevisFrmLyt "Previs"
+			-tabLabel abxShotsPrevisFrmLyt "---"
 			
 			 abxShotsDeptTabLyt;
 
 		// set the Anim department tab to current
 		tabLayout -e -st abxShotsAnimFrmLyt abxShotsDeptTabLyt;
 		// initially set the previs tab to disabled
+		// hide the previs tab since it is no longer in use:
+
 		formLayout -e -en 0 abxShotsPrevisFrmLyt;
 
 		formLayout -e 
@@ -3131,80 +3133,79 @@ global proc abxShotsNewSequence (string $shotFolder){
 
 global proc abxShotsShowNewShotUI (string $shotFolderTab) {
 	$shotsFolder = `abxShotsGetActiveShotFolder`;
-	if (!`window -exists abxShotsCreateWindow`){
-		window -t "New Shot" -width 500 -height 200 abxShotsCreateWindow;
-		formLayout abxShotsNewShotUIFrmLyt;
-		frameLayout -lv 0 -borderStyle "out" abxShotsNewShotFrmeLyt;
-		columnLayout -rowSpacing 3;
-		separator -h 20 -style "none";
-		optionMenuGrp -label "Location:" -columnWidth 2 80 -cw 3 100 -cc abxShotsUpdateNewShotUI abxShotsCreateTypeOM;
-			menuItem -label "Previs";
-			menuItem -label "Shots";
-			optionMenuGrp -e -v $shotsFolder abxShotsCreateTypeOM;
-		optionMenuGrp -e -sl 2 abxShotsCreateTypeOM;
-		rowLayout -numberOfColumns 2 -columnAttach 1 "both" 0 -columnAttach 2 "both" 0 abxShotsNewSeqRL;
-			optionMenuGrp -label "Sequence:"  -columnWidth 2 80 -cw 3 100 -cc abxShotsUpdateNewShotUI abxShotsCreateOMTmpl;	
-				menuItem -label "none";
-				string $loc =  `optionMenuGrp -q -value abxShotsCreateTypeOM`;
-				string $foundSeq[] = `abxShotsGetSequences $loc`;
-				for ($each in $foundSeq){
-					menuItem -label $each;
-				}
-				if (`optionMenuGrp -q -ni abxShotsCreateOMTmpl` > 1)
-					optionMenuGrp -e -sl 2 abxShotsCreateOMTmpl;
-			button -label "New Sequence..." -c "abxShotsNewSequence `optionMenuGrp -q -v abxShotsCreateTypeOM`";
-			setParent ..;
-		// asset name
-		rowLayout -numberOfColumns 6 -columnWidth 1 141 -columnAttach 1 "right" 0 abxShotsShotNameRL;
-			text -label "Shot Name:";
-			text -label "<none>" abxShotsSeqLbl;
-			textField -cc "abxShotsUpdateNewShotUI" -text "01" -w 40 abxShotsCreateTFName;
-			text -label "_";
-			textField -cc "abxShotsUpdateNewShotUI" -text "00" -w 40 abxShotsCreateTFSubName;
-			button -label "Validate" -ann "Removes Invalid Characters like spaces and underscores. (same as pressing enter after typing the shot name)" -c "abxShotsUpdateNewShotUI";
+	if (`window -exists abxShotsCreateWindow`)
+		deleteUI abxShotsCreateWindow;
+
+
+	window -t "New Shot" -width 500 -height 200 abxShotsCreateWindow;
+	formLayout abxShotsNewShotUIFrmLyt;
+	frameLayout -lv 0 -borderStyle "out" abxShotsNewShotFrmeLyt;
+	columnLayout -rowSpacing 3;
+	separator -h 20 -style "none";
+	optionMenuGrp -label "Location:" -columnWidth 2 80 -cw 3 100 -cc abxShotsUpdateNewShotUI abxShotsCreateTypeOM;
+		menuItem -label "Previs";
+		menuItem -label "Shots";
+		optionMenuGrp -e -v $shotsFolder abxShotsCreateTypeOM;
+	optionMenuGrp -e -sl 2 abxShotsCreateTypeOM;
+	rowLayout -numberOfColumns 2 -columnAttach 1 "both" 0 -columnAttach 2 "both" 0 abxShotsNewSeqRL;
+		optionMenuGrp -label "Sequence:"  -columnWidth 2 80 -cw 3 100 -cc abxShotsUpdateNewShotUI abxShotsCreateOMTmpl;	
+			menuItem -label "none";
+			string $loc =  `optionMenuGrp -q -value abxShotsCreateTypeOM`;
+			string $foundSeq[] = `abxShotsGetSequences $loc`;
+			for ($each in $foundSeq){
+				menuItem -label $each;
+			}
+			if (`optionMenuGrp -q -ni abxShotsCreateOMTmpl` > 1)
+				optionMenuGrp -e -sl 2 abxShotsCreateOMTmpl;
+		button -label "New Sequence..." -c "abxShotsNewSequence `optionMenuGrp -q -v abxShotsCreateTypeOM`";
 		setParent ..;
+	// asset name
+	rowLayout -numberOfColumns 6 -columnWidth 1 141 -columnAttach 1 "right" 0 abxShotsShotNameRL;
+		text -label "Shot Name:";
+		text -label "<none>" abxShotsSeqLbl;
+		textField -cc "abxShotsUpdateNewShotUI" -text "01" -w 40 abxShotsCreateTFName;
+		text -label "_";
+		textField -cc "abxShotsUpdateNewShotUI" -text "00" -w 40 abxShotsCreateTFSubName;
+		button -label "Validate" -ann "Removes Invalid Characters like spaces and underscores. (same as pressing enter after typing the shot name)" -c "abxShotsUpdateNewShotUI";
+	setParent ..;
 
-		rowLayout -numberOfColumns 2 -columnWidth 1 141 -columnAttach 1 "right" 0;
-			text -label "Path:";
-			text -label (`optionMenuGrp -q -v abxShotsCreateTypeOM`+"/"+`textField -q -text abxShotsCreateTFName`+"_"+`textField -q -text abxShotsCreateTFSubName`+"/") abxShotsNewShotPath;
-		//textFieldGrp -label "Shot Name:" -text  "S1_010"  abxShotsCreateTFName;
+	rowLayout -numberOfColumns 2 -columnWidth 1 141 -columnAttach 1 "right" 0;
+		text -label "Path:";
+		text -label (`optionMenuGrp -q -v abxShotsCreateTypeOM`+"/"+`textField -q -text abxShotsCreateTFName`+"_"+`textField -q -text abxShotsCreateTFSubName`+"/") abxShotsNewShotPath;
+	//textFieldGrp -label "Shot Name:" -text  "S1_010"  abxShotsCreateTFName;
 
-		// asset method
+	// asset method
 
-		setParent abxShotsNewShotUIFrmLyt;
+	setParent abxShotsNewShotUIFrmLyt;
 
-		rowLayout -numberOfColumns 3 -columnWidth3 160 160 160 -columnAttach 1 "both" 0 -columnAttach 2 "both" 0 -columnAttach 3 "both" 0 abxShotsNewShotRL;
-		button -label "Create" -h 25 -c "abxShotsCreateShotUI `optionMenuGrp -q -v abxShotsCreateTypeOM` (`optionMenuGrp -q -v abxShotsCreateOMTmpl`+\"/\"+`textField -q -text abxShotsCreateTFName`+\"_\"+`textField -q -text abxShotsCreateTFSubName`);window -e -vis 0 abxShotsCreateWindow;" ;
-		button -label "Apply" -h 25 -c "abxShotsCreateShotUI `optionMenuGrp -q -v abxShotsCreateTypeOM` (`optionMenuGrp -q -v abxShotsCreateOMTmpl`+\"/\"+`textField -q -text abxShotsCreateTFName`+\"_\"+`textField -q -text abxShotsCreateTFSubName`);";
-		button -label "Cancel" -h 25 -c "window -e -vis 0 abxShotsCreateWindow";
+	rowLayout -numberOfColumns 3 -columnWidth3 160 160 160 -columnAttach 1 "both" 0 -columnAttach 2 "both" 0 -columnAttach 3 "both" 0 abxShotsNewShotRL;
+	button -label "Create" -h 25 -c "abxShotsCreateShotUI `optionMenuGrp -q -v abxShotsCreateTypeOM` (`optionMenuGrp -q -v abxShotsCreateOMTmpl`+\"/\"+`textField -q -text abxShotsCreateTFName`+\"_\"+`textField -q -text abxShotsCreateTFSubName`);window -e -vis 0 abxShotsCreateWindow;" ;
+	button -label "Apply" -h 25 -c "abxShotsCreateShotUI `optionMenuGrp -q -v abxShotsCreateTypeOM` (`optionMenuGrp -q -v abxShotsCreateOMTmpl`+\"/\"+`textField -q -text abxShotsCreateTFName`+\"_\"+`textField -q -text abxShotsCreateTFSubName`);";
+	button -label "Cancel" -h 25 -c "window -e -vis 0 abxShotsCreateWindow";
 
-		formLayout -e 
-			-af abxShotsNewShotFrmeLyt "left" 5
-			-af abxShotsNewShotFrmeLyt "top" 5
-			-af abxShotsNewShotFrmeLyt "bottom" 34
-			-af abxShotsNewShotFrmeLyt "right" 5
+	formLayout -e 
+		-af abxShotsNewShotFrmeLyt "left" 5
+		-af abxShotsNewShotFrmeLyt "top" 5
+		-af abxShotsNewShotFrmeLyt "bottom" 34
+		-af abxShotsNewShotFrmeLyt "right" 5
 
-			-af abxShotsNewShotRL "left" 5
-			-ac abxShotsNewShotRL  "top" 5 abxShotsNewShotFrmeLyt
-			-af abxShotsNewShotRL "bottom" 5
-			-af abxShotsNewShotRL "right" 5
-			abxShotsNewShotUIFrmLyt;
-			
-		if ($shotFolderTab == "abxShotsLibForm"){
-			optionMenuGrp -e -value "Shots" abxShotsCreateTypeOM;
-			abxShotsUpdateNewShotUI;
-		}
-		else if ($shotFolderTab == "abxPrevisLibForm"){
-			optionMenuGrp -e -value "Previs" abxShotsCreateTypeOM;
-			abxShotsUpdateNewShotUI;
-		}
-		showWindow abxShotsCreateWindow;
-	}
-	else {
-		showWindow abxShotsCreateWindow;
+		-af abxShotsNewShotRL "left" 5
+		-ac abxShotsNewShotRL  "top" 5 abxShotsNewShotFrmeLyt
+		-af abxShotsNewShotRL "bottom" 5
+		-af abxShotsNewShotRL "right" 5
+		abxShotsNewShotUIFrmLyt;
+		
+	if ($shotFolderTab == "abxShotsLibForm"){
+		optionMenuGrp -e -value "Shots" abxShotsCreateTypeOM;
 		abxShotsUpdateNewShotUI;
-
 	}
+	else if ($shotFolderTab == "abxPrevisLibForm"){
+		optionMenuGrp -e -value "Previs" abxShotsCreateTypeOM;
+		abxShotsUpdateNewShotUI;
+	}
+	showWindow abxShotsCreateWindow;
+	
+
 }
 
 global proc abxShotsUpdateNewShotUI () {
