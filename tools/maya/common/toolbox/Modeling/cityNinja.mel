@@ -1,0 +1,10 @@
+// cityNinja
+// Created by: adamb
+// Date: 2014/11/04 17:43:01
+
+global proc cityNinja(){
+
+  string $ppRes = `getenv PP_ROOT`;
+  evalEcho("source \""+$ppRes+"/tools/maya/common/scripts/Ninja_City/Tools/Ninja_City.mel\";");
+  Ninja_City(($ppRes+"/tools/maya/common/scripts/Ninja_City"));
+}

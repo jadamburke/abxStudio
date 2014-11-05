@@ -1,9 +1,10 @@
 __author__ = 'adamb'
 
-import sys,os
+import sys, os
 from settings import *
 import yaml
 import re
+import utils
 
 class StudioEnvironment():
 
@@ -174,3 +175,29 @@ class StudioEnvironment():
         for key, value in self.vars.iteritems():
             print (key+'='+value)
 
+    def make_user_folders(self):
+        # check for any paths that reference the user and create the directory before launching app
+        # this is implemented to help applications store user prefs on the server
+        for var, val in self.vars.iteritems():
+            if '/user/' in val or '\\user\\' in val:
+                if not os.path.isdir(val):
+                    # hard-coded rules to grab template prefs and copy to user folder
+                    copy_dir = None
+                    if 'MAYA_APP_DIR' in var:
+                        # need to add platform handling
+                        copy_dir = os.path.expandvars('%USERPROFILE%/documents/maya')
+
+                    ## if no local prefs exist then copy from the default network user
+                    #if not os.path.isdir(copy_dir):
+                    #    user_name = ''
+                    #    user_name = re.search('/user/(.+?)/', val)
+                    #    copy_dir = val.replace(("/user/"+user_name+"/"), "/user/default/")
+
+                    # if a local dir exists then copy it to the network user prefs, otherwise create an empty folder on network
+                    if copy_dir:
+                        print ("Copying Local Prefs from:"+copy_dir+" to "+val)
+                        utils.copyDirTree(copy_dir,val)
+                    else:
+                        print ("No Local Prefs found in: "+copy_dir)
+                        print ("Making User Folder:"+var+":"+val)
+                        os.makedirs(val)

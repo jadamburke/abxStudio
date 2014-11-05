@@ -47,6 +47,7 @@ aftereffects:
         win32: '%PP_ROOT%\tools\aftereffects'
 maya:
   env:
+    MAYA_APP_DIR: '%PP_ROOT%\user\%USERNAME%\maya'
     MAYA_PPTOOLS: '%PP_RESOURCE%\tools\maya\common'
     MAYA_PPTOOLS_COMMON: '%PP_RESOURCE%\maya\common'
     MAYA_MODULE_PATH: '%MAYA_PPTOOLS%\modules'
@@ -82,7 +83,7 @@ maya:
         ui:
           linux: /
           mac: /
-          win32: maya.exe
+          win32: maya.exe -noAutoloadPlugins
       path:
         linux: /
         mac: /
@@ -300,3 +301,56 @@ motionbuilder:
         linux: /
         mac: /
         win32: C:\Program Files\Autodesk\MotionBuilder 2014\bin\x64
+photoshop:
+  show: true
+  tasks:
+  - design
+  - shade
+  - light
+  - comp
+  versions:
+    'CC':
+      name: Photoshop CC
+      env:
+        PP_PS: 'CC'
+      modes:
+        ui:
+          linux: /
+          mac: /
+          win32: ae_pipeline_init.bat
+      path:
+        linux: /
+        mac: /
+        win32: '%PP_ROOT%\tools\aftereffects'
+    'CC 2014':
+      name: Photoshop CC 2014
+      env:
+        PP_PS: 'CC 2014'
+      modes:
+        ui:
+          linux: /
+          mac: /
+          win32: Photoshop.exe
+      path:
+        linux: /
+        mac: /
+        win32: 'C:\Program Files\Adobe\Adobe Photoshop CC (64 Bit)'
+zbrush:
+  show: true
+  tasks:
+  - design
+  - model
+  versions:
+    '4R6':
+      name: ZBrush 4R6
+      env:
+        PP_ZB: '4R6'
+      modes:
+        ui:
+          linux: /
+          mac: /
+          win32: ZBrush.exe
+      path:
+        linux: /
+        mac: /
+        win32: 'C:\Program Files (x86)\Pixologic\ZBrush 4R6'

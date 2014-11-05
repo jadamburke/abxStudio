@@ -1,5 +1,6 @@
 __author__ = 'adamb'
 
+import os, sys, shutil, errno
 from settings import *
 
 
@@ -16,3 +17,11 @@ def driveToUNC(p, switchToFwdSlash=False):
                 p = p.replace('\\', '/')
             return p
     return p
+
+def copyDirTree(src,dest):
+    try:
+        shutil.copytree(src, dest)
+    except OSError as exc: # python >2.5
+        if exc.errno == errno.ENOTDIR:
+            shutil.copy(src, dest)
+        else: raise

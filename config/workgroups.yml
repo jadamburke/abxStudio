@@ -22,6 +22,10 @@ default:
       version: 'CC 2014'
     motionbuilder:
       version: '2014'
+    photoshop:
+      version: 'CC 2014'
+    zbrush:
+      version: '4R6'
   order:
   - maya
   - softimage
@@ -31,6 +35,8 @@ default:
   - hiero
   - aftereffects
   - premiere
+  - photoshop
+  - zbrush
 
 modeling:
   packages:
@@ -56,5 +62,27 @@ edit:
       version: '8.0v5'
     hiero:
       version: '1.8v1'
+    premiere:
+      version: 'CC 2014'
+
+design:
+  packages:
+    photoshop:
+      version: 'CC 2014'
+    zbrush:
+      version: '4R6'
+
+animation:
+  packages:
+    maya:
+      version: '2015'
+      modules:
+        arnold: '1.0.0.4'
+        crate: '1.1.145'
+    softimage:
+      version: '2015'
+      modules:
+        arnold: '3.2.0'
+        crate: '1.1.145'
     premiere:
       version: 'CC 2014'
