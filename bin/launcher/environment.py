@@ -54,11 +54,13 @@ class StudioEnvironment():
     def load_module_config(self, dataMap, module=None, package=None, version=None):
         print ("loading module: "+module+","+version)
         if module in dataMap:
+            print ("found:"+module)
             for key, value in dataMap.iteritems():
                 if key == module:
                     # add module env vars
                     if 'env' in dataMap[key]:
                         for var, val in dataMap[key]['env'].iteritems():
+                            print ("loading env:"+var)
                             self.add(var, val)
                     # add module/package env vars
                     if 'packages' in dataMap[key]:
@@ -157,7 +159,7 @@ class StudioEnvironment():
 
     def expandvars(self,path):
 
-        # expand any local var as well as previosly declared system environtment vars
+        # expand any local var as well as previously declared system environment vars
         var_subst = re.search('%(.+?)%', path)
         if var_subst:
             if var_subst.group(1) in self.vars:
@@ -186,6 +188,8 @@ class StudioEnvironment():
                     if 'MAYA_APP_DIR' in var:
                         # need to add platform handling
                         copy_dir = os.path.expandvars('%USERPROFILE%/documents/maya')
+                    if 'XSI_USERROOT' in var:
+                        copy_dir = os.path.expandvars('%USERPROFILE%/Autodesk')
 
                     ## if no local prefs exist then copy from the default network user
                     #if not os.path.isdir(copy_dir):

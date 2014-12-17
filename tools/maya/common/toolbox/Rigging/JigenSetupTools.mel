@@ -1,0 +1,7 @@
+// JigenSetupTools
+// Created by: adamb
+// Date: 2014/11/20 17:07:07
+
+global proc JigenSetupTools(){
+python("import setup_tools_jigen_v3");
+}

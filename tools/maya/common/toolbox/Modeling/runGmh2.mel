@@ -1,0 +1,8 @@
+// gmh2.mel
+// Created by: adamb
+// Date: 2014/12/03 15:44:14
+
+global proc runGmh2(){
+	string $pp_res = `getenv PP_RESOURCE`;
+	eval("source \""+$pp_res+"/bin/maya/GMH/2.0/GMH2/GMH2_starter.mel\"");
+}

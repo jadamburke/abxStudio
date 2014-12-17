@@ -91,12 +91,12 @@ global proc abxPicker(){
 	//nodeIconButton -style "textOnly" -l "+" -ann "Zoom In" -w 16 -h 16 -c "abxPickerZoom \"in\";abxPickerRefresh;";
 	//nodeIconButton -style "textOnly" -l "-" -ann "Zoom In" -w 16 -h 16 -c "abxPickerZoom \"out\";abxPickerRefresh;";
 	abxPickerNewControl "default" 16 16 "iconOnly" "" "" "0:0:.7:.4:.4" "abxPickerCtrlNew" .7 .4 .4 "" "" "Drag and Drop: Red Button";
-	abxPickerNewControl "default" 16 16 "iconOnly" "" "" "0:0:.7:.4:.4" "abxPickerCtrlNew" .4 .7 .4 "" "" "Drag and Drop: Green Button";
-	abxPickerNewControl "default" 16 16 "iconOnly" "" "" "0:0:.7:.4:.4" "abxPickerCtrlNew" .4 .5 .7 "" "" "Drag and Drop: Blue";
-	abxPickerNewControl "default" 16 16 "iconOnly" "" "" "0:0:.7:.4:.4" "abxPickerCtrlNew" .7 .7 .4 "" "" "Drag and Drop: Yellow";
-	abxPickerNewControl "default" 19 16 "textOnly" "Sl" "" "0:0:.7:.4:.4" "abxPickerCtrlCommand" .5 .5 .5 "/*select*/" "" "Drag this onto an existing button to reassign it to the current selection";
-	abxPickerNewControl "default" 19 16 "textOnly" "T" "" "0:0:.7:.4:.4" "abxPickerCtrlCommand" .5 .5 .5 "/*selectT*/" "" "Reassign Command: Select Current and Activate Translate Tool";
-	abxPickerNewControl "default" 19 16 "textOnly" "R" "" "0:0:.7:.4:.4" "abxPickerCtrlCommand" .5 .5 .5 "/*selectR*/" "" "Reassign Command: Select Current and Activate Rotate Tool";
+	abxPickerNewControl "default" 16 16 "iconOnly" "" "" "0:0:.4:.7:.4" "abxPickerCtrlNew" .4 .7 .4 "" "" "Drag and Drop: Green Button";
+	abxPickerNewControl "default" 16 16 "iconOnly" "" "" "0:0:.4:.5:.7" "abxPickerCtrlNew" .4 .5 .7 "" "" "Drag and Drop: Blue";
+	abxPickerNewControl "default" 16 16 "iconOnly" "" "" "0:0:.7:.7:.4" "abxPickerCtrlNew" .7 .7 .4 "" "" "Drag and Drop: Yellow";
+	abxPickerNewControl "default" 19 16 "textOnly" "Sl" "" "0:0:.5:.5:.5" "abxPickerCtrlCommand" .5 .5 .5 "/*select*/" "" "Drag this onto an existing button to reassign it to the current selection";
+	abxPickerNewControl "default" 19 16 "textOnly" "T" "" "0:0:.5:.5:.5" "abxPickerCtrlCommand" .5 .5 .5 "/*selectT*/" "" "Reassign Command: Select Current and Activate Translate Tool";
+	abxPickerNewControl "default" 19 16 "textOnly" "R" "" "0:0:.5:.5:.5" "abxPickerCtrlCommand" .5 .5 .5 "/*selectR*/" "" "Reassign Command: Select Current and Activate Rotate Tool";
 	//abxPickerNewControl "default" 16 16 "textOnly" "" "" "0:0:.7:.4:.4" "abxPickerCtrlNew" -1 -1 -1 "" "" "Opens an expanded set of UI controls and commands";
 	//nodeIconButton -style "iconOnly" -ann "Drag and Drop: Red" -dtg "0:0:.7:.4:.4" -w 16 -h 16 -bgc .7 .4 .4 -dgc "abxPickerCtrlNew";
 	//nodeIconButton -ebg 0 -style "iconOnly" -ann "Drag and Drop: Green" -dtg "0:0:.4:.7:.4" -w 16 -h 16 -bgc .4 .7 .4 -dgc "abxPickerCtrlNew";
@@ -892,6 +892,7 @@ global proc abxPickerRefresh (int $force) {
 	string $charName2;
 	string $subName;
 	string $tokenBuffer[];
+	global string $pickrPrefix = "";
 
 
 	$pickerNodes = stringArrayCatenate($pickerNodes,`ls "*:*_PIKR"`);
@@ -1138,10 +1139,12 @@ global proc abxPickerReadNode (string $node) {
 	*/
 
 	// if namespaces are used prefix with colon else use underscore
+
 	if (size($tokenBufferNS)>1)
 		$pickrPrefix = ($charName+":");
 	else
 		$pickrPrefix = $charName2;
+	//print ("Set prefix to "+$pickrPrefix+"\n");
 	for ($i=0;$i<$count;$i++){
 		tokenize $data[$i] ":" $tokenBuffer;
 		if (size($tokenBuffer)==5){
@@ -1184,8 +1187,9 @@ global proc abxPickerReadNode (string $node) {
 		}
 	}
 
-
-
+	// flushed picker prefix after reading
+	$pickrPrefix = "";
+	//print ("Set prefix to "+$pickrPrefix+"\n");
 
 	textField -e -text $charName abxPickerCharText;
 	// formLayout -e -visible true ($charName2+$subName+"PkrLyt");
@@ -1816,6 +1820,11 @@ global proc abxPickerMenuCmd (string $character){
 
 	string $pickerNodes[];
 	string $pickerNodesAlt[];
+
+	global string $pickrPrefix;
+	$pickrPrefix = "";
+	//print ("Set prefix to "+$pickrPrefix+"\n");
+
 	if ($character != ""){
 		$pickerNodes = `ls ($character+"_*_PIKR")`;
 		$pickerNodes = stringArrayCatenate($pickerNodes,`ls ($character+":*_PIKR")`);

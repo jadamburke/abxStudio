@@ -4,7 +4,7 @@ mentalray:
   packages:
     maya:
       env:
-        MAYA_MODULE_PATH: '%PP_RESOURCE%\bin\mentalray\maya\%PP_MAYA%\modules'
+        MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/mentalray/maya/%PP_MAYA%/modules'
       versions:
         '2015':
           path:
@@ -24,10 +24,10 @@ arnold:
   packages:
     maya:
       env:
-        MAYA_RENDER_DESC_PATH: '%PP_RESOURCE%\bin\arnold\maya\%PP_MTOA%\win\%PP_MAYA%'
-        MAYA_PLUG_IN_PATH: '%PP_RESOURCE%\bin\arnold\maya\%PP_MTOA%\win\%PP_MAYA%\plug-ins'
-        MAYA_SCRIPT_PATH: '%PP_RESOURCE%\bin\arnold\maya\%PP_MTOA%\win\%PP_MAYA%\scripts'
-        MAYA_MODULE_PATH: '%PP_RESOURCE%\bin\arnold\maya\%PP_MTOA%\win\%PP_MAYA%'
+        MAYA_RENDER_DESC_PATH: '%PP_RESOURCE%/bin/arnold/maya/%PP_MTOA%/win/%PP_MAYA%'
+        MAYA_PLUG_IN_PATH: '%PP_RESOURCE%/bin/arnold/maya/%PP_MTOA%/win/%PP_MAYA%/plug-ins'
+        MAYA_SCRIPT_PATH: '%PP_RESOURCE%/bin/arnold/maya/%PP_MTOA%/win/%PP_MAYA%/scripts'
+        MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/arnold/maya/%PP_MTOA%/win/%PP_MAYA%'
       versions:
         1.0.0.RC1:
           env:
@@ -61,7 +61,7 @@ arnold:
       versions:
         3.2.0:
           env:
-            XSI_PLUGINS: '%PP_ROOT%\bin\arnold\softimage\%PP_SITOA%\%PP_SOFTIMAGE%'
+            XSI_PLUGINS: '%PP_ROOT%/bin/arnold/softimage/%PP_SITOA%/%PP_SOFTIMAGE%'
             PP_SITOA: '3.2.0'
           path:
             linux: /
@@ -74,7 +74,7 @@ crate:
   name: Exocortex Crate
   show: false
   env:
-    EXOCORTEX_LICENSE: '5053@dmc4'
+    EXOCORTEX_LICENSE: '5063@ppny-lic'
   packages:
     maya:
       versions:
@@ -130,3 +130,60 @@ vray:
           versions:
           - '2014'
 
+alShaders:
+  name: alShaders
+  show: false
+  packages:
+    maya:
+      versions:
+        '0.4.0':
+          env:
+            ARNOLD_PLUGIN_PATH: '%PP_RESOURCE%/bin/arnold/alShaders/0.4.0/win/bin'
+            MTOA_TEMPLATES_PATH: '%PP_RESOURCE%/bin/arnold/alShaders/0.4.0/win/ae'
+          path:
+            linux: /
+            mac: /
+            win32: /
+          versions:
+          - '2013'
+          - '2014'
+          - '2015'
+
+gmh:
+  name: gmh
+  show: false
+  packages:
+    maya:
+      versions:
+        '2.0':
+          env:
+            MAYA_SCRIPT_PATH: '%PP_RESOURCE%/bin/maya/GMH/2.0'
+            PYTHONPATH: '%PP_RESOURCE%/bin/maya/GMH/2.0'
+            XBMLANGPATH: '%PP_RESOURCE%/bin/maya/GMH/2.0/GMH2/graphic'
+          path:
+            linux: /
+            mac: /
+            win32: /
+          versions:
+          - '2013'
+          - '2014'
+          - '2015'
+
+ngSkinningTools:
+  name: ngSkinningTools
+  show: false
+  packages:
+    maya:
+      versions:
+        '1.0.881':
+          env:
+            MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/maya/ngSkinTools/1.0.881/win32/maya2015'
+            MAYA_SHELF_PATH: '%PP_RESOURCE%/bin/maya/ngSkinTools/1.0.881/win32/maya2015/shelves'
+          path:
+            linux: /
+            mac: /
+            win32: /
+          versions:
+          - '2013'
+          - '2014'
+          - '2015'

@@ -1,8 +1,8 @@
 //CopyRight Dustin Nelson 2010-2014. Please do not distribute
 //http://www.creativecrash.com/maya/script/-rapid-rig-modular-procedural-auto-rig-for-maya
 //Script for Modular Character Rigging.
-//VERSION 1.3.4
-//MAY 11, 2014
+//VERSION 1.5.2
+//NOVEMBER 27, 2014
 //FILE IS NOT INTENDED TO BE HARMFUL, HOWEVER USE AT YOUR OWN RISK
 /*/////////////////////////////////////////////////////////////////////////////
 // 
@@ -17,7 +17,7 @@
 //	3. START UP MAYA, ENTER THE FOLLOWING COMMAND INTO
 //	THE COMMAND LINE OR THE SCRIPT EDITOR:
 //
-//	RapidRig_Modular_Selector
+//	RapidRig_Modular_Selector;
 //
 //	4. TO HAVE EASY ACCESS TO SCRIPT, CREATE A SHELF BUTTON
 //	WITH ONLY THAT COMMAND. EVERY TIME YOU HIT THE BUTTON,
@@ -210,7 +210,6 @@ global proc modIKtoFK(string $button)
 		{
 			$AnkleIKtoFKLctr_T = `xform -q -t ($modControl + "_AnkleIKtoFKLctr")`;
 			$AnkleIKtoFKLctr_R = `xform -q -ro ($modControl + "_AnkleIKtoFKLctr")`;
-			$AnkleFKCtrlGrp_R = `xform -q -ro ($modControl + "_AnkleFKCtrlGrp")`;
 			setAttr ($modControl + "_FootIKCtrl.translateX") $AnkleIKtoFKLctr_T[0];
 			setAttr ($modControl + "_FootIKCtrl.translateY") $AnkleIKtoFKLctr_T[1];
 			setAttr ($modControl + "_FootIKCtrl.translateZ") $AnkleIKtoFKLctr_T[2];
@@ -485,6 +484,18 @@ global proc modSideToSidePose(string $modRigName, string $modSide)
 						}
 					}
 				}
+				//AUXILIARY
+				if ($moduleType == "auxiliary")
+				{
+					if ($eachChannel == "translateX" || $eachChannel == "translateZ" || $eachChannel == "rotateY")
+					{
+						setAttr ($oppControl + "." + $eachChannel) ($channelVal * -1);
+					}
+					else
+					{
+						setAttr ($oppControl + "." + $eachChannel) $channelVal;
+					}
+				}
 			}
 		}
 	}
@@ -498,7 +509,10 @@ global proc modMirrorPose(string $modRigName)
 	select -d ($modRigName + "_MAINCtrl");
 	$modControls = `ls -sl`;
 	
-	//CENTER CONTROLS
+	//RANDOM VALUE TO CHECK MIRRORING
+	float $randVal = (rand (10,15));
+	
+	//DEFINE CONTROLS
 	string $centerControls[];
 	string $leftControls[];
 	string $rightControls[];
@@ -542,13 +556,16 @@ global proc modMirrorPose(string $modRigName)
 		}		
 	}
 	
-	//MIRROR LEFT AND RIGHT
+	//MIRROR LEFT TO RIGHT
 	for ($eachLeftControl in $leftControls)
 	{
 		$eachRightControl = `getAttr ($eachLeftControl + ".rightControl")`;
 		$eachRightControl = ($modRigName + $eachRightControl);
 		if (`objExists $eachRightControl`)
 		{
+			//ADD TEMP ATTRIBUTE TO AVOID DOUBLE MIRRORING
+			setAttr ($eachRightControl + ".isMirrored") $randVal;
+			
 			$leftChannels  = `listAttr -k -u $eachLeftControl`;
 			$rightChannels = `listAttr -k -u $eachRightControl`;
 			$channelNum = `size $leftChannels`;
@@ -658,7 +675,165 @@ global proc modMirrorPose(string $modRigName)
 						}
 					}
 				}
+				//AUXILIARY
+				if ($moduleType == "auxiliary")
+				{
+					if ($eachSideChannel == "translateX" || $eachSideChannel == "translateZ" || $eachSideChannel == "rotateY")
+					{
+						setAttr ($eachRightControl + "." + $eachSideChannel) ($leftVal * -1);
+						setAttr ($eachLeftControl + "." + $eachSideChannel) ($rightVal * -1);
+					}
+					else
+					{
+						setAttr ($eachRightControl + "." + $eachSideChannel) $leftVal;
+						setAttr ($eachLeftControl + "." + $eachSideChannel) $rightVal;
+					}
+				}
 			}
+		}
+	}
+	
+	//MIRROR RIGHT TO LEFT
+	for ($eachRightControl in $rightControls)
+	{
+		//CHECK IF THE RIGHT CONTROL HAS ALREADY BEEN MIRRORED, AND SKIP IF TRUE
+		$isMirrored = `getAttr ($eachRightControl + ".isMirrored")`;
+		
+		if ($isMirrored != $randVal)
+		{
+			$eachLeftControl = `getAttr ($eachRightControl + ".leftControl")`;
+			$eachLeftControl = ($modRigName + $eachLeftControl);
+			if (`objExists $eachLeftControl`)
+			{
+				$rightChannels  = `listAttr -k -u $eachRightControl`;
+				$leftChannels = `listAttr -k -u $eachLeftControl`;
+				$channelNum = `size $rightChannels`;
+				for ($eachSideChannel in $rightChannels)
+				{
+					float $rightVal = `getAttr ($eachRightControl + "." + $eachSideChannel)`;
+					float $leftVal = `getAttr ($eachLeftControl + "." + $eachSideChannel)`;
+					
+					$moduleType = `getAttr ($eachRightControl + ".moduleType")`;
+	
+					//SPLINE
+					if ($moduleType == "spline")
+					{
+						if ($eachSideChannel == "translateX" || $eachSideChannel == "rotateY" || $eachSideChannel == "rotateZ")
+						{
+							setAttr ($eachLeftControl + "." + $eachSideChannel) ($rightVal * -1);
+							setAttr ($eachRightControl + "." + $eachSideChannel) ($leftVal * -1);
+						}
+						else
+						{
+							setAttr ($eachLeftControl + "." + $eachSideChannel) $rightVal;
+							setAttr ($eachRightControl + "." + $eachSideChannel) $leftVal;
+						}
+					}				
+					
+					
+					//ARM
+					if ($moduleType == "arm")
+					{
+						if ($eachSideChannel == "translateX" || $eachSideChannel == "rotateY" || $eachSideChannel == "rotateZ")
+						{
+							setAttr ($eachLeftControl + "." + $eachSideChannel) ($rightVal * -1);
+							setAttr ($eachRightControl + "." + $eachSideChannel) ($leftVal * -1);
+						}
+						else
+						{
+							setAttr ($eachLeftControl + "." + $eachSideChannel) $rightVal;
+							setAttr ($eachRightControl + "." + $eachSideChannel) $leftVal;
+						}
+					}
+					//LEG
+					if ($moduleType == "leg")
+					{
+						if (`gmatch $eachRightControl ($modRigName + "_?_*_HipFKCtrl")` || `gmatch $eachRightControl ($modRigName + "_?_*_KneeFKCtrl")` ||
+							`gmatch $eachRightControl ($modRigName + "_?_*_KneeFKCtrl")` || `gmatch $eachRightControl ($modRigName + "_?_*_LowerLegFKCtrl")` ||
+							`gmatch $eachRightControl ($modRigName + "_?_*_AnkleFKCtrl")` || `gmatch $eachRightControl ($modRigName + "_?_*_BallFKCtrl")` ||
+							`gmatch $eachRightControl ($modRigName + "_?_*_ToeFKCtrl")`)
+						{
+							if ($eachSideChannel == "translateY" || $eachSideChannel == "rotateX" || $eachSideChannel == "rotateZ" ||
+							$eachSideChannel == "righttTilt" || $eachSideChannel == "ballSwivel")
+							{
+								setAttr ($eachLeftControl + "." + $eachSideChannel) ($rightVal * -1);
+								setAttr ($eachRightControl + "." + $eachSideChannel) ($leftVal * -1);
+							}
+							else
+							{
+								setAttr ($eachLeftControl + "." + $eachSideChannel) $rightVal;
+								setAttr ($eachRightControl + "." + $eachSideChannel) $leftVal;
+							}
+						}
+						else
+						{
+							if ($eachSideChannel == "translateX" || $eachSideChannel == "rotateY" || $eachSideChannel == "rotateZ" ||
+							$eachSideChannel == "righttTilt" || $eachSideChannel == "ballSwivel")
+							{
+								setAttr ($eachLeftControl + "." + $eachSideChannel) ($rightVal * -1);
+								setAttr ($eachRightControl + "." + $eachSideChannel) ($leftVal * -1);
+							}
+							else
+							{
+								setAttr ($eachLeftControl + "." + $eachSideChannel) $rightVal;
+								setAttr ($eachRightControl + "." + $eachSideChannel) $leftVal;
+							}
+						}
+					}
+					//FK CHAIN
+					if ($moduleType == "fkChain")
+					{
+						////GET CORE NAME
+						//$modCoreName = `getAttr ($eachRightControl + ".modCoreName")`;
+						//GET DIRECTION
+						$direction = `getAttr ($eachRightControl + ".direction")`;
+						if ($direction == 2 || $direction == 5)
+						{
+							if ($eachSideChannel == "translateX" || $eachSideChannel == "translateY" || $eachSideChannel == "translateZ")
+							{
+								setAttr ($eachLeftControl + "." + $eachSideChannel) ($rightVal * -1);
+								setAttr ($eachRightControl + "." + $eachSideChannel) ($leftVal * -1);
+							}
+							else
+							{
+								setAttr ($eachLeftControl + "." + $eachSideChannel) $rightVal;
+								setAttr ($eachRightControl + "." + $eachSideChannel) $leftVal;
+							}
+						}
+						else
+						{
+							if ($eachSideChannel == "translateX" || $eachSideChannel == "rotateY" || $eachSideChannel == "rotateZ")
+							{
+								setAttr ($eachLeftControl + "." + $eachSideChannel) ($rightVal * -1);
+								setAttr ($eachRightControl + "." + $eachSideChannel) ($leftVal * -1);
+							}
+							else
+							{
+								setAttr ($eachLeftControl + "." + $eachSideChannel) $rightVal;
+								setAttr ($eachRightControl + "." + $eachSideChannel) $leftVal;
+							}
+						}
+					}
+					//AUXILIARY
+					if ($moduleType == "auxiliary")
+					{
+						if ($eachSideChannel == "translateX" || $eachSideChannel == "translateZ" || $eachSideChannel == "rotateY")
+						{
+							setAttr ($eachLeftControl + "." + $eachSideChannel) ($rightVal * -1);
+							setAttr ($eachRightControl + "." + $eachSideChannel) ($leftVal * -1);
+						}
+						else
+						{
+							setAttr ($eachLeftControl + "." + $eachSideChannel) $rightVal;
+							setAttr ($eachRightControl + "." + $eachSideChannel) $leftVal;
+						}
+					}
+				}
+			}
+		}
+		else
+		{//RESET MIRRORED ATTRIBUTE
+			setAttr ($eachRightControl + ".isMirrored") 1015;
 		}
 	}
 	select $initialSelection;
@@ -1123,9 +1298,149 @@ global proc CreateModuPoserGUI()
 						}
 
 			setParent mainModSelectionPaneLayout;
-				paneLayout -configuration "horizontal2" subModSelectionPaneLayout2;
+				paneLayout -configuration "horizontal3" subModSelectionPaneLayout2;
 						
 				
+					//LOOK ATS///////////////////////////////////////////////////////////////////////////////////////////
+					$i = 0;
+					frameLayout -label "LOOK-ATS";
+					//columnLayout RRMS_LookAtsColumnLayout;
+						scrollLayout RRMS_LookAtsScrollLayout;
+						columnLayout RRMS_LookAtsColumnLayout;
+						for ($each in $topNodes)
+						{
+							$nodeType = `getAttr ($each + ".topNode")`;
+							if ($nodeType == "lookAt")
+							{
+								//GET CORE NAME
+								string $coreName = `getAttr ($each + ".coreName")`;
+								string $moduleName = `getAttr ($each + ".moduleName")`;
+								int $lookAts = `getAttr ($each + ".lookAts")`;
+								string $side = "";
+								
+								int $frameWidth =  (($lookAts + 2) * 32 - 4);
+								if ($frameWidth < 184)
+								{
+									$frameWidth = 184;
+								}
+
+								string $lookAtButton;
+								vector $buttonC1 = <<0.20, 0.45, 0.22>>;
+								vector $buttonC2 = <<0.33, 0.57, 0.35>>;
+								vector $buttonC3 = <<0.40, 0.75, 0.43>>;
+								if (`objExists ($each + ".side")`)
+								{
+									$side = `getAttr ($each + ".side")`;
+									if ($side == "right")
+									{
+										$buttonC1 = <<0.65, 0.15, 0.15>>;
+										$buttonC2 = <<0.75, 0.25, 0.25>>;
+										$buttonC3 = <<1.00, 0.45, 0.45>>;
+									}
+									if ($side == "left")
+									{
+										$buttonC1 = <<0.00, 0.20, 0.65>>;
+										$buttonC2 = <<0.12, 0.50, 0.85>>;
+										$buttonC3 = <<0.23, 0.70, 1.00>>;
+									}
+								}
+								//CREATE PAIRING FRAME LAYOUT
+								if (`objExists ($each + ".side")` && ($side == "right"))
+								{
+									frameLayout -label ($moduleName + " (pair)")
+									-w 200
+									-bgc 0.17 0.17 0.17
+									-collapsable 1 ($moduleName + "PairFrameLayout");
+									columnLayout ($moduleName + "PairColumnLayout");
+									//ADD TOP LOOK-AT BUTTON
+									string $lookAtButton = `button -label ($moduleName + " Look-At") -h 18 -ann ($modRigName + "_" + $moduleName + "_LookAtCtrl")`;
+									button -edit -command ("modSelectControl " + $lookAtButton) $lookAtButton;
+								}
+								
+								frameLayout -label $coreName
+								-w $frameWidth
+								-bgc ($buttonC1.x) ($buttonC1.y) ($buttonC1.z)
+								-collapsable 1 ("lookAtModFrameLayout" + $i);
+								columnLayout;
+								int $currentSplineNum = 1;
+								
+								if (!`objExists ($each + ".side")`)
+								{
+									string $lookAtButton = `button -label ($moduleName + " Look-At") -h 18 -ann ($modRigName + "_" + $moduleName + "_LookAtCtrl")`;
+									button -edit -command ("modSelectControl " + $lookAtButton) $lookAtButton;
+								}
+
+								//LOOK-AT CONTROLS
+								string $selectForm = `formLayout -numberOfDivisions 100`;
+								$jointNum = 1;
+								$hOffset = 0;
+								$vOffset = 0;
+                        
+								//ADD "ALL" BUTTONS IF THERE ARE MULTIPLE CHAINS
+								if ($lookAts > 1)
+								{
+									$allButton = `button -label ">ALL<" -w 42 -h 18 -bgc .95 .95 .95 -ann ($modRigName + $coreName + "")`;
+									button -edit -command ("modSelectAllModulesControl " + $allButton) $allButton;
+									
+									formLayout -edit
+									-attachForm $allButton "left" 0
+									-attachForm $allButton "top" 0
+									$selectForm;
+									$hOffset = ($hOffset + 44);
+								}
+								
+								string $stringNum = "0";
+								$mainButton = `button -label "Mstr" -w 34 -h 18 -bgc ($buttonC3.x) ($buttonC3.y) ($buttonC3.z) -ann ($modRigName + $coreName + "_MasterCtrl")`;
+								button -edit -command ("modSelectControl " + $mainButton) $mainButton;
+								formLayout -edit
+								-attachForm $mainButton "left" $hOffset
+								-attachForm $mainButton "top" $vOffset											
+								$selectForm;
+								
+								$hOffset = ($hOffset + 36);
+
+								$jointNum = 1;
+								while ($jointNum <= $lookAts)
+								{
+									if ($jointNum >= 10)
+									{
+										$stringNum = "";
+									}
+									$chain_numButton = `button -label ($jointNum) -w 28 -h 18 -bgc ($buttonC2.x) ($buttonC2.y) ($buttonC2.z) -ann ($modRigName + $coreName + "_" + $stringNum + $jointNum + "Ctrl")`;
+									button -edit -command ("modSelectControl " + $chain_numButton) $chain_numButton;
+									
+									formLayout -edit
+									-attachForm $chain_numButton "left" $hOffset
+									-attachForm $chain_numButton "top" $vOffset											
+									$selectForm;
+									
+									$hOffset = ($hOffset + 28);
+									$jointNum++;
+								}
+								$vOffset = ($vOffset + 30);
+								$jointNum = 1;
+								$hOffset = 0;
+
+								setParent ("lookAtModFrameLayout" + $i);
+								if ($side == "left")
+								{
+									setParent..;
+								}
+								setParent..;
+
+								$i++;
+								if ($i == 2 || !`objExists ($each + ".side")`)
+								{
+									setParent RRMS_LookAtsColumnLayout;
+								}
+							}
+							//setParent RRMS_LookAtsColumnLayout;
+							//$i = ($i + 1);
+						}
+						
+
+						setParent subModSelectionPaneLayout2;
+
 					//HEAD///////////////////////////////////////////////////////////////////////////////////////////
 					$i = 0;
 					frameLayout -label "HEADS";
@@ -1329,154 +1644,16 @@ global proc CreateModuPoserGUI()
 							//setParent RRMS_SplineColumnLayout;
 							//$i++;
 						}
+						
+				setParent subModSelectionPaneLayout2;
 
 						
 			setParent mainModSelectionPaneLayout;
 				paneLayout -configuration "horizontal2" subModSelectionPaneLayout3;
 					
-					//LOOK ATS///////////////////////////////////////////////////////////////////////////////////////////
-					$i = 0;
-					frameLayout -label "LOOK-ATS";
-					//columnLayout RRMS_LookAtsColumnLayout;
-						scrollLayout RRMS_LookAtsScrollLayout;
-						columnLayout RRMS_LookAtsColumnLayout;
-						for ($each in $topNodes)
-						{
-							$nodeType = `getAttr ($each + ".topNode")`;
-							if ($nodeType == "lookAt")
-							{
-								//GET CORE NAME
-								string $coreName = `getAttr ($each + ".coreName")`;
-								string $moduleName = `getAttr ($each + ".moduleName")`;
-								int $lookAts = `getAttr ($each + ".lookAts")`;
-								string $side = "";
-								
-								int $frameWidth =  (($lookAts + 2) * 32 - 4);
-								if ($frameWidth < 184)
-								{
-									$frameWidth = 184;
-								}
-
-								string $lookAtButton;
-								vector $buttonC1 = <<0.20, 0.45, 0.22>>;
-								vector $buttonC2 = <<0.33, 0.57, 0.35>>;
-								vector $buttonC3 = <<0.40, 0.75, 0.43>>;
-								if (`objExists ($each + ".side")`)
-								{
-									$side = `getAttr ($each + ".side")`;
-									if ($side == "right")
-									{
-										$buttonC1 = <<0.65, 0.15, 0.15>>;
-										$buttonC2 = <<0.75, 0.25, 0.25>>;
-										$buttonC3 = <<1.00, 0.45, 0.45>>;
-									}
-									if ($side == "left")
-									{
-										$buttonC1 = <<0.00, 0.20, 0.65>>;
-										$buttonC2 = <<0.12, 0.50, 0.85>>;
-										$buttonC3 = <<0.23, 0.70, 1.00>>;
-									}
-								}
-								//CREATE PAIRING FRAME LAYOUT
-								if (`objExists ($each + ".side")` && ($side == "right"))
-								{
-									frameLayout -label ($moduleName + " (pair)")
-									-w 200
-									-bgc 0.17 0.17 0.17
-									-collapsable 1 ($moduleName + "PairFrameLayout");
-									columnLayout ($moduleName + "PairColumnLayout");
-									//ADD TOP LOOK-AT BUTTON
-									string $lookAtButton = `button -label ($moduleName + " Look-At") -h 18 -ann ($modRigName + "_" + $moduleName + "_LookAtCtrl")`;
-									button -edit -command ("modSelectControl " + $lookAtButton) $lookAtButton;
-								}
-								
-								frameLayout -label $coreName
-								-w $frameWidth
-								-bgc ($buttonC1.x) ($buttonC1.y) ($buttonC1.z)
-								-collapsable 1 ("lookAtModFrameLayout" + $i);
-								columnLayout;
-								int $currentSplineNum = 1;
-								
-								if (!`objExists ($each + ".side")`)
-								{
-									string $lookAtButton = `button -label ($moduleName + " Look-At") -h 18 -ann ($modRigName + "_" + $moduleName + "_LookAtCtrl")`;
-									button -edit -command ("modSelectControl " + $lookAtButton) $lookAtButton;
-								}
-
-								//LOOK-AT CONTROLS
-								string $selectForm = `formLayout -numberOfDivisions 100`;
-								$jointNum = 1;
-								$hOffset = 0;
-								$vOffset = 0;
-                        
-								//ADD "ALL" BUTTONS IF THERE ARE MULTIPLE CHAINS
-								if ($lookAts > 1)
-								{
-									$allButton = `button -label ">ALL<" -w 42 -h 18 -bgc .95 .95 .95 -ann ($modRigName + $coreName + "")`;
-									button -edit -command ("modSelectAllModulesControl " + $allButton) $allButton;
-									
-									formLayout -edit
-									-attachForm $allButton "left" 0
-									-attachForm $allButton "top" 0
-									$selectForm;
-									$hOffset = ($hOffset + 44);
-								}
-								
-								string $stringNum = "0";
-								$mainButton = `button -label "Mstr" -w 34 -h 18 -bgc ($buttonC3.x) ($buttonC3.y) ($buttonC3.z) -ann ($modRigName + $coreName + "_MasterCtrl")`;
-								button -edit -command ("modSelectControl " + $mainButton) $mainButton;
-								formLayout -edit
-								-attachForm $mainButton "left" $hOffset
-								-attachForm $mainButton "top" $vOffset											
-								$selectForm;
-								
-								$hOffset = ($hOffset + 36);
-
-								$jointNum = 1;
-								while ($jointNum <= $lookAts)
-								{
-									if ($jointNum >= 10)
-									{
-										$stringNum = "";
-									}
-									$chain_numButton = `button -label ($jointNum) -w 28 -h 18 -bgc ($buttonC2.x) ($buttonC2.y) ($buttonC2.z) -ann ($modRigName + $coreName + "_" + $stringNum + $jointNum + "Ctrl")`;
-									button -edit -command ("modSelectControl " + $chain_numButton) $chain_numButton;
-									
-									formLayout -edit
-									-attachForm $chain_numButton "left" $hOffset
-									-attachForm $chain_numButton "top" $vOffset											
-									$selectForm;
-									
-									$hOffset = ($hOffset + 28);
-									$jointNum++;
-								}
-								$vOffset = ($vOffset + 30);
-								$jointNum = 1;
-								$hOffset = 0;
-
-								setParent ("lookAtModFrameLayout" + $i);
-								if ($side == "left")
-								{
-									setParent..;
-								}
-								setParent..;
-
-								$i++;
-								if ($i == 2 || !`objExists ($each + ".side")`)
-								{
-									setParent RRMS_LookAtsColumnLayout;
-								}
-							}
-							//setParent RRMS_LookAtsColumnLayout;
-							//$i = ($i + 1);
-						}
-						
-
-						setParent subModSelectionPaneLayout3;
 						
 					//FK CHAINS///////////////////////////////////////////////////////////////////////////////////////////
 					$i = 0;
-					string $modClavTxtFld;
 					frameLayout -label "FK CHAINS";
 						scrollLayout RRMS_FkChainScrollLayout;
 						columnLayout RRMS_FkChainColumnLayout;
@@ -1676,6 +1853,100 @@ global proc CreateModuPoserGUI()
 							}
 						}
 						
+						setParent subModSelectionPaneLayout3;
+						
+					//AUXILIARIES///////////////////////////////////////////////////////////////////////////////////////////
+					$i = 0;
+					frameLayout -label "AUXILIARIES";
+						scrollLayout RRMS_AuxiliariesScrollLayout;
+						columnLayout RRMS_AuxiliariesColumnLayout;
+						string $selectForm = `formLayout -numberOfDivisions 100`;
+						int $vOffset;
+						int $hOffset;
+						for ($each in $topNodes)
+						{
+							$nodeType = `getAttr ($each + ".topNode")`;
+							if ($nodeType == "auxiliary")
+							{
+								print ("each is " + $each + "\n");
+								//GET CORE NAME
+								string $coreName = `getAttr ($each + ".coreName")`;
+								string $moduleName = `getAttr ($each + ".moduleName")`;
+								string $side = "";
+								
+								
+								$frameWidth = 184;
+
+								string $auxiliaryButton;
+								vector $buttonC1 = <<0.20, 0.45, 0.22>>;
+								vector $buttonC2 = <<0.33, 0.57, 0.35>>;
+								vector $buttonC3 = <<0.40, 0.75, 0.43>>;
+								if (`objExists ($each + ".side")`)
+								{
+									$side = `getAttr ($each + ".side")`;
+									//print ("side is " + $side + "\n");
+									if ($side == "right")
+									{
+										//print "sfdsf";
+										$buttonC1 = <<0.65, 0.15, 0.15>>;
+										$buttonC2 = <<0.75, 0.25, 0.25>>;
+										$buttonC3 = <<1.00, 0.45, 0.45>>;
+									}
+									if ($side == "left")
+									{
+										//print "zxcxcx";
+										$buttonC1 = <<0.00, 0.20, 0.65>>;
+										$buttonC2 = <<0.12, 0.50, 0.85>>;
+										$buttonC3 = <<0.23, 0.70, 1.00>>;
+									}
+								}
+
+								//AUXILIARY CONTROLS
+								string $selectForm = `formLayout -numberOfDivisions 100`;
+
+								//CREATE PAIRING FRAME LAYOUT
+								if (`objExists ($each + ".side")` && ($side == "right"))
+								{
+									$auxButton = `button -label ($coreName + "_AuxCtrl") -w 150 -h 18 -bgc ($buttonC2.x) ($buttonC2.y) ($buttonC2.z) -ann ($modRigName + $coreName + "_AuxCtrl") ($coreName + "_AuxCtrl")`;
+									button -edit -command ("modSelectControl " + $auxButton) $auxButton;
+									formLayout -edit
+									-attachForm $auxButton "left" 0
+									-attachForm $auxButton "top" 0
+									$selectForm;
+								}
+								else if (`objExists ($each + ".side")` && ($side == "left"))
+								{
+									$auxButton = `button -label ($coreName + "_AuxCtrl") -w 150 -h 18 -bgc ($buttonC2.x) ($buttonC2.y) ($buttonC2.z) -ann ($modRigName + $coreName + "_AuxCtrl") ($coreName + "_AuxCtrl")` ;
+									button -edit -command ("modSelectControl " + $auxButton) $auxButton;
+									formLayout -edit
+									-attachForm $auxButton "left" 0
+									-attachForm $auxButton "top" 0
+									$selectForm;
+								}
+								else
+								{
+									$auxButton = `button -label ($coreName + "_AuxCtrl") -w 150 -h 18 -bgc ($buttonC2.x) ($buttonC2.y) ($buttonC2.z) -ann ($modRigName + $coreName + "_AuxCtrl") ($coreName + "_AuxCtrl")`;
+									button -edit -command ("modSelectControl " + $auxButton) $auxButton;
+									formLayout -edit
+									-attachForm $auxButton "left" 0
+									-attachForm $auxButton "top" 0
+									$selectForm;
+								}
+								
+
+								
+	
+								setParent RRMS_AuxiliariesColumnLayout;
+
+								$i++;
+								if ($i == 2 || !`objExists ($each + ".side")`)
+								{
+									setParent RRMS_AuxiliariesColumnLayout;
+								}
+							}
+							//setParent RRMS_AuxiliariesColumnLayout;
+							//$i = ($i + 1);
+						}
 
 			//setParent mainModSelectionPaneLayout;
 			setParent modPoserTabs;
@@ -1716,7 +1987,7 @@ global proc RapidRig_Modular_Selector()
 	{
 		if (`objExists ($mainCtrl[0] + ".isMain")`)
 		{
-			window -title "Rapid Rig: Modular Selector 1.3.0"
+			window -title "Rapid Rig: Modular Selector 1.5.2"
 			//-wh 375 212
 			-rtf on
 			-mnb true

@@ -5,6 +5,8 @@ default:
       modules:
         arnold: '1.1.1.0'
         crate: '1.1.145'
+        gmh: '2.0'
+        ngSkinningTools: '1.0.881'
     softimage:
       version: '2015'
       modules:

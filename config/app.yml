@@ -3,7 +3,7 @@ studiotools:
   show: false
   env:
     MODE: pub
-    PP_JOB_SERVERS: \\pp-fs-nyc\production\
+    PP_JOB_SERVERS: //pp-fs-nyc/production/
     PP_RESOURCE: '%PP_ROOT%'
   versions:
     '1.0':
@@ -31,7 +31,7 @@ aftereffects:
       path:
         linux: /
         mac: /
-        win32: '%PP_ROOT%\tools\aftereffects'
+        win32: '%PP_ROOT%/tools/aftereffects'
     'CC 2014':
       name: After Effects CC 2014
       env:
@@ -44,25 +44,26 @@ aftereffects:
       path:
         linux: /
         mac: /
-        win32: '%PP_ROOT%\tools\aftereffects'
+        win32: '%PP_ROOT%/tools/aftereffects'
 maya:
   env:
-    MAYA_APP_DIR: '%PP_ROOT%\user\%USERNAME%\maya'
-    MAYA_PPTOOLS: '%PP_RESOURCE%\tools\maya\common'
-    MAYA_PPTOOLS_COMMON: '%PP_RESOURCE%\maya\common'
-    MAYA_MODULE_PATH: '%MAYA_PPTOOLS%\modules'
-    MAYA_PLUG_IN_PATH: '%MAYA_PPTOOLS%\plugins'
-    MAYA_PRESET_PATH: '%MAYA_PPTOOLS%\presets'
-    MAYA_SCRIPT_PATH: '%MAYA_PPTOOLS%\scripts'
-    MAYA_SHELF_PATH: '%MAYA_PPTOOLS%\shelves'
-    PYTHONPATH: '%PP_RESOURCE%\lib\python;%MAYA_PPTOOLS%\scripts'
+    MAYA_APP_DIR: '%PP_ROOT%/user/%USERNAME%/maya'
+    MAYA_PPTOOLS: '%PP_RESOURCE%/tools/maya/common'
+    MAYA_PPTOOLS_COMMON: '%PP_RESOURCE%/maya/common'
+    MAYA_MODULE_PATH: '%MAYA_PPTOOLS%/modules'
+    MAYA_PLUG_IN_PATH: '%MAYA_PPTOOLS%/plugins'
+    MAYA_PRESET_PATH: '%MAYA_PPTOOLS%/presets'
+    MAYA_SCRIPT_PATH: '%MAYA_PPTOOLS%/scripts'
+    MAYA_SHELF_PATH: '%MAYA_PPTOOLS%/shelves'
+    XBMLANGPATH: '%MAYA_PPTOOLS%/icons'
+    PYTHONPATH: '%PP_RESOURCE%/lib/python;%MAYA_PPTOOLS%/scripts'
   show: true
   versions:
     '2014':
       name: Autodesk Maya
       env:
         PP_MAYA: '2014'
-        MAYA_PPTOOLS_VERSIONED: '%PP_RESOURCE%\maya\%PP_MAYA%x64'
+        MAYA_PPTOOLS_VERSIONED: '%PP_RESOURCE%/maya/%PP_MAYA%x64'
         PP_MAYA_DIR: C:/Program Files/Autodesk/Maya%PP_MAYA%
       modes:
         ui:
@@ -76,7 +77,7 @@ maya:
     '2015':
       name: Autodesk Maya
       env:
-        MAYA_PPTOOLS_VERSIONED: '%PP_RESOURCE%\maya\%PP_MAYA%x64'
+        MAYA_PPTOOLS_VERSIONED: '%PP_RESOURCE%/maya/%PP_MAYA%x64'
         PP_MAYA: '2015'
         PP_MAYA_DIR: C:/Program Files/Autodesk/Maya%PP_MAYA%
       modes:
@@ -100,11 +101,12 @@ maya:
   - light
 softimage:
   env:
-    PP_XSI_WORKGRP: '%PP_ROOT%\tools\softimage\common'
+    PP_XSI_WORKGRP: '%PP_ROOT%/tools/softimage/common'
     XSI_HOME: '%SI_HOME%'
-    XSI_BINDIR: '%XSI_HOME%\Application\bin'
-    PYTHONPATH: '%PP_ROOT%\lib\python'
-    XSI_PLUGINS: '%PP_ROOT%\tools\softimage\common'
+    XSI_BINDIR: '%XSI_HOME%/Application/bin'
+    PYTHONPATH: '%PP_ROOT%/lib/python'
+    XSI_PLUGINS: '%PP_ROOT%/tools/softimage/common'
+    XSI_USERROOT: '%PP_ROOT%/user/%USERNAME%'
   show: true
   versions:
     '2014':
@@ -146,8 +148,8 @@ softimage:
   - light
 nuke:
   env:
-    NUKE_PATH: '%PP_RESOURCE%\tools\nuke'
-    NUKE_DISK_CACHE: 'E:\Nuke'
+    NUKE_PATH: '%PP_RESOURCE%/tools/nuke'
+    NUKE_DISK_CACHE: 'E:/Nuke'
   show: true
   tasks:
   - comp
@@ -180,8 +182,8 @@ nuke:
         win32: C:/Program Files/Nuke8.0v5
 nukex:
   env:
-    NUKE_PATH: '%PP_ROOT%\tools\nuke'
-    NUKE_DISK_CACHE: 'E:\Nuke'
+    NUKE_PATH: '%PP_ROOT%/tools/nuke'
+    NUKE_DISK_CACHE: 'E:/Nuke'
   show: true
   tasks:
   - comp
@@ -241,7 +243,7 @@ premiere:
       path:
         linux: /
         mac: /
-        win32: C:\Program Files\Adobe\Adobe Premiere Pro CC
+        win32: C:/Program Files/Adobe/Adobe Premiere Pro CC
     'CC 2014':
       name: Premiere
       modes:
@@ -252,7 +254,7 @@ premiere:
       path:
         linux: /
         mac: /
-        win32: C:\Program Files\Adobe\Adobe Premiere Pro CC 2014
+        win32: C:/Program Files/Adobe/Adobe Premiere Pro CC 2014
 hiero:
   name: Hiero
   show: true
@@ -300,7 +302,7 @@ motionbuilder:
       path:
         linux: /
         mac: /
-        win32: C:\Program Files\Autodesk\MotionBuilder 2014\bin\x64
+        win32: C:/Program Files/Autodesk/MotionBuilder 2014/bin/x64
 photoshop:
   show: true
   tasks:
@@ -321,7 +323,7 @@ photoshop:
       path:
         linux: /
         mac: /
-        win32: '%PP_ROOT%\tools\aftereffects'
+        win32: '%PP_ROOT%/tools/aftereffects'
     'CC 2014':
       name: Photoshop CC 2014
       env:
@@ -334,7 +336,7 @@ photoshop:
       path:
         linux: /
         mac: /
-        win32: 'C:\Program Files\Adobe\Adobe Photoshop CC (64 Bit)'
+        win32: 'C:/Program Files/Adobe/Adobe Photoshop CC (64 Bit)'
 zbrush:
   show: true
   tasks:
@@ -353,4 +355,4 @@ zbrush:
       path:
         linux: /
         mac: /
-        win32: 'C:\Program Files (x86)\Pixologic\ZBrush 4R6'
+        win32: 'C:/Program Files (x86)/Pixologic/ZBrush 4R6'

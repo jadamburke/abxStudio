@@ -306,13 +306,13 @@ global proc qube_addUI()
 
     if (getApplicationVersionAsFloat() >= 2009) { // contains renderpass added in Maya 2009
         menuItem    -label "Render arnold..."
-                -c `substitute "QUBEGUI_ARGS" $qube_cmdTemplate (" --submitDict \\\"{'name':'MtoA batchrender \"+basenameEx(getVersionScenePath())+\"', 'prototype':'cmdrange', 'env':{\"+`getQubeEnvString`+\"}, 'package':{'simpleCmdType':'Maya BatchRender (file)','mayaExe':'"+$mayaLoc+"/bin/render.exe', 'scenefile':'\"+getVersionScenePath()+\"', '-proj':'\"+`workspace -q -rd`+\"', '-rd':'\"+`getQubeRenderPath`+\"', 'range':'\"+`getAttr defaultRenderGlobals.startFrame`+\"-\"+`getAttr defaultRenderGlobals.endFrame`+\"','camera_all':'\"+stringArrayToString(`listCameras -p -o`, \" \")+\"', 'renderLayer_all':'\"+stringArrayToString(`ls -type renderLayer`, \" \")+\"','renderPass_all':'\"+stringArrayToString(`ls -type renderPass`, \" \")+\"'}}\\\"")`
+                -c `substitute "QUBEGUI_ARGS" $qube_cmdTemplate (" --submitDict \\\"{'name':'MtoA batchrender \"+basenameEx(getVersionScenePath())+\"', 'prototype':'cmdrange', 'env':{\"+`getQubeEnvString`+\"}, 'package':{'regex_outputPaths':'writing file `(.*)\\\\'', 'regex_errors':'Failed batch render', 'simpleCmdType':'Maya BatchRender (file)','mayaExe':'"+$mayaLoc+"/bin/render.exe', 'scenefile':'\"+getVersionScenePath()+\"', '-proj':'\"+`workspace -q -rd`+\"', '-rd':'\"+`getQubeRenderPath`+\"', 'range':'\"+`getAttr defaultRenderGlobals.startFrame`+\"-\"+`getAttr defaultRenderGlobals.endFrame`+\"','camera_all':'\"+stringArrayToString(`listCameras -p -o`, \" \")+\"', 'renderLayer_all':'\"+stringArrayToString(`ls -type renderLayer`, \" \")+\"','renderPass_all':'\"+stringArrayToString(`ls -type renderPass`, \" \")+\"'}}\\\"")`
                 -annotation "Render current scene with file renderer through Qube using the appropriate Mayabatch SimpleCmd that exposes all commandline render options"
                 -echoCommand true
                  qube_submitSimpleCmdRender_ar;
     } else {
         menuItem    -label "Render arnold..."
-                -c `substitute "QUBEGUI_ARGS" $qube_cmdTemplate (" --submitDict \\\"{'name':'MtoA batchrender \"+basenameEx(getVersionScenePath())+\"', 'prototype':'cmdrange', 'env':{\"+`getQubeEnvString`+\"}, 'package':{'simpleCmdType':'Maya BatchRender (file)','mayaExe':'"+$mayaLoc+"/bin/render.exe', '-proj':'\"+`workspace -q -rd`+\"', 'range':'\"+`getAttr defaultRenderGlobals.startFrame`+\"-\"+`getAttr defaultRenderGlobals.endFrame`+\"','camera_all':'\"+stringArrayToString(`listCameras -p -o`, \" \")+\"', 'renderLayer_all':'\"+stringArrayToString(`ls -type renderLayer`, \" \")+\"'}}\\\"")`
+                -c `substitute "QUBEGUI_ARGS" $qube_cmdTemplate (" --submitDict \\\"{'name':'MtoA batchrender \"+basenameEx(getVersionScenePath())+\"', 'prototype':'cmdrange', 'env':{\"+`getQubeEnvString`+\"}, 'package':{'regex_outputPaths':'writing file `(.*)\\\\'', 'regex_errors':'Failed batch render', 'simpleCmdType':'Maya BatchRender (file)','mayaExe':'"+$mayaLoc+"/bin/render.exe', '-proj':'\"+`workspace -q -rd`+\"', 'range':'\"+`getAttr defaultRenderGlobals.startFrame`+\"-\"+`getAttr defaultRenderGlobals.endFrame`+\"','camera_all':'\"+stringArrayToString(`listCameras -p -o`, \" \")+\"', 'renderLayer_all':'\"+stringArrayToString(`ls -type renderLayer`, \" \")+\"'}}\\\"")`
                 -annotation "Render current scene with file renderer through Qube using the appropriate Mayabatch SimpleCmd that exposes all commandline render options"
                 -echoCommand true
                  qube_submitSimpleCmdRender_ar;
@@ -537,7 +537,7 @@ global proc string getQubeEnvString(){
 	for ($line in $lines){
 		// make sure to skip user data
 		if (`gmatch $line "*=*"`){
-			if (`gmatch $line ("*MAYA_MODULE_PATH*")` || `gmatch $line ("*PLUG_IN*")` || `gmatch $line ("*MAYA_SCRIPT_PATH*")` || `gmatch $line ("*ARNOLD*")` || `gmatch $line ("*MAYA_RENDER_DESC_PATH*")`|| `gmatch $line ("*EXOCORTEX*")`){
+			if (`gmatch $line ("*MTOA*")` || `gmatch $line ("*MAYA_MODULE_PATH*")` || `gmatch $line ("*PLUG_IN*")` || `gmatch $line ("*MAYA_SCRIPT_PATH*")` || `gmatch $line ("*ARNOLD*")` || `gmatch $line ("*MAYA_RENDER_DESC_PATH*")`|| `gmatch $line ("*EXOCORTEX*")`){
 				string $keyVal[] = stringToStringArray($line,"=");
 				$cmd += ($seperator+" '"+$keyVal[0]+"':'"+$keyVal[1]+"'");
 				if ($seperator == ""){
