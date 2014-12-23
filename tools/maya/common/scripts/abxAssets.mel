@@ -3555,11 +3555,19 @@ global proc abxAssetsCreateNew (string $assetPath, string $type){
 			sysFile -makeDir ($deptPath+"publish/");
 			sysFile -makeDir ($deptPath+"render/");
 		}
-		$deptPath = ($path+"reference/");
+		$deptPath = ($path+"source/");
 		if (!`filetest -d $deptPath`){
 			sysFile -makeDir $deptPath;
-			sysFile -makeDir ($deptPath+"styleframes/");
+			sysFile -makeDir ($deptPath+"images/");
+			sysFile -makeDir ($deptPath+"footage/");
 			sysFile -makeDir ($deptPath+"reference/");
+			sysFile -makeDir ($deptPath+"audio/");
+			sysFile -makeDir ($deptPath+"styleframes/");
+			sysFile -makeDir ($deptPath+"cache/");
+			sysFile -makeDir ($deptPath+"poses/");
+			sysFile -makeDir ($deptPath+"clips/");
+			sysFile -makeDir ($deptPath+"data/");
+		$deptPath = ($path+"config/");
 		}
 	}
 

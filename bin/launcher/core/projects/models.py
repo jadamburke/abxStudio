@@ -48,7 +48,7 @@ class SAssetGroup(SModel):
     def __init__(self):
         return
 
-class SAssets(RenderableObj):
+class SAsset(RenderableObj):
 
     def __init__(self):
         return
