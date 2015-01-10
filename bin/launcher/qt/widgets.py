@@ -228,9 +228,10 @@ class AppLayout(QVBoxLayout):
 
 class PicButton(QToolButton):
 
-    def __init__(self, pixmap, pixmapHover=None, parent=None, textRight="", textLeft="", colorRight=None, colorLeft=None):
+    def __init__(self, label, pixmap, pixmapHover=None, parent=None, textRight="", textLeft="", colorRight=None, colorLeft=None):
 
         super(PicButton, self).__init__(parent)
+        self.label = label
         self.pixmap = pixmap
         self.pixmapHover = pixmapHover
         self.hover = False
@@ -263,7 +264,7 @@ class PicButton(QToolButton):
 
         painter.drawText(rect, Qt.AlignRight | Qt.AlignBottom, self.textRight)
         painter.setPen(QColor(255,255,255))
-        painter.drawText(rect, Qt.AlignLeft | Qt.AlignBottom, self.textLeft)
+        painter.drawText(rect, Qt.AlignLeft | Qt.AlignBottom, self.label)
 
 
     def sizeHint(self):

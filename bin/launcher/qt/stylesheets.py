@@ -92,6 +92,46 @@ class StyleSheet(object):
             }
             """ %(backroundColor,selectBackgroundColor)
         sStyleSheet += """
+            QLabel {
+                font: bold 10pt;
+                color: #888888;
+                font-style:bold;
+                outline:none;
+
+            }
+            QListWidget {
+                font-size:10pt;
+                font-style:bold;
+                outline:none;
+
+            }
+            QListWidget:item {
+                padding: 4px;
+                background-color: %s;
+                color: #bbbbc0;
+                selection-background-color: %s;
+                font-style:bold;
+                border-left-width: 3px;
+                border-left-style: solid;
+                border-left-color: %s;
+
+            }
+            QListWidget:item:selected {
+                color:#ffffff;
+                outline:none;
+                background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                       stop: 0 #333336, stop: 1 #333336);
+                border-left-width: 3px;
+                border-left-style: solid;
+                border-left-color: #f62375;
+
+            }
+            QListWidget:item:pressed  {
+                background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                       stop: 0 #000000, stop: 1 #111111);
+            }
+            """ %(backroundColor,selectBackgroundColor,backroundColor)
+        sStyleSheet += """
             QGridLayout {
                 background-color: #101010;
             }

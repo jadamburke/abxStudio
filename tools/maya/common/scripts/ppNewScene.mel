@@ -715,8 +715,8 @@ proc string assembleCmd()
 // MODIFIED from autodesk performNewScene.mel
 global proc string performNewScene (int $option)
 {
-
-	$result = `confirmDialog -title "PP New Scene" -message "Choose Which New Scene Method You Want to Use.\n Use 'Project Scene Scale' if you are not sure." -button "Use Original Scene Scale" -button "Use Project Scene Scale"  -button "Cancel" -defaultButton "Use Project Scene Scale" -cancelButton "Cancel" -dismissString "Cancel"`;
+	// adamb, disabled prompt, defaults to Using Project Scene Scale to avoid confusion
+	$result = "Use Project Scene Scale"; // `confirmDialog -title "PP New Scene" -message "Choose Which New Scene Method You Want to Use.\n Use 'Project Scene Scale' if you are not sure." -button "Use Original Scene Scale" -button "Use Project Scene Scale"  -button "Cancel" -defaultButton "Use Project Scene Scale" -cancelButton "Cancel" -dismissString "Cancel"`;
 	if ($result == "Use Project Scene Scale"){
 		eval("ppDoNewScene (\"empty\")");
 		return "";

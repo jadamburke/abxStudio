@@ -102,6 +102,7 @@ global proc abxAssets () {
 				menuItem -en 1 -label "Duplicate Instance of Prop/Decor Asset" -c "abxAssetsInstanceWorkRef";
 				setParent -menu ..;
 			menuItem -en 1 -sm 1 -label "Modeling";
+				menuItem -en 1 -label "Check for local sourceimages" -c "abxAssetsMakeTexturesLocalAuto";
 				menuItem -en 1 -label "Convert namespace to underscores" -c "abxAssetsNamespaceToRnp";
 				menuItem -en 1 -label "Remove all namespaces" -c "abxAssetsRemoveAllNamespaces";
 				menuItem -en 1 -label "Turn off all Smooth Mesh Previews" -c "abxAssetsNoPolySmooth";
@@ -2296,12 +2297,12 @@ global proc abxAssetsIncrementalSave(string $assetPath, string $takeName, int $f
 						addAttr -longName "assetRigVersion" -dt "string" "ROOT";
 					setAttr -type "string" ("ROOT.assetRigVersion") $newWorkVersion;
 
-					abxAssetsVraySubDCheck;
+					//abxAssetsVraySubDCheck;
 				}
 
 				if ($deptGuess == "model"){
 					abxAssetsNamespaceToRnp;
-					abxAssetsVraySubDCheck;
+					//abxAssetsVraySubDCheck;
 					//abxAssetsConformAllShapeNames;
 					abxAssetsMakeTexturesLocal ($assetLibGuess+"/"+$assetTypeGuess+"/"+$assetNameGuess);
 
@@ -2559,7 +2560,7 @@ global proc abxAssetsPublish(string $assetPath, string $assetTake, string $versi
 		$publishVersion = abxAssetsGetLatestWorkVersion(($assetLibGuess+"/"+$assetTypeGuess+"/"+$assetNameGuess), $deptGuess, $takeGuess, "publish",0); 
 	}
 
-	string $extension = "ma";
+	string $extension = "mb";
 	if ($deptGuess == "model") $extension = "mb";
 	string $publishExt = "mb";
 
@@ -2853,6 +2854,8 @@ global proc abxAssetsPublish(string $assetPath, string $assetTake, string $versi
 		//     }
 		// }
 
+		// remove 'model_' prefix
+		searchReplaceNames "model_" "" "all";
 
 
 	}
@@ -4082,12 +4085,41 @@ global proc initialShadingGroupCheck(int $force){
 	string $foundObjects[] = `sets -q "initialShadingGroup"`;
 
 	if (size($foundObjects) > 0){
-		$result = `confirmDialog -title "abxAssets: Objects Found with Lambert1 Assignment" -message ("Some Objects in your scene are assigned to Lambert1. Please assign these objects to another shader. No objects are allowed to be assigned to lambert1") -button "OK" -defaultButton "OK"`;
-		select $foundObjects;
-		if ($force == 0)
-			error("Some Objects in your scene are assigned to Lambert1. Please create a shader for these objects even if just a temporary placeholder before continuing");
+		string $foundObjectsList = stringArrayToString($foundObjects,",");
+		$result = `layoutDialog -title ("Lambert1 Check: ") -ui ("reportPrompt \"Lambert1 shader assignments are not allowed.\\n Would you like me to auto-fix this? \" \"Auto Fix,Abort\" \""+$foundObjectsList+"\";")`;
+
+		//$result = `confirmDialog -title "abxAssets: Objects Found with Lambert1 Assignment" -message ("Some Objects in your scene are assigned to Lambert1. Please assign these objects to another shader. No objects are allowed to be assigned to lambert1") -button "OK" -defaultButton "OK"`;
+		//select $foundObjects;
+		if ($result == "Auto Fix"){
+			// create a lambert and assign objects, even intermediate ones to the new shader
+			string $newShader = "lambert_holder";
+			if (!`objExists $newShader`)
+				$newShader = `shadingNode -asShader -name "lambert_holder" lambert`;
+			for ($each in $foundObjects){
+				if (`getAttr ($each+".intermediateObject")`){
+					setAttr ($each+".intermediateObject") 0;
+					select $each;
+					hyperShade -assign $newShader;
+					setAttr ($each+".intermediateObject") 1;
+				}
+				else{
+					select $each;
+					hyperShade -assign $newShader;
+				}
+			}
+		}
+		//if ($force == 0)
+			//error("Some Objects in your scene are assigned to Lambert1. Please create a shader for these objects even if just a temporary placeholder before continuing");
 
 	}
+}
+
+global proc abxAssetsMakeTexturesLocalAuto(){
+
+	// 0:Server 1:Job 2:AssetLib 3:AssetType 4:AssetName 5:dept 6:subDept 7:take 8:version 9:ext
+	string $fileInfo[] = abxAssetsGetFromPath (`file -q -sn`);
+
+	evalEcho("abxAssetsMakeTexturesLocal(\""+$fileInfo[2]+"/"+$fileInfo[3]+"/"+$fileInfo[4]+"\");");
 }
 
 global proc abxAssetsMakeTexturesLocal (string $assetPath) {
@@ -4105,7 +4137,7 @@ global proc abxAssetsMakeTexturesLocal (string $assetPath) {
 
 
 	string $mayaFiles[] = `ls -type file -type psdFileTex -type mentalrayTexture`;
-	string $assetSourceImgPath = (`workspace -q -rd`+$assetLib+"/"+$assetType+"/"+$assetName+"/art/publish");
+	string $assetSourceImgPath = (`workspace -q -rd`+$assetLib+"/"+$assetType+"/"+$assetName);
 	// check to see if any textures are local or not and give warning
 
 	for ($each in $mayaFiles){
@@ -4113,8 +4145,10 @@ global proc abxAssetsMakeTexturesLocal (string $assetPath) {
 			if (!`sets -isMember "deleteSet" $each`){
 				string $texPath = `getAttr ($each+".ftn")`;
 				// expand the texture path incase it is relative to project
+
 				$texPath = `workspace -en $texPath`;
 				//print ("TexPath="+$texPath+"\n");
+
 				// if the texPath is not local to the asset then copy it there
 				if (!`filetest -r $texPath` && !`filetest -d $texPath`){
 					$missingTex[size($missingTex)] = $texPath;
@@ -4145,7 +4179,7 @@ global proc abxAssetsMakeTexturesLocal (string $assetPath) {
 		string $list3[];
 		string $startList[] ;
 		if (size($nonLocalTex)){
-			$startList = {"// NON LOCAL TEXTURES //"};
+			$startList = {"// TEXTURES NOT STORED IN ASSET //"};
 			$list2 = `stringArrayCatenate $startList $nonLocalTex`;
 		}
 		if (size($missingTex) > 0){
@@ -4160,20 +4194,22 @@ global proc abxAssetsMakeTexturesLocal (string $assetPath) {
 		$listStr = stringArrayToString($list, ",");
 		
 		string $result = "Abort";
-		$result = `layoutDialog -title ("Asset Manager: Texture Check") -ui ("reportPrompt \"Move Non Local Textures to "+$assetPath+"/art/publish/ ?\\n Missing Textures Will be ignored. Press Cancel if you want to fix missing textures.\" \""+$listStr+"\";")`;
+		$result = `layoutDialog -title ("Asset Manager: Texture Check") -ui ("reportPrompt \"Move Textures into "+$assetPath+"/source/images/ ?\\n Missing Textures Will be ignored. Press Abort if you want to fix missing textures.\" \"Abort,Fix,Ignore\" \""+$listStr+"\";")`;
 
-		if ($result == "Abort"){
-			error("File Not Saved. User Aborted.");
+		if ($result == "Fix"){
 		}
 		else if ($result == "Ignore"){
 			return;
+		}
+		else{
+			error("User Aborted.");
 		}
 	}
 
 	for ($i=0;$i<size($nonLocalTex);$i++){
 		string $texExt = fileExtension($nonLocalTex[$i]);
 		string $texFileName = basename($nonLocalTex[$i] ,("."+$texExt));
-		string $newTexPath = ($assetSourceImgPath+$texFileName+"."+$texExt);
+		string $newTexPath = ($assetSourceImgPath+"/source/images/"+$texFileName+"."+$texExt);
 		int $success = evalEcho("sysFile -copy \""+$newTexPath+"\" \""+ $nonLocalTex[$i]+"\"");
 		if ($success){
 			evalEcho("setAttr -type \"string\" "+$nonLocalTexNodes[$i]+".ftn"+" \""+`workspace -pp $newTexPath`+"\"");
@@ -5207,7 +5243,7 @@ global proc string[] cbxAssetsGetLatestAssetShaderInfo (string $assetPath)  {
 	return {$versMaxStr, $versMaxShaderFolderStr};
 }
 
-global proc reportPrompt(string $message, string $list)
+global proc reportPrompt(string $message, string $buttons, string $list)
 {
     // Get the dialog's formLayout.
     string $form = `setParent -q`;
@@ -5221,9 +5257,12 @@ global proc reportPrompt(string $message, string $list)
     string $newList = substituteAllString($list, ",", "\n");
     scrollField -e -text $newList $t;
 
-    string $b1 = `button -l "Ignore" -c "layoutDialog -dismiss \"Ignore\""`;
-    string $b2 = `button -l "Move to Asset's ./art/publish" -c "layoutDialog -dismiss \"Fix\""`;
-    string $b3 = `button -l "Abort" -c "layoutDialog -dismiss \"Abort\""`;
+    string $btnLabels[] = stringToStringArray($buttons,",");
+
+    
+    string $b1 = `button -l $btnLabels[0] -c ("layoutDialog -dismiss \""+$btnLabels[0]+"\"")`;
+    string $b2 = `button -l $btnLabels[1] -c ("layoutDialog -dismiss \""+$btnLabels[1]+"\"")`;
+    string $b3 = `button -l $btnLabels[2] -c ("layoutDialog -dismiss \""+$btnLabels[2]+"\"")`;
 
     int $spacer = 5;
     int $top = 5;

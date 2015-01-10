@@ -7,13 +7,17 @@ BIN = os.path.dirname(LAUNCHER)
 ROOT = os.path.dirname(BIN)
 CONFIG = os.path.join(ROOT,'config')
 
-os.environ['PP_ROOT'] = ROOT
-os.environ['PP_CONFIG'] = CONFIG
+os.environ['PP_ROOT'] = ROOT.replace('\\','/')
+os.environ['PP_CONFIG'] = CONFIG.replace('\\','/')
 
-
+# import the proper version of PYQT
+# need to look at a better way of sourcing pyqt / pyside
 os.environ['PATH'] += ';\\\\pp-fs-nyc\\pipeline\\nyc\\lib\\python\\pyqt4\\4.8.4'
+#os.environ['PATH'] += ';E:\\pyqt\\4.8.4'
 os.environ['PYTHONPATH'] += ';\\\\pp-fs-nyc\\pipeline\\nyc\\lib\\python\\pyqt4\\4.8.4'
+#os.environ['PYTHONPATH'] += ';E:\\pyqt\\4.8.4'
 sys.path.append('\\\\pp-fs-nyc\\pipeline\\nyc\\lib\\python\\pyqt4\\4.8.4')
+#sys.path.append('E:\\pyqt\\4.8.4')
 
 print os.environ['PYTHONPATH']
 print sys.path
@@ -40,7 +44,7 @@ DRIVE_MAP = {
 }
 
 RES = os.path.join(LAUNCHER, 'res')
-
+#RES = 'E:\\temp\\res'
 #load the apps dictionary
 f = open(CONFIG+"/app.yml")
 # use safe_load instead load
