@@ -7,6 +7,12 @@ default:
         crate: '1.1.145'
         gmh: '2.0'
         ngSkinningTools: '1.0.881'
+    mayaAlt:
+      version: '2014'
+      modules:
+        arnold: '1.1.1.0'
+        crate: '1.1.145'
+        gmh: '2.0'
     softimage:
       version: '2015'
       modules:
@@ -30,6 +36,7 @@ default:
       version: '4R6'
   order:
   - maya
+  - mayaAlt
   - softimage
   - motionbuilder
   - nuke

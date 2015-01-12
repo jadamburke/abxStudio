@@ -60,7 +60,7 @@ maya:
   show: true
   versions:
     '2014':
-      name: Autodesk Maya
+      name: Autodesk Maya 2014
       env:
         PP_MAYA: '2014'
         MAYA_PPTOOLS_VERSIONED: '%PP_RESOURCE%/maya/%PP_MAYA%x64'
@@ -356,3 +356,57 @@ zbrush:
         linux: /
         mac: /
         win32: 'C:/Program Files (x86)/Pixologic/ZBrush 4R6'
+mayaAlt:
+  env:
+    MAYA_APP_DIR: '%PP_ROOT%/user/%USERNAME%/maya'
+    MAYA_PPTOOLS: '%PP_RESOURCE%/tools/maya/common'
+    MAYA_PPTOOLS_COMMON: '%PP_RESOURCE%/maya/common'
+    MAYA_MODULE_PATH: '%MAYA_PPTOOLS%/modules'
+    MAYA_PLUG_IN_PATH: '%MAYA_PPTOOLS%/plugins'
+    MAYA_PRESET_PATH: '%MAYA_PPTOOLS%/presets'
+    MAYA_SCRIPT_PATH: '%MAYA_PPTOOLS%/scripts'
+    MAYA_SHELF_PATH: '%MAYA_PPTOOLS%/shelves'
+    XBMLANGPATH: '%MAYA_PPTOOLS%/icons'
+    PYTHONPATH: '%PP_RESOURCE%/lib/python;%MAYA_PPTOOLS%/scripts'
+  show: true
+  versions:
+    '2014':
+      name: Autodesk Maya 2014
+      env:
+        PP_MAYA: '2014'
+        MAYA_PPTOOLS_VERSIONED: '%PP_RESOURCE%/maya/%PP_MAYA%x64'
+        PP_MAYA_DIR: C:/Program Files/Autodesk/Maya%PP_MAYA%
+      modes:
+        ui:
+          linux: /
+          mac: /
+          win32: maya.exe
+      path:
+        linux: /
+        mac: /
+        win32: C:/Program Files/Autodesk/Maya2014/bin
+    '2015':
+      name: Autodesk Maya
+      env:
+        MAYA_PPTOOLS_VERSIONED: '%PP_RESOURCE%/maya/%PP_MAYA%x64'
+        PP_MAYA: '2015'
+        PP_MAYA_DIR: C:/Program Files/Autodesk/Maya%PP_MAYA%
+      modes:
+        ui:
+          linux: /
+          mac: /
+          win32: maya.exe -noAutoloadPlugins
+      path:
+        linux: /
+        mac: /
+        win32: C:/Program Files/Autodesk/Maya2015/bin
+  tasks:
+  - model
+  - shade
+  - rig
+  - anim
+  - effects
+  - cloth
+  - hair
+  - muscle
+  - light
