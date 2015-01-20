@@ -1375,15 +1375,18 @@ global proc abxAssetsRefreshDetailsUI (string $assetPath){
 	//textFieldGrp -e -text $assetDetails[4] abxAssetsDtlCamScene;
 	//textFieldGrp -e -text $assetDetails[5] abxAssetsDtlCamDate;
 
-	treeView -e -ra abxAssetsModelScnList;
+	//treeView -e -ra abxAssetsModelScnList;
 	//treeView -e -ra abxAssetsShdScnList;
-	treeView -e -ra abxAssetsRigScnList;
+	//treeView -e -ra abxAssetsRigScnList;
 
 	// get active tab to determine which dept to show
 	string $dept = `abxAssetsGetActiveDeptTab`;
+	
+
 	if ($dept == "Log"){
 		$dept = "";
 	}
+
 
 	string $filePath = (`workspace -q -rd`+"/"+$assetPath);
 
@@ -1391,6 +1394,9 @@ global proc abxAssetsRefreshDetailsUI (string $assetPath){
 	string $sorted[] = `abxAssetsGetScenes $assetPath $dept`;
 	//print $sorted;
 	string $each = "";
+
+	$dept = capitalizeString($dept);
+	treeView -e -ra ("abxAssets"+$dept+"ScnList");
 	for ($i=0;$i<size($sorted);$i++){
 
 		$each = $sorted[$i];
@@ -1398,6 +1404,7 @@ global proc abxAssetsRefreshDetailsUI (string $assetPath){
 			if ($dept != ""){
 				$dept = capitalizeString($dept);
 				//textScrollList -e -append $each abxAssetsAnmScnList;
+				print ($dept+"\n");
 				treeView -e -addItem $each "" ("abxAssets"+$dept+"ScnList");
 				//if ($i%2)
 					//treeView -e -lbc $each .15 .15 .15 abxAssetsAnmScnList;
@@ -4096,14 +4103,22 @@ global proc initialShadingGroupCheck(int $force){
 			if (!`objExists $newShader`)
 				$newShader = `shadingNode -asShader -name "lambert_holder" lambert`;
 			for ($each in $foundObjects){
-				if (`getAttr ($each+".intermediateObject")`){
-					setAttr ($each+".intermediateObject") 0;
-					select $each;
-					hyperShade -assign $newShader;
-					setAttr ($each+".intermediateObject") 1;
+				string $tb[];
+				tokenize $each "." $tb;
+				if (`attributeExists "intermediateObject" $tb[0]`){
+					if (`getAttr ($tb[0]+".intermediateObject")`){
+						setAttr ($tb[0]+".intermediateObject") 0;
+						select $tb[0];
+						hyperShade -assign $newShader;
+						setAttr ($tb[0]+".intermediateObject") 1;
+					}
+					else{
+						select $tb[0];
+						hyperShade -assign $newShader;
+					}
 				}
 				else{
-					select $each;
+					select $tb[0];
 					hyperShade -assign $newShader;
 				}
 			}

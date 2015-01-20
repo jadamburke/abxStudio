@@ -1,0 +1,10 @@
+// mirrorPolyX
+// Created by: adamb
+// Date: 2015/01/15 12:47:28
+
+global proc mirrorPolyX(){
+	$sel = `ls -sl`;
+	polyMirrorFace -ws 1  -direction 1 -mergeMode 1 -ch 1 -mt .01;
+	polySoftEdge -a 180 -ch 1 $sel;
+	select $sel;
+}

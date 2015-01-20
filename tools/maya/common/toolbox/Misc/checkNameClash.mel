@@ -138,7 +138,7 @@ global proc clashCheckThese (string $objects[], int $fixIt, string $type){
 				$result = `confirmDialog -title "Clash Check" -message ("There are "+size($noDupeNodes)+" clashes in referenced scenes files or read-only nodes. Please have the appropriate artists fix the referenced scenes IMMEDIATELY! Check Script Editor for Details.") -button "OK" -defaultButton "OK" -cancelButton "OK" -dismissString "OK"`;
 			}
 
-			if ($result == "Manually Fix" && $fixIt == 2){
+			if ($result == "Cancel" && $fixIt == 2){
 				error("User Aborted Save to manually fix name clashes.");
 			}
 			else if ($result == "Auto Fix" || $fixIt == 1){
@@ -172,9 +172,9 @@ global proc checkNameClashReportPrompt(string $message, string $list)
     string $newList = substituteAllString($list, ",", "\n");
     scrollField -e -text $newList $t;
 
-    string $b1 = `button -l "Manual Fix" -c "layoutDialog -dismiss \"Manual Fix\""`;
-    string $b2 = `button -l "Auto Fix" -c "layoutDialog -dismiss \"Auto Fix\""`;
-    string $b3 = `button -l "Cancel" -c "layoutDialog -dismiss \"Cancel\""`;
+    string $b1 = `button -l "Ignore" -c "layoutDialog -dismiss \"Manual Fix\""`;
+    string $b2 = `button -l "Auto Rename" -c "layoutDialog -dismiss \"Auto Fix\""`;
+    string $b3 = `button -l "Abort" -c "layoutDialog -dismiss \"Cancel\""`;
 
     int $spacer = 5;
     int $top = 5;
