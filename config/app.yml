@@ -214,7 +214,7 @@ nukex:
         linux: /
         mac: /
         win32: C:/Program Files/Nuke8.0v5
-    '9.0v1':
+    '9.0v3':
       name: Nuke
       modes:
         ui:
@@ -224,7 +224,30 @@ nukex:
       path:
         linux: /
         mac: /
-        win32: C:/Program Files/Nuke9.0v1
+        win32: C:/Program Files/Nuke9.0v3
+nukestudio:
+  env:
+    NUKE_PATH: '%PP_ROOT%/tools/nuke'
+    NUKE_DISK_CACHE: 'E:/Nuke'
+  show: true
+  tasks:
+  - comp
+  - light
+  - grade
+  - track
+  - roto
+  versions:
+    '9.0v3':
+      name: Nuke
+      modes:
+        ui:
+          linux: /
+          mac: /
+          win32: Nuke9.0.exe --studio
+      path:
+        linux: /
+        mac: /
+        win32: C:/Program Files/Nuke9.0v3
 premiere:
   show: true
   tasks:

@@ -19,9 +19,13 @@ default:
         arnold: '3.2.0'
         crate: '1.1.145'
     nuke:
-      version: '8.0v5'
+      version: '9.0v3'
     nukex:
-      version: '8.0v5'
+      version: '9.0v3'
+    nukex:
+      version: '9.0v3'
+    nukestudio:
+      version: '9.0v3'
     hiero:
       version: '1.8v2'
     aftereffects:
@@ -41,6 +45,7 @@ default:
   - motionbuilder
   - nuke
   - nukex
+  - nukestudio
   - hiero
   - aftereffects
   - premiere
