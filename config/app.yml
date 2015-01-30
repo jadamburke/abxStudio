@@ -180,6 +180,17 @@ nuke:
         linux: /
         mac: /
         win32: C:/Program Files/Nuke8.0v5
+    '9.0v3':
+      name: Nuke
+      modes:
+        ui:
+          linux: /
+          mac: /
+          win32: Nuke9.0.exe
+      path:
+        linux: /
+        mac: /
+        win32: C:/Program Files/Nuke9.0v3
 nukex:
   env:
     NUKE_PATH: '%PP_ROOT%/tools/nuke'
