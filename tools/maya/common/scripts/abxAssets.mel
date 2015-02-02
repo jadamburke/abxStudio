@@ -2567,7 +2567,7 @@ global proc abxAssetsPublish(string $assetPath, string $assetTake, string $versi
 		$publishVersion = abxAssetsGetLatestWorkVersion(($assetLibGuess+"/"+$assetTypeGuess+"/"+$assetNameGuess), $deptGuess, $takeGuess, "publish",0); 
 	}
 
-	string $extension = "mb";
+	string $extension = "ma";
 	if ($deptGuess == "model") $extension = "mb";
 	string $publishExt = "mb";
 
