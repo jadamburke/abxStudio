@@ -2841,8 +2841,8 @@ global proc abxAssetsPublish(string $assetPath, string $assetTake, string $versi
 		delete `ls -type objectSet "modelPanel*ViewSelectedSet"`;
 		delete `ls -type objectSet "modelPanel*ViewSelectedSet*"`;
 
-		eval("source \""+`getenv MAYA_PPTOOLS`+"/toolbox/Lighting/texRezSwitchButt.mel\"");
-		texRezSwitchButt("LOW");
+		//eval("source \""+`getenv MAYA_PPTOOLS`+"/toolbox/Lighting/texRezSwitchButt.mel\"");
+		//texRezSwitchButt("LOW");
 
 		// //set low rez textures
 		// string $fileNodes[] = `ls -type file`;

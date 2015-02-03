@@ -64,7 +64,7 @@ global proc abxPicker(){
 				menuItem -d 1;
 				//menuItem -label "Original Buttons";
 				//menuItem -label "Raised Buttons";
-				menuItem -label "Auto Char Switching" -cb 0 -command "menuItem -e -cb `abxPickerToggleAutoFocusSJ` abxPickerSwitchMnu;" abxPickerSwitchMnu;
+				menuItem -label "Auto Char Switching" -cb 1 -command "menuItem -e -cb `abxPickerToggleAutoFocusSJ` abxPickerSwitchMnu;" abxPickerSwitchMnu;
 				menuItem -d 1;
 				menuItem -label "Help" -c "abxPickerHelp";
 

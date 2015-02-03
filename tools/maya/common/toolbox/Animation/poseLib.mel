@@ -72,7 +72,7 @@ global proc poseLibInitializeVariables()
 	global string $poseLibPathsBookmarks[];// The actual pairs of Private + Public paths corresponding to the $poseLibProjects.
 	global string $mayaImagesPath;
 	string $poseLibCurrentProject = `workspace -q -fn`;
-	$poseLibPrivatePath = $poseLibCurrentProject + "/data/poseLib/";
+	$poseLibPrivatePath = $poseLibCurrentProject + "/maya/data/poseLib/";
 	//$poseLibPrivatePath = "/u/lorax/Users/lionelg/Sandbox/Labo/PoseLib2/";
 	$poseLibPublicPath = $poseLibPrivatePath;
 	$poseLibBasePath = $poseLibPrivatePath;

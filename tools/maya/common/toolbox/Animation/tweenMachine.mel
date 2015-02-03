@@ -45,8 +45,9 @@ global proc tweenMachine() {
 	$mayaVers = (int) startString(`about -v`,1);
 	$tmSpecTick = 0;
 	
+	string $PP_ROOT = `getenv PP_ROOT`;
 	// Source needed libraries
-	//source xml_lib.mel;
+	eval("source \""+$PP_ROOT+"/tools/maya/common/toolbox/Animation/xml_lib.mel\"");
 
 	// OS check -- this will probably go away once the UI is built using forms
 	if (`about -mac`) {
