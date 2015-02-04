@@ -68,9 +68,11 @@ def submitNukeCmdline_render(executeNodes=''):
     rangeInc = int(nuke.animationIncrement())
     if rangeInc > 1:
         range += 'x%s' % rangeInc
+
     submitDict = {
         'name'      : 'nuke '+os.path.basename(str(nuke.root().name())),
         'prototype' : 'cmdrange',
+        'env': {'NUKE_PATH': os.environ['NUKE_PATH']},
         'package' : {
             'simpleCmdType': 'Nuke (cmdline)',
             'script': str(nuke.root().name()),

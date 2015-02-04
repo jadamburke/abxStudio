@@ -1,4 +1,11 @@
+# create read node from write node
+import readFromWrite
+# add a hotkey but not the menu command
 
+
+# activate threaded localise
+import LocaliseThreaded
+LocaliseThreaded.register()
 
 ## === QUBE SimpleCmd: BEGIN ===
 import qubeSimpleCmd_menu
@@ -8,6 +15,7 @@ qubeSimpleCmd_menu.addMenuItems()
 # create toolbar in menu
 toolbar = nuke.menu('Nodes')
 passionMenu = toolbar.addMenu('Passion', icon='passion.png')
+passionMenu.addCommand( 'Read From Write', 'readFromWrite.readFromWrite()', 'alt+r' )
 passionMenu.addCommand('Passion_Slate', 'nuke.createNode(\"Passion_Slate\")')
 passionMenu.addCommand('RGBmatte', 'nuke.createNode(\"RGBmatte\")')
 passionMenu.addCommand('ID_Matte_Maker', 'nuke.createNode(\"ID_Matte_Maker\")')
@@ -23,6 +31,9 @@ nuke.knobDefault("Tracker.label", "Ref frame [value reference_frame]")
 nuke.knobDefault("Shuffle.label", "[value in] to [value out]")
 
 
+
+
+
 # Method to reload ALL possible reload-able nodes        
 def reloadAllNodes():
   for n in nuke.allNodes():
@@ -31,7 +42,9 @@ def reloadAllNodes():
       print n.name() + ' reloaded'
     except(AttributeError):
       'No knob named Reload'
-	
+
+
+
 def postageStampGenerator():
     nodeSelection = []
     for n in nuke.selectedNodes():
@@ -71,3 +84,16 @@ def postageStampGenerator():
     
     if len(nuke.selectedNodes()) == 0:
         nuke.message('No nodes selected')
+
+# create write directory if it doesn't exist
+def CreatePath():
+     file = nuke.filename(nuke.thisNode())
+     dir = os.path.dirname(file)
+     osdir = nuke.callbacks.filenameFilter(dir)
+     try:
+         os.makedirs (osdir)
+     except OSError:
+         pass
+         
+#pre-render commands
+nuke.addBeforeRender(CreatePath, nodeClass = 'Write')
