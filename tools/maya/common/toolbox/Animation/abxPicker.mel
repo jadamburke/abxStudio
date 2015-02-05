@@ -1463,7 +1463,7 @@ global proc abxPickerKey (string $selList){
 			$selListBuffer[$i] = ($pickrPrefix+$selListBuffer[$i]);
 		}
 	}
-	setKeyframe $selListBuffer;
+	setKeyframe -shape false $selListBuffer;
 }
 
 //-------------------------------------------------------------------------
