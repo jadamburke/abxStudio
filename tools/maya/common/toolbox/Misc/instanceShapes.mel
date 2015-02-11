@@ -1,0 +1,28 @@
+// instanceShapes
+// Created by: adamb
+// Date: 2015/02/10 12:57:05
+
+global proc instanceShapes(){
+
+$sel= `ls -sl -type transform`;
+$source = $sel[0];
+$sourceShapes = `listRelatives -noIntermediate -shapes $source`;
+for ($i=1;$i<size($sel);$i++){
+  // delete children
+  string $children[] = `listRelatives -shapes $sel[$i]`;
+  for ($j=0;$j<size($children);$j++){
+  // if it isn't an instance, delete it 
+  //if (size(`listRelatives -parent $children[$j]`) < 1){
+    delete $children[$j];
+    // if it is an instance, remove it
+  //}
+  //else{
+  //  parent -rm -shape -r $children[$j] $sel[$i];
+   // }
+  }
+  for ($j=0;$j<size($sourceShapes);$j++){
+    parent -add -shape -r $sourceShapes[$j] $sel[$i];
+  }
+}
+
+}
