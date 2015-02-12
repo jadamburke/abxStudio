@@ -1,0 +1,27 @@
+// colorInstances
+// Created by: adamb
+// Date: 2015/02/12 11:28:41
+
+global proc colorInstances(){
+  $sel= `ls -sl -type transform`;
+  $source = $sel[0];
+
+  for ($i=0;$i<size($sel);$i++){
+    string $children[] = `listRelatives -shapes -fullPath $sel[$i]`;
+    for ($j=0;$j<size($children);$j++){
+    // if it isn't an instance, delete it 
+    // if the shape is instanced
+    string $dagParents[] = `listRelatives -allParents -fullPath $children[$j]`;
+    print ("number of dag parents: "+size($dagParents)+"\n");
+    if (size($dagParents) > 1){
+      // if its not the zeroth element in the list then its an instance
+      print("gmatch comparing:"+$children[$j]+" to "+$dagParents[0]+"|*"+"\n");
+      string $fullDagPath = $children[$j];
+      if (!`gmatch $fullDagPath ($dagParents[0]+"|*")`){
+        setAttr ($sel[$i]+".overrideEnabled") 1;
+        setAttr ($sel[$i]+".overrideColor") 2;
+      }
+    }
+  }
+}
+}
