@@ -4021,9 +4021,10 @@ global proc abxShotsAttachAlembicCache (string $dept){
 
 		// reference the necessary assets
 		for ($ea in $foundAssets){
+			string $assetData[] = stringToStringArray($ea,"|");
 			//need to check if it exists already
 			// look for the latest shade publishes first, if none exist get the latest model publishes
-			evalEcho("abxAssetsRefAsset(\""+$assetPath+"/model\",\"\",0,1)");
+			evalEcho("abxAssetsRefAsset(\""+$assetData[0]+"/model\",\"\",0,1)");
 		}
 
 		// import and attache the alembic file
