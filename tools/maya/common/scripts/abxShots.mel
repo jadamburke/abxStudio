@@ -2697,7 +2697,7 @@ global proc abxShotsReferencePublish (string $sourceList){
 			$wrkspcPath = `workspace -pp $publishFilePath`;
 			$result = `confirmDialog -title "Shot Manger: Create Reference Confirm" -message ("Confirm: Create a Reference to "+$wrkspcPath) -button "OK" -button "Cancel" -defaultButton "OK" -cancelButton "Cancel" -dismissString "Cancel"`;
 			if ($result == "OK"){
-				abxShotsCreateReference $publishFilePath ($dept+$takeNameUpper) "namespace" 0;
+				abxShotsCreateReference $publishFilePath ($dept+$takeNameUpper) "namespace" 0 0;
 			}
 			else {
 				error ("User Canceled Create Reference");
@@ -2710,22 +2710,26 @@ global proc abxShotsReferencePublish (string $sourceList){
 	}
 }
 
-global proc abxShotsCreateReference (string $refFile, string $prefix, string $type, int $lock){
+global proc abxShotsCreateReference (string $refFile, string $prefix, string $type, int $lock, int $group){
 		
 	string $lockFlag = "";
 	if ($lock)
 		$lockFlag = "-lck ";
 
+	string $groupFlag = "";
+	if ($group)
+		$groupFlag = ("-gr -gn \""+$prefix+":ROOT\" ");
+
 	if ($type == "rename"){
 		namespace -set ":";
 		//evalEcho ("file -r -gl -loadReferenceDepth \"all\" -rpr \""+$prefix+"\" -options \"v=0\" \""+$refFile+"\"");
-		evalEcho ("file -r "+$lockFlag+"-gl -loadReferenceDepth \"all\" -rpr \""+$prefix+"\" -options \"v=0\" \""+$refFile+"\"");
+		evalEcho ("file -r "+$lockFlag+$groupFlag+"-loadReferenceDepth \"all\" -rpr \""+$prefix+"\" -options \"v=0\" \""+$refFile+"\"");
 		namespace -set ":";
 	}
 	else if ($type == "namespace"){
 		namespace -set ":";
 		//evalEcho ("file -r -type \"mayaAscii\" -gl -loadReferenceDepth \"all\" -namespace \""+$prefix+"\" -options \"v=0\" \""+$refFile+"\"");
-		evalEcho ("file -r "+$lockFlag+"-gl -loadReferenceDepth \"all\" -namespace \""+$prefix+"\" -options \"v=0\" \""+$refFile+"\"");
+		evalEcho ("file -r "+$lockFlag+$groupFlag+"-loadReferenceDepth \"all\" -namespace \""+$prefix+"\" -options \"v=0\" \""+$refFile+"\"");
 		namespace -set ":";
 	}
 }
@@ -3927,11 +3931,111 @@ global proc abxShotsOpenWorkScene (string $shotName, string $dept, string $takeN
 
 
 
+// caches to alembic crate or standard
+global proc abxShotsExportAlembicCache (){
+	// find all objects in the cachable sets
+	// cachable sets = ls -type objectSet -r 1 "cachable"
+
+	// !!!! need to make sure all cachable geo has shape names with matching namespace, fix if needed
+
+	// get a list of all the assets for the scene file (use abxAssets)
+	string $foundAssets[] = sort(abxAssetsGetAssetsInScene());
+	// output a list of assets in the scene for use
+	// for ($ea in $foundAssets){
+	// 	$exportList = `ls -type objectSet ($ea+":geocache")`;
+	// 	select $exportList;
+	// 	// check to make sure 
+	// }
+    $sets = `ls -type objectSet -r 1 "geoCache"`;
+	select $sets;
+	string $sel[] = `ls -sl -long`;
+
+	// determine the output path for the almebic file
+	// 0:Server 1:Job 2:ShotFolder 3:Seq 4:Shot 5:dept 6:subDept 7:take 8:version 9:ext
+	string $shotInfo[] = abxShotsGetFromPath(`file -q -sn`);
+	$filename = ($shotInfo[3]+"_"+$shotInfo[4]+"_"+$shotInfo[10]+"_"+$shotInfo[5]+"_"+$shotInfo[8]);
+	$filepath = ($shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$shotInfo[5]+"/cache/");
+	if (!`filetest -d $filepath`){
+		sysFile -makeDir $filepath;
+	}
+	if ($shotInfo[7] != "")
+		$filename = ($shotInfo[3]+"_"+$shotInfo[4]+"_"+$shotInfo[10]+"_"+$shotInfo[5]+"_"+$shotInfo[7]+"_"+$shotInfo[8]);
+	$ext = "abc";
+	$alembicpath = ($filepath+$filename+"."+$ext);
+	$assetdescPath = ($filepath+$filename+".txt");
+
+	string $objList = stringArrayToString($sel,",");
+	ExocortexAlembic_export -j ("filename="+$alembicpath+";objects="+$objList+";uvs=0;globalspace=1;withouthierarchy=1;ogawa=1");
+
+	// export out a list of assets in the scene inculding file paths in ref 
+	// !!!!need to store the namespace used as well
+	$fileId=`fopen $assetdescPath "w"`;
+		for ($ea in $foundAssets){
+			fprint $fileId ($ea+"\n");
+		}	
+	fclose $fileId;	
+	
+	// export out a list of custom geometries for the scene
+	//string $customGeo[] = `listRelatives -children "_CUSTOM_"`;
+
+	// export the children to a file
+
+}
 
 
 
+global proc abxShotsAttachAlembicCache (string $dept){
+	// check for existing alembic cache file nodes in scene, delete them if
+	// reference the correct assets by reading the fragment
+	// 0:Server 1:Job 2:ShotFolder 3:Seq 4:Shot 5:dept 6:subDept 7:take 8:version 9:ext
+	string $shotInfo[] = abxShotsGetFromPath(`file -q -sn`);
+	$filename = ($shotInfo[3]+"_"+$shotInfo[4]+"_"+$shotInfo[10]+"_"+$dept+"_"+$shotInfo[8]);
+	$filepath = ($shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$dept+"/cache/");
+	$alembicpath = ($filepath+$filename+".abc");
+	$assetdescPath = ($filepath+$filename+".txt");
+	if (`filetest -r $alembicpath` && `filetest -r $assetdescPath`){
+		
+		// create the standard groups if they don't exist
+		string $outlinerNodes[] = {"_CUSTOM_","_SETS_","_PROPS_","_CHARACTERS_","side","front","top","persp"};
+		for ($each in $outlinerNodes){
+			if (!`objExists $each`) {
+				createNode transform -skipSelect -name $each;
+			}
+			reorder -front $each;
+			catch(`setAttr ($each+".overrideEnabled") 1`);
+			if ($each == "_ENVIRONMENT_")
+				catch(`setAttr ($each+".overrideColor") 11`);
+			else if ($each == "_PROPS_")
+				catch(`setAttr ($each+".overrideColor") 28`);
+		}
+
+		// read the asset description file and reference the necessary assets
+		string $foundAssets[];
+		$fileId=`fopen $assetdescPath "r"`;		
+			string $nextLine = `fgetline $fileId`;
+			while (size($nextLine) > 0){
+				$foundAssets[size($foundAssets)] = $nextLine;
+ 				$nextLine = `fgetline $fileId`;
+			}
+		fclose $fileId;	
+
+		// reference the necessary assets
+		for ($ea in $foundAssets){
+			//need to check if it exists already
+			// look for the latest shade publishes first, if none exist get the latest model publishes
+			evalEcho("abxAssetsRefAsset(\""+$assetPath+"/model\",\"\",0,1)");
+		}
+
+		// import and attache the alembic file
+		ExocortexAlembic_import -j ("filename="+$alembicpath+";attachToExisting=1;uvs=0;search=(Deformed);replace=(?1)");
+
+	}
+	else{
+		error("Could Not Find Cache in Location:"+$alembicpath);
+	}
 
 
+}
 
 
 

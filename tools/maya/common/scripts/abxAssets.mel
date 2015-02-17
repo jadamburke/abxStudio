@@ -748,16 +748,16 @@ global proc abxAssetsCtxMCmd(string $menu, string $command){
 		//abxAssetsPublish($assetPath, false, "");
 		break;
 	case "ref asset":
-		abxAssetsRefAsset($assetPath,"",1);
+		abxAssetsRefAsset($assetPath,"",1,0);
 		break;
 	case "ref asset rproxy":
-		abxAssetsRefAsset($assetPath,"renderproxy",1);
+		abxAssetsRefAsset($assetPath,"renderproxy",1,0);
 		break;
 	case "ref asset previs":
-		abxAssetsRefAsset($assetPath,"previs",1);
+		abxAssetsRefAsset($assetPath,"previs",1,0);
 		break;
 	case "ref asset proxy":
-		abxAssetsRefAsset($assetPath,"proxy",1);
+		abxAssetsRefAsset($assetPath,"proxy",1,0);
 		break;
 	case "ref temp":
 		abxAssetsRefTemp($assetPath);
@@ -865,7 +865,8 @@ global proc abxAssetsCreateDetailUI (){
 
 								columnLayout -rs 3;
 									button -vis 1 -bgc .2 .2 .2 -ebg 0 -h 60 -w 90 -l "reference rig>" -ann "Reference Published Rig" -c "" abxAssetsDetailsRefBtn;
-									button -vis 1 -bgc .2 .2 .2 -ebg 0 -h 20 -w 90 -l "reference geo>" -ann "Import Published Rig" -c "" abxAssetsDetailsRefGeoBtn;
+									button -vis 1 -bgc .2 .2 .2 -ebg 0 -h 20 -w 90 -l "reference geo>" -ann "Import Published Model" -c "" abxAssetsDetailsRefGeoBtn;
+									button -vis 1 -bgc .2 .2 .2 -ebg 0 -h 20 -w 90 -l "reference shd>" -ann "Import Published Shade" -c "" abxAssetsDetailsRefShdBtn;
 
 									//button -vis 1 -bgc .2 .2 .2 -ebg 0 -h 20 -w 80 -l "import rig>" -ann "Import Published Rig" -c "" abxAssetsDetailsImpBtn;
 								setParent..;
@@ -920,7 +921,7 @@ global proc abxAssetsCreateDetailUI (){
 						textField -text  "" -editable false abxAssetsDtlRMDate;
 					setParent..;
 					rowLayout -cal 1 "right" -cat 1 "both" 0 -cw 1 80 -nc 2 -adj 2;
-						text -l "Publish:";
+						text -l "Shade Publish:";
 						textField -text  "" -editable false abxAssetsDtlPubDate;
 					setParent..;
 					//separator -style "none" -h 5;
@@ -1282,12 +1283,13 @@ global proc abxAssetsRefreshDetailsUI (string $assetPath){
 	textFieldGrp -e -text $assetName abxAssetsDtlAssetName;
 	textFieldGrp -e -text $assetType abxAssetsDtlType;
 
-	button -e -c ("abxAssetsRefAsset(\""+$assetPath+"/rig\",\"\",0)") abxAssetsDetailsRefBtn;
+	button -e -c ("abxAssetsRefAsset(\""+$assetPath+"/rig\",\"\",0,0)") abxAssetsDetailsRefBtn;
 	//button -e -c ("abxAssetsImpAsset(\""+$assetPath+"/rig\",\"\")") abxAssetsDetailsImpBtn;
-	button -e -c ("abxAssetsRefAsset(\""+$assetPath+"/model\",\"\",0)") abxAssetsDetailsRefGeoBtn;
+	button -e -c ("abxAssetsRefAsset(\""+$assetPath+"/model\",\"\",0,1)") abxAssetsDetailsRefGeoBtn;
+	button -e -c ("abxAssetsRefAsset(\""+$assetPath+"/shade\",\"\",0,1)") abxAssetsDetailsRefShdBtn;
 
 	
-	string $pubDate = abxAssetsGetMDate(abxAssetsGetLatestWorkVersion($assetPath, "model", "", "publish",1));
+	string $pubDate = abxAssetsGetMDate(abxAssetsGetLatestWorkVersion($assetPath, "shade", "", "publish",1));
 	string $rmDate = abxAssetsGetMDate(abxAssetsGetLatestWorkVersion($assetPath, "rig", "", "publish",1));
 	string $gmDate = abxAssetsGetMDate(abxAssetsGetLatestWorkVersion($assetPath, "model", "", "publish",1));
 	// have to get the latest shader version
@@ -1302,7 +1304,7 @@ global proc abxAssetsRefreshDetailsUI (string $assetPath){
 	// 0:Server 1:Job 2:AssetLib 3:AssetType 4:AssetName 5:dept 6:subDept 7:take 8:version 9:ext
 	//string $assetInfo[] =  abxAssetsGetFromPath($filePath);
 
-	int $pubDateS = abxAssetsGetMDateS(abxAssetsGetLatestWorkVersion($assetPath, "rig", "", "publish",1));
+	int $pubDateS = abxAssetsGetMDateS(abxAssetsGetLatestWorkVersion($assetPath, "shade", "", "publish",1));
 	int $rmDateS = abxAssetsGetMDateS(abxAssetsGetLatestWorkVersion($assetPath, "rig", "", "publish",1));
 	int $gmDateS = abxAssetsGetMDateS(abxAssetsGetLatestWorkVersion($assetPath, "model", "", "publish",1));
 	//int $smDateS = abxAssetsGetMDateS((`workspace -q -rd`+$assetPath+"/geo/"+$latestShader[1]+"/"));
@@ -2321,6 +2323,10 @@ global proc abxAssetsIncrementalSave(string $assetPath, string $takeName, int $f
 					initialShadingGroupCheck(0);
 
 				}
+				if ($deptGuess == "shade"){
+
+
+				}
 
 				// remove fur plugin if its not in use
 				if (`pluginInfo -q  -loaded Fur`){
@@ -2479,7 +2485,7 @@ global proc abxAssetsReferencePublish (string $sourceList){
 	$lockRef = 0;
 
 	if (`filetest -r $latestPublishScene`){
-		string $newRef = abxAssetsCreateReference($latestPublishScene,$assetInfo[5],"namespace",$lockRef);
+		string $newRef = abxAssetsCreateReference($latestPublishScene,$assetInfo[5],"namespace",$lockRef,0);
 		abxAssetsCheckForProps({$newRef});
 		//return $newRef;
 	}
@@ -2489,9 +2495,6 @@ global proc abxAssetsReferencePublish (string $sourceList){
 	}
 
 }
-
-
-
 
 
 
@@ -2667,12 +2670,13 @@ global proc abxAssetsPublish(string $assetPath, string $assetTake, string $versi
 	select -clear;		
 
 	// if dept is geo
-	if ($deptGuess == "model"){
+	if ($deptGuess == "model" || $deptGuess == "shade"){
 
 
 		// delete any loaded or unloaded references
 		string $keepFilter = "DECOR_*";
-		abxAssetsRemoveAllReferences($keepFilter);
+		// no longer removing references during publish, they should be imported
+		//abxAssetsRemoveAllReferences($keepFilter);
 
 		abxAssetsImportAllReferences;
 
@@ -2714,11 +2718,11 @@ global proc abxAssetsPublish(string $assetPath, string $assetTake, string $versi
 		abxDeleteUnknownRefNodes;
 		abxDeleteSharedRefNodes;
 		
-
 		// flatten hierarchies		
 
 		// convert : to _
-		abxAssetsNamespaceToRnp;
+		// taking this out so that model names persist without prefixes through scenes--adamb 02/13/15
+		//abxAssetsNamespaceToRnp;
 
 		// remove all namespaces
 		abxAssetsRemoveAllNamespaces;
@@ -2753,6 +2757,30 @@ global proc abxAssetsPublish(string $assetPath, string $assetTake, string $versi
 		//abxAssetsMakeTexturesLocal ($assetLibGuess+"/"+$assetTypeGuess+"/"+$assetNameGuess);
 		//makeLowRezTextures;
 
+		// stamp the filename onto the geometry so it can be traced if needed
+		string $geos[] = `ls -type mesh`;
+		for ($ea in $geos){
+			string $pxforms[] = `listRelatives -parent $ea`;
+			if (!`attributeExists "publishOrigin" $ea`)
+				addAttr -longName "publishOrigin" -dt "string" $ea;
+			setAttr -type "string" ($ea+".publishOrigin") ($assetNameGuess+"_"+$deptGuess+"_"+$workVersion);
+			for ($ev in $pxforms){
+				if (!`attributeExists "publishOrigin" $ev`)
+					addAttr -longName "publishOrigin" -dt "string" $ev;
+				setAttr -type "string" ($ev+".publishOrigin") ($assetNameGuess+"_"+$deptGuess+"_"+$workVersion);
+			}
+		}
+
+		// automatically add geo to geoCache set
+		string $geos[] = `ls -type mesh`;
+		if (!`objExists "geoCache"`) sets -empty -n "geoCache";
+		for ($ea in $geos){
+			string $pxforms[] = `listRelatives -parent $ea`;
+			for ($ev in $pxforms){
+				sets -add "geoCache" $ev;
+			}
+		}		
+
 		// lock REF LOCATORS
 		$locs = `ls -type transform "_PROP_*"`;
 		for ($each in $locs){
@@ -2767,6 +2795,24 @@ global proc abxAssetsPublish(string $assetPath, string $assetTake, string $versi
 			setAttr -lock 1 ($each+".sz");
 		}
 
+	}
+	else if ($deptGuess == "shade"){
+		// import any references
+		// remove any namespaces
+		// commit any renderlayers 
+		// remove render layers
+		// remove display layers
+
+		// export a geo cache set including 
+		  // the names of the geometry
+		  // the vertext count
+		  // the shader assignment
+
+		//abxAssetsMakeTexturesLocal ($assetLibGuess+"/"+$assetTypeGuess+"/"+$assetNameGuess);
+		
+		//abxAssetsRemoveIsolateSelected();
+		//abxAssetsFaceAssignmentCheck(0);
+		//initialShadingGroupCheck(0);
 	}
 	// if dept is rig
 	else if ($deptGuess == "rig")  {
@@ -2912,6 +2958,10 @@ global proc abxAssetsPublish(string $assetPath, string $assetTake, string $versi
 			$result = `confirmDialog -title "abxAssets Confirm" -message ($assetNameGuess+" "+$deptGuess+" Publish Successful.") -button "Open Work" -button "New Scene" -button "Quick Rig" -defaultButton "Open Work" -cancelButton "New Scene" -dismissString "New Scene"`;
 	}
 	else if ($deptGuess == "rig"){
+		if (!$force)
+			$result = `confirmDialog -title "abxAssets Confirm" -message ($assetNameGuess+" "+$deptGuess+" Publish Successful.") -button "Open Work" -button "New Scene"  -defaultButton "Open Work" -cancelButton "New Scene" -dismissString "New Scene"`;	
+	}
+	else if ($deptGuess == "shade"){
 		if (!$force)
 			$result = `confirmDialog -title "abxAssets Confirm" -message ($assetNameGuess+" "+$deptGuess+" Publish Successful.") -button "Open Work" -button "New Scene"  -defaultButton "Open Work" -cancelButton "New Scene" -dismissString "New Scene"`;	
 	}
@@ -3189,9 +3239,19 @@ global proc abxAssetsOpenTake (string $sourceList) {
 		if ($dept == "model" || $dept == "shade"){
 			editRenderLayerGlobals -currentRenderLayer defaultRenderLayer;
 			if (!`objExists deleteSet`) sets -empty -n "deleteSet";
+
+			//if (!`objExists geoCache`) sets -empty -n "geoCache";
 			//print ("Checking Take References\n");
 			//CheckAllRefsForUpdate;
 			// list references
+
+			// add forced outliner nodes if any
+			string $outlinerNodes[] = {"_CONSTRUCTION_"};
+			for ($each in $outlinerNodes){
+				if (`objExists $each`) reorder -front $each;
+			}
+
+			sets -add "deleteSet" "_CONSTRUCTION_";
 
 			// check work references for updated versions
 			abxAssetsUpdateWorkRefs "all" 0;
@@ -3246,6 +3306,7 @@ global proc abxAssetsOpenWorkScene(string $assetPath, string $which, int $force)
 			evalEcho("addRecentFile(\""+$filePath+"\", \""+$ext+"\");");
 
 			if (!`objExists deleteSet`) sets -empty -n deleteSet;
+			//if (!`objExists geoCache`) sets -empty -n geoCache;
 
 			file -mf false;
 
@@ -3658,7 +3719,7 @@ global proc abxAssetsCreateNew (string $assetPath, string $type){
 }
 
 // mode allows you to reference full, proxy, previs, or renderproxy alternates
-global proc string abxAssetsRefAsset (string $assetPath, string $takeName, int $lockRef){
+global proc string abxAssetsRefAsset (string $assetPath, string $takeName, int $lockRef, int $group){
 	
 	string $tokenBuffer[];
 	tokenize $assetPath "/" $tokenBuffer;
@@ -3678,7 +3739,7 @@ global proc string abxAssetsRefAsset (string $assetPath, string $takeName, int $
 	print ("REFFILE="+$refFile+"\n");
 
 	if (`filetest -r $refFile`){
-		string $newRef = abxAssetsCreateReference($refFile,$assetName,"namespace",$lockRef);
+		string $newRef = abxAssetsCreateReference($refFile,$assetName,"namespace",$lockRef,$group);
 		abxAssetsCheckForProps({$newRef});
 		$assetMoverName = (`file -q -ns $newRef`+":MOVER_CTRL");
 		if (`objExists $assetMoverName`) select $assetMoverName;
@@ -3704,7 +3765,7 @@ global proc abxAssetsRefTemp (string $assetPath){
 	}
 
 	if (`filetest -r $refFile`){
-		abxAssetsCreateReference($refFile,("temp"+$assetName),"namespace",0);
+		abxAssetsCreateReference($refFile,("temp"+$assetName),"namespace",0,0);
 	}
 	else {
 		error ("Asset not Published");
@@ -3755,7 +3816,7 @@ global proc int abxAssetsRefGeo (string $assetPath){
 
 
 	if (`filetest -r $refFile`){
-		abxAssetsCreateReference($refFile,"model","rename",0);
+		abxAssetsCreateReference($refFile,"model","namespace",0,0);
 	}
 	else {
 		//error ($assetLib+"/"+$assetType+"/"+$assetName+" Geo Publish Not Found");
@@ -3805,7 +3866,7 @@ global proc int abxAssetsRefGeoWork (string $assetPath, string $refAs){
 	print ("trying to reference: "+$refFile+"\n");
 
 	if (`filetest -r $refFile`){
-		$ref = abxAssetsCreateReference($refFile,($refPrefix+$assetName),"namespace",0);
+		$ref = abxAssetsCreateReference($refFile,($refPrefix+$assetName),"namespace",0,0);
 
 		// create a locators and turn it purple
 		string $newLoc[] = `spaceLocator -p 0 0 0`;
@@ -3838,9 +3899,14 @@ global proc int abxAssetsRefGeoWork (string $assetPath, string $refAs){
 	return 1;
 }
 
-global proc string abxAssetsCreateReference (string $refFile, string $prefix, string $type, int $lock){
+global proc string abxAssetsCreateReference (string $refFile, string $prefix, string $type, int $lock, int $group){
 		
 	string $result;
+
+	string $groupFlag = "";
+	if ($group)
+		$groupFlag = ("-gr -gn \""+$prefix+":ROOT\" ");
+
 	if ($type == "rename"){
 		namespace -set ":";
 		//evalEcho ("file -r  -gl -loadReferenceDepth \"all\" -rpr \""+$prefix+"\" -options \"v=0\" \""+$refFile+"\"");
@@ -3851,9 +3917,9 @@ global proc string abxAssetsCreateReference (string $refFile, string $prefix, st
 		namespace -set ":";
 		//evalEcho ("file -r  -gl -loadReferenceDepth \"all\" -namespace \""+$prefix+"\" -options \"v=0\" \""+$refFile+"\"");
 		if ($lock)
-			$result = evalEcho ("file -r -lck -gl -loadReferenceDepth \"all\" -namespace \""+$prefix+"\" -options \"v=0\" \""+$refFile+"\"");
+			$result = evalEcho ("file -r "+$groupFlag+"-lck -loadReferenceDepth \"all\" -namespace \""+$prefix+"\" -options \"v=0\" \""+$refFile+"\"");
 		else 
-			$result = evalEcho ("file -r -gl -loadReferenceDepth \"all\" -namespace \""+$prefix+"\" -options \"v=0\" \""+$refFile+"\"");
+			$result = evalEcho ("file -r "+$groupFlag+"-loadReferenceDepth \"all\" -namespace \""+$prefix+"\" -options \"v=0\" \""+$refFile+"\"");
 		namespace -set ":";
 	}
 	return $result;
@@ -5880,7 +5946,7 @@ global proc abxAssetsCheckForProps (string $refNodes[]){
 						string $assetPath = ("assets/props/"+$assetNameGuess);
 						//$newRef = abxAssetsRefAsset($assetPath,0);
 						$refFile = (`workspace -q -rd`+"assets/props/"+$assetNameGuess+"/_publish/"+$assetNameGuess+".mb");
-						string $newRef = abxAssetsCreateReference($refFile,$each,"namespace",0);
+						string $newRef = abxAssetsCreateReference($refFile,$each,"namespace",0,0);
 						$newRefNamespace = `file -q -namespace $newRef`;
 						string $locatorName = ($namespace+":geo__PROP_"+$each);
 						if (!`objExists $locatorName`)
