@@ -2670,7 +2670,7 @@ global proc abxAssetsPublish(string $assetPath, string $assetTake, string $versi
 	select -clear;		
 
 	// if dept is geo
-	if ($deptGuess == "model" || $deptGuess == "shade"){
+	if ($deptGuess == "model"){
 
 
 		// delete any loaded or unloaded references
@@ -2796,7 +2796,64 @@ global proc abxAssetsPublish(string $assetPath, string $assetTake, string $versi
 		}
 
 	}
+
 	else if ($deptGuess == "shade"){
+
+		abxAssetsImportAllReferences;
+
+		abxDeleteAllRN;
+
+		// remove items in the deleteSet
+		string $deleteSets[] = `ls -type objectSet -r 1 "*deleteSet"`;
+		for ($every in $deleteSets){
+			lockNode -l 0 $every;
+			$members = `sets -q $every`;
+			for ($m in $members){
+				catch(`lockNode -l 0 $m`);
+				catch(`select -ne $m`);
+				if (size(`ls -sl`)>0)
+					catch(`lockNode -l 0`);
+				delete `ls -sl`;
+				if (`objExists $m`){
+					catch(`delete $m`);
+				}
+			}
+			if (`objExists $every`){
+				catch(`delete $every`);
+			}
+		}
+
+				$unknown = `ls -type unknown -type unknownDag -type unknownTransform`;
+		for ($each in $unknown){
+			catch(`lockNode -l 0 $each`);
+			catch(`delete $each`);
+		}
+
+		abxAssetsRemoveAllNamespaces;
+
+		abxAssetsNoPolySmooth;
+		
+		// optionally export shading networks along with a shader map file
+
+		// remove junk
+
+		// THIS IS CRASHING MAYA 2015 SOMETIMES
+		// delete `ls -type hyperView`;
+		// delete `ls -type objectTypeFilter`;
+		// delete `ls -type objectScriptFilter`;
+		// delete `ls -type objectFilters`;
+
+		// delete render layers
+		abxAssetsDeleteAllRenderLayers;
+
+
+		// delete display layers
+		abxAssetsDeleteAllDisplayLayers;
+
+		// remove any isolateSelectedSets
+		delete `ls -type objectSet "modelPanel*ViewSelectedSet"`;
+		delete `ls -type objectSet "modelPanel*ViewSelectedSet*"`;
+
 		// import any references
 		// remove any namespaces
 		// commit any renderlayers 

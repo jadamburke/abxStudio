@@ -51,7 +51,7 @@ if (!`about -batch`){
 	    renderThumbnailUpdate `optionVar -q "ppSwatchUpdate"`;
 
 	// autoload is disabled on maya startup so we must load certain ones
-	string $loadPlugs[] = {"matrixNodes","modelingToolkit","fbxmaya","OneClick","OpenEXRLoader","quatNodes","tiffFloatReader","ik2Bsolver","ikSpringSolver","nearestPointOnMesh","objExport", "mtoa"};
+	string $loadPlugs[] = {"matrixNodes","modelingToolkit","fbxmaya","OneClick","OpenEXRLoader","quatNodes","tiffFloatReader","ik2Bsolver","ikSpringSolver","nearestPointOnMesh","objExport", "mtoa", "MayaExocortexAlembic"};
 
 	for ($each in $loadPlugs){
 	    catch(eval("loadPlugin "+$each));

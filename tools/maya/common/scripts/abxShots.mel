@@ -3930,7 +3930,6 @@ global proc abxShotsOpenWorkScene (string $shotName, string $dept, string $takeN
 
 
 
-
 // caches to alembic crate or standard
 global proc abxShotsExportAlembicCache (){
 	// find all objects in the cachable sets
@@ -3946,7 +3945,7 @@ global proc abxShotsExportAlembicCache (){
 	// 	select $exportList;
 	// 	// check to make sure 
 	// }
-    $sets = `ls -type objectSet -r 1 "geoCache"`;
+    $sets = `ls -type objectSet -r 1 "geoCacheOverride"`;
 	select $sets;
 	string $sel[] = `ls -sl -long`;
 
@@ -3954,7 +3953,7 @@ global proc abxShotsExportAlembicCache (){
 	// 0:Server 1:Job 2:ShotFolder 3:Seq 4:Shot 5:dept 6:subDept 7:take 8:version 9:ext
 	string $shotInfo[] = abxShotsGetFromPath(`file -q -sn`);
 	$filename = ($shotInfo[3]+"_"+$shotInfo[4]+"_"+$shotInfo[10]+"_"+$shotInfo[5]+"_"+$shotInfo[8]);
-	$filepath = ($shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$shotInfo[5]+"/cache/");
+	$filepath = ("//"+$shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$shotInfo[5]+"/cache/");
 	if (!`filetest -d $filepath`){
 		sysFile -makeDir $filepath;
 	}
@@ -3964,8 +3963,13 @@ global proc abxShotsExportAlembicCache (){
 	$alembicpath = ($filepath+$filename+"."+$ext);
 	$assetdescPath = ($filepath+$filename+".txt");
 
+
+	// get shot range
+	int $frRange[] = abxShotsGetFrameRange(($shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]),$shotInfo[2]);
+
 	string $objList = stringArrayToString($sel,",");
-	ExocortexAlembic_export -j ("filename="+$alembicpath+";objects="+$objList+";uvs=0;globalspace=1;withouthierarchy=1;ogawa=1");
+	//;withouthierarchy=1
+	ExocortexAlembic_export -j ("filename="+$alembicpath+";objects="+$objList+";uvs=0;globalspace=1;withouthierarchy=1;in="+$frRange[0]+";out="+$frRange[1]+";step=1;ogawa=1");
 
 	// export out a list of assets in the scene inculding file paths in ref 
 	// !!!!need to store the namespace used as well
@@ -3982,15 +3986,17 @@ global proc abxShotsExportAlembicCache (){
 
 }
 
-
-
-global proc abxShotsAttachAlembicCache (string $dept){
+global proc abxShotsBuildLightSceneForAlembic (string $dept,string $takeName){
 	// check for existing alembic cache file nodes in scene, delete them if
 	// reference the correct assets by reading the fragment
+
 	// 0:Server 1:Job 2:ShotFolder 3:Seq 4:Shot 5:dept 6:subDept 7:take 8:version 9:ext
 	string $shotInfo[] = abxShotsGetFromPath(`file -q -sn`);
+	// get the latest workscene filepath and use it to guess the cache path
+	string $workScene = abxShotsGetLatestWorkVersion($shotInfo[2],($shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]),$dept,$takeName,"work",1);
+	$shotInfo = abxShotsGetFromPath($workScene);
 	$filename = ($shotInfo[3]+"_"+$shotInfo[4]+"_"+$shotInfo[10]+"_"+$dept+"_"+$shotInfo[8]);
-	$filepath = ($shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$dept+"/cache/");
+	$filepath = ("//"+$shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$dept+"/cache/");
 	$alembicpath = ($filepath+$filename+".abc");
 	$assetdescPath = ($filepath+$filename+".txt");
 	if (`filetest -r $alembicpath` && `filetest -r $assetdescPath`){
@@ -4028,7 +4034,30 @@ global proc abxShotsAttachAlembicCache (string $dept){
 		}
 
 		// import and attache the alembic file
-		ExocortexAlembic_import -j ("filename="+$alembicpath+";attachToExisting=1;uvs=0;search=(Deformed);replace=(?1)");
+		//abxShotsAttachAlembicCache($dept,$takeName);
+
+	}
+	else{
+		error("Could Not Find Cache in Location:"+$alembicpath);
+	}
+}
+
+global proc abxShotsAttachAlembicCache (string $dept, string $takeName){
+	// check for existing alembic cache file nodes in scene, delete them if
+	// reference the correct assets by reading the fragment
+
+	// 0:Server 1:Job 2:ShotFolder 3:Seq 4:Shot 5:dept 6:subDept 7:take 8:version 9:ext
+	string $shotInfo[] = abxShotsGetFromPath(`file -q -sn`);
+	// get the latest workscene filepath and use it to guess the cache path
+	string $workScene = abxShotsGetLatestWorkVersion($shotInfo[2],($shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]),$dept,$takeName,"work",1);
+	$shotInfo = abxShotsGetFromPath($workScene);
+	$filename = ($shotInfo[3]+"_"+$shotInfo[4]+"_"+$shotInfo[10]+"_"+$dept+"_"+$shotInfo[8]);
+	$filepath = ("//"+$shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$dept+"/cache/");
+	$alembicpath = ($filepath+$filename+".abc");
+	if (`filetest -r $alembicpath`){
+		
+		// import and attache the alembic file
+		ExocortexAlembic_import -j ("filename="+$alembicpath+";attachToExisting=1;uvs=0;search=(Deformed)|(Orig);replace=(?1)(?2)");
 
 	}
 	else{
