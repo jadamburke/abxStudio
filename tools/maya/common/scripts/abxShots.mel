@@ -3986,7 +3986,7 @@ global proc abxShotsExportAlembicCache (){
 
 }
 
-global proc abxShotsBuildLightSceneForAlembic (string $dept,string $takeName){
+global proc abxShotsBuildLightSceneForAlembic (string $dept,string $takeName, string $version){
 	// check for existing alembic cache file nodes in scene, delete them if
 	// reference the correct assets by reading the fragment
 
@@ -3995,7 +3995,10 @@ global proc abxShotsBuildLightSceneForAlembic (string $dept,string $takeName){
 	// get the latest workscene filepath and use it to guess the cache path
 	string $workScene = abxShotsGetLatestWorkVersion($shotInfo[2],($shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]),$dept,$takeName,"work",1);
 	$shotInfo = abxShotsGetFromPath($workScene);
-	$filename = ($shotInfo[3]+"_"+$shotInfo[4]+"_"+$shotInfo[10]+"_"+$dept+"_"+$shotInfo[8]);
+
+	if ($version == "")
+		$version = $shotInfo[8];
+	$filename = ($shotInfo[3]+"_"+$shotInfo[4]+"_"+$shotInfo[10]+"_"+$dept+"_"+$version);
 	$filepath = ("//"+$shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$dept+"/cache/");
 	$alembicpath = ($filepath+$filename+".abc");
 	$assetdescPath = ($filepath+$filename+".txt");
@@ -4030,7 +4033,7 @@ global proc abxShotsBuildLightSceneForAlembic (string $dept,string $takeName){
 			string $assetData[] = stringToStringArray($ea,"|");
 			//need to check if it exists already
 			// look for the latest shade publishes first, if none exist get the latest model publishes
-			evalEcho("abxAssetsRefAsset(\""+$assetData[0]+"/model\",\"\",0,1)");
+			catch(evalEcho("abxAssetsRefAsset(\""+$assetData[0]+"/shade\",\"\",0,1)"));
 		}
 
 		// import and attache the alembic file
@@ -4042,7 +4045,7 @@ global proc abxShotsBuildLightSceneForAlembic (string $dept,string $takeName){
 	}
 }
 
-global proc abxShotsAttachAlembicCache (string $dept, string $takeName){
+global proc abxShotsAttachAlembicCache (string $dept, string $takeName, string $version){
 	// check for existing alembic cache file nodes in scene, delete them if
 	// reference the correct assets by reading the fragment
 
@@ -4050,8 +4053,12 @@ global proc abxShotsAttachAlembicCache (string $dept, string $takeName){
 	string $shotInfo[] = abxShotsGetFromPath(`file -q -sn`);
 	// get the latest workscene filepath and use it to guess the cache path
 	string $workScene = abxShotsGetLatestWorkVersion($shotInfo[2],($shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]),$dept,$takeName,"work",1);
+
+	if ($version == "")
+		$version = $shotInfo[8];
+
 	$shotInfo = abxShotsGetFromPath($workScene);
-	$filename = ($shotInfo[3]+"_"+$shotInfo[4]+"_"+$shotInfo[10]+"_"+$dept+"_"+$shotInfo[8]);
+	$filename = ($shotInfo[3]+"_"+$shotInfo[4]+"_"+$shotInfo[10]+"_"+$dept+"_"+$version);
 	$filepath = ("//"+$shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$dept+"/cache/");
 	$alembicpath = ($filepath+$filename+".abc");
 	if (`filetest -r $alembicpath`){

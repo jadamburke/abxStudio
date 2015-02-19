@@ -3303,9 +3303,13 @@ global proc abxAssetsOpenTake (string $sourceList) {
 			// list references
 
 			// add forced outliner nodes if any
-			string $outlinerNodes[] = {"_CONSTRUCTION_"};
+			string $outlinerNodes[] = {"_CONSTRUCTION_","side","front","top","persp"};
 			for ($each in $outlinerNodes){
-				if (`objExists $each`) reorder -front $each;
+				if (!`objExists $each`) {
+					createNode transform -n $each;
+					
+				}
+				reorder -front $each;
 			}
 
 			sets -add "deleteSet" "_CONSTRUCTION_";

@@ -575,7 +575,7 @@ global proc FileMenu_SaveItem()
         int $incrementalSave = false;
 
         // adam@panda ensures render layer is always set to default before saving
-        catch(eval("editRenderLayerGlobals -currentRenderLayer defaultRenderLayer"));
+        //catch(eval("editRenderLayerGlobals -currentRenderLayer defaultRenderLayer"));
 
         if(`optionVar -exists isIncrementalSaveEnabled`)
             $incrementalSave = `optionVar -q isIncrementalSaveEnabled`;
