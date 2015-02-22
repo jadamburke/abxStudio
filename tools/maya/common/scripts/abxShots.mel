@@ -3986,7 +3986,7 @@ global proc abxShotsExportAlembicCache (){
 
 }
 
-global proc abxShotsBuildLightSceneForAlembic (string $dept,string $takeName, string $version){
+global proc abxShotsBuildLightSceneForAlembic (string $dept,string $takeName, string $version, string $refDept){
 	// check for existing alembic cache file nodes in scene, delete them if
 	// reference the correct assets by reading the fragment
 
@@ -3998,6 +3998,9 @@ global proc abxShotsBuildLightSceneForAlembic (string $dept,string $takeName, st
 
 	if ($version == "")
 		$version = $shotInfo[8];
+	if ($refDept == "")
+		$refDept = "model";
+
 	$filename = ($shotInfo[3]+"_"+$shotInfo[4]+"_"+$shotInfo[10]+"_"+$dept+"_"+$version);
 	$filepath = ("//"+$shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$dept+"/cache/");
 	$alembicpath = ($filepath+$filename+".abc");
@@ -4033,7 +4036,7 @@ global proc abxShotsBuildLightSceneForAlembic (string $dept,string $takeName, st
 			string $assetData[] = stringToStringArray($ea,"|");
 			//need to check if it exists already
 			// look for the latest shade publishes first, if none exist get the latest model publishes
-			catch(evalEcho("abxAssetsRefAsset(\""+$assetData[0]+"/shade\",\"\",0,1)"));
+			catch(evalEcho("abxAssetsRefAsset(\""+$assetData[0]+"/"+$refDept+"\",\"\",0,1)"));
 		}
 
 		// import and attache the alembic file
@@ -6700,57 +6703,74 @@ global proc abxShotsVraySubDCheck (){
 }
 global proc abxShotsRestoreDeformedShader (string $refNodes[], int $force){
 
+	$sel = `ls -type transform -sl`;
+
 	// set to the default render layer before processing
 	editRenderLayerGlobals -currentRenderLayer defaultRenderLayer;
 
 	string $foundDeformed[];
 
-	if (size($refNodes) == 0)
-		$refNodes = `file -q -r`;
+	// if no objects are selected specifically, then check all objects
+	if (size($sel) < 1){
+		if (size($refNodes) == 0)
+			$refNodes = `file -q -r`;
 
-	for ($each in $refNodes){
-		string $refNodeName = `referenceQuery -rfn $each`;
-		string $namespace = `file -q -namespace $each`;
-		string $editCommands[] = `referenceQuery -failedEdits false -successfulEdits true -editStrings $each`;
-		for ($every in $editCommands){
-			print ("// Checking Edit Command "+$every+"\n");
-			// if its a geo and a parent command then its probably a deformed shape
-			if (`gmatch $every "*geo_*"` && `gmatch $every "parent -s -r*"`){
-				// if its an instance ignore it as a potential suspect
-				if (!`gmatch $every "parent -s -r -add *"`){
-				print ("GeoEdit:"+$every+"\n");
-					string $tokenBuffer[];
-					tokenize $every " " $tokenBuffer;
-					string $editCmd = $tokenBuffer[0];
-					string $editTarget = "";
-					string $editSource = "";
-					if ($editCmd == "parent"){
-						print ($every+"\n");
-						// shading engine (sg) name
+		for ($each in $refNodes){
+			string $refNodeName = `referenceQuery -rfn $each`;
+			string $namespace = `file -q -namespace $each`;
+			string $editCommands[] = `referenceQuery -failedEdits false -successfulEdits true -editCommand "parent" -editStrings $each`;
+			for ($every in $editCommands){
+				print ("// Checking Edit Command "+$every+"\n");
+				// if its a geo and a parent command then its probably a deformed shape
+				//if (`gmatch $every "*geo_*"` && `gmatch $every "parent -s -r*"`){
+				if (`gmatch $every "parent -s -r*"`){
+					// if its an instance ignore it as a potential suspect
+					if (!`gmatch $every "parent -s -r -add *"`){
+					print ("GeoEdit:"+$every+"\n");
+						string $tokenBuffer[];
+						tokenize $every " " $tokenBuffer;
+						string $editCmd = $tokenBuffer[0];
+						string $editTarget = "";
+						string $editSource = "";
+						if ($editCmd == "parent"){
+							print ($every+"\n");
+							// shading engine (sg) name
 
-						$editTarget = $tokenBuffer[4];
-						$editSource = $tokenBuffer[3];
+							$editTarget = $tokenBuffer[4];
+							$editSource = $tokenBuffer[3];
 
-						if ($editTarget != ""){
-							
-							print ("editTarget="+$editTarget+"\n");
-							// if the target is not referenced object but a deformed shape add it to the list of found deformed
-							// bug line 6591: Syntax error: unexpected end " at position 1 while parsing "|LanternARNfosterParent1|model_bottleShapeDeformed"
-							if (size(`ls -rn $editSource`) == 0)
-								print ("// adding Edit String To Array\n");
-								$foundDeformed[size($foundDeformed)] = $editTarget;
-								//print ("// done Edit String To Array\n");
+							if ($editTarget != ""){
+								
+								print ("editTarget="+$editTarget+"\n");
+								// if the target is not referenced object but a deformed shape add it to the list of found deformed
+								// bug line 6591: Syntax error: unexpected end " at position 1 while parsing "|LanternARNfosterParent1|model_bottleShapeDeformed"
+								// because the string containst quotes it can't be passed to the ls command
+								print("EDIT SOURCE:"+$editSource+"\n");
+
+								string $s1 = `substitute "\"*" $editSource ""`;
+								string $s2 = `substitute "\"$" $s1 ""`;
+								print("EDIT SOURCE AFTER:"+$s2+"\n");
+								if (size(`ls -rn $s2`) == 0)
+									print ("// adding Edit String To Array\n");
+									string $t1 = `substitute "\"*" $editTarget ""`;
+									string $t2 = `substitute "\"$" $t1 ""`;
+									$foundDeformed[size($foundDeformed)] = $t2;
+									//print ("// done Edit String To Array\n");
+							}
 						}
 					}
-				}
 
-				//if (`gmatch $every "*instObjGroup*"`){
-				//	$rnToClean[size($rnToClean)] = $refNodeName;
-				//
-				//	break;
-				//}
+					//if (`gmatch $every "*instObjGroup*"`){
+					//	$rnToClean[size($rnToClean)] = $refNodeName;
+					//
+					//	break;
+					//}
+				}
 			}
 		}
+	}
+	else{
+		$foundDeformed = $sel;
 	}
 
 	if (size($foundDeformed)>0){
@@ -6759,19 +6779,24 @@ global proc abxShotsRestoreDeformedShader (string $refNodes[], int $force){
 	}
 
 	// parse through the found deformed and make it assign the intermediate
+	print ("Starting Shader Reassignment \n");
 	for ($each in $foundDeformed){
 		if (`objExists $each`){
 			string $cmd = ("listRelatives -shapes -fullPath "+$each);
 			$childrenShapes = eval($cmd);
+			//print ("Children Shapes for object "+$each+"\n");
+			//print ($childrenShapes);
+			//print ("=========================="+$each+"\n");
 			if (size($childrenShapes) > 1){
 				// find the shape that has a reference edit that turns it into an intermediate object and use this as the source of the shader assignment
 				string $shapeTurnedIntermediate = "";
 				for ($every in $childrenShapes){
 					if (`referenceQuery -inr $every`){
-						string $editStrings[] = `referenceQuery -editStrings $every`;
+						string $editStrings[] = `referenceQuery -editCommand "setAttr" -editStrings $every`;
 						string $es;
 						for ($es in $editStrings){
 							if (`gmatch $es "*intermediate*"`){
+								print ("FoundIntermediate Shape "+$every+"\n");
 								$shapeTurnedIntermediate  = $every;
 							}
 						}
@@ -8095,3 +8120,4 @@ global proc string[] abxShotsStickNulls(string $Selection[]){
 	//select -r $Selection;
 	return $Locs;
 }
+
