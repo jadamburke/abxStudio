@@ -103,6 +103,8 @@ global proc abxShots () {
 				menuItem -en 1 -label "Delete All Render Layers" -c "abxShotsDeleteAllRenderLayers";
 			setParent -menu ..;
 			menuItem -en 1 -label "Lighting Tools" -sm true;
+				menuItem -en 1 -label "Restore Ref Render Attributes" -c "abxShotsRestoreShapeRenderAttrs";
+			    menuItem -en 1 -label "Restore Ref Shader Assignments" -c "abxShotsRestoreDeformedShader {} 0";
 				menuItem -en 1 -label "Clear Failed Edits on Refs" -c "abxShotsClearFailedEdits";
 				menuItem -en 1 -label "Check For Reference Updates" -c "abxShotsCheckAllRefsForUpdate";
 				menuItem -en 1 -label "Check For Cloth/Hair Cache" -c ("source \""+`getenv MAYA_PPTOOLS`+"/toolbox/Misc/autoCache.mel\";autoCacheFindLatest \"clothSim\";autoCacheFindLatest \"hairSim\"");
@@ -1242,6 +1244,8 @@ global proc abxShotsCreateDetailUI (){
 					//button -ann "Reference selected publish into your open scene" -en 1 -label "Ref Publish" -w 60 -c "abxShotsReferencePublish abxShotsPrevisScnList";
 					separator -h 30;
 					button -bgc .7 .2 .2 -ebg 0 -en 1 -ann "Publish latest work scene"-label "Publish" -w 70 -c "abxShotsPublishTake 1 1 abxShotsPrevisScnList \"publish\" \"\"";
+					button -bgc .7 .2 .2 -ebg 0 -en 1 -ann "Cache latest work scene"-label "Cache" -w 70 -c "abxShotsCacheTake 1 1 abxShotsPrevisScnList \"publish\" \"\"";
+
 
 					setParent ..;	
 
@@ -1279,6 +1283,7 @@ global proc abxShotsCreateDetailUI (){
 					//button -ann "Reference selected publish into your open scene" -en 1 -label "Ref Publish" -w 60 -c "abxShotsReferencePublish abxShotsAnimScnList";
 					separator -h 30;
 					button -bgc .7 .2 .2 -ebg 0 -en 1 -ann "Publish latest work scene"-label "Publish" -w 70 -c "abxShotsPublishTake 1 1 abxShotsAnimScnList \"latest\" \"\"";
+					button -bgc .7 .2 .2 -ebg 0 -en 1 -ann "Cache latest work scene"-label "Cache" -w 70 -c "abxShotsCacheTake 1 1 abxShotsAnimScnList \"latest\" \"\"";
 
 					setParent ..;					
 				
@@ -1315,6 +1320,7 @@ global proc abxShotsCreateDetailUI (){
 					//button -ann "Reference selected publish into your open scene" -en 1 -label "Ref Publish" -w 60 -c "abxShotsReferencePublish abxShotsEffectsScnList";
 					separator -h 30;
 					button -bgc .7 .2 .2 -ebg 0 -en 1 -ann "Publish latest work scene"-label "Publish" -w 70 -c "abxShotsPublishTake 1 1 abxShotsEffectsScnList \"latest\" \"\"";
+					button -bgc .7 .2 .2 -ebg 0 -en 1 -ann "Cache latest work scene"-label "Cache" -w 70 -c "abxShotsCacheTake 1 1 abxShotsEffectsScnList \"latest\" \"\"";
 
 					setParent ..;	
 
@@ -2550,6 +2556,54 @@ global proc abxShotsSaveAsTake (string $sourceList){
 	// incremental save the scene
 }
 */
+
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////// TAKE CACHING ////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+
+global proc abxShotsCacheTake(int $force, int $inBG, string $sourceList, string $version, string $note){
+
+	string $shotFolder = `abxShotsGetActiveShotFolder`;
+
+	// get active tab to determine which dept to show
+	string $dept = `abxShotsGetActiveDeptTab`;
+
+	string $takeSceneName[] = `treeView -q -si $sourceList`;
+	$takeSceneName[0] = basename($takeSceneName[0],"");
+	if (size($takeSceneName)>0){
+		string $shotsPath = (`workspace -q -rd`+$shotFolder+"/");
+		string $selectedItems[] = `treeView -q -si abxShotsList`;
+		string $shotName = $selectedItems[0] ;//`abxShotsGetSceneShotName $takeSceneName[0]`;
+		string $takeName = `abxShotsGetSceneTakeName $takeSceneName[0]`;
+
+		if ($version == "")
+			$version = "latest";
+		if ($version == "latestPublish"){
+			print ("abxShotsGetLatestWorkVersion(\""+$shotFolder+"\" \""+$shotName+"\", \""+$dept+"\", \""+$takeName+"\", \"publish\",0);\n");
+			$version = abxShotsGetLatestWorkVersion($shotFolder, $shotName, $dept, $takeName, "publish",0);
+		}
+
+
+		string $cmd = ("abxShotsPublish "+$force+" 0 \""+$shotFolder+"\" \""+$shotName+"\" \""+$dept+"\" \""+$takeName+"\" \""+$version+"\" \""+$note+"\"");
+		string $eCmd = `encodeString $cmd`;
+		//callMayaBG 1 1 `file -q -sn` `workspace -q -rd` "" "abxShotsPublish \"TEST\TEST_010\" "";
+		if ($inBG){
+
+			string $oldPluginPath = `getenv MAYA_PLUG_IN_PATH`;
+
+			//$eCmd2 = (`encodeString "source \"//monkey/resources/maya/2012-x64/scripts/abxShots_dev.mel\";"`+$eCmd);
+			callMayaBG (1, 1, "", `workspace -q -rd`, "", $eCmd);
+
+		}
+		else{
+			evalEcho($cmd);	
+		}
+
+		abxShotsDeptTabChange;
+
+	}
+
+}
 
 /////////////////////////////////////////////////////////////////////////////////
 ///////////////////TAKE PUBLISHING////////////////////////////////////////////////
@@ -3946,43 +4000,49 @@ global proc abxShotsExportAlembicCache (){
 	// 	// check to make sure 
 	// }
     $sets = `ls -type objectSet -r 1 "geoCacheOverride"`;
-	select $sets;
-	string $sel[] = `ls -sl -long`;
 
-	// determine the output path for the almebic file
-	// 0:Server 1:Job 2:ShotFolder 3:Seq 4:Shot 5:dept 6:subDept 7:take 8:version 9:ext
-	string $shotInfo[] = abxShotsGetFromPath(`file -q -sn`);
-	$filename = ($shotInfo[3]+"_"+$shotInfo[4]+"_"+$shotInfo[10]+"_"+$shotInfo[5]+"_"+$shotInfo[8]);
-	$filepath = ("//"+$shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$shotInfo[5]+"/cache/");
-	if (!`filetest -d $filepath`){
-		sysFile -makeDir $filepath;
+    if (size($sets)>0){
+		select $sets;
+		string $sel[] = `ls -sl -long`;
+
+		// determine the output path for the almebic file
+		// 0:Server 1:Job 2:ShotFolder 3:Seq 4:Shot 5:dept 6:subDept 7:take 8:version 9:ext
+		string $shotInfo[] = abxShotsGetFromPath(`file -q -sn`);
+		$filename = ($shotInfo[3]+"_"+$shotInfo[4]+"_"+$shotInfo[10]+"_"+$shotInfo[5]+"_"+$shotInfo[8]);
+		$filepath = ("//"+$shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$shotInfo[5]+"/cache/");
+		if (!`filetest -d $filepath`){
+			sysFile -makeDir $filepath;
+		}
+		if ($shotInfo[7] != "")
+			$filename = ($shotInfo[3]+"_"+$shotInfo[4]+"_"+$shotInfo[10]+"_"+$shotInfo[5]+"_"+$shotInfo[7]+"_"+$shotInfo[8]);
+		$ext = "abc";
+		$alembicpath = ($filepath+$filename+"."+$ext);
+		$assetdescPath = ($filepath+$filename+".txt");
+
+
+		// get shot range
+		int $frRange[] = abxShotsGetFrameRange(($shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]),$shotInfo[2]);
+
+		string $objList = stringArrayToString($sel,",");
+		//;withouthierarchy=1
+		ExocortexAlembic_export -j ("filename="+$alembicpath+";objects="+$objList+";uvs=0;globalspace=1;withouthierarchy=1;in="+$frRange[0]+";out="+$frRange[1]+";step=1;ogawa=1");
+
+		// export out a list of assets in the scene inculding file paths in ref 
+		// !!!!need to store the namespace used as well
+		$fileId=`fopen $assetdescPath "w"`;
+			for ($ea in $foundAssets){
+				fprint $fileId ($ea+"\n");
+			}	
+		fclose $fileId;	
+		
+		// export out a list of custom geometries for the scene
+		//string $customGeo[] = `listRelatives -children "_CUSTOM_"`;
+
+		// export the children to a file
 	}
-	if ($shotInfo[7] != "")
-		$filename = ($shotInfo[3]+"_"+$shotInfo[4]+"_"+$shotInfo[10]+"_"+$shotInfo[5]+"_"+$shotInfo[7]+"_"+$shotInfo[8]);
-	$ext = "abc";
-	$alembicpath = ($filepath+$filename+"."+$ext);
-	$assetdescPath = ($filepath+$filename+".txt");
-
-
-	// get shot range
-	int $frRange[] = abxShotsGetFrameRange(($shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]),$shotInfo[2]);
-
-	string $objList = stringArrayToString($sel,",");
-	//;withouthierarchy=1
-	ExocortexAlembic_export -j ("filename="+$alembicpath+";objects="+$objList+";uvs=0;globalspace=1;withouthierarchy=1;in="+$frRange[0]+";out="+$frRange[1]+";step=1;ogawa=1");
-
-	// export out a list of assets in the scene inculding file paths in ref 
-	// !!!!need to store the namespace used as well
-	$fileId=`fopen $assetdescPath "w"`;
-		for ($ea in $foundAssets){
-			fprint $fileId ($ea+"\n");
-		}	
-	fclose $fileId;	
-	
-	// export out a list of custom geometries for the scene
-	//string $customGeo[] = `listRelatives -children "_CUSTOM_"`;
-
-	// export the children to a file
+	else {
+		error("No geoCacheOverride' set found in scene. Please create one and add the objects you wish to cache.");
+	}
 
 }
 
@@ -6701,6 +6761,9 @@ global proc abxShotsVraySubDCheck (){
 		}
 	}
 }
+
+
+
 global proc abxShotsRestoreDeformedShader (string $refNodes[], int $force){
 
 	$sel = `ls -type transform -sl`;
@@ -6812,6 +6875,173 @@ global proc abxShotsRestoreDeformedShader (string $refNodes[], int $force){
 							}
 						}
 					}
+				}
+			}
+		}
+	}
+}
+
+
+
+global proc abxShotsRestoreShapeRenderAttrs(){
+
+		// remove any edits to objects with "Shape" in their name (horrible i know. needs to test object for type)
+	editRenderLayerGlobals -currentRenderLayer defaultRenderLayer;
+	string $excludeEditRemoveAttributes[] = {"uvSet","instObjGroups","objectGroups","uvSetName","objectGroupId","scale", "rootThickness","rootSplay", "disableDynamics","enableCollision","stiffness","rootStiffness","dampening","blindShaveData"};
+
+
+
+	// removes setAttr edits on any node found to be an intermediate object thats a shape node
+	string $refNodes[] = `file -q -r`;
+
+	// this is too brute force
+	/*
+	for ($each in $refNodes){
+
+		string $rmvEditCmds[];
+
+		$isUnloaded = false;
+		string $refNodeName = `referenceQuery -rfn $each`;
+		string $namespace = `file -q -namespace $each`;
+		string $editCommands[] = `referenceQuery -failedEdits false -successfulEdits true -editCommand "setAttr" -editNodes -editAttrs $each`;
+		for ($every in $editCommands){
+			//print ("// Checking Edit Command "+$every+"\n");
+			// if its a geo and a parent command then its probably a deformed shape
+			if (`gmatch $every "*Shape*"`){
+				if (!`gmatch $every "*intermediate*"` && !`gmatch $every "*.pt*"`){
+
+
+					string $tokenBuffer[];
+					tokenize $every "." $tokenBuffer;
+					
+					//if (`nodeType $tokenBuffer[0]` != "shaveHair"){
+						if (!stringArrayContains($tokenBuffer[size($tokenBuffer)-1], $excludeEditRemoveAttributes))
+							$rmvEditCmds[size($rmvEditCmds)] = ("referenceEdit -failedEdits false -successfulEdits true -removeEdits  \""+$every+"\"");
+							//evalEcho("referenceEdit -failedEdits false -successfulEdits true -removeEdits  \""+$every+"\"");
+					//}
+				}
+			}
+		}
+
+		// unload then remove the edits that have been marked for removal then reload the reference
+		if ($isUnloaded == false){
+			evalEcho("file -unloadReference \""+$refNodeName+"\"");
+			$isUnloaded = true;
+		}
+		for ($every in $rmvEditCmds){
+			evalEcho($every);
+		}
+
+		if ($isUnloaded == true){
+			evalEcho("file -loadReference \""+$refNodeName+"\"");
+		}
+
+
+	}
+	*/
+
+
+	$allowableMultiAttrTypes = { "double2", "double3", "double4", "float2", "float3", "float4", "short2", "short3", "long2", "long3", "stringArray", "doubleArray", "floatArray" };
+	$allowableAttrTypes = {"float","long","double","short","int","bool","enum"};
+
+	$sel = `ls -type transform -sl`;
+	string $refNodes[] = `file -q -r`;
+		// check for deformed shapes and make sure other children of the deformed shape have same attributes
+	string $foundDeformed[];
+	if (size($sel) < 1){
+		for ($each in $refNodes){
+
+			string $refNodeName = `referenceQuery -rfn $each`;
+			string $namespace = `file -q -namespace $each`;
+			string $editCommands[] = `referenceQuery -failedEdits false -successfulEdits true -editCommand "setAttr" -editNodes -editAttrs $each`;
+			for ($every in $editCommands){
+				//print ("// Checking Edit Command "+$every+"\n");
+				// if its a geo and a parent command then its probably a deformed shape
+				if (`gmatch $every "*Shape*"`){
+					if (`gmatch $every "*intermediate*"`){
+						string $tokenBuffer[];
+						tokenize $every "." $tokenBuffer;
+						$foundDeformed[size($foundDeformed)] = $tokenBuffer[0];
+					}
+				}
+			}
+		}
+	}	
+	else{
+		$foundDeformed = $sel;
+	}
+
+	// remove duplicates of found deformed
+	string $noDupes[] =  `stringArrayRemoveDuplicates($foundDeformed)`;
+
+	if (size($noDupes)>0){
+		print ("// Found Deformed\n");
+		print $noDupes;
+	}
+
+	for ($each in $noDupes){
+		
+		// get the parent of the intermediate shape
+		string $parents[] = `listRelatives -parent -fullPath $each`;
+		// get the children of the intermediate shape
+		string $childrenShapes[] = `listRelatives -shapes -fullPath $parents[0]`;
+
+		for ($every in $childrenShapes){
+			// if the object is not the original shape node and its not a referenced object
+			if ($every != $each && !`referenceQuery -inr $every`){
+				// apply settings from $each to $every
+
+				string $attrsToCopy[] = {"castsShadows","receiveShadows","motionBlur","primaryVisibility","smoothShading","visibleInReflections","visibleInRefractions","doubleSided","opposite","geometryAntialiasingOverride","shadingSamplesOverride","maxShadingSamples","shadingSamples","antialiasingLevel","geometryAntialiasingOverride","shadingSamplesOverride","aiSubdivType","aiSubdivIterations","aiOpaque"};
+				string $pluginAttrs[] = `listAttr -fromPlugin $each`;
+				string $userAttrs[] = `listAttr -userDefined $each`;
+				string $settableAttrs[] = stringArrayCatenate($attrsToCopy,$pluginAttrs);
+				string $settableAttrs2[] = stringArrayCatenate($settableAttrs,$userAttrs);
+				for ($s in $settableAttrs2){
+					//if (!catch(eval("getAttr "+$each+"."+$s))){
+					if (catch(`getAttr -type ($each + "." + $s)`) == 0){
+						string $attrType = `getAttr -type ($each + "." + $s)`;		
+
+						string $setAttrCmd = "";
+						string $typeFlag = "";
+						string $attrValStr = "";
+						if ($attrType == "string" || $attrType == "stringArray")  {
+							//$attrType = ("\"" + $attrType + "\"");
+							if ($attrType == "stringArray")  {
+								string $attrStrs[] = `getAttr ($each + "." + $s)`;
+								for ($attrStr in $attrStrs)
+									$attrValStr += (" \"" + $attrStr + "\"");
+								$typeFlag = " -type \"stringArray\"";
+							} else  {
+								string $attrStr = `getAttr ($each + "." + $s)`;
+								$attrValStr = (" \"" + $attrStr + "\"");
+								$typeFlag = " -type \"string\"";
+							}
+						} else if (stringArrayContains($attrType, $allowableMultiAttrTypes))  {
+							float $attrVals[] = `getAttr ($each + "." + $s)`;
+							for ($attrVal in $attrVals)
+								$attrValStr += (" " + $attrVal);
+							$typeFlag = (" -type " + $attrType);
+						} else if (stringArrayContains($attrType, $allowableAttrTypes))  {
+							float $attrVal = `getAttr ($each + "." + $s)`;
+							$attrValStr = (" " + $attrVal);
+							$typeFlag = "";
+						}
+						
+							$setAttrCmd = ("setAttr \""+$every+"."+$s+"\" "+$typeFlag+$attrValStr);
+							
+						if ($attrValStr != ""){
+							//print ($setAttrCmd+"\n");
+							catch(eval($setAttrCmd));
+						}
+						else{
+							print ("// skipping type "+$attrType+": "+$setAttrCmd+"\n");
+						}
+					}
+
+						//$val = `getAttr ($each+"."+$s)`;
+						//if (size($val) > 0)
+						//catch(evalEcho("setAttr \""+$every+"."+$s+"\" "+$val));
+					//}
 				}
 			}
 		}

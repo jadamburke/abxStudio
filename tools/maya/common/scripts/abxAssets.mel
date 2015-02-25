@@ -407,6 +407,9 @@ global proc abxAssetsPopulateTreeView (){
 	treeView -e -ra $listControl;
 
 	string $assetFolders[] = `getFileList -folder ($projectPath+"/assets/")`;
+	//print ("Found Asset Folders:\n");
+	//print ($assetFolders);
+	//print ("END\n");
 
 	string $assetList[];
 	string $assetLib[];
@@ -2870,6 +2873,16 @@ global proc abxAssetsPublish(string $assetPath, string $assetTake, string $versi
 		//abxAssetsRemoveIsolateSelected();
 		//abxAssetsFaceAssignmentCheck(0);
 		//initialShadingGroupCheck(0);
+
+		// select any maya hair shapes and add them to a hairSet
+
+		// make sure geo doesn't have any animation or incoming connections on trs or vis
+
+		if (`objExists "hairSet"`) delete "hairSet";
+		// create hair shapes set
+		$hairShapes = `ls -type "hairSystem"`;
+		select $hairShapes;
+		sets -n hairSet;
 	}
 	// if dept is rig
 	else if ($deptGuess == "rig")  {
@@ -4027,18 +4040,18 @@ global proc abxAssetsRemoveAllNamespaces() {
 		$refNamespaces[size($refNamespaces)] = $namespace;
 	}
 	for ($i=0;$i<$iterations;$i++){
-	// set namespace to root namespace
-	namespace -set ":";
-	string $foundNamespaces[] = `namespaceInfo -lon`;
-	for ($each in $foundNamespaces){	
-		if (!stringArrayContains($each,$refNamespaces)){
-			// if its not an autodesk standard namespace remove the namesspace and move its children to the root namespace
-			if ($each != "UI" && $each != "shared"){
-				evalEcho("namespace -f -mv "+$each+" \":\"");
-				evalEcho("namespace -rm "+$each);
+		// set namespace to root namespace
+		namespace -set ":";
+		string $foundNamespaces[] = `namespaceInfo -lon`;
+		for ($each in $foundNamespaces){	
+			if (!stringArrayContains($each,$refNamespaces)){
+				// if its not an autodesk standard namespace remove the namesspace and move its children to the root namespace
+				if ($each != "UI" && $each != "shared"){
+					evalEcho("namespace -f -mv "+$each+" \":\"");
+					evalEcho("namespace -rm "+$each);
+				}
 			}
-		}
-	}	
+		}	
 	}
 
 }
@@ -5761,6 +5774,8 @@ global proc abxAssetsRestoreDeformedShader (int $force){
 	// set to the default render layer before processing
 	editRenderLayerGlobals -currentRenderLayer defaultRenderLayer;
 
+
+
 	string $foundDeformed[];
 	string $setAttrCmds[];
 
@@ -5775,7 +5790,7 @@ global proc abxAssetsRestoreDeformedShader (int $force){
 		for ($every in $editCommands){
 			//print ("// Checking Edit Command "+$every+"\n");
 			// if its a geo and a parent command then its probably a deformed shape
-			if (`gmatch $every "*model_*"`){
+			//if (`gmatch $every "*model_*"`){
 				// if its an instance ignore it as a potential suspect
 				//if (!`gmatch $every "parent -s -r -add *"`){
 				//print ("GeoEdit:"+$every+"\n");
@@ -5802,7 +5817,7 @@ global proc abxAssetsRestoreDeformedShader (int $force){
 						}
 					}
 				//}
-			}
+			//}
 		}
 	}
 
