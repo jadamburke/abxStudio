@@ -8121,7 +8121,9 @@ global proc string[] ppNukeCamExport (string $filePath){
     string $shotDetails[] = abxShotsGetShotDetails(($shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]), $shotInfo[2]);
 
     //string $exportPath = ("M:/"+$shotInfo[1]+"/COMP/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/camera/"+$shotInfo[4]+"_"+$shotInfo[10]+"_"+$shotInfo[5]);
-
+    	string $shotInfo[] = abxShotsGetFromPath(`file -q -sn`);
+		$filename = ($shotInfo[3]+"_"+$shotInfo[4]+"_"+$shotInfo[10]+"_camera_"+$shotInfo[8]);
+		$filepath = ("//"+$shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/camera/");
 
 
     for ($each in $renderCamNames){
@@ -8129,12 +8131,13 @@ global proc string[] ppNukeCamExport (string $filePath){
     	// disable fluids to prevent slow exporting
     	setState fluid 0;
 
-    	string $exportPath = (`workspace -q -rd`+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/camera/"+$shotInfo[3]+"_"+$shotInfo[4]+"_"+$shotInfo[10]+"_"+$shotInfo[5]);
+    	//string $exportPath = (`workspace -q -rd`+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/camera/"+$shotInfo[3]+"_"+$shotInfo[4]+"_"+$shotInfo[10]+"_"+$shotInfo[5]);
+    	string $exportPath = $filepath;
 
 	    // if there is more than one camera being exported (stereo pairs) then export with camName
-	    string $exportfilename = $shotInfo[8];
+	    string $exportfilename = ($filename);
 	    if (size($renderCamNames)>1)
-	    	$exportfilename = ($shotInfo[8]+"_"+$each);
+	    	$exportfilename = ($filename+"_"+$each);
 
 
 	    if ($shotInfo[7] == "")
@@ -8197,7 +8200,7 @@ global proc string[] ppNukeCamExport (string $filePath){
 
 	   	// set fbx options
 	   	evalEcho("FBXExportFileVersion -v \"FBX200900\"");
-	   	evalEcho("FBXExportReferencedContainersContent -v false");
+	   	evalEcho("FBXExportReferencedAssetsContent -v false");
 		evalEcho("FBXExportCameras -v true");
 		evalEcho("FBXExportBakeComplexStart -v "+$shotDetails[2]);
 		evalEcho("FBXExportBakeComplexEnd -v "+$shotDetails[3]);
