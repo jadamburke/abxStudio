@@ -2775,14 +2775,16 @@ global proc abxAssetsPublish(string $assetPath, string $assetTake, string $versi
 		}
 
 		// automatically add geo to geoCache set
-		string $geos[] = `ls -type mesh`;
-		if (!`objExists "geoCache"`) sets -empty -n "geoCache";
-		for ($ea in $geos){
-			string $pxforms[] = `listRelatives -parent $ea`;
-			for ($ev in $pxforms){
-				sets -add "geoCache" $ev;
-			}
-		}		
+		if ($assetTypeGuess != "environment"){
+			string $geos[] = `ls -type mesh`;
+			if (!`objExists "geoCache"`) sets -empty -n "geoCache";
+			for ($ea in $geos){
+				string $pxforms[] = `listRelatives -parent $ea`;
+				for ($ev in $pxforms){
+					sets -add "geoCache" $ev;
+				}
+			}		
+		}
 
 		// lock REF LOCATORS
 		$locs = `ls -type transform "_PROP_*"`;
@@ -2796,6 +2798,12 @@ global proc abxAssetsPublish(string $assetPath, string $assetTake, string $versi
 			setAttr -lock 1 ($each+".sx");
 			setAttr -lock 1 ($each+".sy");
 			setAttr -lock 1 ($each+".sz");
+		}
+
+		// delete any expressions
+		$expr = `ls -type expression`;
+		for ($each in $expr){
+			catch(eval("delete "+$each));
 		}
 
 	}
@@ -2883,6 +2891,12 @@ global proc abxAssetsPublish(string $assetPath, string $assetTake, string $versi
 		$hairShapes = `ls -type "hairSystem"`;
 		select $hairShapes;
 		sets -n hairSet;
+
+		// delete any expressions
+		$expr = `ls -type expression`;
+		for ($each in $expr){
+			catch(eval("delete "+$each));
+		}
 	}
 	// if dept is rig
 	else if ($deptGuess == "rig")  {

@@ -1,0 +1,116 @@
+// arnoldConnectIDs
+// Created by: adamb
+// Date: 2015/02/26 17:29:19
+
+global proc arnoldConnectIDs(){
+    $aiWtoF = `ls -type aiWriteFloat`;
+    string $aovNodes[] = `ls -type aiAOV`;
+    string $aovNames[];
+    
+ 
+    for ($ea in $aovNodes){
+        $aovNames[size($aovNames)]=`getAttr ($ea+".name")`;
+    }
+    for ($ea in $aiWtoF){
+        //print ($ea+"\n");
+        string $aovName = `getAttr ($ea+".aovName")`;
+        //print ($aovName+"\n");
+        
+        // if the aov doesn't exist in the arnold render globals then create it
+        if (!stringArrayContains($aovName,$aovNames)){
+            $newAOV = `createNode -ss -n ("ai"+$aovName) aiAOV`;
+            catch(eval("connectAttr -na \""+$newAOV+".message\" \"defaultArnoldRenderOptions.aovList\""));
+            setAttr ($newAOV+".outputs[0]");
+            setAttr -type "string" ($newAOV+".name") $aovName;
+            setAttr ($newAOV+".enabled") 0; 
+            catch(eval("connectAttr \"defaultArnoldFilter.message\" \""+$newAOV+".outputs[0].filter\""));
+            catch(eval("connectAttr \"defaultArnoldDriver.message\" \""+$newAOV+".outputs[0].driver\""));
+        }
+      }
+      evalDeferred -lowestPriority "arnoldConnectForceAttrEditorUpdate";
+
+        
+}
+
+global proc arnoldConnectForceAttrEditorUpdate(){
+
+	    $aiWtoF = `ls -type aiWriteFloat`;
+    string $aovNodes[] = `ls -type aiAOV`;
+  
+    for ($ea in $aiWtoF){
+        $destSGs = `listConnections -d 1 -p 1 ($ea+".outColor")`;
+        for ($ev in $destSGs){
+    		evalDeferred -lowestPriority ("select "+$ev+";openAEWindow;");
+    	}
+    }
+    evalDeferred -lowestPriority "arnoldConnectIDsMatchName";
+}
+
+
+global proc arnoldConnectIDsMatchName(){
+    
+    $aiWtoF = `ls -type aiWriteFloat`;
+    string $aovNodes[] = `ls -type aiAOV`;
+    string $aovNames[];
+    
+ 
+    for ($ea in $aovNodes){
+        $aovNames[size($aovNames)]=`getAttr ($ea+".name")`;
+    }
+    for ($ea in $aiWtoF){
+        //print ($ea+"\n");
+        string $aovName = `getAttr ($ea+".aovName")`;
+        //print ($aovName+"\n");
+        
+        // get its connection to a shading group
+        $destSGs = `listConnections -d 1 -p 1 ($ea+".outColor")`;
+        for ($ev in $destSGs){
+            //print ($ev+"\n");
+            $nodeParts = stringToStringArray($ev, ".");
+            $sgName = $nodeParts[0];
+            $aovAttr = $nodeParts[1];
+            //print ($aovAttr+"\n");
+            $aovAttrParts = stringToStringArray($aovAttr,"[");
+            $aovAttrName = $aovAttrParts[0];
+            $aovAttrIndex = `match "[0-9]+" $aovAttrParts[1]`;
+            $aovPlug = $nodeParts[2];
+            
+            $AOVCount = `getAttr -size ($sgName+".aiCustomAOVs")`;
+            
+            $aovAttrAovName = `getAttr ($sgName+"."+$aovAttr+".aovName")`;
+            
+            int $foundMatch = 0;
+            if ($aovName != $aovAttrAovName){
+            
+                // loop through the custom aov names to find a match, 
+                // if the match is not the same element as the current connections, then break it
+                // connect the current match;
+                for ($i=0;$i<$AOVCount;$i++){
+                    // get the name of the aov
+                    $aovAttrAovName = `getAttr ($sgName+"."+$aovAttrName+"["+$i+"].aovName")`;
+                    //print ("testing match of "+$aovName+" with "+$aovAttrAovName+"\n");
+                    if ($aovAttrAovName == $aovName){
+                        // if its already connected then disconnect it
+                        string $input = `listConnections -s 1 -p 1 ($sgName+"."+$aovAttrName+"["+$i+"].aovInput")`;
+                        if ($input != "")
+                            disconnectAttr $input ($sgName+"."+$aovAttrName+"["+$i+"].aovInput");
+                        // connect it
+                        connectAttr ($ea+".outColor") ($sgName+"."+$aovAttrName+"["+$i+"].aovInput");
+                        
+                        // disconnect old stuff
+                        //print ("disconnectAttr "+$ea+".outColor "+$sgName+"."+$aovAttr+".aovInput\n");
+                        disconnectAttr ($ea+".outColor") ($sgName+"."+$aovAttr+".aovInput");
+                        $foundMatch = 1;
+                    }
+                }
+            }
+            else{
+                $foundMatch = 1;
+            }
+            if ($foundMatch == 0){
+                print ("no AOV match for "+$ea+".outColor. still connected to "+$sgName+"."+$aovAttr+".aovInput\n");
+            }
+            //getAttr Mom:MOM_head_layeredSG.aiCustomAOVs[8].aovName
+        }
+    }
+}
