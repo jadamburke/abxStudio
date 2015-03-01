@@ -31,6 +31,10 @@
 // FIXED: bug not recognizing future versions of maya
 // handles clashing node names more gracefully
 
+// CHANGES SINCE
+// adding a reference purge for the layer to remove unclean ref edits that bloat scenes up
+
+
 
 
 // ©2011 J. Adam Burke 
@@ -427,6 +431,13 @@ global proc exportRenderLayerEdits2(string $renderLayerName, string $filePath) {
 
 }
 
+global proc importRenderLayerMulti(string $filenames[]){
+
+	for ($ea in $filenames){
+		importRenderLayer ($ea);
+	}
+}
+
 global proc importRenderLayer (string $filename) {
 
 	if ($filename == "")
@@ -457,6 +468,9 @@ global proc importRenderLayer (string $filename) {
 
 	
 	while ( size( $nextLine ) > 0 ) {
+
+		string $layerName;
+		string $layerRename;
 	
 		// if the line is the create layer command
 		if (`gmatch $nextLine "createRenderLayer -empty -name*"`) {
@@ -536,6 +550,10 @@ global proc importRenderLayer (string $filename) {
 		}
     		print ( $nextLine );
     		$nextLine = `fgetline $fileId`;
+
+
+    	// clean up renderlayer .renderInfo connections which bloat referenced scenes
+    	referenceEdit -failedEdits true -successfulEdits true -editCommand connectAttr -removeEdits ($layerRename+".renderInfo");
 	}
 	fclose $fileId;
 
@@ -548,6 +566,9 @@ global proc exportAllRenderLayers () {
 	string $allRenderLayers[] = `ls -type "renderLayer"`;
 	// pick a save location prefix
 	$filePathPrefix = `fileDialog -title "Save Render Layer MEL" -mode 1 -directoryMask "*.mel"`;
+	
+
+
 	if ($filePathPrefix == "")
 		return;
 	// export each render layer
@@ -1600,7 +1621,7 @@ global proc layerEditorBuildRenderLayerMenu(string $parent, string $toolName)
 	$copyLayerOptionBoxForRenLayers = `menuItem -optionBox true`;
 
 	// CUSTOM MENU
-	menuItem -label "Import Layers" -c "importRenderLayer `fileDialog`";
+	menuItem -label "Import Layers" -c "importRenderLayerMulti `fileDialog2 -okc \"import\" o-fileFilter \"RenderLayer Mel (*.mel);;All Files (*.*)\" -caption \"Import Render Layers\" -fileMode 4`";
 
 	// CUSTOM MENU
 	menuItem -label "Export All Layers" -c "exportAllRenderLayers";

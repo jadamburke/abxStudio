@@ -4001,6 +4001,12 @@ global proc abxShotsExportAlembicCache (){
 	// }
 
 	$sets = `ls -type objectSet -r 1 "geoCache"`;
+
+	// show outer eyes
+	string $oe[] = `ls -r 1 "*_outer"`;
+	for ($each in $oe){
+		setAttr ($each+".visibility") 1;
+	}
     //$sets = `ls -type objectSet -r 1 "geoCacheOverride"`;
 
     if (size($sets)>0){
@@ -4093,12 +4099,20 @@ global proc abxShotsBuildLightSceneForAlembic (string $dept,string $takeName, st
 			}
 		fclose $fileId;	
 
+		string $refAlt = "model";
+		if ($refDept == "model"){
+			$refAlt = "shade";
+		}
+
 		// reference the necessary assets
 		for ($ea in $foundAssets){
 			string $assetData[] = stringToStringArray($ea,"|");
 			//need to check if it exists already
 			// look for the latest shade publishes first, if none exist get the latest model publishes
-			catch(evalEcho("abxAssetsRefAsset(\""+$assetData[0]+"/"+$refDept+"\",\"\",0,1)"));
+			int $err = catch(evalEcho("abxAssetsRefAsset(\""+$assetData[0]+"/"+$refDept+"\",\"\",0,1)"));
+			if ($err){
+				catch(evalEcho("abxAssetsRefAsset(\""+$assetData[0]+"/"+$refAlt+"\",\"\",0,1)"));
+			}
 		}
 
 		// import and attache the alembic file
@@ -7007,6 +7021,7 @@ global proc abxShotsRestoreShapeRenderAttrs(){
 	}
 
 	for ($each in $noDupes){
+
 		
 		// get the parent of the intermediate shape
 		string $parents[] = `listRelatives -parent -fullPath $each`;

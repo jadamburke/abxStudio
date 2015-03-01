@@ -976,9 +976,10 @@ global proc abxAssetsCreateDetailUI (){
 		// Geo
 		formLayout -en 1 -bgc .2 .5 .3 abxAssetsModelFrmLyt;
 			//rowLayout -numberOfColumns 2 -adj 2 -ct2 "both" "both" -rat 2 "both" 0;
-				rowLayout -nc 5 -adj 4 abxAssetsModelListBtnCol;
+				rowLayout -nc 6 -adj 4 abxAssetsModelListBtnCol;
 					button -label "Save As" -w 60 -h 20 -bgc .2 .2 .2 -ebg 0 -ann "Adds a Scene File to Rig Dept" -c abxAssetsCreateTakeProc;
 					button -label "Open" -w 60 -h 20 -bgc .2 .2 .2 -ebg 0 -c "abxAssetsOpenTake abxAssetsModelScnList";
+					button -label "Other..." -w 60 -h 20 -bgc .2 .2 .2 -ebg 0 -c "abxAssetsOpenOtherFile \"\"";
 					button -label "Version Up" -w 60 -h 20 -bgc .2 .2 .2 -ebg 0 -c "abxAssetsIncrementalSave \"auto\" \"\" 0 \"\";abxAssetsDeptTabChange;";
 					separator -w 20 -h 20 -style "none";
 					button -en 1 -ann "Publish latest work scene" -label "Publish" -w 60 -h 20 -bgc .7 .2 .2 -ebg 0 -c "abxAssetsPublishTake 0 0 abxAssetsModelScnList \"latest\" \"\""; //bxAssetsPublishTake(int $force, int $inBG, string $sourceList, string $version, string $note)
@@ -1011,9 +1012,10 @@ global proc abxAssetsCreateDetailUI (){
 		// Rig
 		formLayout -en 1 -bgc .3 .5 .6 abxAssetsRigFrmLyt;
 			//rowLayout -numberOfColumns 2 -adj 2 -ct2 "both" "both" -rat 2 "both" 0;
-				rowLayout -nc 5 -adj 4 abxAssetsRigListBtnCol ;
+				rowLayout -nc 6 -adj 4 abxAssetsRigListBtnCol ;
 					button -label "Save As" -h 20 -w 60 -bgc .2 .2 .2 -ebg 0 -ann "Adds a Scene File to Rig Dept" -c abxAssetsCreateTakeProc;
 					button -label "Open" -h 20 -w 60 -bgc .2 .2 .2 -ebg 0 -c "abxAssetsOpenTake abxAssetsRigScnList";
+					button -label "Other..." -w 60 -h 20 -bgc .2 .2 .2 -ebg 0 -c "abxAssetsOpenOtherFile \"\"";
 					button -label "Version Up" -h 20 -w 60 -bgc .2 .2 .2 -ebg 0 -c "abxAssetsIncrementalSave \"auto\" \"\" 0 \"\";abxAssetsDeptTabChange;";
 					separator -h 20 -w 20 -style "none";
 					button -en 1 -ann "Publish latest work scene" -label "Publish" -w 60 -h 20 -bgc .7 .2 .2 -ebg 0 -c "abxAssetsPublishTake 0 0 abxAssetsRigScnList \"latest\" \"\"";
@@ -1044,9 +1046,10 @@ global proc abxAssetsCreateDetailUI (){
 		// Rig
 		formLayout -en 1 -bgc .3 .5 .6 abxAssetsShadeFrmLyt;
 			//rowLayout -numberOfColumns 2 -adj 2 -ct2 "both" "both" -rat 2 "both" 0;
-				rowLayout -nc 5 -adj 4 abxAssetsShadeListBtnCol ;
+				rowLayout -nc 6 -adj 4 abxAssetsShadeListBtnCol ;
 					button -label "Save As" -h 20 -w 60 -bgc .2 .2 .2 -ebg 0 -ann "Adds a Scene File to Shade Dept" -c abxAssetsCreateTakeProc;
 					button -label "Open" -h 20 -w 60 -bgc .2 .2 .2 -ebg 0 -c "abxAssetsOpenTake abxAssetsRigScnList";
+					button -label "Other..." -w 60 -h 20 -bgc .2 .2 .2 -ebg 0 -c "abxAssetsOpenOtherFile \"\"";
 					button -label "Version Up" -h 20 -w 60 -bgc .2 .2 .2 -ebg 0 -c "abxAssetsIncrementalSave \"auto\" \"\" 0 \"\";abxAssetsDeptTabChange;";
 					separator -h 20 -w 20 -style "none";
 					button -en 1 -ann "Publish latest work scene" -label "Publish" -w 60 -h 20 -bgc .7 .2 .2 -ebg 0 -c "abxAssetsPublishTake 0 0 abxAssetsShadeScnList \"latest\" \"\"";
@@ -1077,9 +1080,10 @@ global proc abxAssetsCreateDetailUI (){
 		// Rig
 		formLayout -en 1 -bgc .3 .5 .6 abxAssetsAnimFrmLyt;
 			//rowLayout -numberOfColumns 2 -adj 2 -ct2 "both" "both" -rat 2 "both" 0;
-				rowLayout -nc 5 -adj 4 abxAssetsAnimListBtnCol ;
+				rowLayout -nc 6 -adj 4 abxAssetsAnimListBtnCol ;
 					button -label "Save As" -h 20 -w 60 -bgc .2 .2 .2 -ebg 0 -ann "Adds a Scene File to Shade Dept" -c abxAssetsCreateTakeProc;
 					button -label "Open" -h 20 -w 60 -bgc .2 .2 .2 -ebg 0 -c "abxAssetsOpenTake abxAssetsRigScnList";
+					button -label "Other..." -w 60 -h 20 -bgc .2 .2 .2 -ebg 0 -c "abxAssetsOpenOtherFile \"\"";
 					button -label "Version Up" -h 20 -w 60 -bgc .2 .2 .2 -ebg 0 -c "abxAssetsIncrementalSave \"auto\" \"\" 0 \"\";abxAssetsDeptTabChange;";
 					separator -h 20 -w 20 -style "none";
 					button -en 1 -ann "Publish latest work scene" -label "Publish" -w 60 -h 20 -bgc .7 .2 .2 -ebg 0 -c "abxAssetsPublishTake 0 0 abxAssetsAnimScnList \"latest\" \"\"";;
@@ -2806,6 +2810,12 @@ global proc abxAssetsPublish(string $assetPath, string $assetTake, string $versi
 			catch(eval("delete "+$each));
 		}
 
+		// delete any AOVs
+		$expr = `ls -type aiAOV`;
+		for ($each in $expr){
+			catch(eval("delete "+$each));
+		}
+
 	}
 
 	else if ($deptGuess == "shade"){
@@ -2894,6 +2904,13 @@ global proc abxAssetsPublish(string $assetPath, string $assetTake, string $versi
 
 		// delete any expressions
 		$expr = `ls -type expression`;
+		for ($each in $expr){
+			catch(eval("delete "+$each));
+		}
+
+
+		// delete any AOVs
+		$expr = `ls -type aiAOV`;
 		for ($each in $expr){
 			catch(eval("delete "+$each));
 		}
@@ -6308,14 +6325,22 @@ global proc string[] abxAssetsGetFromPath (string $filePath){
 
 global proc abxAssetsCheckAllRefsForUpdate (){
 	
-	string $referencePath[] = `file -q -r`;
-	for ($each in $referencePath){
-		// if it contains a publish file as a reference 
-		if (`gmatch $each "*publish*"`){
-			print ("checking: "+$each+"\n");
-			abxAssetsCheckRefForUpdate($each);
-		}
-	}	
+	$result = catch(`editRenderLayerGlobals -currentRenderLayer defaultRenderLayer`);
+	if ($result == 0){
+
+		string $referencePath[] = `file -q -r`;
+		for ($each in $referencePath){
+			// if it contains a publish file as a reference 
+			if (`gmatch $each "*publish*"`){
+				print ("checking: "+$each+"\n");
+				abxAssetsCheckRefForUpdate($each);
+			}
+		}	
+	}
+	else {
+		error ("Could not swith to master layer. use abxLayers>List Failed Ref Edits to remove failed edits");
+		//$result = `confirmDialog -title "Shot Manager: masterLayer Locked" -message ("There appears to be a new publish for "+$filename+".") -button ("Reload with "+$latestPublishVersion) -button ("Keep Using "+$curVersion) -button ("Import "+$curVersion+" & Ref "+$latestPublishVersion) -defaultButton "Reload with Latest Publish" -cancelButton ("Keep Using "+$curVersion) -dismissString ("Keep Using "+$curVersion)`;
+	}
 }
 
 global proc abxAssetsCheckRefForUpdate (string $referencePath){
@@ -6369,4 +6394,25 @@ global proc abxAssetsCheckRefForUpdate (string $referencePath){
 			}
 		}
 	}
+}
+
+// opens a standard maya file open browser at the shot work path
+global proc abxAssetsOpenOtherFile(string $assetPath){
+
+	if ($assetPath == ""){
+		$selItems = `treeView -q -si abxAssetsTreeView`;
+		$assetPath = $selItems[0];
+	}
+
+	string $dept = `abxAssetsGetActiveDeptTab`;
+	$dept = $dept;
+	string $browserPath = (`workspace -q -rd`+$assetPath+"/"+$dept+"/work/");
+	print ("browserPath ="+$browserPath+"\n");
+	string $file[] = `fileDialog2 -fileFilter "Maya Files (*.ma *.mb);;Maya ASCII (*.ma);;Maya Binary (*.mb);;All Files (*.*)" -caption "Open" -fileMode 1 -dir $browserPath`;
+	//$file[0] = `workspace -en $file[0]`;
+	if (`filetest -r $file[0]`){
+		print ($file[0]+"\n");
+		saveChanges("abxLockFileCheckOut(\"\");file -f -o \""+$file[0]+"\";abxLockFileCheckIn(\""+$file[0]+"\");");
+	}
+		
 }
