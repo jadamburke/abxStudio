@@ -2258,7 +2258,7 @@ global proc abxShotsOpenTake (string $sourceList) {
 			if (`exists abxAssetsUpdatePropInstances`)
 				abxAssetsUpdatePropInstances {""} 0;
 			//renderThumbnailUpdate true;
-
+			abxShotsCheckAllRefsForUpdate;
 			
 			catch(`abxShotsUseAudioPublish`);
 

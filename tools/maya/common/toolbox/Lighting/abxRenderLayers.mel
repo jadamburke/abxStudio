@@ -300,7 +300,7 @@ global proc exportRenderLayerEdits2(string $renderLayerName, string $filePath) {
 	// get members of render layer
 	string $renderLayerMembers[] = `editRenderLayerMembers -q -fullNames $renderLayerName`;
 	for ($each in $renderLayerMembers){
-		$editCommands[size($editCommands)] = ("editRenderLayerMembers "+$renderLayerName+" "+$each+"\;");
+		$editCommands[size($editCommands)] = ("editRenderLayerMembers -nr "+$renderLayerName+" "+$each+"\;");
 		$index++;
 	}
 
@@ -1621,7 +1621,7 @@ global proc layerEditorBuildRenderLayerMenu(string $parent, string $toolName)
 	$copyLayerOptionBoxForRenLayers = `menuItem -optionBox true`;
 
 	// CUSTOM MENU
-	menuItem -label "Import Layers" -c "importRenderLayerMulti `fileDialog2 -okc \"import\" o-fileFilter \"RenderLayer Mel (*.mel);;All Files (*.*)\" -caption \"Import Render Layers\" -fileMode 4`";
+	menuItem -label "Import Layers" -c "importRenderLayerMulti `fileDialog2 -okc \"import\" -fileFilter \"RenderLayer Mel (*.mel);;All Files (*.*)\" -caption \"Import Render Layers\" -fileMode 4`";
 
 	// CUSTOM MENU
 	menuItem -label "Export All Layers" -c "exportAllRenderLayers";

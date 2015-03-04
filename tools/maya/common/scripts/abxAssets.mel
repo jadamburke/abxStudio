@@ -4079,7 +4079,7 @@ global proc abxAssetsRemoveAllNamespaces() {
 				// if its not an autodesk standard namespace remove the namesspace and move its children to the root namespace
 				if ($each != "UI" && $each != "shared"){
 					evalEcho("namespace -f -mv "+$each+" \":\"");
-					evalEcho("namespace -rm "+$each);
+					catch(evalEcho("namespace -rm "+$each));
 				}
 			}
 		}	
