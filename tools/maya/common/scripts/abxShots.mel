@@ -6983,7 +6983,7 @@ global proc abxShotsRestoreShapeRenderAttrs(){
 
 
 	$allowableMultiAttrTypes = { "double2", "double3", "double4", "float2", "float3", "float4", "short2", "short3", "long2", "long3", "stringArray", "doubleArray", "floatArray" };
-	$allowableAttrTypes = {"float","long","double","short","int","bool","enum"};
+	$allowableAttrTypes = {"float","long","double","short","int","bool","enum", "byte"};
 
 	$sel = `ls -type transform -sl`;
 	string $refNodes[] = `file -q -r`;
