@@ -180,7 +180,7 @@ nuke:
         linux: /
         mac: /
         win32: C:/Program Files/Nuke8.0v5
-    '9.0v3':
+    '9.0v4':
       name: Nuke
       modes:
         ui:
@@ -190,7 +190,7 @@ nuke:
       path:
         linux: /
         mac: /
-        win32: C:/Program Files/Nuke9.0v3
+        win32: C:/Program Files/Nuke9.0v4
 nukex:
   env:
     NUKE_PATH: '%PP_ROOT%/tools/nuke'
@@ -225,7 +225,7 @@ nukex:
         linux: /
         mac: /
         win32: C:/Program Files/Nuke8.0v5
-    '9.0v3':
+    '9.0v4':
       name: Nuke
       modes:
         ui:
@@ -235,7 +235,7 @@ nukex:
       path:
         linux: /
         mac: /
-        win32: C:/Program Files/Nuke9.0v3
+        win32: C:/Program Files/Nuke9.0v4
 nukestudio:
   env:
     NUKE_PATH: '%PP_ROOT%/tools/nuke'
@@ -248,7 +248,7 @@ nukestudio:
   - track
   - roto
   versions:
-    '9.0v3':
+    '9.0v4':
       name: Nuke
       modes:
         ui:
@@ -258,7 +258,7 @@ nukestudio:
       path:
         linux: /
         mac: /
-        win32: C:/Program Files/Nuke9.0v3
+        win32: C:/Program Files/Nuke9.0v4
 premiere:
   show: true
   tasks:

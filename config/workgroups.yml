@@ -19,13 +19,11 @@ default:
         arnold: '3.2.0'
         crate: '1.1.145'
     nuke:
-      version: '9.0v3'
+      version: '9.0v4'
     nukex:
-      version: '9.0v3'
-    nukex:
-      version: '9.0v3'
+      version: '9.0v4'
     nukestudio:
-      version: '9.0v3'
+      version: '9.0v4'
     hiero:
       version: '1.8v2'
     aftereffects:
