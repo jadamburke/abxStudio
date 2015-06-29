@@ -19,8 +19,7 @@ arnold:
   name: Arnold
   show: false
   env:
-    ARNOLD_LICENSE_HOST: 'ppny-lic'
-    ARNOLD_LICENSE_PORT: '5060'
+    solidangle_LICENSE: '5060@ppny-lic'
   packages:
     maya:
       env:
@@ -51,6 +50,15 @@ arnold:
         1.1.1.0:
           env:
             PP_MTOA: '1.1.1.0'
+          path:
+            linux: /
+            mac: /
+            win32: /
+          versions:
+          - '2015'
+        1.2.0.8:
+          env:
+            PP_MTOA: '1.2.0.8'
           path:
             linux: /
             mac: /
@@ -186,4 +194,89 @@ ngSkinningTools:
           versions:
           - '2013'
           - '2014'
+          - '2015'
+
+SOuP:
+  name: SOuP
+  show: false
+  packages:
+    maya:
+      versions:
+        '2015':
+          env:
+            MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/maya/SOuP/win/SOuP_2015_06_08/Maya2015'
+            MAYA_SHELF_PATH: '%PP_RESOURCE%/bin/maya/SOuP/win/SOuP_2015_06_08/Maya2015/shelves'
+          path:
+            linux: /
+            mac: /
+            win32: /
+          versions:
+          - '2013'
+          - '2014'
+          - '2015'
+
+houdiniEngine:
+  name: houdiniEngine
+  show: false
+  packages:
+    maya:
+      versions:
+        '14.0.258':
+          env:
+            MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/maya/houdiniEngine/win/14.0.258/maya2015'
+            PATH: '%PP_RESOURCE%/bin/maya/houdiniEngine/win/14.0.258/maya2015/bin'
+          path:
+            linux: /
+            mac: /
+            win32: /
+          versions:
+          - '2013'
+          - '2014'
+          - '2015'
+
+realflowMaya:
+  name: realflowMaya
+  show: false
+  packages:
+    maya:
+      versions:
+        '14.8.012':
+          env:
+            MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/maya/realflow/win/14.8.012/Maya2015'
+          path:
+            linux: /
+            mac: /
+            win32: /
+          versions:
+          - '2015'
+rfrk:
+  name: realflowrenderkit
+  show: false
+  packages:
+    maya:
+      versions:
+        '2014':
+          env:
+            MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/maya/rfrk/win/2014/Maya2015'
+            PATH: '%PP_RESOURCE%/bin/maya/rfrk/win/2014/RFRK 2014 For Maya'
+          path:
+            linux: /
+            mac: /
+            win32: /
+          versions:
+          - '2015'
+presenz:
+  name: presenz
+  show: false
+  packages:
+    maya:
+      versions:
+        '0.1.0':
+          env:
+            MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/maya/presenz/win/0.1.0/Maya2015'
+          path:
+            linux: /
+            mac: /
+            win32: /
+          versions:
           - '2015'

@@ -3,27 +3,20 @@ default:
     maya:
       version: '2015'
       modules:
-        arnold: '1.1.1.0'
+        arnold: '1.2.0.8'
         crate: '1.1.145'
-        gmh: '2.0'
-        ngSkinningTools: '1.0.881'
-    mayaAlt:
-      version: '2014'
-      modules:
-        arnold: '1.1.1.0'
-        crate: '1.1.145'
-        gmh: '2.0'
+        SOuP: '2015'
     softimage:
       version: '2015'
       modules:
         arnold: '3.2.0'
         crate: '1.1.145'
     nuke:
-      version: '9.0v4'
+      version: '9.0v5'
     nukex:
-      version: '9.0v4'
+      version: '9.0v5'
     nukestudio:
-      version: '9.0v4'
+      version: '9.0v5'
     hiero:
       version: '1.8v2'
     aftereffects:
@@ -38,7 +31,6 @@ default:
       version: '4R6'
   order:
   - maya
-  - mayaAlt
   - softimage
   - motionbuilder
   - nuke

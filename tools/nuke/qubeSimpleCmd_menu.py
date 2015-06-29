@@ -73,6 +73,10 @@ def submitNukeCmdline_render(executeNodes=''):
         'name'      : 'nuke '+os.path.basename(str(nuke.root().name())),
         'prototype' : 'cmdrange',
         'env': {'NUKE_PATH': os.environ['NUKE_PATH']},
+        'priority': 500,
+        'cpus': 10,
+        'reservations': 'global.nuke=1,host.processors=1',
+        'groups': 'RENDERBOX',
         'package' : {
             'simpleCmdType': 'Nuke (cmdline)',
             'script': str(nuke.root().name()),
@@ -80,7 +84,8 @@ def submitNukeCmdline_render(executeNodes=''):
             'executeNodes' : executeNodes,
             'allNodes_Write' : ','.join(allNodes_Write),
             'allNodes_Viewer' : ','.join(allNodes_Viewer),
-            }
+            'executable': 'C:\\Program Files\\Nuke9.0v5\\Nuke9.0.exe',
+            } 
         }
     return launchgui(submitDict=submitDict)
 

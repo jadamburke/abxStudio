@@ -13,14 +13,20 @@ global proc passionPlayblast (){
 				deleteUI -menuItem "ppAutoPlayblastDivItem2";
 			if (`menuItem -q -exists "ppAutoPlayblastMenuItem3"`)
 				deleteUI -menuItem "ppAutoPlayblastMenuItem3";
+			if (`menuItem -q -exists "ppAutoPlayblastMenuItem4"`)
+				deleteUI -menuItem "ppAutoPlayblastMenuItem4";
+			if (`menuItem -q -exists "ppAutoPlayblastDivItem3"`)
+				deleteUI -menuItem "ppAutoPlayblastDivItem3";
 		}
 		else{
 			setParent -menu TimeSliderMenu;
 			menuItem -divider true ppAutoPlayblastDivItem;
-			menuItem -label "Passion Playblast GreenScreen" -c "ppPlayblastDoCurrentScene 2 0 1" ppAutoPlayblastMenuItem3;
+			menuItem -label "Passion Playblast renderLayer" -c "ppPlayblastDoCurrentScene 2 0 0 1" ppAutoPlayblastMenuItem4;
 			menuItem -divider true ppAutoPlayblastDivItem2;
-			menuItem -label "Passion Playblast As Is(Sends to Edit)" -c "ppPlayblastDoCurrentScene 2 1 0" ppAutoPlayblastMenuItem;
-			menuItem -label "Passion Playblast Geo Only(Sends to Edit)" -c "ppPlayblastDoCurrentScene 2 0 0" ppAutoPlayblastMenuItem2;
+			menuItem -label "Passion Playblast GreenScreen" -c "ppPlayblastDoCurrentScene 2 0 1 0" ppAutoPlayblastMenuItem3;
+			menuItem -divider true ppAutoPlayblastDivItem3;
+			menuItem -label "Passion Playblast As Is(Sends to Edit)" -c "ppPlayblastDoCurrentScene 2 1 0 0" ppAutoPlayblastMenuItem;
+			menuItem -label "Passion Playblast Geo Only(Sends to Edit)" -c "ppPlayblastDoCurrentScene 2 0 0 0" ppAutoPlayblastMenuItem2;
 
 
 		}
@@ -49,7 +55,7 @@ global proc ppPlayblastAddCustomCamAttrs(string $dupedCam){
 
 }
 
-global proc ppPlayblastDoCurrentScene(string $doCommit, int $asIs, int $greenscreen){
+global proc ppPlayblastDoCurrentScene(string $doCommit, int $asIs, int $greenscreen, int $useRenderLayerName){
 
 	
 	// determine the shot
@@ -60,11 +66,22 @@ global proc ppPlayblastDoCurrentScene(string $doCommit, int $asIs, int $greenscr
 	string $shotInfo[] = abxShotsGetFromPath($currentScene);
 	
 	//set the playblast variables
-	string $renderPath = ("//"+$shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$shotInfo[5]+"/render/");
+	string $renderPath = "";
+	if (!`gmatch $shotInfo[0] "[A-Z]:*"`)
+		$renderPath += "//";
+	$renderPath += ($shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$shotInfo[5]+"/render/");
 	string $shotName = "";
 	if ($greenscreen == 1) $shotName ="GS_";
 	$shotName += $shotInfo[3]+"_"+$shotInfo[4];
-	string $pbPath  = ($renderPath+$currentSceneName);
+
+	string $currentLayer = `editRenderLayerGlobals -q -currentRenderLayer`;
+
+	string $pbPath  = $renderPath+$currentSceneName;
+	if ($useRenderLayerName){
+		$pbPath += ("/"+$currentLayer);
+		$currentSceneName += ("_"+$currentLayer);
+	}
+	
 	
 	//$currentSceneName = ($shotInfo[3]+"_"+$shotInfo[4]+"_Animation_v"+$vNum);
 	//string $renderPath = (`workspace -q -rd`+"../../RENDER/"+$shotFolderGuess+"/");
@@ -107,6 +124,8 @@ global proc ppPlayblastDoCurrentScene(string $doCommit, int $asIs, int $greenscr
 	string $cameraName = "";
 	if (`objExists "master:renderCam"`)
 		$cameraName = "master:renderCam";
+	else if (`objExists "anim:renderCam"`)
+		$cameraName = "anim:renderCam";
 	else if (`objExists "renderCam"`)
 		$cameraName = "renderCam";
 	else 
@@ -134,9 +153,9 @@ global proc ppPlayblastDoCurrentScene(string $doCommit, int $asIs, int $greenscr
 		setAttr ($cameraName+".filmFit") 1;
 
 		if ($hA > 0)
-				setAttr ($cameraName+".horizontalFilmAperture") $hA;
+				catchQuiet(eval("setAttr "+$cameraName+".horizontalFilmAperture "+$hA));
 		if ($hV > 0)	
-				setAttr ($cameraName+".verticalFilmAperture") $hV;
+				catchQuiet(eval("setAttr "+$cameraName+".verticalFilmAperture "+$hV));
 
 		lookThroughModelPanel $cameraName $activePanel;
 		if ($asIs == false){
@@ -399,10 +418,14 @@ global proc ppPlayblastCheckFrameRange(string $filePath){
 	if ($result != "Skip"){
 		if ($currentS != $start || $currentE != $end) {
 			$result = "Match Offical Frame Range";
-			$result = `confirmDialog -title "Frame Range Mismatch" -message ("Your current frame range ("+$currentS+"-"+$currentE+") does not match the offical frame range ("+$start+"-"+$end+") for Shot:"+$shotName) -button "Match Offical Frame Range" -button "Abort Playblast" -defaultButton "Match Offical Frame Range" -cancelButton "Abort Playblast" -dismissString "Abort Playblast"`;
+			$result = `confirmDialog -title "Frame Range Mismatch" -message ("Your current frame range ("+$currentS+"-"+$currentE+") does not match the offical frame range ("+$start+"-"+$end+") for Shot:"+$shotName) -button "Match Offical Frame Range" -button "Abort Playblast" -defaultButton "Match Official Frame Range" -button "Do It Anyway" -cancelButton "Abort Playblast" -dismissString "Abort Playblast"`;
 			if ($result == "Match Offical Frame Range"){
 				playbackOptions -e -min $start;
 				playbackOptions -e -max $end;	
+			}
+			else if ($result == "Do It Anyway"){
+				$start = `playbackOptions -q -min` ;
+				$end = `playbackOptions -q -max` ;	
 			}
 			else {
 				error ("User Aborted Playblast due to frame range not matching offical frame range for the shot");

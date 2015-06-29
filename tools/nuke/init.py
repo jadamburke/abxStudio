@@ -53,4 +53,18 @@ nuke.pluginAddPath('./gizmos')
 nuke.pluginAddPath('./icons')
 nuke.pluginAddPath('./scripts')
 
+#create write directory
+def createWriteDir():
+  import nuke, os, errno
+  file = nuke.filename(nuke.thisNode())
+  dir = os.path.dirname( file )
+  osdir = nuke.callbacks.filenameFilter( dir )
+  # cope with the directory existing already by ignoring that exception
+  try:
+    os.makedirs( osdir )
+  except OSError, e:
+    if e.errno != errno.EEXIST:
+      raise
+nuke.addBeforeRender(createWriteDir)
+
 print 'STUDIO INIT.PY WAS RUN'

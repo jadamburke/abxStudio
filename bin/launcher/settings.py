@@ -72,7 +72,7 @@ UTILITIES = {
                     'ui':{
                         'linux': '/',
                         'mac': '/',
-                        'win32': 'chrome.exe https://owa.passion-email.com/owa'
+                        'win32': 'chrome.exe http://mail.passion-pictures.com'
                     }
                 },
                 'path':{
@@ -136,6 +136,25 @@ UTILITIES = {
                     'linux': '/',
                     'mac': '/',
                     'win32': 'C:/Program Files (x86)/Google/Chrome/Application'
+                }
+            }
+        }
+    },
+    'internal': {
+        'show': True,
+        'versions':{
+            '1':{
+                'modes':{
+                    'ui':{
+                        'linux': '/',
+                        'mac': '/',
+                        'win32': 'firefox.exe http://internal/'
+                    }
+                },
+                'path':{
+                    'linux': '/',
+                    'mac': '/',
+                    'win32': 'C:/Program Files (x86)/Mozilla Firefox'
                 }
             }
         }

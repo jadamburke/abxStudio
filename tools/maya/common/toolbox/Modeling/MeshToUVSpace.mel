@@ -1,0 +1,60 @@
+// MeshToUVSpace
+// Created by: adamb
+// Date: 2015/06/25 15:44:37
+// copied from  http://forums.cgsociety.org/showthread.php?t=1025401
+// nyro A. D. Vertex Slinger Munich, Germany Join Date: Dec 2006 Posts: 1,436
+
+global proc MeshToUVSpace(){
+global string $gMainProgressBar;
+progressBar -e -bp -ii 1 -st "Preparing for UV Layout Adaptation..." $gMainProgressBar;
+
+//store the currently selected Object;
+string $thisSelection[] = `ls -sl`;
+string $thisObject = $thisSelection[0];
+
+// convert to UVs
+ConvertSelectionToUVs;
+
+//convert to Shell Border
+polySelectConstraint -t 0x0010 -w 1 -m 2;
+
+// reset select Constraint
+polySelectConstraint -m 0;
+
+//split associated Edges;
+polyListComponentConversion -tv;
+polySplitVertex;
+
+// reselect all vertices
+int $vertexCount[] = `polyEvaluate -v $thisObject`;
+select -r ($thisObject + ".vtx[0:" + $vertexCount[0] + "]");
+string $vertices[] = `ls -sl -fl`;
+
+
+
+// set scale multiplier here
+float $multiplier = 10;
+
+string $vertex;
+
+progressBar -e -bp -ii 1 -st "Adapting to UV layout" -max `size($vertices)` $gMainProgressBar;
+
+for ($vertex in $vertices) {
+    if(`progressBar -q -ic $gMainProgressBar`) { break; }
+    
+    progressBar -e -step 1 $gMainProgressBar;
+    
+	$uv = `polyListComponentConversion -tuv $vertex`;
+	float $pos[] = `polyEditUV -q -vValue $uv`;
+	$pos[0] *= $multiplier;
+	$pos[1] *= $multiplier;
+	xform -ws -a -t $pos[0] $pos[1] 0.0 $vertex;
+};
+
+progressBar -e -ep $gMainProgressBar;
+
+// merge vertices after remapping. Depening on geometry and UV Layout, may create non-manifold geometry.
+polyMergeVertex  -d 0.001 -ch 1 -tx 0 $thisObject;
+
+print "Phew!";
+}

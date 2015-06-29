@@ -24,4 +24,4 @@ def copyDirTree(src,dest):
     except OSError as exc: # python >2.5
         if exc.errno == errno.ENOTDIR:
             shutil.copy(src, dest)
-        else: raise
+        #else: raise

@@ -8036,20 +8036,25 @@ global proc string[] abxShotsGetFromPath (string $filePath){
 
 
 		if (size($pathParts)>2){
+
+			int $spathLen = 0;
 			if ($prodServer == ("\\\\"+$pathParts[0]+"\\"+$pathParts[1]+"\\")){
 				$server = ($pathParts[0]+"/"+$pathParts[1]);
 			}
 			else{
+
 				$projRoot = dirname(`workspace -q -rd`);
 				if (`gmatch $projRoot "//*"` || `gmatch $projRoot "\\\\*"`){
 					int $strLen = size($projRoot);
 					$server = substring($projRoot,3,$strLen);
+					$spathLen = size($server)+3;  // server name Plus unc double-slash plus one
 				}
 				else {
 					$server = $projRoot;
+					$spathLen = size($server)+1; 
 				}
 			}
-			int $spathLen = size($server)+3; // server name Plus unc double-slash plus one
+			 
 			int $pathLen = size($filePath);
 			string $pathMinusServer = substring($filePath,$spathLen,$pathLen);
 			$pathParts = stringToStringArray($pathMinusServer, "/");
