@@ -4,7 +4,7 @@
 
 global proc turnTable(){
 
-	file -import -type "mayaAscii" -ra true -namespace "turntable" -options "v=0"  -pr -loadReferenceDepth "all" (`getenv MAYA_PPTOOLS`+"/sceneTemplates/import_arnold_maquete_v01.ma");
+	file -import -type "mayaAscii" -ra true -namespace "turntable" -options "v=0"  -pr -loadReferenceDepth "all" (`getenv MAYA_STTOOLS`+"/sceneTemplates/import_arnold_maquete_v01.ma");
   	evalDeferred -lowestPriority "arnoldLoadMaquette()";
 }
 

@@ -3994,7 +3994,7 @@ global proc abxShotsExportAlembicCache (){
 		// 0:Server 1:Job 2:ShotFolder 3:Seq 4:Shot 5:dept 6:subDept 7:take 8:version 9:ext
 		string $shotInfo[] = abxShotsGetFromPath(`file -q -sn`);
 		$filename = ($shotInfo[3]+"_"+$shotInfo[4]+"_"+$shotInfo[10]+"_"+$shotInfo[5]+"_"+$shotInfo[8]);
-		$filepath = ("//"+$shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$shotInfo[5]+"/cache/");
+		$filepath = ($shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$shotInfo[5]+"/cache/");
 		if (!`filetest -d $filepath`){
 			sysFile -makeDir $filepath;
 		}
@@ -4115,7 +4115,7 @@ global proc abxShotsAttachAlembicCache (string $dept, string $takeName, string $
 
 	$shotInfo = abxShotsGetFromPath($workScene);
 	$filename = ($shotInfo[3]+"_"+$shotInfo[4]+"_"+$shotInfo[10]+"_"+$dept+"_"+$version);
-	$filepath = ("//"+$shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$dept+"/cache/");
+	$filepath = ($shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$dept+"/cache/");
 	$alembicpath = ($filepath+$filename+".abc");
 	if (`filetest -r $alembicpath`){
 		
@@ -4140,7 +4140,7 @@ global proc abxShotsUpdateAlembicCache (string $dept, string $takeName, string $
 	string $workScene = abxShotsGetLatestWorkVersion($shotInfo[2],($shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]),$dept,$takeName,"work",1);
 	$shotInfo = abxShotsGetFromPath($workScene);
 	$filename = ($shotInfo[3]+"_"+$shotInfo[4]+"_"+$shotInfo[10]+"_"+$dept+"_"+$version);
-	$filepath = ("//"+$shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$dept+"/cache/");
+	$filepath = ($shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$dept+"/cache/");
 	$alembicpath = ($filepath+$filename+".abc");
 
 	if ($version == "")

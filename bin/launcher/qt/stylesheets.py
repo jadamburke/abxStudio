@@ -86,6 +86,7 @@ class StyleSheet(object):
         sStyleSheet += """
             QPushButton {
                 background-color: %s;
+                text-align: left;
                 selection-background-color: %s;
                 border: none; /* no border for a flat push button */
             }

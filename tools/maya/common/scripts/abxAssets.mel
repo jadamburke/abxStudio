@@ -22,13 +22,13 @@ global proc abxAssets () {
 		window -t ("Asset Manager v" + $abxAssetsVersionString + " ") -width 616 -height 650 -menuBar true abxAssetsWindow;
 
 		menu -label "Create";
-			menuItem -label "New Character" -c "abxAssetsShowCreateUI \"assets\" \"Character\" \"\" \"model\"";
-			menuItem -label "New Prop"  -c "abxAssetsShowCreateUI \"assets\" \"Prop\" \"\" \"model\"";
-			menuItem -label "New Vehicle"  -c "abxAssetsShowCreateUI \"assets\" \"Vehicle\" \"\" \"model\"";
-			menuItem -label "New Decor"  -c "abxAssetsShowCreateUI \"assets\" \"Decor\" \"\" \"model\"";
-			menuItem -label "New Environment"  -c "abxAssetsShowCreateUI \"assets\" \"Environment\" \"\" \"model\"";
-			menuItem -label "New Shader" -c "abxAssetsShowCreateUI \"assets\" \"Shader\" \"\" \"model\"";
-			menuItem -label "New Light Rig" -c "abxAssetsShowCreateUI \"assets\" \"Light\" \"\" \"model\"";
+			menuItem -label "New Character" -c "abxAssetsShowCreateUI \"assets\" \"characters\" \"\" \"model\"";
+			menuItem -label "New Prop"  -c "abxAssetsShowCreateUI \"assets\" \"props\" \"\" \"model\"";
+			menuItem -label "New Vehicle"  -c "abxAssetsShowCreateUI \"assets\" \"vehicles\" \"\" \"model\"";
+			menuItem -label "New Decor"  -c "abxAssetsShowCreateUI \"assets\" \"decors\" \"\" \"model\"";
+			menuItem -label "New Environment"  -c "abxAssetsShowCreateUI \"assets\" \"environments\" \"\" \"model\"";
+			menuItem -label "New Shader" -c "abxAssetsShowCreateUI \"assets\" \"shaders\" \"\" \"model\"";
+			menuItem -label "New Light Rig" -c "abxAssetsShowCreateUI \"assets\" \"lights\" \"\" \"model\"";
 
 		formLayout abxAssetsWindowMainForm;
 
@@ -1464,7 +1464,7 @@ global proc string abxAssetsGetTakeLabel (string $takeName, string $filePath){
 		$takeNameL += ("("+$user+")");
 
 	}
-
+	//print ("GetTakeLabel:assetPath="+$assetPath+"\n");
 	string $latestPublishVersion = "";
 	if ($takeName == "default" || $takeName == "")
 		$latestPublishVersion = abxAssetsGetLatestWorkVersion($assetPath, $dept, "", "publish",0);
@@ -3247,9 +3247,9 @@ global proc abxAssetsStartRigScene (string $assetPath, int $quickPublish){
 		
 		//string $geoObjects[] = `ls -dag "geo_*"`;
 		string $geoAllRootObjs[] = `ls -assemblies -referencedNodes`;
-		$grpName = `group -parent GEO -name "REF_GEO_GRP" $geoAllRootObjs`;
-		parentConstraint -mo OFFSET_CTRL $grpName;
-		scaleConstraint -mo OFFSET_CTRL $grpName;
+		$grpName = `group -parent geo -name "REF_GEO_GRP" $geoAllRootObjs`;
+		parentConstraint -mo offset_ctrl $grpName;
+		scaleConstraint -mo offset_ctrl $grpName;
 
 		//for ($each in $geoObjects){
 		//	$geoAllRootObjs[size($geoAllRootObjs)] = rootOf($each);
@@ -3498,7 +3498,6 @@ global proc string abxAssetsGetLatestVersionFromPath (string $filePath){
 	int $getFullPath = 1;
 
 	// if there are at least 7 folders deep its probably a valid asset
-	//M:\STORY2012_PP10088\3D\STORY2012_maya\assets\characters\roboto\geo\work\file.ma
 	if (size($tokenBuffer2) > 7){
 		$assetPath = ($tokenBuffer2[4]+"/"+$tokenBuffer2[5]+"/"+$tokenBuffer2[6]);
 	}	
@@ -3525,6 +3524,7 @@ global proc string abxAssetsGetLatestWorkVersion (string $assetPath, string $dep
 	string $assetLib = $tokenBuffer[0];
 
 	string $workPath = (`workspace -q -rd`+$assetPath+"/"+$dept+"/"+$type+"/");
+	//print ("assetPath="+$assetPath+"\n");
 	if (!`filetest -d $workPath`){
 		warning ("path not found: \""+$workPath+"\"\n");
 		return "";
@@ -3621,7 +3621,7 @@ global proc abxAssetsShowCreateUI (string $lib, string $type, string $name, stri
 		// load the found folder names in assets and show them
 		string $assetFolder = (`workspace -q -rd`+"assets/");
 		string $foundAssetTypes[] = `getFileList -folder $assetFolder`;
-		string $propTypes[] = {"Character","Prop","Decor","Environment","Vehicle","Shader","Light"};
+		string $propTypes[] = {"characters","props","decors","environments","vehicles","shaders","lights"};
 		for ($each in $propTypes){
 			menuItem -label $each;
 		}
@@ -3798,19 +3798,19 @@ global proc abxAssetsCreateNew (string $assetPath, string $type){
 
 	// add other job dept paths
 
-	string $renderFolder = (`workspace -q -rd`+"../../RENDER/_ASSETS/");
+	//string $renderFolder = (`workspace -q -rd`+"../../RENDER/_ASSETS/");
 	//string $compFolder = (`workspace -q -rd`+"../../COMP/_ASSETS/");
-	string $sourceFolder = (`workspace -q -rd`+"../../SOURCE/_ASSETS/");
-	string $styleFramesFolder = (`workspace -q -rd`+"../../STYLEFRAMES/_ASSETS/");
+	//string $sourceFolder = (`workspace -q -rd`+"../../SOURCE/_ASSETS/");
+	//string $styleFramesFolder = (`workspace -q -rd`+"../../STYLEFRAMES/_ASSETS/");
 
-	string $paths[] = {$renderFolder,$sourceFolder, $styleFramesFolder};
-
-	for ($path in $paths){
-		$path += ($assetType+"/"+$assetName);
-		if (!`filetest -d $path`){
-			sysFile -makeDir $path;
-		}
-	}
+	//string $paths[] = {$renderFolder,$sourceFolder, $styleFramesFolder};
+//
+	//for ($path in $paths){
+	//	$path += ($assetType+"/"+$assetName);
+	//	if (!`filetest -d $path`){
+	//		sysFile -makeDir $path;
+	//	}
+	//}
 
 	string $filepath = (`workspace -q -rd`+$assetLib+"/"+$assetType+"/"+$assetName);
 	// add it to the db
@@ -6081,12 +6081,12 @@ global proc abxAssetsCheckForProps (string $refNodes[]){
 								xform -a -ws -ro $rot[0] $rot[1] $rot[2] $instLocName;
 								xform -s $scl[0] $scl[1] $scl[2] $instLocName;
 							}
-							string $instRenamePrefix = `substitute "geo__PROP_" $instLocName ""`;
-							$instRenamePrefix = `substitute "_PROP_" $instRenamePrefix ""`;
-							$dupeROOT = `duplicate -po -name ($instRenamePrefix+"ROOT") ($newRefNamespace+":ROOT")`;
-							$dupeMOVER = `duplicate -po -name ($instRenamePrefix+"MOVER") ($newRefNamespace+":MOVER")`;
-							$newInst = `instance -name ($instRenamePrefix+"BODY") ($newRefNamespace+":BODY")`;
-							$newInstGeo = `instance -name ($instRenamePrefix+"GEO") ($newRefNamespace+":GEO")`;
+							string $instRenamePrefix = `substitute "geo__prop_" $instLocName ""`;
+							$instRenamePrefix = `substitute "_prop_" $instRenamePrefix ""`;
+							$dupeROOT = `duplicate -po -name ($instRenamePrefix+"root") ($newRefNamespace+":root")`;
+							$dupeMOVER = `duplicate -po -name ($instRenamePrefix+"mover") ($newRefNamespace+":mover")`;
+							$newInst = `instance -name ($instRenamePrefix+"body") ($newRefNamespace+":body")`;
+							$newInstGeo = `instance -name ($instRenamePrefix+"geo") ($newRefNamespace+":geo")`;
 							evalEcho("parent -r "+$dupeMOVER[0]+" "+$dupeROOT[0]);
 							evalEcho("parent -r "+$newInst[0]+" "+$dupeMOVER[0]);
 							evalEcho("parent -r "+$newInstGeo[0]+" "+$dupeROOT[0]);
@@ -6099,9 +6099,9 @@ global proc abxAssetsCheckForProps (string $refNodes[]){
 							$trans = `xform -q -a -ws -t $locatorName`;
 							$rot = `xform -q -a -ws -ro $locatorName`;
 							$scl = `xform -q -r -s $locatorName`;
-							xform -a -ws -t $trans[0] $trans[1] $trans[2] ($newRefNamespace+":ROOT");
-							xform -a -ws -ro $rot[0] $rot[1] $rot[2] ($newRefNamespace+":ROOT");
-							xform -s $scl[0] $scl[1] $scl[2] ($newRefNamespace+":ROOT");
+							xform -a -ws -t $trans[0] $trans[1] $trans[2] ($newRefNamespace+":root");
+							xform -a -ws -ro $rot[0] $rot[1] $rot[2] ($newRefNamespace+":root");
+							xform -s $scl[0] $scl[1] $scl[2] ($newRefNamespace+":root");
 						}
 						else {
 							warning ("No Locator Named:"+$locatorName+" unable to snap "+$each+"\n");
@@ -6181,12 +6181,12 @@ global proc abxAssetsUpdatePropInstances(string $refNodes[], int $forceRebuild){
 			}
 			if ($skipRebuild == false){
 				if (!`objExists $instLocName`){
-					string $instRenamePrefix = `substitute "geo__PROP_" $instLocName ""`;
-					$instRenamePrefix = `substitute "_PROP_" $instRenamePrefix ""`;
-					$dupeROOT = `duplicate -po -name ($instRenamePrefix+"ROOT") ($instAssetNamespace+":ROOT")`;
-					$dupeMOVER = `duplicate -po -name ($instRenamePrefix+"MOVER") ($instAssetNamespace+":MOVER")`;
-					$newInst = `instance -name ($instRenamePrefix+"BODY") ($instAssetNamespace+":BODY")`;
-					$newInstGeo = `instance -name ($instRenamePrefix+"GEO") ($instAssetNamespace+":GEO")`;
+					string $instRenamePrefix = `substitute "geo__prop_" $instLocName ""`;
+					$instRenamePrefix = `substitute "_prop_" $instRenamePrefix ""`;
+					$dupeROOT = `duplicate -po -name ($instRenamePrefix+"root") ($instAssetNamespace+":root")`;
+					$dupeMOVER = `duplicate -po -name ($instRenamePrefix+"mover") ($instAssetNamespace+":mover")`;
+					$newInst = `instance -name ($instRenamePrefix+"body") ($instAssetNamespace+":body")`;
+					$newInstGeo = `instance -name ($instRenamePrefix+"geo") ($instAssetNamespace+":geo")`;
 					evalEcho("parent -r "+$dupeMOVER[0]+" "+$dupeROOT[0]);
 					evalEcho("parent -r "+$newInst[0]+" "+$dupeMOVER[0]);
 					evalEcho("parent -r "+$newInstGeo[0]+" "+$dupeROOT[0]);
@@ -6280,6 +6280,8 @@ global proc string[] abxAssetsGetFromPath (string $filePath){
 	if ($filePath == "")
 		$filePath = `file -q -sn`;
 
+	$prodServer = getenv("ST_JOB_SERVERS");
+
 	if ($filePath != ""){
 		string $basename = `basenameEx $filePath`;
 		string $pathParts[] = stringToStringArray($filePath, "/");
@@ -6290,11 +6292,39 @@ global proc string[] abxAssetsGetFromPath (string $filePath){
 		string $assetType;
 		string $subDept;
 		if (size($pathParts)>2){
-			$server = ($pathParts[0]+"/"+$pathParts[1]);
-			$job = $pathParts[2];
-			$assetLib = $pathParts[3]; // was 5
-			$assetType = $pathParts[4];
+
+			int $spathLen = 0;
+			if ($prodServer == ("\\\\"+$pathParts[0]+"\\"+$pathParts[1]+"\\")){
+				$server = ($pathParts[0]+"/"+$pathParts[1]);
+			}
+			else{
+
+				$projRoot = dirname(`workspace -q -rd`);
+				if (`gmatch $projRoot "//*"` || `gmatch $projRoot "\\\\*"`){
+					int $strLen = size($projRoot);
+					$server = substring($projRoot,3,$strLen);
+					$spathLen = size($server)+3;  // server name Plus unc double-slash plus one
+				}
+				else {
+					$server = $projRoot;
+					$spathLen = size($server)+2; 
+				}
+			}
+			 
+			int $pathLen = size($filePath);
+			string $pathMinusServer = substring($filePath,$spathLen,$pathLen);
+			$pathParts = stringToStringArray($pathMinusServer, "/");
+
+			$job = $pathParts[0];
+			$assetLib = $pathParts[1]; // was 5
+			$assetType = $pathParts[2];
 			$subDept = $pathParts[size($pathParts)-2];
+
+			//$server = ($pathParts[0]+"/"+$pathParts[1]);
+			//$job = $pathParts[2];
+			//$assetLib = $pathParts[3]; // was 5
+			//$assetType = $pathParts[4];
+			//$subDept = $pathParts[size($pathParts)-2];
 		}
 		else{
 			$pathParts = stringToStringArray(`workspace -q -rd`, "/");
