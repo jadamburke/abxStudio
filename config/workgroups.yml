@@ -3,9 +3,10 @@ default:
     maya:
       version: '2015'
       modules:
-        arnold: '1.2.0.8'
+        arnold: '1.1.0.4'
         crate: '1.1.145'
-        SOuP: '2015'
+        playblastVR: '1.2'
+        jfDielectric: '1.0.5'
     softimage:
       version: '2015'
       modules:

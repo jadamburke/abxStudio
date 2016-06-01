@@ -156,7 +156,22 @@ alShaders:
           - '2013'
           - '2014'
           - '2015'
-
+jfDielectric:
+  name: jfDielectric
+  show: false
+  packages:
+    maya:
+      versions:
+        '1.0.5':
+          env:
+            ARNOLD_PLUGIN_PATH: '%PP_RESOURCE%/bin/arnold/jfDielectric/1.0.5/win/bin'
+            MTOA_TEMPLATES_PATH: '%PP_RESOURCE%/bin/arnold/jfDielectric/1.0.5/win/ae'
+          path:
+            linux: /
+            mac: /
+            win32: /
+          versions:
+          - '2015'
 gmh:
   name: gmh
   show: false
@@ -187,25 +202,6 @@ ngSkinningTools:
           env:
             MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/maya/ngSkinTools/1.0.881/win32/maya2015'
             MAYA_SHELF_PATH: '%PP_RESOURCE%/bin/maya/ngSkinTools/1.0.881/win32/maya2015/shelves'
-          path:
-            linux: /
-            mac: /
-            win32: /
-          versions:
-          - '2013'
-          - '2014'
-          - '2015'
-
-SOuP:
-  name: SOuP
-  show: false
-  packages:
-    maya:
-      versions:
-        '2015':
-          env:
-            MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/maya/SOuP/win/SOuP_2015_06_08/Maya2015'
-            MAYA_SHELF_PATH: '%PP_RESOURCE%/bin/maya/SOuP/win/SOuP_2015_06_08/Maya2015/shelves'
           path:
             linux: /
             mac: /
@@ -274,6 +270,21 @@ presenz:
         '0.1.0':
           env:
             MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/maya/presenz/win/0.1.0/Maya2015'
+          path:
+            linux: /
+            mac: /
+            win32: /
+          versions:
+          - '2015'
+playblastVR:
+  name: playblastVR
+  show: false
+  packages:
+    maya:
+      versions:
+        '1.2':
+          env:
+            MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/maya/PlayblastVR/win/1.2'
           path:
             linux: /
             mac: /
