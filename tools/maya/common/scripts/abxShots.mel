@@ -2265,25 +2265,48 @@ global proc abxShotsOpenTake (string $sourceList) {
 			// add a deleteSet
 			if (!`objExists deleteSet`) sets -empty -n deleteSet;
 			// add a Previs_ group
-			if (!`objExists "_previs_"`) 
-				createNode transform -skipSelect -name "_previs_";
+			if (!`objExists "_PREVIS_"`) 
+				createNode transform -skipSelect -name "_PREVIS_";
 			// add a _PREVIS_ group
-			if (!`objExists "_custom_"`) 
-				createNode transform -skipSelect -name "_custom_";
+			if (!`objExists "_CUSTOM_"`) 
+				createNode transform -skipSelect -name "_CUSTOM_";
 
-			string $outlinerNodes[] = {"_previs_","_custom_","_environment_","_props_","_characters_","side","front","top","persp"};
+			string $outlinerNodes[] = {"_PREVIS_","_CUSTOM_","_SETS_","_PROPS_","_CHARACTERS_","side","front","top","persp"};
 			for ($each in $outlinerNodes){
 				if (!`objExists $each`) {
 					createNode transform -skipSelect -name $each;
 				}
 				reorder -front $each;
 				catch(`setAttr ($each+".overrideEnabled") 1`);
-				if ($each == "_environment_")
+				if ($each == "_ENVIRONMENT_")
 					catch(`setAttr ($each+".overrideColor") 11`);
-				else if ($each == "_props_")
+				else if ($each == "_PROPS_")
 					catch(`setAttr ($each+".overrideColor") 28`);
-				else if ($each == "_previs_")
+				else if ($each == "_PREVIS_")
 					catch(`setAttr ($each+".overrideColor") 8`);
+			}
+
+			// code to handle the depricated _ENVIRONMENT_ group so that it is now called "_SETS_"
+			if (`workspace -q -rd` != "M:/STORY2012_PP10088/3D/STORY2012_maya/"){
+				if (`objExists "_ENVIRONMENT_"`){
+					if (!`objExists "_SETS_"`){
+						rename "_ENVIRONMENT_" "_SETS_";
+					}
+					else {
+						$envChildren = `listRelatives -children _ENVIRONMENT_`;
+						for ($each in $envChildren){
+							catch(eval("parent "+$each+" _SETS_"));
+						}
+						catch(eval("delete _ENVIRONMENT_"));
+					}
+				}
+				if (`objExists "_SETS_1"`){
+					$envChildren = `listRelatives -children "_SETS_1"`;
+					for ($each in $envChildren){
+						catch(eval("parent "+$each+" _SETS_"));
+					}
+					catch(eval("delete _SETS_1"));
+				}
 			}
 			
 			// makes sure camera is set to off-axis mode for stereo checks
@@ -3776,8 +3799,8 @@ global proc abxShotsIncrementalSave(int $force, string $shotFolder, string $shot
 		if ($deptGuess == "anim"){
 
 			// check that _ENVIRONMENT is name _ENVIRONMENT_ and _PREVIZ is named _PREVIS_
-			string $blacklistObjs[] = {"_environment", "_previz", "_previs","_props","_characters"};
-			string $correctObjs[] = {"_environment_", "_previs_", "_previs_","_props_","_characters_"};
+			string $blacklistObjs[] = {"_ENVIRONMENT", "_PREVIZ", "_PREVIS","_PROPS","_CHARACTERS"};
+			string $correctObjs[] = {"_ENVIRONMENT_", "_PREVIS_", "_PREVIS_","_PROPS_","_CHARACTERS_"};
 			for ($i=0;$i<size($blacklistObjs);$i++){
 			    //print ("objExists "+$blacklistObjs[$i]+";\n");
 				if (`objExists $blacklistObjs[$i]`){
@@ -3793,7 +3816,7 @@ global proc abxShotsIncrementalSave(int $force, string $shotFolder, string $shot
 			}
 
 			// organize the _GROUPS_ to the top of the outliner
-			string $outlinerNodes[] = {"_custom_","_previs_","_environments_","_props_","_characters_","side","front","top","persp"};
+			string $outlinerNodes[] = {"_CUSTOM_","_PREVIS_","_SETS_","_PROPS_","_CHARACTERS_","side","front","top","persp"};
 			for ($each in $outlinerNodes){
 				if (`objExists $each`) reorder -front $each;
 			}
@@ -3923,7 +3946,7 @@ global proc abxShotsIncrementalSave(int $force, string $shotFolder, string $shot
 
 global proc abxShotsOpenWorkScene (string $shotName, string $dept, string $takeName, string $version, int $skipLock) {
 	string $shotFolder;
-	string $shotsPath = (`workspace -q -rd`+"/shots/");
+	string $shotsPath = (`workspace -q -rd`+"/Shots/");
 	//if ($version == "" || $version == "latest" )
 	//	$version = abxShotsGetLatestWorkVersion($shotFolder, $shotName, $dept, $takeName,"work",0);
 
@@ -4053,16 +4076,16 @@ global proc abxShotsBuildLightSceneForAlembic (string $dept,string $takeName, st
 	if (`filetest -r $alembicpath` && `filetest -r $assetdescPath`){
 		
 		// create the standard groups if they don't exist
-		string $outlinerNodes[] = {"_custom_","_sets_","_props_","_characters_","side","front","top","persp"};
+		string $outlinerNodes[] = {"_CUSTOM_","_SETS_","_PROPS_","_CHARACTERS_","side","front","top","persp"};
 		for ($each in $outlinerNodes){
 			if (!`objExists $each`) {
 				createNode transform -skipSelect -name $each;
 			}
 			reorder -front $each;
 			catch(`setAttr ($each+".overrideEnabled") 1`);
-			if ($each == "_environment_")
+			if ($each == "_ENVIRONMENT_")
 				catch(`setAttr ($each+".overrideColor") 11`);
-			else if ($each == "_props_")
+			else if ($each == "_PROPS_")
 				catch(`setAttr ($each+".overrideColor") 28`);
 		}
 
@@ -8028,7 +8051,7 @@ global proc string[] abxShotsGetFromPath (string $filePath){
 				}
 				else {
 					$server = $projRoot;
-					$spathLen = size($server)+2; 
+					$spathLen = size($server)+1; 
 				}
 			}
 			 

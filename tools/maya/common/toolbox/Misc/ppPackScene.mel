@@ -45,6 +45,8 @@ global proc ppPackScene () {
 		checkBoxGrp -l "Include Textures" -v1 1 ppPackSceneTexCB;
 		checkBoxGrp -l "Include Audio" -v1 1 ppPackSceneAudCB;
 		checkBoxGrp -en 0 -l "Include Image Planes" ppPackSceneImgPlnCB;
+		checkBoxGrp -en 1 -l "Include Crate Alembic" ppPackSceneCrate;
+		checkBoxGrp -en 1 -l "Include XGen" ppPackSceneXgen;
 
 		checkBoxGrp -en 0 -l "Outside of Proj Files";
 		checkBoxGrp -en 1 -l "Compress to Zip" -v1 1 ppPackSceneZipCB;
@@ -57,7 +59,7 @@ global proc ppPackScene () {
 
 		// todo: 
 
-		button -label "Pack Scenes" -h 30 -w 60 -c "ppPackSceneProc `textScrollList -q -ai ppPackSceneFLScrlLst` `checkBoxGrp -q -v1 ppPackSceneRefCB` `checkBoxGrp -q -v1 ppPackSceneTexCB` `checkBoxGrp -q -v1 ppPackSceneAudCB` `checkBoxGrp -q -v1 ppPackSceneImgPlnCB` `checkBoxGrp -q -v1 ppPackSceneWrkCB` `checkBoxGrp -q -v1 ppPackSceneZipCB`";
+		button -label "Pack Scenes" -h 30 -w 60 -c "ppPackSceneProc `textScrollList -q -ai ppPackSceneFLScrlLst` `checkBoxGrp -q -v1 ppPackSceneRefCB` `checkBoxGrp -q -v1 ppPackSceneTexCB` `checkBoxGrp -q -v1 ppPackSceneAudCB` `checkBoxGrp -q -v1 ppPackSceneImgPlnCB` `checkBoxGrp -q -v1 ppPackSceneWrkCB` `checkBoxGrp -q -v1 ppPackSceneZipCB` `checkBoxGrp -q -v1 ppPackSceneCrate` `checkBoxGrp -q -v1 ppPackSceneXgen`";
 
 		// add the current scene to the scroll list
 		string $currentScene = `file -q -sn`;
@@ -94,7 +96,7 @@ global proc ppPackSceneUpdateList (){
 	
 }
 
-global proc ppPackSceneProc (string $filesToPack[], int $refFlag, int $texFlag, int $audFlag, int $imgPlnFlag, int $wrkFlag, int $zipFlag){
+global proc ppPackSceneProc (string $filesToPack[], int $refFlag, int $texFlag, int $audFlag, int $imgPlnFlag, int $wrkFlag, int $zipFlag, int $crateFlag, int $xgenFlag){
 
 	string $packFiles[];
 	$packFiles[0] = `workspace -pp $filesToPack[0]`;
@@ -138,6 +140,20 @@ global proc ppPackSceneProc (string $filesToPack[], int $refFlag, int $texFlag, 
 			$packFiles[size($packFiles)] = `workspace -pp $each`;
 		}
 	}
+	if ($crateFlag){
+		string $results[] = `ppPackSceneGetNodeTypePath "ExocortexAlembicFile"`;
+		for ($each in $results){
+			if (`workspace -en $each` != `workspace -pp $each`)
+			$packFiles[size($packFiles)] = `workspace -pp $each`;
+		}
+	}
+	if ($xgenFlag){
+		string $results[] = `ppPackSceneGetNodeTypePath "xgmPallette"`;
+		for ($each in $results){
+			if (`workspace -en $each` != `workspace -pp $each`)
+			$packFiles[size($packFiles)] = `workspace -pp $each`;
+		}
+	}
 	
 
 	// run a save changes file open on the next scene
@@ -173,6 +189,20 @@ global proc ppPackSceneProc (string $filesToPack[], int $refFlag, int $texFlag, 
 			}
 			if ($audFlag){
 				string $results[] = `ppPackSceneGetNodeTypePath "audio"`;
+				for ($each in $results){
+					if (`workspace -en $each` != `workspace -pp $each`)
+					$packFiles[size($packFiles)] = `workspace -pp $each`;
+				}
+			}
+			if ($crateFlag){
+				string $results[] = `ppPackSceneGetNodeTypePath "ExocortexAlembicFile"`;
+				for ($each in $results){
+					if (`workspace -en $each` != `workspace -pp $each`)
+					$packFiles[size($packFiles)] = `workspace -pp $each`;
+				}
+			}
+			if ($xgenFlag){
+				string $results[] = `ppPackSceneGetNodeTypePath "xgmPallette"`;
 				for ($each in $results){
 					if (`workspace -en $each` != `workspace -pp $each`)
 					$packFiles[size($packFiles)] = `workspace -pp $each`;
@@ -250,6 +280,7 @@ global proc string[] ppPackSceneGetNodeTypePath (string $nodeType){
 					$path = `workspace -en $path`;
 					if (`filetest -r $path` && !`filetest -d $path`)
 						$results[size($results)] = `workspace -en $path`;
+					else print ("Skipped outside project file: "+`workspace -en $path`+"\n");
 				}
 			}
 		}
@@ -258,6 +289,7 @@ global proc string[] ppPackSceneGetNodeTypePath (string $nodeType){
 			$path = `workspace -en $path`;
 			if (`filetest -r $path` && !`filetest -d $path`)
 				$results[size($results)] = `workspace -en $path`;
+			else print ("Skipped outside project file: "+`workspace -en $path`+"\n");
 		}
 		else if ($nodeType == "file" || $nodeType == "psdFileTex" || $nodeType == "mentalrayTexture"){
 			// get the .ftn attribute
@@ -265,18 +297,38 @@ global proc string[] ppPackSceneGetNodeTypePath (string $nodeType){
 			$path = `workspace -en $path`;
 			if (`filetest -r $path` && !`filetest -d $path`)
 				$results[size($results)] = `workspace -en $path`;
+			else print ("Skipped outside project file: "+`workspace -en $path`+"\n");
 		}
 		else if ($nodeType == "imagePlane"){
 			// get the .imageName attribute
 			string $path = `getAttr ($each+".imageName")`;
 			if (`filetest -r $path` && !`filetest -d $path`)		
 				$results[size($results)] = `workspace -en $path`;
+			else print ("Skipped outside project file: "+`workspace -en $path`+"\n");
+		}
+		else if ($nodeType == "ExocortexAlembicFile"){
+			// get the .imageName attribute
+			string $path = `getAttr ($each+".fileName")`;
+			if (`filetest -r $path` && !`filetest -d $path`)		
+				$results[size($results)] = `workspace -en $path`;
+			else print ("Skipped outside project file: "+`workspace -en $path`+"\n");
+		}
+		else if ($nodeType == "xgmPalette"){
+			// get the .imageName attribute
+			string $path = `getAttr ($each+".xgFileName")`;
+			string $fullpath = (dirname(`file -q -sn`)+"/"+$path);
+			if (`filetest -r $fullpath` && !`filetest -d $fullpath`)		
+				$results[size($results)] = `workspace -en $fullpath`;
+			else print ("Skipped outside project file: "+`workspace -en $fullpath`+"\n");
 		}
 		// TODO: add the rest of the node types that potentially have external sources
+
 		
 	}
 	return $results;
 }
+
+
 
 
 global proc ppPackSceneRunPackFile (string $packFile){
@@ -353,4 +405,134 @@ global proc ppPackSceneZipIt (string $workspaceName, string $files[]){
 	print ($command+"\n");
 	python ($command);
 	
+}
+
+global proc ppPackSceneMapLocalProject (string $nodeTypes[]){
+
+	//string $nodeTypes[] = {"reference","file","ExocortexAlembicFile"};
+	
+	string $localWorkspace = `workspace -q -rd`;
+	
+	string $results[];
+	for ($nodeType in $nodeTypes){
+		string $nodes[] = `ls -type $nodeType`;
+		for ($each in $nodes){
+			if ($nodeType == "reference"){
+				if (!`gmatch $each "*shared*"` && !`gmatch $each "*_UNKNOWN*"`){
+					// need to do something to handle an error returned in fhte RN is broken
+					int $failure = catch(eval("referenceQuery -f \""+$each+"\""));
+					string $rnNode = `referenceQuery -rfn $each`;
+
+					if (!$failure){
+
+						// get the file path attribute
+						string $path = eval("referenceQuery -f \""+$each+"\"");
+						string $ext = fileExtension($path);
+						string $fileFormat = "mayaBinary";
+						if ($ext == "ma") $fileFormat = "mayaAscii"; 
+
+						$path = `workspace -en $path`;
+						$pathParts = stringToStringArray($path,"/");
+
+						for ($i=0;$i<size($pathParts);$i++){
+							string $testPath = "";
+							for ($j=$i;$j<size($pathParts);$j++){
+								$testPath += ($pathParts[$j]+"/");
+							}
+							if (`filetest -r ($localWorkspace+$testPath) `){
+								$localPath = `workspace -pp ($localWorkspace+$testPath)`;
+								evalEcho ("file -loadReference \""+$rnNode+"\" -type \""+$fileFormat+"\" -options \"v=0\" \""+$localPath+"\"");
+								print ("Remapping "+$path+" to "+$localPath+"\n");
+							}
+						}
+					}
+				}
+			}
+			else if ($nodeType == "audio"){
+				string $path = `getAttr ($each+".filename")`;
+				$path = `workspace -en $path`;
+				$pathParts = stringToStringArray($path,"/");
+
+				for ($i=0;$i<size($pathParts);$i++){
+					string $testPath = "";
+					for ($j=$i;$j<size($pathParts);$j++){
+						$testPath += ($pathParts[$j]+"/");
+					}
+					if (`filetest -r ($localWorkspace+$testPath) `){
+						$localPath = `workspace -pp ($localWorkspace+$testPath)`;
+						setAttr  -type "string" ($each+".filename") ($localPath);
+						print ("Remapping "+$path+" to "+$localPath+"\n");
+					}
+				
+				}
+			}
+			else if ($nodeType == "file" || $nodeType == "psdFileTex" || $nodeType == "mentalrayTexture"){
+				// get the .ftn attribute
+				string $path = `getAttr ($each+".ftn")`;
+				$path = `workspace -en $path`;
+				$pathParts = stringToStringArray($path,"/");
+
+				for ($i=0;$i<size($pathParts);$i++){
+					string $testPath = "";
+					for ($j=$i;$j<size($pathParts);$j++){
+						$testPath += ($pathParts[$j]+"/");
+					}
+					if (`filetest -r ($localWorkspace+$testPath) `){
+						$localPath = `workspace -pp ($localWorkspace+$testPath)`;
+						setAttr  -type "string" ($each+".ftn") ($localPath);
+						print ("Remapping "+$path+" to "+$localPath+"\n");
+					}
+				
+				}
+			}
+			else if ($nodeType == "imagePlane"){
+				// get the .imageName attribute
+				string $path = `getAttr ($each+".imageName")`;
+				if (`filetest -r $path` && !`filetest -d $path`)		
+					$results[size($results)] = `workspace -pp $path`;
+			}
+			else if ($nodeType == "ExocortexAlembicFile"){
+				// get the .imageName attribute
+				string $path = `getAttr ($each+".fileName")`;
+				$path = `workspace -en $path`;
+				$pathParts = stringToStringArray($path,"/");
+
+				for ($i=0;$i<size($pathParts);$i++){
+					string $testPath = "";
+					for ($j=$i;$j<size($pathParts);$j++){
+						$testPath += ($pathParts[$j]+"/");
+					}
+					if (`filetest -r ($localWorkspace+$testPath) `){
+						$localPath = `workspace -pp ($localWorkspace+$testPath)`;
+						setAttr  -type "string" ($each+".fileName") ($localPath);
+						print ("Remapping "+$path+" to "+$localPath+"\n");
+					}
+				
+				}
+			}
+			else if ($nodeType == "xgmPalette"){
+				// get the .imageName attribute
+				string $path = `getAttr ($each+".xgFileName")`;
+				$path = `workspace -en $path`;
+				$pathParts = stringToStringArray($path,"/");
+
+				for ($i=0;$i<size($pathParts);$i++){
+					string $testPath = "";
+					for ($j=$i;$j<size($pathParts);$j++){
+						$testPath += ($pathParts[$j]+"/");
+					}
+					if (`filetest -r ($localWorkspace+$testPath) `){
+						$localPath = `workspace -pp ($localWorkspace+$testPath)`;
+						setAttr  -type "string" ($each+".xgFileName") ($localPath);
+						print ("Remapping "+$path+" to "+$localPath+"\n");
+					}
+				
+				}
+			}
+		// TODO: add the rest of the node types that potentially have external sources
+	}
+		
+	}
+
+
 }
