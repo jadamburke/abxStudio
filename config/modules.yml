@@ -19,8 +19,7 @@ arnold:
   name: Arnold
   show: false
   env:
-    ARNOLD_LICENSE_HOST: 'ppny-lic'
-    ARNOLD_LICENSE_PORT: '5060'
+    solidangle_LICENSE: '5060@ppny-lic'
   packages:
     maya:
       env:
@@ -51,6 +50,15 @@ arnold:
         1.1.1.0:
           env:
             PP_MTOA: '1.1.1.0'
+          path:
+            linux: /
+            mac: /
+            win32: /
+          versions:
+          - '2015'
+        1.2.0.8:
+          env:
+            PP_MTOA: '1.2.0.8'
           path:
             linux: /
             mac: /
@@ -148,7 +156,22 @@ alShaders:
           - '2013'
           - '2014'
           - '2015'
-
+jfDielectric:
+  name: jfDielectric
+  show: false
+  packages:
+    maya:
+      versions:
+        '1.0.5':
+          env:
+            ARNOLD_PLUGIN_PATH: '%PP_RESOURCE%/bin/arnold/jfDielectric/1.0.5/win/bin'
+            MTOA_TEMPLATES_PATH: '%PP_RESOURCE%/bin/arnold/jfDielectric/1.0.5/win/ae'
+          path:
+            linux: /
+            mac: /
+            win32: /
+          versions:
+          - '2015'
 gmh:
   name: gmh
   show: false
@@ -186,4 +209,85 @@ ngSkinningTools:
           versions:
           - '2013'
           - '2014'
+          - '2015'
+
+houdiniEngine:
+  name: houdiniEngine
+  show: false
+  packages:
+    maya:
+      versions:
+        '14.0.258':
+          env:
+            MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/maya/houdiniEngine/win/14.0.258/maya2015'
+            PATH: '%PP_RESOURCE%/bin/maya/houdiniEngine/win/14.0.258/maya2015/bin'
+          path:
+            linux: /
+            mac: /
+            win32: /
+          versions:
+          - '2013'
+          - '2014'
+          - '2015'
+
+realflowMaya:
+  name: realflowMaya
+  show: false
+  packages:
+    maya:
+      versions:
+        '14.8.012':
+          env:
+            MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/maya/realflow/win/14.8.012/Maya2015'
+          path:
+            linux: /
+            mac: /
+            win32: /
+          versions:
+          - '2015'
+rfrk:
+  name: realflowrenderkit
+  show: false
+  packages:
+    maya:
+      versions:
+        '2014':
+          env:
+            MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/maya/rfrk/win/2014/Maya2015'
+            PATH: '%PP_RESOURCE%/bin/maya/rfrk/win/2014/RFRK 2014 For Maya'
+          path:
+            linux: /
+            mac: /
+            win32: /
+          versions:
+          - '2015'
+presenz:
+  name: presenz
+  show: false
+  packages:
+    maya:
+      versions:
+        '0.1.0':
+          env:
+            MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/maya/presenz/win/0.1.0/Maya2015'
+          path:
+            linux: /
+            mac: /
+            win32: /
+          versions:
+          - '2015'
+playblastVR:
+  name: playblastVR
+  show: false
+  packages:
+    maya:
+      versions:
+        '1.2':
+          env:
+            MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/maya/PlayblastVR/win/1.2'
+          path:
+            linux: /
+            mac: /
+            win32: /
+          versions:
           - '2015'

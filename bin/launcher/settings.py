@@ -12,11 +12,11 @@ os.environ['PP_CONFIG'] = CONFIG.replace('\\','/')
 
 # import the proper version of PYQT
 # need to look at a better way of sourcing pyqt / pyside
-os.environ['PATH'] += ';\\\\pp-fs-nyc\\pipeline\\nyc\\lib\\python\\pyqt4\\4.8.4'
+os.environ['PATH'] += ';\\\\diskstation\\res\\studio\\nyc\\lib\\python\\pyqt4\\4.10.3'
 #os.environ['PATH'] += ';E:\\pyqt\\4.8.4'
-os.environ['PYTHONPATH'] += ';\\\\pp-fs-nyc\\pipeline\\nyc\\lib\\python\\pyqt4\\4.8.4'
+os.environ['PYTHONPATH'] += ';\\\\diskstation\\res\\studio\\nyc\\lib\\python\\pyqt4\\4.10.3'
 #os.environ['PYTHONPATH'] += ';E:\\pyqt\\4.8.4'
-sys.path.append('\\\\pp-fs-nyc\\pipeline\\nyc\\lib\\python\\pyqt4\\4.8.4')
+sys.path.append('\\\\diskstation\\res\\studio\\nyc\\lib\\python\\pyqt4\\4.10.3')
 #sys.path.append('E:\\pyqt\\4.8.4')
 
 print os.environ['PYTHONPATH']
@@ -27,10 +27,10 @@ import yaml
 
 MODE = "pub"
 SITE = "ny"
-SERVER = "pp-fs-nyc"
+SERVER = "diskstation"
 SHARES = {
-    'prod' : 'production',
-    'sys' : 'pipeline',
+    'prod' : 'jobs',
+    'sys' : 'res',
     'user' : 'personal',
     'lib' : 'lib',
     'job' : 'jobs'
@@ -72,7 +72,7 @@ UTILITIES = {
                     'ui':{
                         'linux': '/',
                         'mac': '/',
-                        'win32': 'chrome.exe https://owa.passion-email.com/owa'
+                        'win32': 'chrome.exe http://mail.passion-pictures.com'
                     }
                 },
                 'path':{
@@ -136,6 +136,25 @@ UTILITIES = {
                     'linux': '/',
                     'mac': '/',
                     'win32': 'C:/Program Files (x86)/Google/Chrome/Application'
+                }
+            }
+        }
+    },
+    'internal': {
+        'show': True,
+        'versions':{
+            '1':{
+                'modes':{
+                    'ui':{
+                        'linux': '/',
+                        'mac': '/',
+                        'win32': 'firefox.exe http://internal/'
+                    }
+                },
+                'path':{
+                    'linux': '/',
+                    'mac': '/',
+                    'win32': 'C:/Program Files (x86)/Mozilla Firefox'
                 }
             }
         }

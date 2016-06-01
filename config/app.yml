@@ -47,6 +47,7 @@ aftereffects:
         win32: '%PP_ROOT%/tools/aftereffects'
 maya:
   env:
+    ADSKFLEX_LICENSE_FILE: '27000@ppny-dc01'
     MAYA_APP_DIR: '%PP_ROOT%/user/%USERNAME%/maya'
     MAYA_PPTOOLS: '%PP_RESOURCE%/tools/maya/common'
     MAYA_PPTOOLS_COMMON: '%PP_RESOURCE%/maya/common'
@@ -104,14 +105,14 @@ softimage:
     PP_XSI_WORKGRP: '%PP_ROOT%/tools/softimage/common'
     XSI_HOME: '%SI_HOME%'
     XSI_BINDIR: '%XSI_HOME%/Application/bin'
-    PYTHONPATH: '%PP_ROOT%/lib/python'
     XSI_PLUGINS: '%PP_ROOT%/tools/softimage/common'
-    XSI_USERROOT: '%PP_ROOT%/user/%USERNAME%'
   show: true
   versions:
     '2014':
       name: Autodesk Softimage XSI
       env:
+        PP_SOFTIMAGE: '2012SP2'
+        XSI_PLUGINS: '%PP_ROOT%/tools/softimage/si_2014__sitoa350;%PP_ROOT%/tools/softimage/si_2014__alembic'
         SI_HOME: 'C:/Program Files/Autodesk/Softimage 2014 SP2/Application/bin'
       modes:
         ui:
@@ -150,6 +151,7 @@ nuke:
   env:
     NUKE_PATH: '%PP_RESOURCE%/tools/nuke'
     NUKE_DISK_CACHE: 'E:/Nuke'
+    NUKE_TEMP_DIR: 'E:/Nuke/Temp'
   show: true
   tasks:
   - comp
@@ -191,10 +193,22 @@ nuke:
         linux: /
         mac: /
         win32: C:/Program Files/Nuke9.0v4
+    '9.0v5':
+      name: Nuke
+      modes:
+        ui:
+          linux: /
+          mac: /
+          win32: Nuke9.0.exe
+      path:
+        linux: /
+        mac: /
+        win32: C:/Program Files/Nuke9.0v5
 nukex:
   env:
     NUKE_PATH: '%PP_ROOT%/tools/nuke'
     NUKE_DISK_CACHE: 'E:/Nuke'
+    NUKE_TEMP_DIR: 'E:/Nuke/Temp'
   show: true
   tasks:
   - comp
@@ -236,10 +250,22 @@ nukex:
         linux: /
         mac: /
         win32: C:/Program Files/Nuke9.0v4
+    '9.0v5':
+      name: Nuke
+      modes:
+        ui:
+          linux: /
+          mac: /
+          win32: Nuke9.0.exe --nukex
+      path:
+        linux: /
+        mac: /
+        win32: C:/Program Files/Nuke9.0v5
 nukestudio:
   env:
     NUKE_PATH: '%PP_ROOT%/tools/nuke'
     NUKE_DISK_CACHE: 'E:/Nuke'
+    NUKE_TEMP_DIR: 'E:/Nuke/Temp'
   show: true
   tasks:
   - comp
@@ -259,6 +285,17 @@ nukestudio:
         linux: /
         mac: /
         win32: C:/Program Files/Nuke9.0v4
+    '9.0v5':
+      name: Nuke
+      modes:
+        ui:
+          linux: /
+          mac: /
+          win32: Nuke9.0.exe --studio
+      path:
+        linux: /
+        mac: /
+        win32: C:/Program Files/Nuke9.0v5
 premiere:
   show: true
   tasks:
