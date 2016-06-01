@@ -270,7 +270,7 @@ global proc qube_addUI()
 	print ("Adding Qube mayabatch menuitems to Qube! menu\n");
 	global string $gQubeMenu;
 	setParent -menu $gQubeMenu;
-	$mayaLoc = "//pp-fs-nyc/pipeline/nyc/env/ppMayaBatch_Arnold.bat"; //`getenv MAYA_LOCATION`;
+	$mayaLoc = "//pp-fs-nyc/pipeline/nyc/env/studioMayaBatch_Arnold.bat"; //`getenv MAYA_LOCATION`;
 
 
 	if (getApplicationVersionAsFloat() >= 2009) { // contains renderpass added in Maya 2009

@@ -7,9 +7,9 @@ global proc abxProject () {
 	global int $hideProjMan;
 	if ($hideProjMan != 1){
 		if (!`window -exists abxProjectWindow`){
-			window -title "Passion Pictures Project Manager" -width 580 -height 540 -menuBar true abxProjectWindow;
-			string $ppResources = `getenv PP_RESOURCE`;
-			string $ppTools = `getenv MAYA_PPTOOLS`;
+			window -title "Project Manager" -width 580 -height 540 -menuBar true abxProjectWindow;
+			string $stResources = `getenv ST_RESOURCE`;
+			string $stTools = `getenv MAYA_STTOOLS`;
 
 
 			//menu -label "Create";
@@ -17,7 +17,7 @@ global proc abxProject () {
 			//	menuItem -label "New Maya Project";
 
 			formLayout abxProjectWindowMainForm;
-			image -w 250 -h 52 -image ($ppTools+"/icons/passion.png") abxProjectLogoImage;
+			image -w 250 -h 52 -image ($stTools+"/icons/studio.png") abxProjectLogoImage;
 			columnLayout abxProjectDetailsCol;
 			text -font "fixedWidthFont" -label ("Current Project: "+`workspace -q -rd`);
 			//text -font "fixedWidthFont" -label ("     Resolution: 1920 X 1080");
@@ -50,7 +50,7 @@ global proc abxProject () {
 					/*
 					rowLayout -numberOfColumns 2 -rat 2 "top" 0 -adj 2;
 						frameLayout -lv 0 abxProjectDetailImgFrmLyt;
-							image -h 100 -w 177 -i ($ppTools+"/icons/shotThumb.png") abxProjectDetailImg;
+							image -h 100 -w 177 -i ($stTools+"/icons/shotThumb.png") abxProjectDetailImg;
 							popupMenu;
 								menuItem -label "Capture Thumbnail" -c "abxProjectCaptureThumbnail \"\"";
 						setParent..;
@@ -90,7 +90,7 @@ global proc abxProject () {
 			//button -l "New Job" -c "abxProjectCreateNewJobUI;" -al "center" -h 26 ;
 
 			setParent abxProjectLibForm;
-			frameLayout -cll 0 -bs "etchedIn" -l "Passion Picture Jobs:" abxProjectJobListFrmeLyt;
+			frameLayout -cll 0 -bs "etchedIn" -l "Job Servers:" abxProjectJobListFrmeLyt;
 				//text -label "Jobs:" abxProjectTL2;
 
 				//string $jobLister = `textScrollList  abxProjectJobList`;
@@ -184,7 +184,7 @@ global proc abxProjectEditDefaults () {
 		else
 			$workspaceName = $tokenBuffer[size($tokenBuffer)-2];
 
-		string $detailsFile = ($workspace+"System/"+$workspaceName+"_config.yml");
+		string $detailsFile = ($workspace+"config/"+$workspaceName+"_config.yml");
 		// if a details file doesn't exist then set the values to some default defaults
 		if (!`filetest -r $detailsFile`){
 			textFieldGrp -e -text 24 abxProjectDtlFPS;
@@ -357,11 +357,11 @@ global proc abxProjectBuildMenu (string $shotLister){
 
 global proc abxProjectPopulateList () {
 
-	string $ppJobServers = `getenv PP_JOB_SERVERS`;
-	string $ppServers[];
-	tokenize $ppJobServers ";" $ppServers;
+	string $stJobServers = `getenv ST_JOB_SERVERS`;
+	string $stServers[];
+	tokenize $stJobServers ";" $stServers;
 
-	for ($each in $ppServers){
+	for ($each in $stServers){
 		// get the drive letter if any
 		string $tokenBuffer[];
 		tokenize $each ":" $tokenBuffer;
@@ -381,24 +381,25 @@ global proc abxProjectPopulateList () {
 			$serverNickName = `basename $each ""`;
 		}
 		string $jobsPath = ($each);
-		//print ($jobsPath+"\n");
+		//print ("\""+$jobsPath+"\"\n");
 		string $jobFolders[] = `getFileList -folder ($jobsPath)`;
 		string $alphabetical[] = sort($jobFolders);
+		//print ("found "+size($alphabetical)+" folders");
 
 		treeView -e -addItem $serverNickName "" abxProjectJobList;
-		treeView -e -ei $serverNickName 0 abxProjectJobList;
+		treeView -e -ei $serverNickName 1 abxProjectJobList;
 		treeView -e -selectionColor $serverNickName .8 .8 .8 abxProjectJobList;
 		int $i = 0;
 
 		for ($every in $alphabetical){
-			if (`filetest -d ($jobsPath+$every)` && $every != "TEMP" && $every != ".TemporaryItems" && $every != ".Trashes"){
-				treeView -e -addItem ($each+$every) $serverNickName abxProjectJobList;
-				treeView -e -displayLabel ($each+$every) $every abxProjectJobList;
-				treeView -e -selectionColor ($each+$every) .8 .8 .8 abxProjectJobList;
+			if (`filetest -d ($jobsPath+"/"+$every)` && $every != "TEMP" && $every != ".TemporaryItems" && $every != ".Trashes"){
+				treeView -e -addItem ($each+"/"+$every) $serverNickName abxProjectJobList;
+				treeView -e -displayLabel ($each+"/"+$every) $every abxProjectJobList;
+				treeView -e -selectionColor ($each+"/"+$every) .8 .8 .8 abxProjectJobList;
 				if ($i%2)
-					treeView -e -lbc ($each+$every) .2 .2 .2 abxProjectJobList;
+					treeView -e -lbc ($each+"/"+$every) .2 .2 .2 abxProjectJobList;
 				else 
-					treeView -e -lbc ($each+$every) .24 .24 .24 abxProjectJobList;
+					treeView -e -lbc ($each+"/"+$every) .24 .24 .24 abxProjectJobList;
 				//treeView -e -bti $each 1 "A" -bti $each 2 "F" -bti $each 3 "L" abxProjectJobList;
 				$i++;
 			}			
@@ -410,9 +411,9 @@ global proc abxProjectPopulateList () {
 global proc abxProjectRefreshProjectList (string $jobName) {
 		treeView -e -removeAll abxProjectProjectList;
 		int $foundDefault = false;
-
+		print ($jobName+"\n");
 		string $jobFolders[] = `getFileList -folder ($jobName+"/")`;
-		string $projFolders[] = `getFileList -folder ($jobName+"/3D/")`;
+		string $projFolders[] = `getFileList -folder ($jobName+"/")`;
 
 		string $tokenBuffer[];
 		tokenize $jobName "/" $tokenBuffer;
@@ -434,19 +435,20 @@ global proc abxProjectRefreshProjectList (string $jobName) {
 		}
 
 		for ($each in $projFolders){
-			if (`filetest -d ($jobName+"/3D/"+$each)` && $each != "TEMP" && $each != ".TemporaryItems" && $each != ".Trashes" && $each != "old"){
-				string $projSubFolders[] = `getFileList -folder ($jobName+"/3D/"+$each+"/")`;
+			if (`filetest -d ($jobName+"/"+$each)` && $each != "TEMP" && $each != ".TemporaryItems" && $each != ".Trashes" && $each != "old"){
+				string $projSubFolders[] = `getFileList -folder ($jobName+"/"+$each+"/")`;
+				print ("Found Sub Project folder:"+size($projSubFolders)+"\n");
 				if (stringArrayContains("workspace.mel",$projSubFolders)){
-					treeView -e -addItem ($jobName+"/3D/"+$each+"/") $jobName abxProjectProjectList;
-					treeView -e -displayLabel ($jobName+"/3D/"+$each+"/") ($each) abxProjectProjectList;
-					treeView -e -selectionColor ($jobName+"/3D/"+$each+"/") .8 .8 .8 abxProjectProjectList;
-					if (tolower($jobName+"/3D/"+$each+"/") == tolower($jobName+"/3D/"+$client+"_"+$job+"_maya/")){
-						treeView -e -si ($jobName+"/3D/"+$each+"/") 1 abxProjectProjectList;
-						abxProjectSetActiveProject ($jobName+"/3D/"+$each+"/") 1;
+					treeView -e -addItem ($jobName+"/"+$each+"/") $jobName abxProjectProjectList;
+					treeView -e -displayLabel ($jobName+"/"+$each+"/") ($each) abxProjectProjectList;
+					treeView -e -selectionColor ($jobName+"/"+$each+"/") .8 .8 .8 abxProjectProjectList;
+					if (tolower($jobName+"/"+$each+"/") == tolower($jobName+"/"+$client+"_"+$job+"_maya/")){
+						treeView -e -si ($jobName+"/"+$each+"/") 1 abxProjectProjectList;
+						abxProjectSetActiveProject ($jobName+"/"+$each+"/") 1;
 						//print ("enabled button\n");
 						button -e -en 1 abxProjectBtnRefresh;
-						abxProjectRefreshDetailsUI2 ($jobName+"/3D/"+$each+"/");
-						treeView -e -displayLabel ($jobName+"/3D/"+$each+"/") ($each+"   (default)") abxProjectProjectList;
+						abxProjectRefreshDetailsUI2 ($jobName+"/"+$each+"/");
+						treeView -e -displayLabel ($jobName+"/"+$each+"/") ($each+"   (default)") abxProjectProjectList;
 						$foundDefault = true;
 					}
 				}
@@ -519,7 +521,7 @@ global proc abxProjectWriteShotDetails (string $workspace, string $projDetails[]
 	else
 		$workspaceName = $tokenBuffer[size($tokenBuffer)-2];
 
-	string $detailsFile = ($workspace+"/System/"+$workspaceName+"_config.yml");
+	string $detailsFile = ($workspace+"/config/"+$workspaceName+"_config.yml");
 	
 	if (size($projDetails) > 8){	
 
@@ -562,7 +564,7 @@ global proc string[] abxProjectGetShotDetails (string $workspace) {
 	else
 		$workspaceName = $tokenBuffer[size($tokenBuffer)-2];
 
-	string $detailsFile = ($workspace+"System/"+$workspaceName+"_config.yml");
+	string $detailsFile = ($workspace+"config/"+$workspaceName+"_config.yml");
 	print ($detailsFile+"\n");
 	string $shotDetails[];
 	string $headerData="";
@@ -786,18 +788,18 @@ global proc abxProjectCreateNewMayaProject (){
 
 global proc string[] abxProjectsGetServers(int $returnNicknames){
 
-	string $ppJobServers = `getenv PP_JOB_SERVERS`;
-	string $ppServers[];
-	tokenize $ppJobServers ";" $ppServers;
+	string $stJobServers = `getenv ST_JOB_SERVERS`;
+	string $stServers[];
+	tokenize $stJobServers ";" $stServers;
 
 	if ($returnNicknames == 0){
-		return $ppServers;
+		return $stServers;
 	}
 	else{
 	// get server nicknames
 		string $serverNickNames[];
-		for ($i=0;$i<size($ppServers);$i++){
-			$each = $ppServers[$i];
+		for ($i=0;$i<size($stServers);$i++){
+			$each = $stServers[$i];
 			// get the drive letter if any
 			string $tokenBuffer[];
 			tokenize $each ":" $tokenBuffer;

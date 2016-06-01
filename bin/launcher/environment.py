@@ -198,10 +198,10 @@ class StudioEnvironment():
                     #    copy_dir = val.replace(("/user/"+user_name+"/"), "/user/default/")
 
                     # if a local dir exists then copy it to the network user prefs, otherwise create an empty folder on network
-                    if copy_dir:
-                        print ("Copying Local Prefs from:"+copy_dir+" to "+val)
-                        utils.copyDirTree(copy_dir,val)
-                    else:
-                        print ("No Local Prefs found in: "+copy_dir)
-                        print ("Making User Folder:"+var+":"+val)
-                        os.makedirs(val)
+                    # if copy_dir:
+                    #     print ("Copying Local Prefs from:"+copy_dir+" to "+val)
+                    #     utils.copyDirTree(copy_dir,val)
+                    # else:
+                    #     print ("No Local Prefs found in: "+copy_dir)
+                    #     print ("Making User Folder:"+var+":"+val)
+                    #     os.makedirs(val)

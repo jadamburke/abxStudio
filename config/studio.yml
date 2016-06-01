@@ -6,9 +6,9 @@ version_incr: 1
 version_padding: 3
 servers:
   'jobs':
-    root_path: 'C:/Users/Adam/Dropbox/personal'
+    root_path: 'C:\Users\aburke\Dropbox\dev\abxStudioDemo'
   'media':
-    root_path: 'C:/Users/Adam/Dropbox/personal'
+    root_path: 'C:\Users\aburke\Dropbox\dev\abxStudioDemo'
   'personal':
     root_path: 'C:/Users/Adam/Dropbox/personal'
 stages:

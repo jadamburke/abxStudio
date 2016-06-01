@@ -12,12 +12,14 @@ os.environ['ST_CONFIG'] = CONFIG.replace('\\','/')
 
 # import the proper version of PYQT
 # need to look at a better way of sourcing pyqt / pyside
-os.environ['PATH'] += ';C:\\pipeline\\abxStudio\\lib\\python\\pyqt4\\4.10.3'
-#os.environ['PATH'] += ';E:\\pyqt\\4.8.4'
-os.environ['PYTHONPATH'] += ';C:\\pipeline\\abxStudio\\lib\\python\\pyqt4\\4.10.3'
-#os.environ['PYTHONPATH'] += ';E:\\pyqt\\4.8.4'
-sys.path.append('C:\\pipeline\\abxStudio\\lib\\python\\pyqt4\\4.10.3')
-#sys.path.append('E:\\pyqt\\4.8.4')
+pyQTPath = os.path.join(ROOT,'lib','python','pyqt4','4.10.3')
+os.environ['PATH'] += (';'+pyQTPath)
+print ('setting pyQTPath to '+pyQTPath)
+try:
+    os.environ['PYTHONPATH'] += (';'+pyQTPath)
+except:
+    os.environ['PYTHONPATH'] = (pyQTPath)
+sys.path.append(pyQTPath)
 
 print os.environ['PYTHONPATH']
 print sys.path

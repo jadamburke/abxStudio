@@ -1,16 +1,16 @@
 
 global proc studioMenu()
 {
-    global string $gPassionMainMenu;
+    global string $gStudioMainMenu;
     global string $gMainWindow;
 
 
-        if(!`menu -exists $gPassionMainMenu`){
-            $gPassionMainMenu = `menu -p $gMainWindow -l "Studio" -tearOff true -allowOptionBoxes true mainPassionMenu`;
+        if(!`menu -exists $gStudioMainMenu`){
+            $gStudioMainMenu = `menu -p $gMainWindow -l "Studio" -tearOff true -allowOptionBoxes true mainStudioMenu`;
         }
 
-        if (`menu -exists $gPassionMainMenu`) {
-            setParent -menu $gPassionMainMenu;
+        if (`menu -exists $gStudioMainMenu`) {
+            setParent -menu $gStudioMainMenu;
             // custom menu items
             if (int(`about -v`) >= 2015)
                 menuItem -divider true -dl "STUDIO TOOLS";
@@ -30,7 +30,7 @@ global proc studioMenu()
                     menuItem -divider true ;
                     menuItem -l "New Rig Scene" -c "studioNewScene;studioDoNewScene \"rig\"";
 
-                setParent -menu $gPassionMainMenu;
+                setParent -menu $gStudioMainMenu;
                 menuItem -en 1 -l  "New Camera" -sm true;
                     menuItem -en 1 -l "Camera" -c "studioNewCam;studioDoNewCamVerbosity \"camera\" 1";
                     menuItem -en 1 -l "Camera and Aim" -c "studioNewCam;studioDoNewCamVerbosity \"cameraAim\" 1";
@@ -41,7 +41,7 @@ global proc studioMenu()
                     //menuItem -l "StereoCam Tools" -c ("if (`exists studioStereoCam`==0) source \""+$studioScripts+"/scripts/production/studioStereoCam.mel\";if (`exists studioStereoCam`) studioStereoCam");
                     //menuItem -divider true ;
                     menuItem -l "renderCam for Track Shots" -c "studioNewCam;studioDoNewCamVerbosity \"renderCam4Track\" 1";    
-                setParent -menu $gPassionMainMenu;
+                setParent -menu $gStudioMainMenu;
 
                 menuItem -divider true ;
 

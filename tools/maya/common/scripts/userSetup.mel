@@ -37,7 +37,7 @@ if (!`about -batch`){
 
 
 	// loads GoZ if zbrush is installed
-	if (`filetest -d "C:/Program Files/Pixologic"`){
+	if (`filetest -r "C:/Users/Public/Pixologic/GoZApps/Maya/GoZBrushToMaya.mel"`){
 		evalEcho ("source \""+$stTools+"/scripts/goZBrush/GoZScript.mel\"");
 	}
 

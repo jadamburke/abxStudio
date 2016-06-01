@@ -3,8 +3,8 @@ studiotools:
   show: false
   env:
     MODE: pub
-    PP_JOB_SERVERS: //pp-fs-nyc/production/
-    PP_RESOURCE: '%PP_ROOT%'
+    ST_JOB_SERVERS: 'C:/Users/aburke/Dropbox/dev/abxStudioDemo'
+    ST_RESOURCE: '%ST_ROOT%'
   versions:
     '1.0':
       path:
@@ -22,7 +22,7 @@ aftereffects:
     'CC':
       name: After Effects CC
       env:
-        PP_AE: 'CC'
+        ST_AE: 'CC'
       modes:
         ui:
           linux: /
@@ -31,11 +31,11 @@ aftereffects:
       path:
         linux: /
         mac: /
-        win32: '%PP_ROOT%/tools/aftereffects'
+        win32: '%ST_ROOT%/tools/aftereffects'
     'CC 2014':
       name: After Effects CC 2014
       env:
-        PP_AE: 'CC 2014'
+        ST_AE: 'CC 2014'
       modes:
         ui:
           linux: /
@@ -44,28 +44,29 @@ aftereffects:
       path:
         linux: /
         mac: /
-        win32: '%PP_ROOT%/tools/aftereffects'
+        win32: '%ST_ROOT%/tools/aftereffects'
 maya:
   env:
-    ADSKFLEX_LICENSE_FILE: '27000@ppny-dc01'
-    MAYA_APP_DIR: '%PP_ROOT%/user/%USERNAME%/maya'
-    MAYA_PPTOOLS: '%PP_RESOURCE%/tools/maya/common'
-    MAYA_PPTOOLS_COMMON: '%PP_RESOURCE%/maya/common'
-    MAYA_MODULE_PATH: '%MAYA_PPTOOLS%/modules'
-    MAYA_PLUG_IN_PATH: '%MAYA_PPTOOLS%/plugins'
-    MAYA_PRESET_PATH: '%MAYA_PPTOOLS%/presets'
-    MAYA_SCRIPT_PATH: '%MAYA_PPTOOLS%/scripts'
-    MAYA_SHELF_PATH: '%MAYA_PPTOOLS%/shelves'
-    XBMLANGPATH: '%MAYA_PPTOOLS%/icons'
-    PYTHONPATH: '%PP_RESOURCE%/lib/python;%MAYA_PPTOOLS%/scripts'
+    LM_LICENSE_FILE: '@scholar-lic01'
+    AUTODESK_ADLM_THINCLIENT_ENV: '//scholar/apps/Autodesk/adlm/AdlmThinClientCustomEnv.xml'
+    MAYA_APP_DIR: '%ST_ROOT%/user/%USERNAME%/maya'
+    MAYA_STTOOLS: '%ST_RESOURCE%/tools/maya/common'
+    MAYA_STTOOLS_COMMON: '%ST_RESOURCE%/maya/common'
+    MAYA_MODULE_PATH: '%MAYA_STTOOLS%/modules'
+    MAYA_PLUG_IN_PATH: '%MAYA_STTOOLS%/plugins'
+    MAYA_PRESET_PATH: '%MAYA_STTOOLS%/presets'
+    MAYA_SCRIPT_PATH: '%MAYA_STTOOLS%/scripts'
+    MAYA_SHELF_PATH: '%MAYA_STTOOLS%/shelves'
+    XBMLANGPATH: '%MAYA_STTOOLS%/icons'
+    PYTHONPATH: '%ST_RESOURCE%/lib/python;%MAYA_STTOOLS%/scripts'
   show: true
   versions:
     '2014':
       name: Autodesk Maya 2014
       env:
-        PP_MAYA: '2014'
-        MAYA_PPTOOLS_VERSIONED: '%PP_RESOURCE%/maya/%PP_MAYA%x64'
-        PP_MAYA_DIR: C:/Program Files/Autodesk/Maya%PP_MAYA%
+        ST_MAYA: '2014'
+        MAYA_STTOOLS_VERSIONED: '%ST_RESOURCE%/maya/%ST_MAYA%x64'
+        ST_MAYA_DIR: C:/Program Files/Autodesk/Maya%ST_MAYA%
       modes:
         ui:
           linux: /
@@ -78,9 +79,9 @@ maya:
     '2015':
       name: Autodesk Maya
       env:
-        MAYA_PPTOOLS_VERSIONED: '%PP_RESOURCE%/maya/%PP_MAYA%x64'
-        PP_MAYA: '2015'
-        PP_MAYA_DIR: C:/Program Files/Autodesk/Maya%PP_MAYA%
+        MAYA_STTOOLS_VERSIONED: '%ST_RESOURCE%/maya/%ST_MAYA%x64'
+        ST_MAYA: '2015'
+        ST_MAYA_DIR: C:/Program Files/Autodesk/Maya/%ST_MAYA%.0.5
       modes:
         ui:
           linux: /
@@ -89,7 +90,7 @@ maya:
       path:
         linux: /
         mac: /
-        win32: C:/Program Files/Autodesk/Maya2015/bin
+        win32: C:/Program Files/Autodesk/Maya/2015.0.5/bin
   tasks:
   - model
   - shade
@@ -102,17 +103,17 @@ maya:
   - light
 softimage:
   env:
-    PP_XSI_WORKGRP: '%PP_ROOT%/tools/softimage/common'
+    ST_XSI_WORKGRP: '%ST_ROOT%/tools/softimage/common'
     XSI_HOME: '%SI_HOME%'
     XSI_BINDIR: '%XSI_HOME%/Application/bin'
-    XSI_PLUGINS: '%PP_ROOT%/tools/softimage/common'
+    XSI_PLUGINS: '%ST_ROOT%/tools/softimage/common'
   show: true
   versions:
     '2014':
       name: Autodesk Softimage XSI
       env:
-        PP_SOFTIMAGE: '2012SP2'
-        XSI_PLUGINS: '%PP_ROOT%/tools/softimage/si_2014__sitoa350;%PP_ROOT%/tools/softimage/si_2014__alembic'
+        ST_SOFTIMAGE: '2012SP2'
+        XSI_PLUGINS: '%ST_ROOT%/tools/softimage/si_2014__sitoa350;%ST_ROOT%/tools/softimage/si_2014__alembic'
         SI_HOME: 'C:/Program Files/Autodesk/Softimage 2014 SP2/Application/bin'
       modes:
         ui:
@@ -126,7 +127,7 @@ softimage:
     '2015':
       name:  Autodesk Softimage XSI
       env:
-        PP_SOFTIMAGE: '2015'
+        ST_SOFTIMAGE: '2015'
         SI_HOME: 'C:/Program Files/Autodesk/Softimage 2015/Application/bin'
       modes:
         ui:
@@ -149,9 +150,9 @@ softimage:
   - light
 nuke:
   env:
-    NUKE_PATH: '%PP_RESOURCE%/tools/nuke'
-    NUKE_DISK_CACHE: 'E:/Nuke'
-    NUKE_TEMP_DIR: 'E:/Nuke/Temp'
+    NUKE_PATH: '%ST_RESOURCE%/tools/nuke'
+    NUKE_DISK_CACHE: 'C:/Nuke'
+    NUKE_TEMP_DIR: 'C:/Nuke/Temp'
   show: true
   tasks:
   - comp
@@ -160,29 +161,7 @@ nuke:
   - track
   - roto
   versions:
-    '7.0v8':
-      name: Nuke
-      modes:
-        ui:
-          linux: /
-          mac: /
-          win32: Nuke7.0.exe
-      path:
-        linux: /
-        mac: /
-        win32: C:/Program Files/Nuke7.0v8
-    '8.0v5':
-      name: Nuke
-      modes:
-        ui:
-          linux: /
-          mac: /
-          win32: Nuke8.0.exe
-      path:
-        linux: /
-        mac: /
-        win32: C:/Program Files/Nuke8.0v5
-    '9.0v4':
+    '9.0v7':
       name: Nuke
       modes:
         ui:
@@ -192,23 +171,12 @@ nuke:
       path:
         linux: /
         mac: /
-        win32: C:/Program Files/Nuke9.0v4
-    '9.0v5':
-      name: Nuke
-      modes:
-        ui:
-          linux: /
-          mac: /
-          win32: Nuke9.0.exe
-      path:
-        linux: /
-        mac: /
-        win32: C:/Program Files/Nuke9.0v5
+        win32: C:/Program Files/Foundry/Nuke/9.0v7
 nukex:
   env:
-    NUKE_PATH: '%PP_ROOT%/tools/nuke'
-    NUKE_DISK_CACHE: 'E:/Nuke'
-    NUKE_TEMP_DIR: 'E:/Nuke/Temp'
+    NUKE_PATH: '%ST_ROOT%/tools/nuke'
+    NUKE_DISK_CACHE: 'C:/Nuke'
+    NUKE_TEMP_DIR: 'C:/Nuke/Temp'
   show: true
   tasks:
   - comp
@@ -217,29 +185,7 @@ nukex:
   - track
   - roto
   versions:
-    '7.0v8':
-      name: Nuke
-      modes:
-        ui:
-          linux: /
-          mac: /
-          win32: Nuke7.0.exe --nukex
-      path:
-        linux: /
-        mac: /
-        win32: C:/Program Files/Nuke7.0v8
-    '8.0v5':
-      name: Nuke
-      modes:
-        ui:
-          linux: /
-          mac: /
-          win32: Nuke8.0.exe --nukex
-      path:
-        linux: /
-        mac: /
-        win32: C:/Program Files/Nuke8.0v5
-    '9.0v4':
+    '9.0v7':
       name: Nuke
       modes:
         ui:
@@ -249,23 +195,12 @@ nukex:
       path:
         linux: /
         mac: /
-        win32: C:/Program Files/Nuke9.0v4
-    '9.0v5':
-      name: Nuke
-      modes:
-        ui:
-          linux: /
-          mac: /
-          win32: Nuke9.0.exe --nukex
-      path:
-        linux: /
-        mac: /
-        win32: C:/Program Files/Nuke9.0v5
+        win32: C:/Program Files/Foundry/Nuke/9.0v7
 nukestudio:
   env:
-    NUKE_PATH: '%PP_ROOT%/tools/nuke'
-    NUKE_DISK_CACHE: 'E:/Nuke'
-    NUKE_TEMP_DIR: 'E:/Nuke/Temp'
+    NUKE_PATH: '%ST_ROOT%/tools/nuke'
+    NUKE_DISK_CACHE: 'C:/Nuke'
+    NUKE_TEMP_DIR: 'C:/Nuke/Temp'
   show: true
   tasks:
   - comp
@@ -274,7 +209,7 @@ nukestudio:
   - track
   - roto
   versions:
-    '9.0v4':
+    '9.0v7':
       name: Nuke
       modes:
         ui:
@@ -284,18 +219,7 @@ nukestudio:
       path:
         linux: /
         mac: /
-        win32: C:/Program Files/Nuke9.0v4
-    '9.0v5':
-      name: Nuke
-      modes:
-        ui:
-          linux: /
-          mac: /
-          win32: Nuke9.0.exe --studio
-      path:
-        linux: /
-        mac: /
-        win32: C:/Program Files/Nuke9.0v5
+        win32: C:/Program Files/Foundry/Nuke/9.0v7
 premiere:
   show: true
   tasks:
@@ -315,7 +239,7 @@ premiere:
         linux: /
         mac: /
         win32: C:/Program Files/Adobe/Adobe Premiere Pro CC
-    'CC 2014':
+    'CC 2015':
       name: Premiere
       modes:
         ui:
@@ -325,12 +249,12 @@ premiere:
       path:
         linux: /
         mac: /
-        win32: C:/Program Files/Adobe/Adobe Premiere Pro CC 2014
+        win32: C:/Program Files/Adobe/Adobe Premiere Pro CC 2015
 hiero:
   name: Hiero
   show: true
   env:
-    HIERO_PLUGIN_PATH: '%PP_RESOURCE%/tools/hiero'
+    HIERO_PLUGIN_PATH: '%ST_RESOURCE%/tools/hiero'
   tasks:
   - edit
   - grade
@@ -385,7 +309,7 @@ photoshop:
     'CC':
       name: Photoshop CC
       env:
-        PP_PS: 'CC'
+        ST_PS: 'CC'
       modes:
         ui:
           linux: /
@@ -394,11 +318,11 @@ photoshop:
       path:
         linux: /
         mac: /
-        win32: '%PP_ROOT%/tools/aftereffects'
-    'CC 2014':
-      name: Photoshop CC 2014
+        win32: '%ST_ROOT%/tools/aftereffects'
+    'CC 2015':
+      name: Photoshop CC 2015
       env:
-        PP_PS: 'CC 2014'
+        ST_PS: 'CC 2015'
       modes:
         ui:
           linux: /
@@ -407,7 +331,7 @@ photoshop:
       path:
         linux: /
         mac: /
-        win32: 'C:/Program Files/Adobe/Adobe Photoshop CC (64 Bit)'
+        win32: 'C:/Program Files/Adobe/Adobe Photoshop CC 2015'
 zbrush:
   show: true
   tasks:
@@ -417,7 +341,7 @@ zbrush:
     '4R6':
       name: ZBrush 4R6
       env:
-        PP_ZB: '4R6'
+        ST_ZB: '4R6'
       modes:
         ui:
           linux: /
@@ -429,24 +353,24 @@ zbrush:
         win32: 'C:/Program Files (x86)/Pixologic/ZBrush 4R6'
 mayaAlt:
   env:
-    MAYA_APP_DIR: '%PP_ROOT%/user/%USERNAME%/maya'
-    MAYA_PPTOOLS: '%PP_RESOURCE%/tools/maya/common'
-    MAYA_PPTOOLS_COMMON: '%PP_RESOURCE%/maya/common'
-    MAYA_MODULE_PATH: '%MAYA_PPTOOLS%/modules'
-    MAYA_PLUG_IN_PATH: '%MAYA_PPTOOLS%/plugins'
-    MAYA_PRESET_PATH: '%MAYA_PPTOOLS%/presets'
-    MAYA_SCRIPT_PATH: '%MAYA_PPTOOLS%/scripts'
-    MAYA_SHELF_PATH: '%MAYA_PPTOOLS%/shelves'
-    XBMLANGPATH: '%MAYA_PPTOOLS%/icons'
-    PYTHONPATH: '%PP_RESOURCE%/lib/python;%MAYA_PPTOOLS%/scripts'
+    MAYA_APP_DIR: '%ST_ROOT%/user/%USERNAME%/maya'
+    MAYA_STTOOLS: '%ST_RESOURCE%/tools/maya/common'
+    MAYA_STTOOLS_COMMON: '%ST_RESOURCE%/maya/common'
+    MAYA_MODULE_PATH: '%MAYA_STTOOLS%/modules'
+    MAYA_PLUG_IN_PATH: '%MAYA_STTOOLS%/plugins'
+    MAYA_PRESET_PATH: '%MAYA_STTOOLS%/presets'
+    MAYA_SCRIPT_PATH: '%MAYA_STTOOLS%/scripts'
+    MAYA_SHELF_PATH: '%MAYA_STTOOLS%/shelves'
+    XBMLANGPATH: '%MAYA_STTOOLS%/icons'
+    PYTHONPATH: '%ST_RESOURCE%/lib/python;%MAYA_STTOOLS%/scripts'
   show: true
   versions:
     '2014':
       name: Autodesk Maya 2014
       env:
-        PP_MAYA: '2014'
-        MAYA_PPTOOLS_VERSIONED: '%PP_RESOURCE%/maya/%PP_MAYA%x64'
-        PP_MAYA_DIR: C:/Program Files/Autodesk/Maya%PP_MAYA%
+        ST_MAYA: '2014'
+        MAYA_STTOOLS_VERSIONED: '%ST_RESOURCE%/maya/%ST_MAYA%x64'
+        ST_MAYA_DIR: C:/Program Files/Autodesk/Maya%ST_MAYA%
       modes:
         ui:
           linux: /
@@ -459,9 +383,9 @@ mayaAlt:
     '2015':
       name: Autodesk Maya
       env:
-        MAYA_PPTOOLS_VERSIONED: '%PP_RESOURCE%/maya/%PP_MAYA%x64'
-        PP_MAYA: '2015'
-        PP_MAYA_DIR: C:/Program Files/Autodesk/Maya%PP_MAYA%
+        MAYA_STTOOLS_VERSIONED: '%ST_RESOURCE%/maya/%ST_MAYA%x64'
+        ST_MAYA: '2015'
+        ST_MAYA_DIR: C:/Program Files/Autodesk/Maya/%ST_MAYA%.0.5
       modes:
         ui:
           linux: /
@@ -470,7 +394,7 @@ mayaAlt:
       path:
         linux: /
         mac: /
-        win32: C:/Program Files/Autodesk/Maya2015/bin
+        win32: C:/Program Files/Autodesk/Maya/2015.0.5/bin
   tasks:
   - model
   - shade

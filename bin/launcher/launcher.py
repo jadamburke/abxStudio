@@ -40,8 +40,8 @@ class Launcher(QMainWindow):
         self.setStyleSheet(sStyleSheet)
 
         self.setWindowFlags( Qt.FramelessWindowHint )
-        pixmapPasion = QPixmap(os.path.join( RES, "pink.ico"))
-        self.setWindowIcon(QIcon(pixmapPasion))
+        pixmapIcon = QPixmap(os.path.join( RES, "pink.ico"))
+        self.setWindowIcon(QIcon(pixmapIcon))
 
         iconsize = QSize(48,48)
 
@@ -147,10 +147,6 @@ class Launcher(QMainWindow):
         jobsList = core.project.list_jobs('jobs')
         for j in jobsList:
             jobsListBox.addItem(j)
-        for j in jobsList:
-            jobsListBox.addItem(j)
-        for j in jobsList:
-            jobsListBox.addItem(j)
         tab2_layout.addWidget(jobsListBox)
 
 
@@ -193,7 +189,10 @@ class Launcher(QMainWindow):
 
                 print executable
                 env = dict(os.environ.items() + self.studioenv.vars.items() + process_env.vars.items())
-                Popen(executable, env=env)
+                try:
+                    Popen(executable, env=env)
+                except:
+                    print (executable + " failed to open. Does it Exist?")
 
         return
 
@@ -214,6 +213,6 @@ class Launcher(QMainWindow):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     wind = Launcher()
-    wind.setWindowTitle(('Passion Studio Tools -'+MODE))
+    wind.setWindowTitle(('Studio Tools -'+MODE))
     wind.show()
     app.exec_()

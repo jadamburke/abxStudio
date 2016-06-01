@@ -100,11 +100,14 @@ global proc clashCheckThese (string $objects[], int $fixIt, string $type){
 		string $noDupeNodes[] =  stringArrayRemoveDuplicates($clashNodes);
 		//print $noDupeNodes;
 
+		// listrelatives -ap to array
+
 		int $foundTrueClashes = 0;
 		// print the clashes for checking
 		for ($each in $noDupeNodes){
 			if (`objExists $each`){
 				string $duplicates[] = `ls -r 1 $each`;
+				// string $duplicates[] = `listRelatives -ap $each`;
 				// if it only returns 1 dag path to name then it is an instance and should be ignored
 				if (size ($duplicates)>1){
 					print ("// ========CLASH FOUND: "+$each+"\n");

@@ -7,7 +7,7 @@
 
 // make sure this is loaded and up-to-date
 //source "//monkey/resources/maya/2012-x64/toolbox/Lighting/abxExportShaderMel";
-eval("source \""+`getenv MAYA_PPTOOLS`+"/toolbox/Lighting/abxExportShaderMel.mel\"");
+eval("source \""+`getenv MAYA_STTOOLS`+"/toolbox/Lighting/abxExportShaderMel.mel\"");
 
 
 global proc abxAssets () {
@@ -19,7 +19,7 @@ global proc abxAssets () {
 	string $abxAssetsVersionString = "1.18b";
 
 	if (!`window -exists abxAssetsWindow`)  {
-		window -t ("Asset Manager v" + $abxAssetsVersionString + " - Passion Pictures") -width 616 -height 650 -menuBar true abxAssetsWindow;
+		window -t ("Asset Manager v" + $abxAssetsVersionString + " ") -width 616 -height 650 -menuBar true abxAssetsWindow;
 
 		menu -label "Create";
 			menuItem -label "New Character" -c "abxAssetsShowCreateUI \"assets\" \"Character\" \"\" \"model\"";
@@ -40,7 +40,7 @@ global proc abxAssets () {
 			formLayout -p abxAssetsUITabLyt abxAssetsDetailsForm;
 			formLayout -p abxAssetsUITabLyt abxAssetsUIForm;
 				//if (!`exists abxAssetUILoadForm`)
-					eval("source \""+`getenv MAYA_PPTOOLS`+"/scripts/abxAssetUI.mel\"");
+					eval("source \""+`getenv MAYA_STTOOLS`+"/scripts/abxAssetUI.mel\"");
 				// parent the UI form
 				abxAssetUILoadForm("abxAssetsUIForm");
 		
@@ -114,7 +114,7 @@ global proc abxAssets () {
 				menuItem -en 1 -label "Remove Orphan Isolate Selected Sets" -c "abxAssetsRemoveIsolateSelected";
 			setParent -menu ..;
 			menuItem -en 1 -sm 1 -label "Rigging";
-				menuItem -en 1 -label "Check for Name Clashes" -c ("source \""+`getenv MAYA_PPTOOLS`+"/toolbox/Misc/checkNameClash.mel\";checkNameClash;");
+				menuItem -en 1 -label "Check for Name Clashes" -c ("source \""+`getenv MAYA_STTOOLS`+"/toolbox/Misc/checkNameClash.mel\";checkNameClash;");
 				menuItem -en 1 -label "Clear Failed Edits on Refs" -c "abxAssetsClearFailedEdits";
 			    menuItem -en 1 -label "Restore Deformed Geo Shader Assignments" -c "abxAssetsRestoreDeformedShader 0;";
 			    menuItem -en 1 -label "Restore Deformed Geo Render Attrs" -c "abxAssetsRestoreShapeRenderProperties 1";
@@ -208,7 +208,7 @@ global proc abxAssetsReloadInScene(){
 		treeView -e  -addItem $each "" abxAssetsAnmScnList;
 		treeView -e -bto $each 1 true -bs $each 1 "2StateButton" -bs $each 3 "2StateButton" -bto $each 2 true -bto $each 3 true abxAssetsAnmScnList;
 		if ($isLoaded){
-			treeView -e -bst $each 1 buttonDown -i $each 1 (`getenv MAYA_PPTOOLS`+"/icons/glyph_check.png") abxAssetsAnmScnList;
+			treeView -e -bst $each 1 buttonDown -i $each 1 (`getenv MAYA_STTOOLS`+"/icons/glyph_check.png") abxAssetsAnmScnList;
 			treeView -e -lbc $each .27 .27 .27 abxAssetsAnmScnList;
 		}
 		else{
@@ -217,13 +217,13 @@ global proc abxAssetsReloadInScene(){
 			treeView -e -tc $each .3 .3 .3 abxAssetsAnmScnList;
 		}
 		if ($isLocked){
-			treeView -e -bst $each 3 buttonDown -i $each 3 (`getenv MAYA_PPTOOLS`+"/icons/glyph_lock.png") abxAssetsAnmScnList;
+			treeView -e -bst $each 3 buttonDown -i $each 3 (`getenv MAYA_STTOOLS`+"/icons/glyph_lock.png") abxAssetsAnmScnList;
 		}
 		else{	
 			treeView -e -bst $each 3 buttonUp -i $each 3 "" abxAssetsAnmScnList;
 		}
 		treeView -e -dl $each $namespace abxAssetsAnmScnList;
-		treeView -e -i $each 2 (`getenv MAYA_PPTOOLS`+"/icons/glyph_reload.png") abxAssetsAnmScnList;
+		treeView -e -i $each 2 (`getenv MAYA_STTOOLS`+"/icons/glyph_reload.png") abxAssetsAnmScnList;
 		//treeView -e -bs $each 1 "3StateButton" -bs $each 2 "3StateButton" abxAssetsAnmScnList;
 		treeView -e -hl $each 1 abxAssetsAnmScnList;
 		treeView -e -hc $each .2 .2 .2 abxAssetsAnmScnList;
@@ -787,13 +787,13 @@ global proc abxAssetsCtxMCmd(string $menu, string $command){
 		abxAssetsFileOpenHere($assetPath);
 		break;
 	case "pack publish":
-		string $packScriptSource = (`getenv MAYA_PPTOOLS`+"/toolbox/Misc/ppPackScene.mel");
+		string $packScriptSource = (`getenv MAYA_STTOOLS`+"/toolbox/Misc/studioPackScene.mel");
 		if (`filetest -r $packScriptSource`){
 			eval("source \""+$packScriptSource+"\"");
-			if (!`window -ex ppPackSceneWindow`)
-				ppPackScene;
+			if (!`window -ex studioPackSceneWindow`)
+				studioPackScene;
 			string $scenePath = (`workspace -q -rd`+$assetLib+"/"+$assetType+"/"+$assetName+"/_publish/"+$assetName+".mb");
-			textScrollList -e -append $scenePath ppPackSceneFLScrlLst;
+			textScrollList -e -append $scenePath studioPackSceneFLScrlLst;
 		}
 		else {
 			error ("Could Not Find Pack Script:"+$packScriptSource);
@@ -853,8 +853,8 @@ global proc abxAssetsCreateDetailUI (){
 					rowLayout -numberOfColumns 3 -rat 2 "top" 0 -adj 3;
 						separator -w 4 -vis 0;
 						frameLayout -lv 0 -bgc .4 .4 .4 abxAssetsDetailImgFrmLyt;
-							iconTextStaticLabel -style "iconOnly" -h 128 -w 128 -i (`getenv MAYA_PPTOOLS`+"/icons/assetThumb.png") abxAssetUIDetailImg;
-							//image -h 128 -w 128 -i (`getenv MAYA_PPTOOLS`+"/icons/assetThumb.png") abxAssetsDetailImg;
+							iconTextStaticLabel -style "iconOnly" -h 128 -w 128 -i (`getenv MAYA_STTOOLS`+"/icons/assetThumb.png") abxAssetUIDetailImg;
+							//image -h 128 -w 128 -i (`getenv MAYA_STTOOLS`+"/icons/assetThumb.png") abxAssetsDetailImg;
 							popupMenu;
 								menuItem -label "Capture Thumbnail" -c "abxAssetsCaptureThumbnail \"\"" abxAssetsDetailCaptureMI;
 							setParent..;
@@ -1242,7 +1242,7 @@ global proc int abxAssetsUpdateSceneAssetsMenu (string $itemName) {
 
 global proc abxAssetsRefreshDetailsUI (string $assetPath){
 
-	string $ppResource = `getenv PP_RESOURCE`;
+	string $stResource = `getenv ST_RESOURCE`;
 	
 	string $tokenBuffer[];
 	string $assetLib = "";
@@ -1281,8 +1281,8 @@ global proc abxAssetsRefreshDetailsUI (string $assetPath){
 		iconTextStaticLabel -e -image $shotImg -di $shotImg abxAssetUIDetailImg;
 		//image -e -image $shotImg abxAssetsDetailImg;
 	else 
-		iconTextStaticLabel -e -i (`getenv MAYA_PPTOOLS`+"/icons/assetThumb.png") -di (`getenv MAYA_PPTOOLS`+"/icons/assetThumb.png") abxAssetUIDetailImg;
-		//image -e -i (`getenv MAYA_PPTOOLS`+"/icons/assetThumb.png") abxAssetsDetailImg;
+		iconTextStaticLabel -e -i (`getenv MAYA_STTOOLS`+"/icons/assetThumb.png") -di (`getenv MAYA_STTOOLS`+"/icons/assetThumb.png") abxAssetUIDetailImg;
+		//image -e -i (`getenv MAYA_STTOOLS`+"/icons/assetThumb.png") abxAssetsDetailImg;
 	
 	// get master file details
 	menuItem -e -c ("abxAssetsCaptureThumbnail \""+$assetPath+"\"") abxAssetsDetailCaptureMI;
@@ -1674,12 +1674,12 @@ global proc abxAssetsCreateTake (string $assetPath, string $dept, string $takeNa
 
 		if ($result == "New"){	
 			//$cmd = ("saveChanges(\"file -f -new\");");
-			if (`exists ppDoNewScene`){
+			if (`exists studioDoNewScene`){
 				if ($dept == "model" || $dept == "shade"){
-					$cmd = ("ppDoNewScene \"geo\";");
+					$cmd = ("studioDoNewScene \"geo\";");
 				}
 				else if ($dept == "anim"){
-					$cmd = ("ppDoNewScene \"anm\";");
+					$cmd = ("studioDoNewScene \"anm\";");
 				}
 			}	
 			else{
@@ -1796,12 +1796,12 @@ global proc abxAssetsCreateTake (string $assetPath, string $dept, string $takeNa
 
 		if ($result == "New"){	
 			//$cmd = ("saveChanges(\"file -f -new\");");
-			if (`exists ppDoNewScene`){
+			if (`exists studioDoNewScene`){
 				if ($dept == "anm" || $dept == "pre"){
-					$cmd = ("ppDoNewScene \"anm\";");
+					$cmd = ("studioDoNewScene \"anm\";");
 				}
 				else if ($dept == "lgt"){
-					$cmd = ("ppDoNewScene \"lgt\";");
+					$cmd = ("studioDoNewScene \"lgt\";");
 				}
 			}	
 			else{
@@ -2112,8 +2112,8 @@ global proc abxAssetsPublish(string $assetPath,  int $force, string $note){
 			abxAssetsOpenWorkScene($assetPath, "latest", true);
 		}
 		else if ($result == "New Scene"){
-			if (`exists ppDoNewScene`)
-				ppDoNewScene "empty";
+			if (`exists studioDoNewScene`)
+				studioDoNewScene "empty";
 			else 
 				file -f -new;
 		}
@@ -2167,7 +2167,7 @@ global proc abxAssetsIncrementalSave(string $assetPath, string $takeName, int $f
 	string $subDeptGuess = "";
 	string $assetLibGuess = "";
 	string $takeGuess = $takeName;
-	string $ppTools = `getenv MAYA_PPTOOLS`;
+	string $stTools = `getenv MAYA_STTOOLS`;
 
 	// need to remove namespaces sooner rather than during publish to make sure names only change once
 	// remove all namespaces
@@ -2183,7 +2183,7 @@ global proc abxAssetsIncrementalSave(string $assetPath, string $takeName, int $f
 	// checks for name clashes on file save
 	int $failure = 0;
 	if (`exists checkNameClash`==0) 
-		evalEcho ("source \""+$ppTools+"/toolbox/Misc/checkNameClash.mel\"");
+		evalEcho ("source \""+$stTools+"/toolbox/Misc/checkNameClash.mel\"");
 	if (`exists checkNameClash`) {
 		print ("Running Check Name Clash\n");
 		$failure = catch(`checkNameClash`);
@@ -2451,7 +2451,7 @@ global proc abxAssetsPublishTake(int $force, int $inBG, string $sourceList, stri
 
 			string $oldPluginPath = `getenv MAYA_PLUG_IN_PATH`;
 			// set the shave plugin to load by adding it to plugin paths
-			putenv "MAYA_PLUG_IN_PATH" (`getenv PP_RESOURCE`+"\\bin\\win32\\shaveHaircut\\maya2012\\plug-ins;"+$oldPluginPath);
+			putenv "MAYA_PLUG_IN_PATH" (`getenv ST_RESOURCE`+"\\bin\\win32\\shaveHaircut\\maya2012\\plug-ins;"+$oldPluginPath);
 
 			//$eCmd2 = (`encodeString "source \"//monkey/resources/maya/2012-x64/scripts/abxAssets_dev.mel\";"`+$eCmd);
 			callMayaBG (1, 1, "", `workspace -q -rd`, "", $eCmd);
@@ -2988,7 +2988,7 @@ global proc abxAssetsPublish(string $assetPath, string $assetTake, string $versi
 		delete `ls -type objectSet "modelPanel*ViewSelectedSet"`;
 		delete `ls -type objectSet "modelPanel*ViewSelectedSet*"`;
 
-		//eval("source \""+`getenv MAYA_PPTOOLS`+"/toolbox/Lighting/texRezSwitchButt.mel\"");
+		//eval("source \""+`getenv MAYA_STTOOLS`+"/toolbox/Lighting/texRezSwitchButt.mel\"");
 		//texRezSwitchButt("LOW");
 
 		// //set low rez textures
@@ -2999,10 +2999,10 @@ global proc abxAssetsPublish(string $assetPath, string $assetTake, string $versi
 		//     string $baseFileName = `basenameEx($filePath)`;
 		//     string $pathParts[];
 		//     tokenize($filePath,"/",$pathParts);
-		//     int $pp = `size $pathParts`-1;
+		//     int $st = `size $pathParts`-1;
 		//     if(!`gmatch $baseFileName "*_LOW"`)
 		//     {
-		//           string $outputPath = substitute($pathParts[$pp],$filePath,($baseFileName+"_LOW.tga"));
+		//           string $outputPath = substitute($pathParts[$st],$filePath,($baseFileName+"_LOW.tga"));
 		//           setAttr -type "string" ($tmp+".fileTextureName") $outputPath;
 		//           print ($outputPath+"\n");
 		//     }
@@ -3073,8 +3073,8 @@ global proc abxAssetsPublish(string $assetPath, string $assetTake, string $versi
 	else if ($result == "New Scene"){
 		file -mf false;
 		// file -f -new;
-		if (`exists ppDoNewScene`){
-			ppDoNewScene "empty";
+		if (`exists studioDoNewScene`){
+			studioDoNewScene "empty";
 		}
 		else {
 			file -f -new;
@@ -3151,7 +3151,7 @@ global proc int cbxShadersNeedUpdating ()  {
 	for ($sh in $shapes)  {
 		string $sgs[] = `listSets -t 1 -o $sh`;
 		if (size($sgs) > 0)  {
-			if (!`attributeQuery -n $sh -ex "PP_SGName"`)  {
+			if (!`attributeQuery -n $sh -ex "ST_SGName"`)  {
 				$needUpdate = true;
 				break;
 			}
@@ -3165,7 +3165,7 @@ global proc int cbxShadersNeedUpdating ()  {
 // Assumes that top-level node of model is named GEO
 global proc cbxUpdateShadersVersion (string $shaderDir, string $workVersion)  {
 
-	eval("source \""+`getenv MAYA_PPTOOLS`+"/toolbox/Lighting/abxExportShaderMel.mel\"");
+	eval("source \""+`getenv MAYA_STTOOLS`+"/toolbox/Lighting/abxExportShaderMel.mel\"");
 	//string $shapes[] = `listRelatives -allDescendents -type mesh -type nurbsSurface -noIntermediate GEO`;
 	string $shapes[] = `ls -type mesh -type nurbsSurface`;
 
@@ -3176,12 +3176,12 @@ global proc cbxUpdateShadersVersion (string $shaderDir, string $workVersion)  {
 			string $sg = $sgs[0];
 			$sgNodes[size($sgNodes)] = $sg;
 
-			if (!`attributeQuery -n $sh -ex "PP_SGName"`)  {
-				addAttr -dt "string" -ln "PP_SGName" $sh;
-				addAttr -dt "string" -ln "PP_SGVersion" $sh;
+			if (!`attributeQuery -n $sh -ex "ST_SGName"`)  {
+				addAttr -dt "string" -ln "ST_SGName" $sh;
+				addAttr -dt "string" -ln "ST_SGVersion" $sh;
 			}
-			setAttr -type "string" ($sh + ".PP_SGName") $sg;
-			setAttr -type "string" ($sh + ".PP_SGVersion") $workVersion;
+			setAttr -type "string" ($sh + ".ST_SGName") $sg;
+			setAttr -type "string" ($sh + ".ST_SGVersion") $workVersion;
 		}
 	}
 
@@ -3223,8 +3223,8 @@ global proc abxAssetsStartRigScene (string $assetPath, int $quickPublish){
 
 	if ($result=="Force"){
 		// create new rig work scene
-		if (`exists ppDoNewScene`)
-			ppDoNewScene "rig";
+		if (`exists studioDoNewScene`)
+			studioDoNewScene "rig";
 		else 
 			file -f -new;
 							
@@ -3274,8 +3274,8 @@ global proc abxAssetsStartRigScene (string $assetPath, int $quickPublish){
 			//abxAssetsPublish ($assetPath, 1, "publish basic rig");
 		}
 		else{
-			//if (`exists ppDoNewScene`)
-			//	ppDoNewScene "empty";
+			//if (`exists studioDoNewScene`)
+			//	studioDoNewScene "empty";
 			//else 
 			//	file -f -new;
 		}
@@ -3474,9 +3474,9 @@ global proc abxAssetsSetFrameRate (float $targetFPS){
 	int $moveRange = false;
 	int $snapKeys = false;
 	int $snapRange = false;
-	string $ppTools = `getenv MAYA_PPTOOLS`;
+	string $stTools = `getenv MAYA_STTOOLS`;
 
-	eval("source \""+$ppTools+"/toolbox/Animation/abxFPS.mel\"");
+	eval("source \""+$stTools+"/toolbox/Animation/abxFPS.mel\"");
 	frameRateChangeProc ($targetFPS,$startFrame,$moveKeys,$moveRange,$snapKeys,$snapRange);
 
 }
@@ -5154,17 +5154,17 @@ global proc string abxAssetsStatAsColor (int $status){
 global proc string abxAssetsStageAsLabel(int $stage){
 	string $strStage = $stage;
 	string $result = "";
-	string $ppTools = `getenv MAYA_PPTOOLS`;
+	string $stTools = `getenv MAYA_STTOOLS`;
 	
 	switch ($strStage){
 		case "0":
-			$result = ($ppTools+"/icons/stat1.png"); // Blocking
+			$result = ($stTools+"/icons/stat1.png"); // Blocking
 			break;
 		case "1":
-			$result = ($ppTools+"/icons/stat2.png"); // Splining
+			$result = ($stTools+"/icons/stat2.png"); // Splining
 			break;
 		case "2":
-			$result = ($ppTools+"/icons/stat3.png"); // Polish
+			$result = ($stTools+"/icons/stat3.png"); // Polish
 			break;
 	}
 	return $result;
@@ -5325,7 +5325,7 @@ global proc string abxAssetsGetShortAssetName (string $fullAssetName){
 // given an asset path or determined from the current scene file export the shaders to the shader group
 global proc abxAssetsExportAssetShaders (string $assetPath)  {
 
-	eval("source \""+`getenv MAYA_PPTOOLS`+"/toolbox/Lighting/abxExportShaderMel.mel\"");
+	eval("source \""+`getenv MAYA_STTOOLS`+"/toolbox/Lighting/abxExportShaderMel.mel\"");
 	string $scnNameShort = basenameEx(`file -q -shn -sn`);
 	string $assetLib = "";
 	string $assetType = "";

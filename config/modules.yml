@@ -4,7 +4,7 @@ mentalray:
   packages:
     maya:
       env:
-        MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/mentalray/maya/%PP_MAYA%/modules'
+        MAYA_MODULE_PATH: '%ST_RESOURCE%/bin/mentalray/maya/%ST_MAYA%/modules'
       versions:
         '2015':
           path:
@@ -23,14 +23,14 @@ arnold:
   packages:
     maya:
       env:
-        MAYA_RENDER_DESC_PATH: '%PP_RESOURCE%/bin/arnold/maya/%PP_MTOA%/win/%PP_MAYA%'
-        MAYA_PLUG_IN_PATH: '%PP_RESOURCE%/bin/arnold/maya/%PP_MTOA%/win/%PP_MAYA%/plug-ins'
-        MAYA_SCRIPT_PATH: '%PP_RESOURCE%/bin/arnold/maya/%PP_MTOA%/win/%PP_MAYA%/scripts'
-        MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/arnold/maya/%PP_MTOA%/win/%PP_MAYA%'
+        MAYA_RENDER_DESC_PATH: '%ST_RESOURCE%/bin/arnold/maya/%ST_MTOA%/win/%ST_MAYA%'
+        MAYA_PLUG_IN_PATH: '%ST_RESOURCE%/bin/arnold/maya/%ST_MTOA%/win/%ST_MAYA%/plug-ins'
+        MAYA_SCRIPT_PATH: '%ST_RESOURCE%/bin/arnold/maya/%ST_MTOA%/win/%ST_MAYA%/scripts'
+        MAYA_MODULE_PATH: '%ST_RESOURCE%/bin/arnold/maya/%ST_MTOA%/win/%ST_MAYA%'
       versions:
         1.0.0.RC1:
           env:
-            PP_MTOA: '1.0.0.RC1'
+            ST_MTOA: '1.0.0.RC1'
           path:
             linux: /
             mac: /
@@ -40,7 +40,7 @@ arnold:
           - '2014'
         1.1.0.4:
           env:
-            PP_MTOA: '1.1.0.4'
+            ST_MTOA: '1.1.0.4'
           path:
             linux: /
             mac: /
@@ -49,7 +49,7 @@ arnold:
           - '2015'
         1.1.1.0:
           env:
-            PP_MTOA: '1.1.1.0'
+            ST_MTOA: '1.1.1.0'
           path:
             linux: /
             mac: /
@@ -58,7 +58,7 @@ arnold:
           - '2015'
         1.2.0.8:
           env:
-            PP_MTOA: '1.2.0.8'
+            ST_MTOA: '1.2.0.8'
           path:
             linux: /
             mac: /
@@ -69,8 +69,8 @@ arnold:
       versions:
         3.2.0:
           env:
-            XSI_PLUGINS: '%PP_ROOT%/bin/arnold/softimage/%PP_SITOA%/%PP_SOFTIMAGE%'
-            PP_SITOA: '3.2.0'
+            XSI_PLUGINS: '%ST_ROOT%/bin/arnold/softimage/%ST_SITOA%/%ST_SOFTIMAGE%'
+            ST_SITOA: '3.2.0'
           path:
             linux: /
             mac: /
@@ -81,30 +81,40 @@ arnold:
 crate:
   name: Exocortex Crate
   show: false
-  env:
-    EXOCORTEX_LICENSE: '5063@ppny-lic'
   packages:
     maya:
       versions:
         '1.1.145':
           env:
-            MAYA_MODULE_PATH: '%PP_ROOT%/bin/alembic/ExocortexCrateSuite1.1.145/Windows/Maya%PP_MAYA%'
+            EXOCORTEX_LICENSE: '5063@ppny-lic'
+            MAYA_MODULE_PATH: '%ST_ROOT%/bin/alembic/ExocortexCrateSuite1.1.145/Windows/Maya%ST_MAYA%'
           path:
             linux: /
             mac: /
-            win32: '%PP_ROOT%/bin/alembic/ExocortexCrateSuite1.1.145'
+            win32: '%ST_ROOT%/bin/alembic/ExocortexCrateSuite1.1.145'
           versions:
           - '2014'
           - '2015'
+        '1.1.148':
+          env:
+            MAYA_MODULE_PATH: '%ST_ROOT%/bin/alembic/ExocortexCrate1.1.148/Windows7/Maya%ST_MAYA%'
+          path:
+            linux: /
+            mac: /
+            win32: '%ST_ROOT%/bin/alembic/ExocortexCrateSuite1.1.148'
+          versions:
+          - '2014'
+          - '2015'
+          - '2016'
     softimage:
       versions:
         '1.1.145':
           env:
-            XSI_PLUGINS: '%PP_ROOT%/bin/alembic/ExocortexCrateSuite1.1.145/Windows/Softimage%PP_SOFTIMAGE%'
+            XSI_PLUGINS: '%ST_ROOT%/bin/alembic/ExocortexCrateSuite1.1.145/Windows/Softimage%ST_SOFTIMAGE%'
           path:
             linux: /
             mac: /
-            win32: '%PP_ROOT%/bin/alembic/ExocortexCrateSuite1.1.145'
+            win32: '%ST_ROOT%/bin/alembic/ExocortexCrateSuite1.1.145'
           versions:
           - '2014'
           - '2015'
@@ -123,18 +133,18 @@ vray:
       versions:
         '2.40.01':
           env:
-            PP_MAYA_VRAY: '2.40.01'
-            VRAY_AUTH_CLIENT_FILE_PATH: '%PP_RESOURCE%/bin/vray/maya/config'
-            VRAY_FOR_MAYA%PP_MAYA%_MAIN_x64: '%PP_RESOURCE%/bin/vray/maya/%PP_MAYA_VRAY%/Maya%PP_MAYA%/maya_vray'
-            VRAY_FOR_MAYA%PP_MAYA%_PLUGINS_x64: '%PP_RESOURCE%/bin/vray/maya/%PP_MAYA_VRAY%/Maya%PP_MAYA%/maya_vray/vrayplugins'
-            VRAY_TOOLS_MAYA%PP_MAYA%_x64: '%PP_RESOURCE%/bin/vray/maya/%PP_MAYA_VRAY%/Maya%PP_MAYA%/vray/bin'
-            MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/vray/maya/%PP_MAYA_VRAY%/Maya%PP_MAYA%/maya_root/modules'
-            PATH: '%PP_RESOURCE%/bin/vray/maya/%PP_MAYA_VRAY%/Maya%PP_MAYA%/maya_root/bin'
-            MAYA_RENDER_DESC_PATH: '%PP_RESOURCE%/bin/vray/maya/%PP_MAYA_VRAY%/Maya%PP_MAYA%/maya_root/bin/rendererDesc'
+            ST_MAYA_VRAY: '2.40.01'
+            VRAY_AUTH_CLIENT_FILE_PATH: '%ST_RESOURCE%/bin/vray/maya/config'
+            VRAY_FOR_MAYA%ST_MAYA%_MAIN_x64: '%ST_RESOURCE%/bin/vray/maya/%ST_MAYA_VRAY%/Maya%ST_MAYA%/maya_vray'
+            VRAY_FOR_MAYA%ST_MAYA%_PLUGINS_x64: '%ST_RESOURCE%/bin/vray/maya/%ST_MAYA_VRAY%/Maya%ST_MAYA%/maya_vray/vrayplugins'
+            VRAY_TOOLS_MAYA%ST_MAYA%_x64: '%ST_RESOURCE%/bin/vray/maya/%ST_MAYA_VRAY%/Maya%ST_MAYA%/vray/bin'
+            MAYA_MODULE_PATH: '%ST_RESOURCE%/bin/vray/maya/%ST_MAYA_VRAY%/Maya%ST_MAYA%/maya_root/modules'
+            PATH: '%ST_RESOURCE%/bin/vray/maya/%ST_MAYA_VRAY%/Maya%ST_MAYA%/maya_root/bin'
+            MAYA_RENDER_DESC_PATH: '%ST_RESOURCE%/bin/vray/maya/%ST_MAYA_VRAY%/Maya%ST_MAYA%/maya_root/bin/rendererDesc'
           path:
             linux: /
             mac: /
-            win32: '%PP_RESOURCE%/bin/vray/maya/2.40.01'
+            win32: '%ST_RESOURCE%/bin/vray/maya/2.40.01'
           versions:
           - '2014'
 
@@ -146,8 +156,8 @@ alShaders:
       versions:
         '0.4.0':
           env:
-            ARNOLD_PLUGIN_PATH: '%PP_RESOURCE%/bin/arnold/alShaders/0.4.0/win/bin'
-            MTOA_TEMPLATES_PATH: '%PP_RESOURCE%/bin/arnold/alShaders/0.4.0/win/ae'
+            ARNOLD_PLUGIN_PATH: '%ST_RESOURCE%/bin/arnold/alShaders/0.4.0/win/bin'
+            MTOA_TEMPLATES_PATH: '%ST_RESOURCE%/bin/arnold/alShaders/0.4.0/win/ae'
           path:
             linux: /
             mac: /
@@ -164,8 +174,8 @@ jfDielectric:
       versions:
         '1.0.5':
           env:
-            ARNOLD_PLUGIN_PATH: '%PP_RESOURCE%/bin/arnold/jfDielectric/1.0.5/win/bin'
-            MTOA_TEMPLATES_PATH: '%PP_RESOURCE%/bin/arnold/jfDielectric/1.0.5/win/ae'
+            ARNOLD_PLUGIN_PATH: '%ST_RESOURCE%/bin/arnold/jfDielectric/1.0.5/win/bin'
+            MTOA_TEMPLATES_PATH: '%ST_RESOURCE%/bin/arnold/jfDielectric/1.0.5/win/ae'
           path:
             linux: /
             mac: /
@@ -180,9 +190,9 @@ gmh:
       versions:
         '2.0':
           env:
-            MAYA_SCRIPT_PATH: '%PP_RESOURCE%/bin/maya/GMH/2.0'
-            PYTHONPATH: '%PP_RESOURCE%/bin/maya/GMH/2.0'
-            XBMLANGPATH: '%PP_RESOURCE%/bin/maya/GMH/2.0/GMH2/graphic'
+            MAYA_SCRIPT_PATH: '%ST_RESOURCE%/bin/maya/GMH/2.0'
+            PYTHONPATH: '%ST_RESOURCE%/bin/maya/GMH/2.0'
+            XBMLANGPATH: '%ST_RESOURCE%/bin/maya/GMH/2.0/GMH2/graphic'
           path:
             linux: /
             mac: /
@@ -200,8 +210,8 @@ ngSkinningTools:
       versions:
         '1.0.881':
           env:
-            MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/maya/ngSkinTools/1.0.881/win32/maya2015'
-            MAYA_SHELF_PATH: '%PP_RESOURCE%/bin/maya/ngSkinTools/1.0.881/win32/maya2015/shelves'
+            MAYA_MODULE_PATH: '%ST_RESOURCE%/bin/maya/ngSkinTools/1.0.881/win32/maya2015'
+            MAYA_SHELF_PATH: '%ST_RESOURCE%/bin/maya/ngSkinTools/1.0.881/win32/maya2015/shelves'
           path:
             linux: /
             mac: /
@@ -219,8 +229,8 @@ houdiniEngine:
       versions:
         '14.0.258':
           env:
-            MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/maya/houdiniEngine/win/14.0.258/maya2015'
-            PATH: '%PP_RESOURCE%/bin/maya/houdiniEngine/win/14.0.258/maya2015/bin'
+            MAYA_MODULE_PATH: '%ST_RESOURCE%/bin/maya/houdiniEngine/win/14.0.258/maya2015'
+            PATH: '%ST_RESOURCE%/bin/maya/houdiniEngine/win/14.0.258/maya2015/bin'
           path:
             linux: /
             mac: /
@@ -238,7 +248,7 @@ realflowMaya:
       versions:
         '14.8.012':
           env:
-            MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/maya/realflow/win/14.8.012/Maya2015'
+            MAYA_MODULE_PATH: '%ST_RESOURCE%/bin/maya/realflow/win/14.8.012/Maya2015'
           path:
             linux: /
             mac: /
@@ -253,8 +263,8 @@ rfrk:
       versions:
         '2014':
           env:
-            MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/maya/rfrk/win/2014/Maya2015'
-            PATH: '%PP_RESOURCE%/bin/maya/rfrk/win/2014/RFRK 2014 For Maya'
+            MAYA_MODULE_PATH: '%ST_RESOURCE%/bin/maya/rfrk/win/2014/Maya2015'
+            PATH: '%ST_RESOURCE%/bin/maya/rfrk/win/2014/RFRK 2014 For Maya'
           path:
             linux: /
             mac: /
@@ -269,7 +279,7 @@ presenz:
       versions:
         '0.1.0':
           env:
-            MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/maya/presenz/win/0.1.0/Maya2015'
+            MAYA_MODULE_PATH: '%ST_RESOURCE%/bin/maya/presenz/win/0.1.0/Maya2015'
           path:
             linux: /
             mac: /
@@ -284,7 +294,7 @@ playblastVR:
       versions:
         '1.2':
           env:
-            MAYA_MODULE_PATH: '%PP_RESOURCE%/bin/maya/PlayblastVR/win/1.2'
+            MAYA_MODULE_PATH: '%ST_RESOURCE%/bin/maya/PlayblastVR/win/1.2'
           path:
             linux: /
             mac: /

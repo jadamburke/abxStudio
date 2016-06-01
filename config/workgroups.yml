@@ -3,8 +3,8 @@ default:
     maya:
       version: '2015'
       modules:
-        arnold: '1.1.0.4'
-        crate: '1.1.145'
+        arnold: '1.1.1.0'
+        crate: '1.1.148'
         playblastVR: '1.2'
         jfDielectric: '1.0.5'
     softimage:
@@ -13,21 +13,21 @@ default:
         arnold: '3.2.0'
         crate: '1.1.145'
     nuke:
-      version: '9.0v5'
+      version: '9.0v7'
     nukex:
-      version: '9.0v5'
+      version: '9.0v7'
     nukestudio:
-      version: '9.0v5'
+      version: '9.0v7'
     hiero:
       version: '1.8v2'
     aftereffects:
-      version: 'CC'
+      version: 'CC 2015'
     premiere:
-      version: 'CC 2014'
+      version: 'CC 2015'
     motionbuilder:
       version: '2014'
     photoshop:
-      version: 'CC 2014'
+      version: 'CC 2015'
     zbrush:
       version: '4R6'
   order:

@@ -1,4 +1,4 @@
-// ppNewScene
+// studioNewScene
 
 
 
@@ -9,19 +9,19 @@
 
 //source "C:/Program Files/Autodesk/Maya2012/scripts/startup/performNewScene.mel";
 
-global proc ppNewScene () {
+global proc studioNewScene () {
 
 }
 
-global proc ppDoNewScene (string $which) {
-	ppDoNewSceneVerbosity($which, true);
+global proc studioDoNewScene (string $which) {
+	studioDoNewSceneVerbosity($which, true);
 }
 
-global proc ppDoNewSceneQuiet (string $which) {
-	ppDoNewSceneVerbosity($which, false);
+global proc studioDoNewSceneQuiet (string $which) {
+	studioDoNewSceneVerbosity($which, false);
 }
 
-global proc ppDoNewSceneVerbosity (string $which, int $verbose) {
+global proc studioDoNewSceneVerbosity (string $which, int $verbose) {
 	if ($verbose) print ("DOING THE NEW ONE\n");
 	string $stTools = `getenv MAYA_STTOOLS`;
 	//get the old newFile name variable if it exists so it can be restored later.
@@ -80,8 +80,8 @@ global proc ppDoNewSceneVerbosity (string $which, int $verbose) {
 	}
 
 
-	ppPerformNewScene $newFile $dept $verbose;
-	//string $tmpCmd = "ppPerformNewScene 0 ";
+	studioPerformNewScene $newFile $dept $verbose;
+	//string $tmpCmd = "studioPerformNewScene 0 ";
 	//addToRecentCommandQueue $tmpCmd "New Passion Scene";
 
 
@@ -96,7 +96,7 @@ global proc ppDoNewSceneVerbosity (string $which, int $verbose) {
 
 
 
-global proc ppPerformNewScene (string $fileToOpen, string $dept, int $verbose) {
+global proc studioPerformNewScene (string $fileToOpen, string $dept, int $verbose) {
 
 	$result = saveChanges("abxLockFileCheckOut(\"\");file -f -new;");
 
@@ -142,7 +142,7 @@ global proc ppPerformNewScene (string $fileToOpen, string $dept, int $verbose) {
 		if (`objExists uiConfigurationScriptNode`)
 			scriptNode -executeBefore uiConfigurationScriptNode;
 
-		ppNewSceneConfigDefaults ($dept);
+		studioNewSceneConfigDefaults ($dept);
 
 		evalEcho("file -mf false");
 		evalDeferred("evalEcho(\"file -mf false;\")");
@@ -151,7 +151,7 @@ global proc ppPerformNewScene (string $fileToOpen, string $dept, int $verbose) {
 
 // check the defaults section for 
 
-global proc ppNewSceneConfigDefaults(string $dept){
+global proc studioNewSceneConfigDefaults(string $dept){
 
 	eval("source \""+`getenv MAYA_STTOOLS`+"/scripts/abxProject.mel\"");
 
@@ -718,7 +718,7 @@ global proc string performNewScene (int $option)
 	// adamb, disabled prompt, defaults to Using Project Scene Scale to avoid confusion
 	$result = "Use Project Scene Scale"; // `confirmDialog -title "PP New Scene" -message "Choose Which New Scene Method You Want to Use.\n Use 'Project Scene Scale' if you are not sure." -button "Use Original Scene Scale" -button "Use Project Scene Scale"  -button "Cancel" -defaultButton "Use Project Scene Scale" -cancelButton "Cancel" -dismissString "Cancel"`;
 	if ($result == "Use Project Scene Scale"){
-		eval("ppDoNewScene (\"empty\")");
+		eval("studioDoNewScene (\"empty\")");
 		return "";
 	}
 	// do the original new scene procedures

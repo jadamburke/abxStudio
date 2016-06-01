@@ -5,7 +5,7 @@
 global proc int callRenderBG (string $process, int $threaded, string $filePath, string $projDir, string $renderPath, string $command, float $start, float $end, float $by, string $renderLayers[], string $postRender)
 {
     
-   $ppTools = `getenv MAYA_PPTOOLS`;
+   $stTools = `getenv MAYA_STTOOLS`;
    $mayaBG = $process; //("R:/studio/nyc/env/ppMayaBatch_Arnold.bat");
    //$mayaBG = "render.exe";
 

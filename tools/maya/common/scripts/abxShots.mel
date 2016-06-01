@@ -30,19 +30,19 @@
 // 
 
 
-//eval("source \""+`getenv MAYA_PPTOOLS`+"/toolbox/Misc/autoCache.mel\"");
+//eval("source \""+`getenv MAYA_STTOOLS`+"/toolbox/Misc/autoCache.mel\"");
 
 
 
 global proc abxShots () {
 
-	eval("source \""+`getenv MAYA_PPTOOLS`+"/scripts/abxProject.mel\"");
-	eval("source \""+`getenv MAYA_PPTOOLS`+"/scripts/abxAssets.mel\"");
-	eval("source \""+`getenv MAYA_PPTOOLS`+"/toolbox/Lighting/abxExportShaderMel.mel\"");
-	eval("source \""+`getenv MAYA_PPTOOLS`+"/scripts/callMayaBG.mel\"");
-	eval("source \""+`getenv MAYA_PPTOOLS`+"/scripts/abxShotBot.mel\"");
-	eval("source \""+`getenv MAYA_PPTOOLS`+"/scripts/abxLockFile.mel\"");
-	eval("source \""+`getenv MAYA_PPTOOLS`+"/scripts/ppNewScene.mel\"");
+	eval("source \""+`getenv MAYA_STTOOLS`+"/scripts/abxProject.mel\"");
+	eval("source \""+`getenv MAYA_STTOOLS`+"/scripts/abxAssets.mel\"");
+	eval("source \""+`getenv MAYA_STTOOLS`+"/toolbox/Lighting/abxExportShaderMel.mel\"");
+	eval("source \""+`getenv MAYA_STTOOLS`+"/scripts/callMayaBG.mel\"");
+	eval("source \""+`getenv MAYA_STTOOLS`+"/scripts/abxShotBot.mel\"");
+	eval("source \""+`getenv MAYA_STTOOLS`+"/scripts/abxLockFile.mel\"");
+	eval("source \""+`getenv MAYA_STTOOLS`+"/scripts/studioNewScene.mel\"");
 
 	string $abxShotsVersionString = "1.5b";
 	global int $dbExists = 0;
@@ -50,19 +50,19 @@ global proc abxShots () {
 
 	global int $jobLoaded = 0;
 	$jobLoaded = 0;
-	//eval("source \""+`getenv MAYA_PPTOOLS`+"/scripts/abxShotBot.mel\"");
+	//eval("source \""+`getenv MAYA_STTOOLS`+"/scripts/abxShotBot.mel\"");
 
 	if (!`window -exists abxShotsWindow`)  {
-		window -t ("Shot Manager v" + $abxShotsVersionString + " - Passion Pictures") -width 710 -height 600 -menuBar true abxShotsWindow;
+		window -t ("Shot Manager v" + $abxShotsVersionString + " ") -width 710 -height 600 -menuBar true abxShotsWindow;
 
 		menu -label "File" -tearOff 1;
 			menuItem -en 1 -sm 1 -label "New Scene";
-				menuItem -l "New Anm Scene" -c "ppDoNewScene (\"anm\")";
+				menuItem -l "New Anm Scene" -c "studioDoNewScene (\"anm\")";
 				menuItem -divider true ;
-				menuItem -l "New Lgt Scene" -c "ppDoNewScene (\"lgt\")";
+				menuItem -l "New Lgt Scene" -c "studioDoNewScene (\"lgt\")";
 				menuItem -divider true ;
-				menuItem -l "New Empty Scene" -c "ppDoNewScene \"empty\"";
-				menuItem -l "New Rig Scene" -c "ppDoNewScene \"rig\"";
+				menuItem -l "New Empty Scene" -c "studioDoNewScene \"empty\"";
+				menuItem -l "New Rig Scene" -c "studioDoNewScene \"rig\"";
 				setParent -menu ..;
 			menuItem -en 1 -label "Open Old Scene..." -c "abxShotsOpenOtherFile \"\"";
 			menuItem -divider true ;
@@ -76,8 +76,8 @@ global proc abxShots () {
 			menuItem -label "Close" -c "window -e -vis 0 abxShotsWindow";
 
 		menu -label "Project" -tearOff 1;
-			menuItem -label "Set Project" -c ("if (`exists abxProject`==0) source \""+`getenv MAYA_PPTOOLS`+"/scripts/abxProject.mel\";if (`exists abxProject`) abxProject"); 
-			menuItem -label "Asset Manager" -c ("if (`exists abxAssets`==0) source \""+`getenv MAYA_PPTOOLS`+"/scripts/abxAssets.mel\";if (`exists abxAssets`) abxAssets");
+			menuItem -label "Set Project" -c ("if (`exists abxProject`==0) source \""+`getenv MAYA_STTOOLS`+"/scripts/abxProject.mel\";if (`exists abxProject`) abxProject"); 
+			menuItem -label "Asset Manager" -c ("if (`exists abxAssets`==0) source \""+`getenv MAYA_STTOOLS`+"/scripts/abxAssets.mel\";if (`exists abxAssets`) abxAssets");
 
 			setParent -menu ..;
 		menu -label "Create" -tearOff 1;
@@ -92,7 +92,7 @@ global proc abxShots () {
 			menuItem -en 1 -label "Update Prop Instances" -c "abxAssetsUpdatePropInstances({\"\"},0);";
 			menuItem -en 1 -label "Rebuild All Prop Instances" -c "abxAssetsUpdatePropInstances({\"\"},1);";
 			menuItem -en 1 -label "Check For Reference Updates" -c "abxShotsCheckAllRefsForUpdate";
-			menuItem -en 1 -label "Check for Name Clashes" -c ("source \""+`getenv MAYA_PPTOOLS`+"/toolbox/Misc/checkNameClash.mel\";checkNameClash;");
+			menuItem -en 1 -label "Check for Name Clashes" -c ("source \""+`getenv MAYA_STTOOLS`+"/toolbox/Misc/checkNameClash.mel\";checkNameClash;");
 			menuItem -en 1 -label "Gather Audio to Server" -c "abxShotsGatherAudio";
 			menuItem -en 1 -label "Anim Publish Procedures" -sm true;
 				menuItem -en 1 -label "Clear Failed Edits on Refs" -c "abxShotsClearFailedEdits";
@@ -107,11 +107,11 @@ global proc abxShots () {
 			    menuItem -en 1 -label "Restore Ref Shader Assignments" -c "abxShotsRestoreDeformedShader {} 0";
 				menuItem -en 1 -label "Clear Failed Edits on Refs" -c "abxShotsClearFailedEdits";
 				menuItem -en 1 -label "Check For Reference Updates" -c "abxShotsCheckAllRefsForUpdate";
-				menuItem -en 1 -label "Check For Cloth/Hair Cache" -c ("source \""+`getenv MAYA_PPTOOLS`+"/toolbox/Misc/autoCache.mel\";autoCacheFindLatest \"clothSim\";autoCacheFindLatest \"hairSim\"");
+				menuItem -en 1 -label "Check For Cloth/Hair Cache" -c ("source \""+`getenv MAYA_STTOOLS`+"/toolbox/Misc/autoCache.mel\";autoCacheFindLatest \"clothSim\";autoCacheFindLatest \"hairSim\"");
 			setParent -menu ..;
 
 		menu -label "Help";
-			menuItem -l "Passion Pictures Wiki" -c "system \"start \\\"C:/Program Files (x86)/Mozilla Firefox/firefox.exe\\\" \\\"http://ppny/wiki\\\"\"";
+			menuItem -l "Studio Wiki" -c "system \"start \\\"C:/Program Files (x86)/Mozilla Firefox/firefox.exe\\\" \\\"http://wiki\\\"\"";
 
 		formLayout abxShotsWindowMainForm;
 
@@ -1083,7 +1083,7 @@ global proc int abxShotsSetActiveShot (string $shotName, int $state) {
 
 global proc abxShotsCreateDetailUI (){
 	
-	string $ppTools = `getenv MAYA_PPTOOLS`;
+	string $stTools = `getenv MAYA_STTOOLS`;
 	setParent abxShotsDetailsForm;
 
 	paneLayout -configuration "horizontal2" abxShotsDetailsPane;
@@ -1100,9 +1100,9 @@ global proc abxShotsCreateDetailUI (){
 						frameLayout -lv 0 abxShotsDetailImgFrmLyt;
 							columnLayout -cat "both" 1 -rs 1 -adj 1;
 								//separator -h 4 -style "none";
-								iconTextStaticLabel -style "iconOnly" -h 120 -w 214 -i (`getenv MAYA_PPTOOLS`+"/icons/assetThumb.png") abxShotsDetailImg;
+								iconTextStaticLabel -style "iconOnly" -h 120 -w 214 -i (`getenv MAYA_STTOOLS`+"/icons/assetThumb.png") abxShotsDetailImg;
 
-								//image -h 100 -w 177 -i ($ppTools+"/icons/shotThumb.png") abxShotsDetailImg;
+								//image -h 100 -w 177 -i ($stTools+"/icons/shotThumb.png") abxShotsDetailImg;
 								popupMenu;
 									menuItem -label "Capture Thumbnail" -c "abxShotsCaptureThumbnail \"\"";
 								//separator -h 4 -style "none";
@@ -1613,8 +1613,8 @@ global proc string abxShotsGetActiveDeptTab (){
 // main procedure called when a shot is selected. This gets the shot data and it updates the UI
 global proc abxShotsRefreshDetailsUI (string $shotName){
 
-	string $ppResource = `getenv PP_RESOURCE`;
-	string $ppTools =`getenv MAYA_PPTOOLS`;
+	string $stResource = `getenv ST_RESOURCE`;
+	string $stTools =`getenv MAYA_STTOOLS`;
 	string $shotFolder = `abxShotsGetActiveShotFolder`;
 	//string $shotTab = `abxShotsGetActiveShotTab`;
 	
@@ -1638,11 +1638,11 @@ global proc abxShotsRefreshDetailsUI (string $shotName){
 	string $shotImg = ($shotsPath+$shotName+"/"+$shotNameSplit[0]+"_"+$shotFileName+"_comp.png");
 	if (!`filetest -r $shotImg`) $shotImg = ($shotsPath+$shotName+"/"+$shotNameSplit[0]+"_"+$shotFileName+"_lgt.png");
 	if (!`filetest -r $shotImg`) $shotImg = ($shotsPath+$shotName+"/"+$shotNameSplit[0]+"_"+$shotFileName+".png");
-	if (!`filetest -r $shotImg`) $shotImg = ($ppTools +"/icons/shotThumb.png");
+	if (!`filetest -r $shotImg`) $shotImg = ($stTools +"/icons/shotThumb.png");
 
 	iconTextStaticLabel -e -image $shotImg -di $shotImg abxShotsDetailImg;
 
-	//iconTextStaticLabel -e -i ($ppTools +"/icons/shotThumb.png") -di ($ppTools +"/icons/shotThumb.png") abxShotsDetailImg;
+	//iconTextStaticLabel -e -i ($stTools +"/icons/shotThumb.png") -di ($stTools +"/icons/shotThumb.png") abxShotsDetailImg;
 	
 
 	textFieldGrp -e -text $shotName abxShotsDtlShotName;
@@ -1999,15 +1999,15 @@ global proc abxShotsPackTake(string $sourceList ){
 		string $takeFullPath = ($shotsPath+$shotName[0]+"/"+$dept+"/work/"+$takeSceneName[0]);
 		string $takeProjPath= `workspace -pp $takeFullPath `;
 		
-		string $packScriptSource = (`getenv MAYA_PPTOOLS`+"/toolbox/Misc/ppPackScene.mel");
+		string $packScriptSource = (`getenv MAYA_STTOOLS`+"/toolbox/Misc/studioPackScene.mel");
 		
-		if (!`exists ppPackScene`){
+		if (!`exists studioPackScene`){
 			eval("source \""+$packScriptSource+"\"");
 		}
-		if (!`window -ex ppPackSceneWindow`)
-			ppPackScene;
+		if (!`window -ex studioPackSceneWindow`)
+			studioPackScene;
 		string $scenePath = "";
-		textScrollList -e -append $takeProjPath ppPackSceneFLScrlLst;
+		textScrollList -e -append $takeProjPath studioPackSceneFLScrlLst;
 	}
 }
 
@@ -2023,7 +2023,7 @@ global proc abxShotsBuildSeqUberCam (string $seqName){
 		$seqChildren = `treeView -q -ch $seqName abxShotsList`;
 		$dept = "anim";
 	}
-	string $packScriptSource = (`getenv MAYA_PPTOOLS`+"/toolbox/Misc/uberCam.mel");
+	string $packScriptSource = (`getenv MAYA_STTOOLS`+"/toolbox/Misc/uberCam.mel");
 	eval("source \""+$packScriptSource+"\"");
 	uberCam;
 
@@ -2075,7 +2075,7 @@ global proc abxShotsBuildAutoCache (string $seqName) {
 		$dept = "anim";
 	}
 	
-	string $packScriptSource = (`getenv MAYA_PPTOOLS`+"/toolbox/Misc/autoCache.mel");
+	string $packScriptSource = (`getenv MAYA_STTOOLS`+"/toolbox/Misc/autoCache.mel");
 	eval("source \""+$packScriptSource+"\"");
 	
 	evalEcho("autoCache");
@@ -2119,7 +2119,7 @@ global proc abxShotsBuildPlaybomb (string $seqName) {
 		$seqChildren = `treeView -q -ch $seqName abxShotsList`;
 		$dept = "anim";
 	}
-	string $packScriptSource = (`getenv MAYA_PPTOOLS`+"/toolbox/Misc/playbomb.mel");
+	string $packScriptSource = (`getenv MAYA_STTOOLS`+"/toolbox/Misc/playbomb.mel");
 	eval("source \""+$packScriptSource+"\"");
 	playbomb;
 
@@ -2167,7 +2167,7 @@ global proc abxShotsBuildUberCam (string $sourceList){
 		string $publishCamFullPath = ($shotsPath+$shotName[0]+"/camera/publish/"+$shotFileName+"_cam_publish.ma");
 		string $takeProjPath= `workspace -en $takeFullPath `;
 
-		string $packScriptSource = (`getenv MAYA_PPTOOLS`+"/toolbox/Misc/uberCam.mel");
+		string $packScriptSource = (`getenv MAYA_STTOOLS`+"/toolbox/Misc/uberCam.mel");
 		eval("source \""+$packScriptSource+"\"");
 
 		string $addPath = "";
@@ -2241,9 +2241,9 @@ global proc abxShotsOpenTake (string $sourceList) {
 
 		// if the user chose to not change ownership and open as read-only instead
 		if ($lockStatus != 2)
-			$cmd = ("saveChanges(\"abxLockFileCheckOut(\\\"\\\");file -f -o \\\""+$fileToOpen+"\\\";abxLockFileCheckIn(\\\""+$fileToOpen+"\\\");\");");
+			$cmd = ("saveChanges(\"abxLockFileCheckOut(\\\"\\\");file -f -ignoreVersion -o \\\""+$fileToOpen+"\\\";abxLockFileCheckIn(\\\""+$fileToOpen+"\\\");\");");
 		else
-			$cmd = ("saveChanges(\"abxLockFileCheckOut(\\\"\\\");file -f -o \\\""+$fileToOpen+"\\\";\");");
+			$cmd = ("saveChanges(\"abxLockFileCheckOut(\\\"\\\");file -f -ignoreVersion -o \\\""+$fileToOpen+"\\\";\");");
 
 		$cmd += ("addRecentFile(\""+$fileToOpen+"\", \""+$mayaFormat+"\");");
 		evalEcho $cmd;
@@ -2414,8 +2414,8 @@ string $cbxShotsCheckAssetForShaderUpdatesAllChoice = "";
 global proc cbxShotsCheckAllAssetsForShaderUpdates ()  {
 
 	/// add local source
-	eval("source \""+`getenv MAYA_PPTOOLS`+"/toolbox/Lighting/abxExportShaderMel.mel\"");
-	eval("source \""+`getenv MAYA_PPTOOLS`+"/scripts/abxAssets.mel\"");
+	eval("source \""+`getenv MAYA_STTOOLS`+"/toolbox/Lighting/abxExportShaderMel.mel\"");
+	eval("source \""+`getenv MAYA_STTOOLS`+"/scripts/abxAssets.mel\"");
 	global string $cbxShotsCheckAssetForShaderUpdatesAllChoice;
 
 	print("Checking for shader updates on assets\n");
@@ -2437,7 +2437,7 @@ global proc cbxShotsCheckAllAssetsForShaderUpdates ()  {
 global proc cbxShotsCheckAssetForShaderUpdates (string $asset)  {
 	global string $cbxShotsCheckAssetForShaderUpdatesAllChoice;
 
-	eval("source \""+`getenv MAYA_PPTOOLS`+"/toolbox/Lighting/abxExportShaderMel.mel\"");
+	eval("source \""+`getenv MAYA_STTOOLS`+"/toolbox/Lighting/abxExportShaderMel.mel\"");
 
 
 	string $assetShapes[] = `listRelatives -allDescendents -type mesh -type nurbsSurface -noIntermediate ($asset + ":ROOT")`;
@@ -2616,7 +2616,7 @@ global proc abxShotsPublishTake(int $force, int $inBG, string $sourceList, strin
 
 			string $oldPluginPath = `getenv MAYA_PLUG_IN_PATH`;
 			// set the shave plugin to load by adding it to plugin paths
-			putenv "MAYA_PLUG_IN_PATH" (`getenv PP_RESOURCE`+"\\bin\\win32\\shaveHaircut\\maya2012\\plug-ins;"+$oldPluginPath);
+			putenv "MAYA_PLUG_IN_PATH" (`getenv ST_RESOURCE`+"\\bin\\win32\\shaveHaircut\\maya2012\\plug-ins;"+$oldPluginPath);
 
 			//$eCmd2 = (`encodeString "source \"//monkey/resources/maya/2012-x64/scripts/abxShots_dev.mel\";"`+$eCmd);
 			callMayaBG (1, 1, "", `workspace -q -rd`, "", $eCmd);
@@ -2664,7 +2664,7 @@ global proc abxShotsOpenPublish(string $sourceList){
 			$publishFile = ($shotName+"_"+$dept+"_"+$takeName+"_publish.ma");		
 	}
 	
-	string $cmd = ("saveChanges(\"abxLockFileCheckOut(\\\"\\\");file -f -o \\\""+$shotsPath+$shotName+"/"+$dept+"/publish/"+$publishFile+"\\\";abxLockFileCheckIn(\\\""+$shotsPath+$shotName+"/"+$dept+"/publish/"+$publishFile+"\\\");\")");
+	string $cmd = ("saveChanges(\"abxLockFileCheckOut(\\\"\\\");file -f -ignoreVersion -o \\\""+$shotsPath+$shotName+"/"+$dept+"/publish/"+$publishFile+"\\\";abxLockFileCheckIn(\\\""+$shotsPath+$shotName+"/"+$dept+"/publish/"+$publishFile+"\\\");\")");
 	evalEcho $cmd;
 	}
 
@@ -3046,12 +3046,12 @@ global proc abxShotsCreateTake (string $shotName, string $dept, string $takeName
 
 		if ($result == "New"){	
 			//$cmd = ("saveChanges(\"file -f -new\");");
-			if (`exists ppDoNewScene`){
+			if (`exists studioDoNewScene`){
 				if ($dept == "anim" || $dept == "previs"){
-					$cmd = ("ppDoNewScene \"anm\";");
+					$cmd = ("studioDoNewScene \"anm\";");
 				}
 				else if ($dept == "light"){
-					$cmd = ("ppDoNewScene \"lgt\";");
+					$cmd = ("studioDoNewScene \"lgt\";");
 				}
 			}	
 			else{
@@ -3816,9 +3816,9 @@ global proc abxShotsIncrementalSave(int $force, string $shotFolder, string $shot
 		}
 
 		// do a name clash check
-		string $ppTools = `getenv MAYA_PPTOOLS`;
+		string $stTools = `getenv MAYA_STTOOLS`;
 		if (`exists checkNameClash`==0) 
-			//evalEcho ("source \""+$ppTools+"/toolbox/Misc/checkNameClash.mel\"");
+			//evalEcho ("source \""+$stTools+"/toolbox/Misc/checkNameClash.mel\"");
 		if (`exists checkNameClash`) {
 			//print ("Running Check Name Clash\n");
 			//$failure = catch(`checkNameClash`);
@@ -3942,7 +3942,7 @@ global proc abxShotsOpenWorkScene (string $shotName, string $dept, string $takeN
 	$takeSceneName = basename(abxShotsGetLatestWorkVersion($shotFolder, $shotName, $dept, $takeName,"work",1),"");
 
 	// if skiplock is true then don't actually check-in the file
-	string $cmd = ("saveChanges(\"abxLockFileCheckOut(\\\"\\\");file -f -o \\\""+$shotsPath+$shotName+"/"+$dept+"/work/"+$takeSceneName+"\\\";");
+	string $cmd = ("saveChanges(\"abxLockFileCheckOut(\\\"\\\");file -f -ignoreVersion -o \\\""+$shotsPath+$shotName+"/"+$dept+"/work/"+$takeSceneName+"\\\";");
 	if ($skipLock != 1){
 		$cmd += ("abxLockFileCheckIn(\\\""+$shotsPath+$shotName+"/"+$dept+"/work/"+$takeSceneName+"\\\");");
 	}
@@ -4586,13 +4586,12 @@ global proc abxShotsPublish(int $force, int $mode, string $shotFolder, string $s
 		abxShotsDeleteAllRenderLayers;
 		abxShotsDeleteAllDisplayLayers ;
 
-		// make sure paths are set to MOON
 
 		// This is done in LGT scenes instead to keep camera names small
 		//// bake camera 
 		//if (`objExists stereoCam`){
-		//	//source ("/Resources/Maya/toolbox/Pipeline/ppStereoCam.mel");
-		//	ppStereoCamPublish("renderCam_L","renderCam_R");
+		//	//source ("/Resources/Maya/toolbox/Pipeline/studioStereoCam.mel");
+		//	studioStereoCamPublish("renderCam_L","renderCam_R");
 		//	// remove render cam and stereo camera
 		//	if (`objExists stereoCam`)
 		//		delete "stereoCam";
@@ -4644,7 +4643,7 @@ global proc abxShotsPublish(int $force, int $mode, string $shotFolder, string $s
 		abxShotsVraySubDCheck();
 
 
-		eval("source \""+`getenv MAYA_PPTOOLS`+"/toolbox/Lighting/texRezSwitchButt.mel\"");
+		eval("source \""+`getenv MAYA_STTOOLS`+"/toolbox/Lighting/texRezSwitchButt.mel\"");
 		texRezSwitchButt("HI");
 
 		// 
@@ -4717,7 +4716,7 @@ global proc abxShotsPublish(int $force, int $mode, string $shotFolder, string $s
 		//abxShotsOpenWorkScene($assetPath , "latest");
 	}
 	else if ($result == "New Scene"){
-		 ppDoNewScene "anm";
+		 studioDoNewScene "anm";
 		//file -f -new;
 	}
 	else if ($result == "Inspect Publish"){
@@ -4829,7 +4828,7 @@ global proc abxShotsCameraPublish (string $cameraName[]) {
 	}
 
 	//if (`currentUnit -q -time` != "ntsc"){
-	//	string $result = `confirmDialog -title "Camera Publish Error" -message ("Your Scene is not at 30 FPS. Camera Publishing Cancelled. Please adjust your frame rate to 30 using the abxFPS.mel found in Passion->Scripts->Animation to adjust your frame rate correctly!!!") -button "OK"`;
+	//	string $result = `confirmDialog -title "Camera Publish Error" -message ("Your Scene is not at 30 FPS. Camera Publishing Cancelled. Please adjust your frame rate to 30 using the abxFPS.mel found in studio->Scripts->Animation to adjust your frame rate correctly!!!") -button "OK"`;
 	//	return;		
 	//}
 
@@ -6562,17 +6561,17 @@ global proc string abxShotsStatAsColor (int $status){
 global proc string abxShotsStageAsLabel(int $stage){
 	string $strStage = $stage;
 	string $result = "";
-	string $ppTools = `getenv MAYA_PPTOOLS`;
+	string $stTools = `getenv MAYA_STTOOLS`;
 	
 	switch ($strStage){
 		case "0":
-			$result = ($ppTools+"/icons/stat1.png"); // Blocking
+			$result = ($stTools+"/icons/stat1.png"); // Blocking
 			break;
 		case "1":
-			$result = ($ppTools+"/icons/stat2.png"); // Splining
+			$result = ($stTools+"/icons/stat2.png"); // Splining
 			break;
 		case "2":
-			$result = ($ppTools+"/icons/stat3.png"); // Polish
+			$result = ($stTools+"/icons/stat3.png"); // Polish
 			break;
 	}
 	return $result;
@@ -7258,7 +7257,7 @@ global proc abxShotsOpenOtherFile(string $shotName){
 	//$file[0] = `workspace -en $file[0]`;
 	if (`filetest -r $file[0]`){
 		print ($file[0]+"\n");
-		saveChanges("abxLockFileCheckOut(\"\");file -f -o \""+$file[0]+"\";abxLockFileCheckIn(\""+$file[0]+"\");");
+		saveChanges("abxLockFileCheckOut(\"\");file -f -ignoreVersion -o \""+$file[0]+"\";abxLockFileCheckIn(\""+$file[0]+"\");");
 	}
 		
 }
@@ -7478,9 +7477,9 @@ global proc abxShotsSetFrameRate (float $targetFPS){
 	int $moveRange = false;
 	int $snapKeys = false;
 	int $snapRange = false;
-	string $ppTools = `getenv MAYA_PPTOOLS`;
+	string $stTools = `getenv MAYA_STTOOLS`;
 
-	eval("source \""+$ppTools+"/toolbox/Animation/abxFPS.mel\"");
+	eval("source \""+$stTools+"/toolbox/Animation/abxFPS.mel\"");
 	frameRateChangeProc ($targetFPS,$startFrame,$moveKeys,$moveRange,$snapKeys,$snapRange);
 
 }
@@ -8000,7 +7999,7 @@ global proc string[] abxShotsGetFromPath (string $filePath){
 		$filePath = `file -q -sn`;
 
 
-	$prodServer = getenv("PP_JOB_SERVERS");
+	$prodServer = getenv("ST_JOB_SERVERS");
 	if ($filePath != ""){
 		string $basename = `basenameEx $filePath`;
 		string $pathParts[] = stringToStringArray($filePath, "/");
@@ -8094,7 +8093,7 @@ global proc deleteAllInNamespace (string $namespace){
 }
 
 
-global proc string[] ppNukeCamExport (string $filePath){
+global proc string[] studioNukeCamExport (string $filePath){
 
 	$oldExports = `ls -r 1 "exportCam*"`;
 	string $renderCamNames[] = {"renderCam"};
@@ -8232,7 +8231,7 @@ global proc string[] ppNukeCamExport (string $filePath){
     return $results;
 }
 
-global proc string[] ppNukeNullsExport (string $filePath){
+global proc string[] studioNukeNullsExport (string $filePath){
 
 	string $results[];
 
