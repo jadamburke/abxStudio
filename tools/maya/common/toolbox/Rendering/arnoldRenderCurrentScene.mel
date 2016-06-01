@@ -1,0 +1,54 @@
+// arnoldBlast
+// Created by: adam
+// Date: 2015/09/11 16:21:33
+
+global proc arnoldRenderCurrentScene(){
+
+
+	// set some basic render globals
+
+	// save the scene file
+
+	// submit the scene file to a render
+	$renderPath = arnoldBlastGetQubeRenderPath();
+	$exePath = ("R:/studio/nyc/env/ppMayaBatch_Arnold.bat");
+	print ("callRenderBG("+$exePath+", 1, "+`file -q -sn`+", "+`workspace -q -rd`+", "+$renderPath+", \"\", "+`playbackOptions -q -min`+", "+`playbackOptions -q -max`+", 2, {})\n");
+	
+	callRenderBG($exePath , 1, `file -q -sn`, `workspace -q -rd`, $renderPath, "", -1, -1, -1, {});
+
+}
+
+global proc string arnoldBlastGetQubeRenderPath(){
+
+	string $renderPath;
+	setAttr -type "string" defaultRenderGlobals.imageFilePrefix "<Scene>/<RenderLayer>/<Scene>_<RenderLayer>_<RenderPass>_<Camera>";
+
+	//$vNum = getHistoryVersion($vNum);
+	string $shotInfo[] = abxShotsGetFromPath(`file -q -sn`);
+	if ($shotInfo[2] == "assets"){
+		string $assetInfo[] = abxAssetsGetFromPath(`file -q -sn`);
+		//                         0                     1                2       3      4    5    6     7    8
+		// example return: pp-fs-nyc/production J0166_PPNY_ChildHunger assets character Mom shade work  v001 ma
+		//$renderPath = ("//"+$assetInfo[0]+"/"+$assetInfo[1]+"/"+$assetInfo[2]+"/"+$assetInfo[3]+"/"+$assetInfo[4]+"/"+$assetInfo[5]+"/render/");
+		$renderPath = ($assetInfo[0]+"/"+$assetInfo[1]+"/"+$assetInfo[2]+"/"+$assetInfo[3]+"/"+$assetInfo[4]+"/"+$assetInfo[5]+"/render/");
+
+	}
+	else if ($shotInfo[2] == "shots" || $shotInfo[2] == "Shots"){
+		//string $renderPath = ("//"+$shotInfo[0]+"/"+$shotInfo[1]+"/Render_Pictures/Shots/"+$shotInfo[3]+"/"+$shotInfo[4]+"/CG/");
+		//$renderPath = ("//"+$shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$shotInfo[5]+"/render/");
+		$renderPath = ($shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$shotInfo[5]+"/render/");
+	}
+	else{
+		$renderPath = (`workspace -q -rd`+"maya/images");
+	}
+
+	return $renderPath;
+
+}
+
+global proc string arnoldBlastGetFirstFrame (){
+
+	//$sceneName
+	//$renderPath = arnoldBlastGetQubeRenderPath();
+	return "";
+}

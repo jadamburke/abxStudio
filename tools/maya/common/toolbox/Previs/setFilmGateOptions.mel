@@ -1,0 +1,22 @@
+global proc setFilmGateOptions(float $aspectRatio){
+
+	$cams = `ls -r 1 -type camera`;
+	string $each;
+
+
+
+	for ($each in $cams){
+		if (!`getAttr ($each+".orthographic")` && !`gmatch $each "persp*"`){
+			print ("Setting Camera "+$each+"\n");
+			// set camera attributes
+			setAttr ($each+".horizontalFilmAperture") 0.98;
+			setAttr ($each+".verticalFilmAperture") (.98 / $aspectRatio);
+			setAttr ($each+".displayGateMaskColor") -type double3 0 0 0 ;
+			setAttr ($each+".displayResolution") 0;
+			setAttr ($each+".displayFilmGate") 1;
+			setAttr ($each+".displayGateMask") 1;
+			setAttr ($each+".overscan") 1;
+			setAttr ($each+".displayGateMaskOpacity") 1.0;
+		}
+	}
+}

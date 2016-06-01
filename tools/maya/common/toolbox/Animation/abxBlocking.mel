@@ -15,6 +15,7 @@ global proc abxBlocking(){
 
 			button -w 100 -label `optionVar -q inTangentType` abxBlockingTanType;
 			popupMenu -button 1;
+			menuItem -label "Auto" -c "keyTangent -global -itt auto -ott auto;button -e -l Auto abxBlockingTanType";
 			menuItem -label "Stepped" -c "keyTangent -global -itt linear -ott step;button -e -l Stepped abxBlockingTanType";
  			menuItem -label "Spline" -c "keyTangent -global -itt spline -ott spline;button -e -l Spline abxBlockingTanType";
 			menuItem -label "Clamped" -c "keyTangent -global -itt clamped -ott clamped;button -e -l Clamped abxBlockingTanType";

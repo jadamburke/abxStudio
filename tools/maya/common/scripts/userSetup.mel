@@ -25,15 +25,15 @@ if (!`about -batch`){
 
 	// enable the playblast HUD for now
 
-	evalDeferred("if (`exists playblastHUD`==0) source \""+$ppTools+"/toolbox/Pipeline/playblastHUD.mel\";if (`exists playblastHUD`) playblastHUD;");
+	//evalDeferred("if (`exists playblastHUD`==0) source \""+$ppTools+"/toolbox/Pipeline/playblastHUD.mel\";if (`exists playblastHUD`) playblastHUD;");
 	//evalDeferred("if (`exists timewarpHUD`==0) source \""+$ppTools+"/toolbox/Pipeline/timewarpHUD.mel\";if (`exists timewarpHUD`) timewarpHUD;");
 
 
 	// not implemented but it allows us to force maya preferences
-	evalDeferred("ppForcePrefs;");
+	//evalDeferred("ppForcePrefs;");
 
 	// loads the Project Manager
-	evalDeferred("if (`exists abxAssets`==0) source \""+$ppTools+"/scripts/abxProject.mel\";if (`exists abxProject`) abxProject");
+	//evalDeferred("if (`exists abxAssets`==0) source \""+$ppTools+"/scripts/abxProject.mel\";if (`exists abxProject`) abxProject");
 
 	// sometimes plug-ins turn off undo queue, this would enforce it to be on each time maya starts
 	//evalDeferred("int $state = `undoInfo -q -state`; if (!$state){undoInfo -state 1; print (\"undoQueue turned on\\n\");}");
@@ -51,7 +51,9 @@ if (!`about -batch`){
 	    renderThumbnailUpdate `optionVar -q "ppSwatchUpdate"`;
 
 	// autoload is disabled on maya startup so we must load certain ones
-	string $loadPlugs[] = {"matrixNodes","modelingToolkit","fbxmaya","OneClick","OpenEXRLoader","quatNodes","tiffFloatReader","ik2Bsolver","ikSpringSolver","nearestPointOnMesh","objExport", "mtoa", "MayaExocortexAlembic"};
+	//string $loadPlugs[] = {"matrixNodes","modelingToolkit","fbxmaya","OneClick","OpenEXRLoader","quatNodes","tiffFloatReader","ik2Bsolver","ikSpringSolver","nearestPointOnMesh","objExport"};
+	//fast load
+	string $loadPlugs[] = {"fbxmaya","OpenEXRLoader","quatNodes","tiffFloatReader","objExport","mtoa"};
 
 	for ($each in $loadPlugs){
 	    catch(eval("loadPlugin "+$each));

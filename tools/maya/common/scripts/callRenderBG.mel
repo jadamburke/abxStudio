@@ -1,0 +1,74 @@
+//callMayaBG `file -q -sn` `workspace -q -rd` "" "print \"Hello\"" 1;
+//callMayaBG `file -q -sn` `workspace -q -rd` "" "abxShotsMaster()";
+
+
+global proc int callRenderBG (string $process, int $threaded, string $filePath, string $projDir, string $renderPath, string $command, float $start, float $end, float $by, string $renderLayers[], string $postRender)
+{
+    
+   $ppTools = `getenv MAYA_PPTOOLS`;
+   $mayaBG = $process; //("R:/studio/nyc/env/ppMayaBatch_Arnold.bat");
+   //$mayaBG = "render.exe";
+
+
+
+    string $result;
+    string $sysCmd = "";
+
+    //$command += ("quit -f;");
+    //$command += ("quit -f;");
+    //if (`about -os` == "mac") {
+//
+    //    $mayaBG = "render";
+//
+    //    $sysCmd = ($mayaBG+" ");
+    //    
+    //}
+    if (`about -os` == "win" || `about -os` == "win64"){
+
+        //$mayaBG = "render.exe";
+
+        if ($threaded == 1)
+            $sysCmd = ("start \""+$mayaBG+"\" ");
+        else 
+            $sysCmd = ($mayaBG+" ");
+        
+        ///print ("system start "+$mayaBG+" \""+toNativePath($abxScriptPath)+"\"\n");
+    }
+
+
+    if ($projDir != "")
+        $sysCmd += ("-proj \""+$projDir+"\" ");
+    if ($command != "")
+        $sysCmd += ("-command \""+$command+"\" ");
+    if ($start > -1)
+        $sysCmd += ("-s "+$start+" ");
+    if ($end > -1)
+        $sysCmd += ("-e "+$end+" ");
+    if ($by > -1)
+        $sysCmd += ("-b "+$by+" ");
+    if ($renderPath != "")
+        $sysCmd += ("-rd \""+$renderPath+"\" ");
+    if (size($renderLayers)>0){
+        $sysCmd += ("-rl \"");
+        for ($each in $renderLayers){
+            $sysCmd += ($each+",");
+        }
+        $sysCmd += ("\"");
+    }
+
+    if ($filePath != "")
+        $sysCmd += ($filePath);
+    
+
+    if ($postRender != "")
+        $sysCmd += (" && "+$postRender);
+
+    $sysCmd += ("\"");
+
+    
+    print ("system (\""+$sysCmd+"\");\n");
+    system ($sysCmd);
+    // add checks to make all processes were successful.
+    return 1;
+}
+

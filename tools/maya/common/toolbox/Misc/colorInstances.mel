@@ -21,7 +21,15 @@ global proc colorInstances(){
         setAttr ($sel[$i]+".overrideEnabled") 1;
         setAttr ($sel[$i]+".overrideColor") 2;
       }
+      else{
+        setAttr ($sel[$i]+".overrideEnabled") 0;
+        setAttr ($sel[$i]+".overrideColor") 0;
+        }
     }
+      else{
+        setAttr ($sel[$i]+".overrideEnabled") 0;
+        setAttr ($sel[$i]+".overrideColor") 0;
+        }
   }
 }
 }

@@ -1,0 +1,101 @@
+// arnoldBlast
+// Created by: adam
+// Date: 2015/09/11 16:21:33
+
+global proc arnoldBlast(){
+
+
+	// set some basic render globals
+
+	// save the scene file
+	string $res = "2K";
+
+	// submit the scene file to a render
+	$scene = basenameEx(`file -q -sn -shn`);
+	$renderLayer = `editRenderLayerGlobals -q -currentRenderLayer`;
+	if ($renderLayer == "defaultRenderLayer")
+		$renderLayer = "masterLayer";
+	string $activePanel = `getPanel -withFocus`; 
+	$cameraName = `modelPanel -q -camera $activePanel`;
+	$cameraName = "TB";
+	$startFrame = `playbackOptions -q -min`;
+	$ext = "exr";
+	$filename = ($scene+"/"+$renderLayer+"/"+$scene+"_"+$renderLayer+"_Beauty_"+$cameraName+".0"+$startFrame+"."+$ext);
+	$editFilename = toNativePath($scene+"_"+$cameraName+".mp4");
+	
+
+
+	$renderPath = arnoldBlastGetQubeRenderPath();
+	$editPath  = arnoldBlastGetQubeEditPath("4K");
+	$editPath = toNativePath($editPath);
+	$exePath = ("R:/studio/nyc/env/ppMayaBatch_Arnold.bat");
+	string $renderPathN = toNativePath($renderPath+$filename);
+	string $postRenderCmd = (" pause &&\\\\diskstation\\jobs\\EurydiceTeaser\\previs\\scripts\\samsunggearConvert-12fps_forEdit.bat "+$renderPathN+" "+$editPath+$editFilename+" 3840 2160 ");
+	$editPath  = arnoldBlastGetQubeEditPath("2K");
+	$editPath = toNativePath($editPath);
+	$editFilname = toNativePath($editFilename);
+	$postRenderCmd += ("&& \\\\diskstation\\jobs\\EurydiceTeaser\\previs\\scripts\\samsunggearConvert-12fps_forEdit.bat "+$renderPathN+" "+$editPath+$editFilename+ " 1920 1080 ");
+	print ("callRenderBG("+$exePath+", 1, "+`file -q -sn`+", "+`workspace -q -rd`+", "+$renderPath+", \"\", "+`playbackOptions -q -min`+", "+`playbackOptions -q -max`+", 2, {})\n");
+	
+	callRenderBG($exePath , 1, `file -q -sn`, `workspace -q -rd`, $renderPath, "", `playbackOptions -q -min`, `playbackOptions -q -max`, 2, {},$postRenderCmd);
+
+}
+
+
+// ideally sharepath/shots/<sequences>/<shotnum>/<stage>/<scene_name_no_version>/<renderLayer>/<renderPass>/<camera>/<version>/
+// this keeps version numbers beneath each pass making it easy to identify renderLayers and renderPasses
+global proc string arnoldBlastGetQubeRenderPath(){
+
+	string $renderPath;
+	setAttr -type "string" defaultRenderGlobals.imageFilePrefix "<Scene>/<RenderLayer>/<Scene>_<RenderLayer>_<RenderPass>_<Camera>";
+
+	//$vNum = getHistoryVersion($vNum);
+	string $shotInfo[] = abxShotsGetFromPath(`file -q -sn`);
+	if ($shotInfo[2] == "assets"){
+		string $assetInfo[] = abxAssetsGetFromPath(`file -q -sn`);
+		$renderPath = ($assetInfo[0]+"/"+$assetInfo[1]+"/assets/"+$assetInfo[2]+"/"+$assetInfo[3]+"/"+$assetInfo[4]+"/"+$assetInfo[5]+"/");
+
+	}
+	else if ($shotInfo[2] == "shots" || $shotInfo[2] == "Shots"){
+		$renderPath = ($shotInfo[0]+"/"+$shotInfo[1]+"/renders/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$shotInfo[5]+"/");
+	}
+	else{
+		$renderPath = (`workspace -q -rd`+"maya/images");
+	}
+
+	return $renderPath;
+
+}
+
+global proc string arnoldBlastGetFirstFrame (){
+
+	//$sceneName
+	//$renderPath = arnoldBlastGetQubeRenderPath();
+	return "";
+}
+
+
+global proc string arnoldBlastGetQubeEditPath(string $res){
+
+	string $renderPath;
+	setAttr -type "string" defaultRenderGlobals.imageFilePrefix "<Scene>/<RenderLayer>/<Scene>_<RenderLayer>_<RenderPass>_<Camera>";
+
+	//$vNum = getHistoryVersion($vNum);
+	string $shotInfo[] = abxShotsGetFromPath(`file -q -sn`);
+	if ($shotInfo[2] == "assets"){
+		string $assetInfo[] = abxAssetsGetFromPath(`file -q -sn`);
+		//$renderPath = ($assetInfo[0]+"/"+$assetInfo[1]+"/edit/media/renders/"+$res+"/"+$assetInfo[2]+"/"+$assetInfo[3]+"/"+$assetInfo[4]+"/"+$assetInfo[5]+"/");
+		$renderPath = ($assetInfo[0]+"/"+$assetInfo[1]+"/edit/media/renders/"+$res+"/"+$assetInfo[2]+"/"+$assetInfo[3]+"/"+$assetInfo[5]+"/");
+	}
+	else if ($shotInfo[2] == "shots" || $shotInfo[2] == "Shots"){
+		//$renderPath = ($shotInfo[0]+"/"+$shotInfo[1]+"/edit/media/renders/"+$res+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$shotInfo[5]+"/");
+		$renderPath = ($shotInfo[0]+"/"+$shotInfo[1]+"/edit/media/renders/"+$res+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[5]+"/");
+
+	}
+	else{
+		$renderPath = ($shotInfo[0]+"/"+$shotInfo[1]+"/edit/media/renders/misc"+$res);
+	}
+
+	return $renderPath;
+
+}

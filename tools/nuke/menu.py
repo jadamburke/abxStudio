@@ -12,7 +12,7 @@ import qubeSimpleCmd_menu
 qubeSimpleCmd_menu.addMenuItems()
 ## === QUBE SimpleCmd: END ===
 
-# create toolbar in menu
+# create passion toolbar in menu
 toolbar = nuke.menu('Nodes')
 passionMenu = toolbar.addMenu('Passion', icon='passion.png')
 passionMenu.addCommand( 'Read From Write', 'readFromWrite.readFromWrite()', 'alt+r' )
@@ -26,11 +26,30 @@ passionMenu.addCommand('BumpNormals', 'nuke.createNode(\"BumpNormals\")')
 passionMenu.addCommand('Reload All Read Nodes', 'reloadAllNodes()')
 passionMenu.addCommand('Postage Stamp Generator', 'postageStampGenerator()', 'ctrl+alt+p')
 
+# create world position toolkit menu
+wptkMenu = toolbar.addMenu('World Position Tool Kit', icon='wptk.png')
+wptkMenu.addCommand('Mask3DCubical_ik', 'nuke.createNode("Mask3DCubical_ik")') 
+wptkMenu.addCommand('Mask3DGradient_ik', 'nuke.createNode("Mask3DGradient_ik")') 
+wptkMenu.addCommand('Mask3DSpherical_ik', 'nuke.createNode("Mask3DSpherical_ik")') 
+wptkMenu.addCommand('TransformWorld_ik', 'nuke.createNode("TransformWorld_ik")') 
+wptkMenu.addCommand('WorldPos_Texture_Projection_ik', 'nuke.createNode("WorldPos_Texture_Projection_ik")') 
+wptkMenu.addCommand('WorldPos_Texture_Generator_ik', 'nuke.createNode("WorldPos_Texture_Generator_ik")') 
+wptkMenu.addCommand('WorldPos_Lambert_Shader_ik', 'nuke.createNode("WorldPos_Lambert_Shader_ik")') 
+
+# 3DEqualizer Plugin Nodes
+nuke.menu("Nodes").addCommand("3DE4/LD_3DE4_Anamorphic_Standard_Degree_4", "nuke.createNode('LD_3DE4_Anamorphic_Standard_Degree_4')")
+nuke.menu("Nodes").addCommand("3DE4/LD_3DE4_Anamorphic_Degree_6", "nuke.createNode('LD_3DE4_Anamorphic_Degree_6')")
+nuke.menu("Nodes").addCommand("3DE4/LD_3DE4_Radial_Standard_Degree_4", "nuke.createNode('LD_3DE4_Radial_Standard_Degree_4')")
+nuke.menu("Nodes").addCommand("3DE4/LD_3DE4_Radial_Fisheye_Degree_8", "nuke.createNode('LD_3DE4_Radial_Fisheye_Degree_8')")
+nuke.menu("Nodes").addCommand("3DE4/LD_3DE_Classic_LD_Model", "nuke.createNode('LD_3DE_Classic_LD_Model')")
+
+
 # custom defaults
 nuke.knobDefault("Tracker.label", "Ref frame [value reference_frame]")
 nuke.knobDefault("Shuffle.label", "[value in] to [value out]")
 
-
+# better vesrion of update to latest version
+# nuke.menu( 'Nuke' ).addCommand( 'Edit/Node/Filename/Version to Latest (Reads only)' , versionToLatest.versionToLatest)
 
 
 
@@ -85,15 +104,4 @@ def postageStampGenerator():
     if len(nuke.selectedNodes()) == 0:
         nuke.message('No nodes selected')
 
-# create write directory if it doesn't exist
-def CreatePath():
-     file = nuke.filename(nuke.thisNode())
-     dir = os.path.dirname(file)
-     osdir = nuke.callbacks.filenameFilter(dir)
-     try:
-         os.makedirs (osdir)
-     except OSError:
-         pass
-         
-#pre-render commands
-nuke.addBeforeRender(CreatePath, nodeClass = 'Write')
+

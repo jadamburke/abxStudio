@@ -1,0 +1,538 @@
+// abxCamSequencer
+// Created by: adamb
+// Date: 2015/09/30 18:48:02
+
+
+// add menu items to camera sequencer to make it more useful
+global proc abxCamSequencer(){
+
+}
+
+
+// menuitem key selected on in/out points
+// menuitem set frame range to shot
+// menuitem set frame range to shot plus pad
+// menuitem extend shot with ripple anim
+
+//////////////////////////////////////////////////
+// REDEFINITION OF AUTODESK MAYA 2015 PROCEDURE///
+//////////////////////////////////////////////////
+//  of proc found in <Maya install>/scripts/others/SequenceEdMenu.mel
+
+// This is the menu that pops up on top of shotButtons via RMB
+global proc buildSequenceShotMenuItems(string $editor, string $menu, string $shot)
+{
+	setParent -menu $menu;
+
+	string $group = getShotsGroup( $shot );
+
+	// Are we are over a Shot or a Group
+	if ( ($group == "") || (!isShotActive($shot))) 
+	{
+		string $title = (uiRes("m_SequenceEdMenu.kShotMenuTitle")) + $shot;
+		menuItem -label $title titleItem;
+	}
+	else
+	{
+		string $title = (uiRes("m_SequenceEdMenu.kGroupMenuTitle")) + $shot;
+		menuItem -label $title titleItem;
+	}
+
+	menuItem -divider true;
+	menuItem -divider true;
+
+	// Don't split shots if they are part of a group.
+	if ( $group == "" ) 
+	{
+		menuItem -label (uiRes("m_SequenceEdMenu.kSplitShot"))
+			-annotation (uiRes("m_SequenceEdMenu.kSplitShotAnnot")) 
+			-command ("performSplitShot 0 \"" + $shot + "\"" )
+			-dragMenuCommand ("performSplitShot 2 \"" + $shot + "\"" )
+			splitShotItem;
+		menuItem -optionBox true
+			-annotation (uiRes("m_SequenceEdMenu.kSplitShotOptAnnot")) 
+			-command ("performSplitShot 1 \"" + $shot + "\"" )
+			splitShotOBItem;
+	}
+
+	string $sel[] = `ls -sl -type shot`;
+	string $myself[] = `ls -sl $shot`;
+	if (`shot -q -mute $shot`)
+	{
+		if ($group == "")
+		{
+			string $unmuteCmd = "unmuteSelectedShots";
+			string $label = (uiRes("m_SequenceEdMenu.kUnmuteShot"));
+			string $annot = (uiRes("m_SequenceEdMenu.kUnmuteShotAnnot"));
+			if ((size($myself) == 0) || ((size($myself) == 1) && (size($sel) == 1)))
+			{
+				$unmuteCmd = ("shot -e -mute false " + $shot);
+				$label = (uiRes("m_SequenceEdMenu.kUnmuteShot2"));
+				$annot = (uiRes("m_SequenceEdMenu.kUnmuteShotAnnot2"));
+			}
+			menuItem -label $label -annotation $annot -command $unmuteCmd;
+		}
+		else
+		{
+			string $unmuteCmd = "seqUnmuteGroup " + $group;
+			menuItem -label (uiRes("m_SequenceEdMenu.kUnmuteGroup")) 
+				-annotation (uiRes("m_SequenceEdMenu.kUnmuteGroupAnnot")) 
+				-command $unmuteCmd;
+		}
+	}
+	else
+	{
+		if ($group == "")
+		{
+			string $unmuteCmd = "muteSelectedShots";
+			string $label = (uiRes("m_SequenceEdMenu.kMuteShot"));
+			string $annot = (uiRes("m_SequenceEdMenu.kMuteShotAnnot"));
+			if ((size($myself) == 0) || ((size($myself) == 1) && (size($sel) == 1)))
+			{
+				$unmuteCmd = ("shot -e -mute true " + $shot);
+				$label = (uiRes("m_SequenceEdMenu.kMuteShot2"));
+				$annot = (uiRes("m_SequenceEdMenu.kMuteShotAnnot2"));
+			}
+			menuItem -label $label -annotation $annot -command $unmuteCmd;
+		}
+		else
+		{
+			string $muteCmd = "seqMuteGroup " + $group;
+			menuItem -label (uiRes("m_SequenceEdMenu.kMuteGroup")) 
+				-annotation (uiRes("m_SequenceEdMenu.kMuteGroupAnnot")) 
+				-command $muteCmd;
+		}
+	}
+
+	if (`shot -q -lock $shot`)
+	{
+		if ($group == "")
+		{
+			string $unlockCmd = "unlockSelectedShots";
+			string $label = (uiRes("m_SequenceEdMenu.kUnlockShot"));
+			string $annot = (uiRes("m_SequenceEdMenu.kUnlockShotAnnot"));
+			if ((size($myself) == 0) || ((size($myself) == 1) && (size($sel) == 1)))
+			{
+				$unlockCmd = ("shot -e -lock false " + $shot);
+				$label = (uiRes("m_SequenceEdMenu.kUnlockShot2"));
+				$annot = (uiRes("m_SequenceEdMenu.kUnlockShotAnnot2"));
+			}
+			menuItem -label $label -annotation $annot -command $unlockCmd;
+		}
+		else
+		{
+			string $unlockCmd = "seqUnlockGroup " + $group;
+			menuItem -label (uiRes("m_SequenceEdMenu.kUnlockGroup")) 
+				-annotation (uiRes("m_SequenceEdMenu.kUnlockGroupAnnot")) 
+				-command $unlockCmd;
+		}
+	}
+	else
+	{
+		if ($group == "")
+		{
+			string $lockCmd = "lockSelectedShots";
+			string $label = (uiRes("m_SequenceEdMenu.kLockShot"));
+			string $annot = (uiRes("m_SequenceEdMenu.kLockShotAnnot"));
+			if ((size($myself) == 0) || ((size($myself) == 1) && (size($sel) == 1)))
+			{
+				$lockCmd = ("shot -e -lock true " + $shot);
+				$label = (uiRes("m_SequenceEdMenu.kLockShot2"));
+				$annot = (uiRes("m_SequenceEdMenu.kLockShotAnnot2"));
+			}
+			menuItem -label $label -annotation $annot -command $lockCmd;
+		}
+		else
+		{
+			string $lockCmd = "seqLockGroup " + $group;
+			menuItem -label (uiRes("m_SequenceEdMenu.kLockGroup")) 
+				-annotation (uiRes("m_SequenceEdMenu.kLockGroupAnnot")) 
+				-command $lockCmd;
+		}
+	}
+
+	if (`shot -q -favorite $shot`)
+	{
+		string $unfavorCmd = "unfavorSelectedShots";
+		string $label = (uiRes("m_SequenceEdMenu.kUnfavorShot"));
+		string $annot = 
+			(uiRes("m_SequenceEdMenu.kUnfavorShotAnnot"));
+		if ((size($myself) == 0) || ((size($myself) == 1) && (size($sel) == 1)))
+		{
+			$unfavorCmd = ("shot -e -favorite false " + $shot);
+			$label = (uiRes("m_SequenceEdMenu.kUnfavorShot2"));
+			$annot = (uiRes("m_SequenceEdMenu.kUnfavorShotAnnot2"));
+		}
+		menuItem -label $label -annotation $annot -command $unfavorCmd;
+	}
+	else
+	{
+		string $favorCmd = "favorSelectedShots";
+		string $label = (uiRes("m_SequenceEdMenu.kFavorShot"));
+		string $annot = (uiRes("m_SequenceEdMenu.kFavorShotAnnot"));
+		if ((size($myself) == 0) || ((size($myself) == 1) && (size($sel) == 1)))
+		{
+			$favorCmd = ("shot -e -favorite true " + $shot);
+			$label = (uiRes("m_SequenceEdMenu.kFavorShot2"));
+			$annot = (uiRes("m_SequenceEdMenu.kFavorShotAnnot2"));
+		}
+		menuItem -label $label -annotation $annot -command $favorCmd;
+	}
+
+	menuItem -divider true;
+
+	// BUG 347507: Adding a menu item to select the camera the shot refers to --RJ
+	string $menuItem = `menuItem -label (uiRes("m_SequenceEdMenu.kSelectCamera")) -command ("selectShotsCam " + $shot)`;
+
+	$menuItem = `menuItem -label (uiRes("m_SequenceEdMenu.kChangeCamera"))
+		-subMenu true
+		ChangeCameraCascade`;
+
+	menuItem -edit -to true -postMenuCommand
+		("buildSequenceEditorCameraMenu " + $editor + " " + $menuItem + " " + $shot + " 0") $menuItem;
+	setParent -menu ..;
+
+	menuItem -divider true;
+
+	menuItem -label (uiRes("m_SequenceEdMenu.kShotAttrEd" ))
+		-annotation (uiRes("m_SequenceEdMenu.kShotAttrEdAnnot" ))
+		-command ("showEditor " + $shot)
+		-dragMenuCommand ("showEditor " + $shot)
+		shotPropItem;
+
+	// Create an IP, or access the existing one.
+	string $ip = getShotsClip( $shot );
+	if( $ip != "" )
+	{
+		menuItem -label (uiRes("m_SequenceEdMenu.kShotIPAttrEd" ))
+			-annotation (uiRes("m_SequenceEdMenu.kShotIPAttrEdAnnot" ))
+			-command ("showEditor " + $ip)
+			-dragMenuCommand ("showEditor " + $ip)
+			shotIPPropItem;
+
+		float $ipAlpha = `getAttr ( $ip + ".alphaGain" )`;
+		if( $ipAlpha != 0 )
+		{ 
+			string $hideCmd = "showHideSelectedImagePlanes 0";
+			string $label = (uiRes("m_SequenceEdMenu.kHideImagePlanes"));
+			string $annot = 
+				(uiRes("m_SequenceEdMenu.kHideImagePlanesAnnot"));
+			if ((size($myself) == 0) || ((size($myself) == 1) && (size($sel) == 1)))
+			{
+				$hideCmd = ("showHideImagePlane " + $shot + " 0" );
+				$label = (uiRes("m_SequenceEdMenu.kHideImagePlanes2"));
+				$annot = (uiRes("m_SequenceEdMenu.kHideImagePlanesAnnot2"));
+			}
+			menuItem -label $label -annotation $annot -command $hideCmd;
+		}
+		else
+		{
+			string $showCmd = "showHideSelectedImagePlanes 1";
+			string $label = (uiRes("m_SequenceEdMenu.kShowImagePlanes"));
+			string $annot = 
+				(uiRes("m_SequenceEdMenu.kShowImagePlanesAnnot"));
+			if ((size($myself) == 0) || ((size($myself) == 1) && (size($sel) == 1)))
+			{
+				$showCmd = ("showHideImagePlane " + $shot + " 1" );
+				$label = (uiRes("m_SequenceEdMenu.kShowImagePlanes2"));
+				$annot = (uiRes("m_SequenceEdMenu.kShowImagePlanesAnnot2"));
+			}
+			menuItem -label $label -annotation $annot -command $showCmd;
+		}	
+
+		// If there's an IP, provide a way to remove it
+		menuItem -label (uiRes("m_SequenceEdMenu.kRemoveImagePlane"))
+			-annotation (uiRes("m_SequenceEdMenu.kRemoveImagePlaneAnnot"))
+			-command ("removeImageplane " + $shot )
+			removeIPItem;
+
+		// Snap the shot to the full extents of any clip
+		menuItem -label (uiRes("m_SequenceEdMenu.kResetShotToMovie"))
+			-annotation (uiRes("m_SequenceEdMenu.kResetShotToMovieAnot"))
+			-command ("snapToMovie " + $shot )
+			snapMovieItem;
+	}
+	else
+	{
+		menuItem -label (uiRes("m_SequenceEdMenu.kImportImage"))
+				 -c ("shotImagePlane " + $shot ) shotIPCreateMenuItem;
+	}
+
+	menuItem -label (uiRes("m_SequenceEdMenu.kPlayblastOutShot"))
+		-annotation (uiRes("m_SequenceEdMenu.kSequencerPlayblastShotAnnot"))
+		-command ("performPlayblastShot 0 \"" + $shot + "\"" )
+		-dragMenuCommand ("performPlayblastShot 2 \"" + $shot + "\"" )
+		playblastShotItem;
+	menuItem -optionBox true
+		-annotation (uiRes("m_SequenceEdMenu.kSequencerPlayblastShotOptAnnot"))
+		-command ("performPlayblastShot 1 \"" + $shot + "\"" )
+		playblastShotOBItem;
+
+	// Add group specific menu items.
+	if ($group != "")
+	{
+		menuItem -divider true;
+
+		string $menuItem;
+
+		if (isShotActive($shot))
+		{
+			string $menuItem = `menuItem -label (uiRes("m_SequenceEdMenu.kSetActiveShot2"))
+				-subMenu true
+				-annotation (uiRes("m_SequenceEdMenu.kSetActiveShot2Annot"))
+				setActiveShot2Item`;
+
+			menuItem -edit
+				-postMenuCommand ("buildSetActiveShotSubMenu " + $shot + " " + $menuItem)
+				$menuItem;
+				setParent -menu ..;
+		}
+		else
+		{
+			menuItem -label (uiRes("m_SequenceEdMenu.kSetActiveShot3")) 
+				-annotation (uiRes("m_SequenceEdMenu.kSetActiveShot3Annot")) 
+				-command ("setShotActive " + $shot);
+		}
+	}
+	//menuItem -divider true;
+
+	//menuItem -label "Add Camera" -annotation "Adds another camera to this segment" -command ("abxCamSequencerSetTimeslider {\""+$shot+"\"} 0");
+
+
+	menuItem -divider true;
+
+	menuItem -label "Set Timeslider To Shot" -annotation "Sets the global timeslider frame range to this shots in/out points" -command ("abxCamSequencerSetTimeslider {\""+$shot+"\"} 0");
+	if (size($sel)>1){
+
+		string $selStr = ("\""+$sel[0]+"\"");
+		for ($i=1;$i<size($sel);$i++) 
+			$selStr += (",\""+$sel[$i]+"\"");
+		menuItem -label "Set Timeslider To Selected" -annotation "Sets the global timeslider frame range to the selected shots in/out points" -command ("abxCamSequencerSetTimeslider {"+$selStr+"} 0");
+
+	}
+
+	if (`attributeExists "segmentStartFrame" $shot` && `attributeExists "segmentEndFrame" $shot`){
+			menuItem -label "Set Timeslider To Segment" -annotation "Sets the global timeslider frame range to this shots Segment" -command ("abxCamSequencerSetTimeslider {\""+$shot+"\"} 1");
+
+	}
+	string $camera = `shot -q -currentCamera $shot`;
+	menuItem -label "Key Camera at In/Out" -annotation "Sets the global timeslider frame range to this shots in/out points" -command ("abxCamSequencerSetInOutKeys \""+$shot+"\" {\""+$camera+"\"} \"linear\" 0 1");
+	menuItem -label "Key Sel Obj at In/Out" -annotation "Sets the global timeslider frame range to this shots in/out points" -command ("abxCamSequencerSetInOutKeys \""+$shot+"\" {} \"step\" 1 1");
+	
+}
+
+global proc abxCamSequencerSetTimeslider(string $sel[], int $useSegment){
+	
+	//string $sel[] = `ls -sl -type shot`;
+
+    if (size($sel) > 0){
+    	float $minRange = `shot -q -startTime $sel[0]`;
+    	float $maxRange = `shot -q -endTime $sel[0]`;
+
+    	if ($useSegment && `attributeExists "segmentStartFrame" $sel[0]` && `attributeExists "segmentEndFrame" $sel[0]`){
+    		$minRange = `getAttr ($sel[0]+".segmentStartFrame")`;
+    		$maxRange = `getAttr ($sel[0]+".segmentEndFrame")`;
+    	}
+    
+    	for ($each in $sel){
+    		float $st = `shot -q -startTime $each`;
+    		float $et = `shot -q -endTime $each`;
+	     	if ($useSegment && `attributeExists "segmentStartFrame" $each` && `attributeExists "segmentEndFrame" $each`){
+	    		$st = `getAttr ($each+".segmentStartFrame")`;
+	    		$et = `getAttr ($each+".segmentEndFrame")`;
+	    	}
+
+    		if ($st<$minRange) $minRange = $st;
+    		if ($et>$maxRange) $maxRange = $et;
+    	}
+    	
+    	playbackOptions -min $minRange -max $maxRange;
+
+    	currentTime -e $minRange;
+    	sequenceManager -currentTime `shot -q -sequenceStartTime $sel[0]`;
+
+    	abxCamSequencerActivateShot $sel;
+
+    }
+
+
+}
+
+global proc abxCamSequencerSetInOutKeys(string $shot, string $nodes[], string $tanType, int $useSel, int $useSegment){
+
+		$cf = `currentTime -q`;
+		if ($useSel)
+			$nodes = `ls -sl`;
+
+		string $itType = $tanType;
+		if ($itType == "stepped") $itType = "linear";
+
+    	float $minRange = `shot -q -startTime $shot`;
+    	float $maxRange = `shot -q -endTime $shot`;
+
+    	if ($useSegment && `attributeExists "segmentStartFrame" $shot` && `attributeExists "segmentEndFrame"  $shot`){
+    		$minRange = `getAttr ($shot+".segmentStartFrame")`;
+    		$maxRange = `getAttr ($shot+".segmentEndFrame")`;
+    	}
+
+			// set keyframes on camera
+    	currentTime -e $minRange;
+		setKeyframe -breakdown 0 -hierarchy none -controlPoints 0 -shape 0 -t $minRange -itt $itType -ott $tanType $nodes;
+
+		currentTime -e $maxRange;
+		setKeyframe -breakdown 0 -hierarchy none -controlPoints 0 -shape 0 -t $maxRange -itt $itType -ott $tanType $nodes;
+		
+		// keyframe the pre and post frame just to make sure we don't contaminate other shot segment aniamtion
+		if ($useSegment){
+			currentTime -e ($minRange-1);
+			setKeyframe -breakdown 0 -hierarchy none -controlPoints 0 -shape 0 -t ($minRange-1) -itt $itType -ott $tanType $nodes;
+			currentTime -e ($maxRange+1);
+			setKeyframe -breakdown 0 -hierarchy none -controlPoints 0 -shape 0 -t ($maxRange+1) -itt $itType -ott $tanType $nodes;
+		}
+		currentTime -e $cf;
+}
+
+global proc abxCamSequencerActivateShot(string $shots[]){
+	string $allShots[] = `ls -type shot`;
+	for ($each in $allShots){
+		setAttr ($each+".userStatus2") 0;
+	}
+	
+	for ($each in $shots) 
+		setAttr ($each+".userStatus2") 1;
+}
+
+//////////////////////////////////////////////////
+// REDEFINITION OF AUTODESK MAYA 2015 PROCEDURE///
+//////////////////////////////////////////////////
+//  of proc found in <Maya install>/scripts/others/doPlayblastSequenceArgList.mel
+
+global proc doPlayblastSequenceArgList( string $version, string $args[])
+{
+
+		// adam added
+	// if exists set the playblast hud for sequence mode
+	if(`exists playblastHUDCleanForBlast`)
+		playblastHUDCleanForBlast();
+
+
+	if ( !`exists doPlayblastArgList`) {
+		source doPlayblastArgList.mel;
+	}
+	
+	if( ($version == 1 && size($args) != 6) ||
+		( $version == 3 && size($args) != 9 ) )
+	{
+		print (uiRes("m_doPlayblastSequenceArgList.kArgListWrongLength"));
+		return;
+	}	
+
+	// get the current display options of the view port
+	getEditorViewVars();
+	
+	// set display options from the playblast controls
+	setPlayblastViewVars();
+
+	string $path = $args[0];
+	string $filename = $args[1];
+	string $format  = $args[2];
+	string $compression = $args[3];
+	int $quality = $args[4];
+	int $useViewer = $args[5];
+
+	int $wantOffscreen = 1;   // default to offscreen
+	int $resolutionW = 1024; 
+	int $resolutionH = 778;  
+	
+	if ($version == 3) {
+		$wantOffscreen = $args[6];
+		$resolutionW = $args[7];
+		$resolutionH = $args[8]; 
+	}
+	
+	if(!endsWith($path,"/") &&
+	   !endsWith($path,"\\"))
+	{
+		$path += "/";
+	}
+	$path = substituteAllString($path, "\\", "/");
+	
+	int $useMovie = true;			
+	if( $format == "iff" ) $useMovie = false;
+	
+	string $offscreen = ""; 
+	if ($wantOffscreen) {
+		$offscreen = " -offScreen";
+	}
+	
+	if ($format == "avi") {
+		if(!endsWith($filename,".avi") &&
+		   !endsWith($filename,".AVI"))
+		{
+			$filename += ".avi";
+		}
+	}
+	else if ($format == "qt") {
+		if(!endsWith($filename,".mov") &&
+		   !endsWith($filename,".MOV"))
+		{
+			$filename += ".mov";
+		}
+	} 
+		 
+	string $fullPath = $path + $filename;
+
+	// Change any namespace delimiters into underscores.
+	string $seq = `sequenceManager -q -writableSequencer`;	
+
+	float $start = `getAttr ( $seq + ".minFrame")`;
+	float $end = `getAttr ( $seq + ".maxFrame")`;
+	float $duration = $end - $start;
+	string $cmd ="";
+	
+	if ( $useMovie )
+	{
+		
+		$cmd   = "playblast -fmt \"" + $format +
+					 "\" -startTime " + $start + " -endTime " + $end +
+					 " -sequenceTime 1 -forceOverwrite -filename \"" + $fullPath + 
+					 "\" -clearCache 1 -percent 100 -wh " +
+					 $resolutionW + " " + $resolutionH + $offscreen +
+					 " -viewer " + $useViewer + " -useTraxSounds";
+					 
+		if ( $compression != "" && $compression != "global") {
+			// TODO internationalization this string. 
+	        // global is used for get the render setting from the global render settings
+	        // this will be used if there is no compression flag set.
+			$cmd += " -compression \""+ $compression + "\" -quality " + $quality;
+		}
+		
+		evalEcho($cmd);
+	}
+	else
+	{
+		// Playblast out the images to IFF files
+		string $image = $fullPath;
+        // TO DO number extensions		
+		
+		$cmd   = "playblast -ifz  -fmt \"iff\" -startTime " + $start + " -endTime " + $end +
+				 " -sequenceTime 1 -forceOverwrite -filename \"" + $fullPath +
+				 "\" -clearCache 1 -percent 100 -wh " +
+					 $resolutionW + " " + $resolutionH + $offscreen +
+				 " -viewer " + $useViewer + " -fp 4";
+		if ( $compression != ""&& $compression != "global") {
+			// TODO internationalization this string. 
+	        // global is used for get the render setting from the global render settings
+	        // this will be used if there is no compression flag set.
+			$cmd += " -compression \""+ $compression + "\" -quality " + $quality;
+		}
+				
+		evalEcho($cmd);
+	}	
+
+	// recover the display options
+	restoreEditorViewVars();	
+			
+	// Snap back to the first frame in the shot, handy for playback/verification of playblast
+	sequenceManager -currentTime $start;	
+}

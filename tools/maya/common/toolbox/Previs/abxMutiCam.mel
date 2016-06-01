@@ -1,0 +1,181 @@
+// abxMutiCam
+// Created by: adamb
+// Date: 2015/09/30 18:48:31
+
+global proc abxMutiCam(){
+
+	// basic UI for cameras creation
+	// inputs  
+		// number of cameras
+		// length of each camera
+		// checkbox for keying all animation 
+	// remake scene
+	if (`window -ex abxMultiCamWindow` != true)
+	{
+		window -w 150 -h 100 -t "abxMultiCam" -in "abxMultiCam" -s true -tb true abxMultiCamWindow;
+ 
+		columnLayout -rs 1 -w 400 -cal "center" -cat "both" 0 -adj true abxMultiCamColLyt;
+
+		// add nameing convention string
+		intSliderGrp -label "Shot Count" -field true -s 1 -fs 1 -minValue 1 -maxValue 20 -fieldMinValue 1 -fieldMaxValue 100 -value 10 abxMultiCamShotCountIS;
+		intSliderGrp -label "Shot Lengths" -field true -s 1 -fs 1 -minValue 1 -maxValue 10000 -fieldMinValue 1 -fieldMaxValue 10 -value 50 abxMultiCamShotLengthIS;
+		checkBoxGrp -l "Place After Last Shot" -v1 1 abxMultiCamShotPlacement;
+		floatFieldGrp -numberOfFields 1 -label "Start Frame" -v1 150 abxMultiStartFrameFlF;
+		checkBoxGrp -l "Create Sets" -v1 1 abxMultiCamCreateSetCB;
+		checkBoxGrp -l "Key In/Out Points" -v1 1 abxMultiCamKeyAnimCB;
+
+		button -label "Generate Shots" -h 20 -w 60 -c "performAbxMutiCamGen();";
+	
+
+		window -e -w 413 -h 300 abxMultiCamWindow;
+		showWindow abxMultiCamWindow;
+	}
+	else	// else just pop it up from being minimized again
+    	{
+		window -e -w 413 -h 300 abxMultiCamWindow;
+		showWindow abxMultiCamWindow;
+    	}
+
+
+}
+
+global proc performAbxMutiCamGen(){
+
+	$cmd = "abxMultiCamGen ";
+	$cmd += `intSliderGrp -q -v abxMultiCamShotCountIS`;
+	$cmd += (" "+`intSliderGrp -q -v abxMultiCamShotLengthIS`);
+	$cmd += (" "+`floatFieldGrp -q -v1 abxMultiStartFrameFlF`);
+	if (`checkBoxGrp -q -v1 abxMultiCamShotPlacement`)
+		$cmd += (" "+`abxMultiCamGetNextSequenceStart`);
+	else
+		$cmd += (" -1");
+	$cmd += (" "+`checkBoxGrp -q -v1 abxMultiCamCreateSetCB`);
+
+	evalEcho($cmd);
+
+}
+
+global proc abxMultiCamGen(int $shotCt, int $shotLen, float $stFrame, float $seqStFrame, int $keyAnim){
+
+	// check for existing multi cameras to see if you need to offset naming convention
+		// generate cameras for the shot count
+	int $offset = 0;
+	string $newCams[];
+	string $newShots[];
+
+	for ($i = 1; $i<=$shotCt; $i++){
+		string $camName = "PR_004_001";
+		string $shotName = "PR_004_001_shot";
+		int $camNum = 1;
+
+		while (`objExists $camName`) {
+			print $offset;
+			$offset++;
+			$camNum = (($offset));
+			string $camNumStr = $camNum;
+			while (size($camNumStr) < 3) $camNumStr = ("0"+$camNumStr);
+			$camName = ("PR_004_"+$camNumStr+"");
+			$shotName = ("PR_004_"+$camNumStr+"_shot");
+		}
+		print ("making camera "+$camName+"\n");
+		string $newCam[] = `camera -name $camName `;
+		$newCams[size($newCams)] = $newCam[0];
+
+		float $nextStart = abxMultiCamGetNextSegmentStart();
+		float $nextSeqStart = abxMultiCamGetNextSequenceStart();
+		if ($nextStart > $stFrame) $stFrame = $nextStart;
+		$st = $stFrame;//+(($i-1)*$shotLen);
+		$et = $st+$shotLen - 1;
+		$sst = $st; //$seqStFrame;
+
+		if ($seqStFrame > 0) $sst = $seqStFrame;
+
+		$set = $sst+$shotLen;
+
+		shot -startTime $st -endTime $et -sequenceStartTime $sst -sequenceEndTime $set -currentCamera $newCams[size($newCams)-1] -clip "" $shotName;
+
+		addAttr -ln "segmentStartFrame"  -at double  -dv 0 $shotName;
+		setAttr -e -channelBox true ($shotName+".segmentStartFrame") $st;
+
+		addAttr -ln "segmentEndFrame"  -at double  -dv 0 $shotName;
+		setAttr -e -channelBox true ($shotName+".segmentEndFrame") $et;
+
+
+		// set camera attributes
+		setAttr ($newCams[size($newCams)-1]+".horizontalFilmAperture") 0.98;
+		setAttr ($newCams[size($newCams)-1]+".verticalFilmAperture") .551;
+		setAttr ($newCams[size($newCams)-1]+".displayGateMaskColor") -type double3 0 0 0 ;
+		setAttr ($newCams[size($newCams)-1]+".displayResolution") 1;
+		setAttr ($newCams[size($newCams)-1]+".overscan") 1;
+		setAttr ($newCams[size($newCams)-1]+".displayGateMaskOpacity") 1.0;
+
+		// set keyframes on camera
+		//setKeyframe -breakdown 0 -hierarchy none -controlPoints 0 -shape 0 -t $st -itt "spline" -ott "spline" {$newCams[size($newCams)-1]};
+		//setKeyframe -breakdown 0 -hierarchy none -controlPoints 0 -shape 0 -t $et -itt "spline" -ott "spline" {$newCams[size($newCams)-1]};
+
+	}
+
+}
+
+
+
+global proc string[] abxMultiCamGetCameras() {
+	$cameras = `ls -type camera "A*T*"`;
+	string $validAngles[];
+	for ($ea in $cameras){
+		string $angleName[] = stringToStringArray($ea,"_");
+		$validAngles[size($validAngles)] = $angleName[0];
+	}
+	string $noDuplicates[] = stringArrayRemoveDuplicates($validAngles);
+	return $noDuplicates;
+}
+
+global proc float abxMultiCamGetNextSegmentStart(){
+
+		string $shots[] = `ls -type shot`;
+		float $lastSegment = 0;
+    	if (size($shots) > 0){
+	    	$lastSegment = `shot -q -endTime $shots[0]`;
+
+	    	if (`attributeExists "segmentEndFrame" $shots[0]`){
+	    		$lastSegment = `getAttr ($shots[0]+".segmentEndFrame")`;
+	    	}
+	    
+	    	for ($each in $shots){
+	    		float $et = `shot -q -endTime $each`;
+		     	if (`attributeExists "segmentEndFrame" $each`){
+		    		$et = `getAttr ($each+".segmentEndFrame")`;
+		    	}
+
+	    		if ($et>$lastSegment) $lastSegment = $et;
+	    	}
+    	}
+    	
+    	return $lastSegment+1;
+
+}
+
+global proc float abxMultiCamGetNextSequenceStart(){
+
+		string $shots[] = `ls -type shot`;
+		float $lastSequence = 0;
+    	if (size($shots) > 0){
+	    	$lastSequence = `shot -q -endTime $shots[0]`;
+
+	    	if (`attributeExists "sequenceEndFrame" $shots[0]`){
+	    		$lastSequence = `getAttr ($shots[0]+".sequenceEndFrame")`;
+	    	}
+	    
+	    	for ($each in $shots){
+	    		float $et = `shot -q -endTime $each`;
+		     	if (`attributeExists "sequenceEndFrame" $each`){
+		    		$et = `getAttr ($each+".sequenceEndFrame")`;
+		    	}
+
+	    		if ($et>$lastSequence) $lastSequence = $et;
+	    	}
+    	}
+    	
+    	return $lastSequence+1;
+
+}

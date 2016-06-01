@@ -3,46 +3,47 @@
 
 global proc playblastHUD (){
 
+	// move the view axis out of the corner
 	headsUpDisplay -e -section 5 -block 2 HUDViewAxis; 
 
+	// initialize missing huds
+	if (!`headsUpDisplay -q -exists HUDSeqFrame`)
+		initSeqFrameHUD();
 	if (!`headsUpDisplay -q -exists HUDRenderCam`)
 		initRenderCamHUD();
-
+	if (!`headsUpDisplay -q -exists HUDUserName`)
+		initUserNameHUD();
+	if (!`headsUpDisplay -q -exists HUDDateName`)
+		initDateHUD();
 	if (!`headsUpDisplay -q -exists HUDSceneName`)
 		initSceneNameHUD();
 	if (!`headsUpDisplay -q -exists HUDStatus`)
 		initStatusHUD();
-
-	headsUpDisplay -e -section 7 -block `headsUpDisplay -nfb 7` HUDFocalLength;
-	headsUpDisplay -e -section 9 -block `headsUpDisplay -nfb 9` HUDSceneTimecode;
-
-	
-	if (!`headsUpDisplay -q -exists HUDUserName`)
-		initUserNameHUD();
-
 	if (!`headsUpDisplay -q -exists HUDFR`)
 		initFRHUD();
 
 
-
+	//headsUpDisplay -e -section 7 -block `headsUpDisplay -nfb 7` HUDFocalLength;
+	//headsUpDisplay -e -section 9 -block `headsUpDisplay -nfb 9` HUDSceneTimecode;
 
 	
+	// TOGGLE ON
 	if (`headsUpDisplay -q -vis HUDSceneName`){
 			print ("turning off\n");
+			headsUpDisplay -e -vis 0 HUDSeqFrame;
 			headsUpDisplay -e -vis 0 HUDSceneName;
 			headsUpDisplay -e -vis 0 HUDStatus;
 			headsUpDisplay -e -vis 0 HUDUserName;
-			headsUpDisplay -e -vis 0 HUDFR;
+			//headsUpDisplay -e -vis 0 HUDFR;
+			headsUpDisplay -e -vis 0 HUDDateName;
 
-			headsUpDisplay -e -vis 0 HUDSceneTimecode;
+			//headsUpDisplay -e -vis 0 HUDSceneTimecode;
 			headsUpDisplay -e -vis 0 HUDCurrentFrame;
-			//headsUpDisplay -e -vis 0 HUDRenderCam;
-			
+			headsUpDisplay -e -vis 0 HUDRenderCam;
 
-
-			if (`headsUpDisplay -q -vis HUDCameraNames`){
-				headsUpDisplay -e -vis 0 HUDCameraNames;
-			}
+			//if (`headsUpDisplay -q -vis HUDCameraNames`){
+			//	headsUpDisplay -e -vis 0 HUDCameraNames;
+			//}
 
 			headsUpDisplay -e -labelFontSize "small" -dataFontSize "small"  HUDCameraNames;
 			headsUpDisplay -e -vis 1 HUDCameraNames;
@@ -51,44 +52,171 @@ global proc playblastHUD (){
 			headsUpDisplay -e -vis 1 HUDViewAxis;
 			headsUpDisplay -e -ao true -vis 0 HUDFocalLength;
 
+			// restore color and display options
+			colorIndex 17 1 1 0;
+			eval("playblastHUDResize \"small\"");
+			catchQuiet(eval("displayColor -dormant headsUpDisplayLabels 7"));
+			catchQuiet(eval("displayColor -dormant headsUpDisplayValues 16"));
+
 
 	}
+	// TOGGLE OFF
 	else {
 			print ("turning on\n");
+			headsUpDisplay -e -vis 1 HUDSeqFrame;
 			headsUpDisplay -e -vis 1 HUDSceneName;
 			headsUpDisplay -e -vis 1 HUDStatus;
 			headsUpDisplay -e -vis 1 HUDUserName;
-			headsUpDisplay -e -vis 1 HUDFR;
-			//headsUpDisplay -e -vis 1 HUDRenderCam;
+			//headsUpDisplay -e -vis 1 HUDFR;
+			headsUpDisplay -e -vis 1 HUDRenderCam;
+			headsUpDisplay -e -vis 1 HUDDateName;
 
 
-			if (`headsUpDisplay -q -vis HUDSceneTimecode`){
-				headsUpDisplay -e -vis 0 HUDSceneTimecode;
-			}
-			headsUpDisplay -e -vis 1 -lw 30 -label "TC:" -labelFontSize "large" -dataFontSize "large" HUDSceneTimecode;
+			//if (`headsUpDisplay -q -vis HUDSceneTimecode`){
+			//	headsUpDisplay -e -vis 0 HUDSceneTimecode;
+			//}
+			//headsUpDisplay -e -vis 1 -lw 30 -label "TC:" -labelFontSize "large" -dataFontSize "large" HUDSceneTimecode;
 
-			if (`headsUpDisplay -q -vis HUDCurrentFrame`){
-				headsUpDisplay -e -vis 0 HUDCurrentFrame;
-			}
-			headsUpDisplay -e -vis 1 -lw 30 -label "FR:" -labelFontSize "large" -dataFontSize "large"  HUDCurrentFrame;
-
-			
+			//if (`headsUpDisplay -q -vis HUDCurrentFrame`){
+			//	headsUpDisplay -e -vis 0 HUDCurrentFrame;
+			//}
+			//headsUpDisplay -e -vis 1 -lw 30 -label "FR:" -labelFontSize "large" -dataFontSize "large"  HUDCurrentFrame;
 
 			if (`headsUpDisplay -q -exists HUDCameraNames`){
 				headsUpDisplay -e -vis 0 HUDCameraNames;
 			}
 
 			headsUpDisplay -e -vis 1 HUDCameraNames;
-			headsUpDisplay -e -ao true -vis 1 HUDFocalLength;
+			headsUpDisplay -e -ao true -vis 0 HUDFocalLength;
+			headsUpDisplay -e -ao true -vis 0 HUDCurrentFrame;
 
 			headsUpDisplay -e -vis 1 HUDViewAxis;
 
+			// set display colors and options
+			colorIndex 17  0.72 0.6 0;
+			eval("playblastHUDResize \"large\"");
+			// this returns an error about it not existing but it actually still does and still works
+			catchQuiet(eval("displayColor -dormant headsUpDisplayLabels 17"));
+			catchQuiet(eval("displayColor -dormant headsUpDisplayValues 17"));
 
 	}
-	playblastHUDResize "small";
+	
 	playblastHUDStatus();
 
 }
+
+// -event  "timeChanged"
+// -event	"NameChanged" 
+// -event   "ModelPanelSetFocus"
+// -event   "postSceneCallbacks"
+// -event   "SceneSegmentChanged"
+
+
+global proc initSceneNameHUD () {
+
+	headsUpDisplay 
+		-vis            0
+       	-section        7
+       	-block          `headsUpDisplay -nfb 7`
+       	-blockSize      "small"
+		-dataFontSize   "large"
+        -command        "getSceneName()"
+		-event          "RecentCommandChanged"
+    HUDSceneName;
+}
+
+global proc initDateHUD () {
+
+	headsUpDisplay 
+		-vis            0
+       	-section        5
+       	-block          `headsUpDisplay -nfb 5`
+       	-blockSize      "small"
+		-dataFontSize   "large"
+        -command        "getDateModified()"
+        -atr
+    HUDDateName;
+
+}
+
+global proc initStatusHUD () {
+
+	headsUpDisplay 
+		-vis		     0
+		-dataWidth 	     150
+        -section         4
+        -block           `headsUpDisplay -nfb 4`
+        -blockSize       "large"
+		-dataFontSize    "large"
+        -command        "getShotStatus()"
+		-atr
+    HUDStatus;
+}
+
+global proc initSeqFrameHUD () {
+
+	headsUpDisplay 
+		-vis		     0
+		-dataWidth 	     150
+        -section         9
+        -block           `headsUpDisplay -nfb 9`
+        -blockSize       "small"
+        -ba              "right"
+        -da              "right"
+		-dataFontSize    "large"
+        -command         "getSeqFrame()"
+		-atr
+    HUDSeqFrame;
+}
+
+
+global proc initUserNameHUD () {
+
+	headsUpDisplay 
+		-vis		      0
+        -section          5
+        -block            `headsUpDisplay -nfb 5`
+        -blockSize        "small"
+		-dataFontSize     "large"
+        -command          "getUserName()"
+		-event            "RecentCommandChanged"
+    HUDUserName;
+
+}
+
+global proc initRenderCamHUD () {
+
+	headsUpDisplay 
+		-vis		     0
+        -section         9
+        -block           `headsUpDisplay -nfb 9`
+        -blockSize       "small"
+        -ba              "right"
+        -da              "right"
+		-dataFontSize    "large"
+        -command         "getRenderCamDetails()"
+		-atr
+    HUDRenderCam;
+
+}
+
+global proc initFRHUD () {
+
+	headsUpDisplay 
+		-vis		   0
+        -section       0
+        -block         `headsUpDisplay -nfb 0`
+        -blockSize     "large"
+		-dataFontSize  "large"
+        -command       "getFR()"
+		-atr
+    HUDFR;
+}
+
+
+
+
+
 
 global proc string getSceneName (){
 
@@ -96,198 +224,110 @@ global proc string getSceneName (){
 }
 
 global proc string getUserName () {
-	return (`getDateModified`+"  "+`getenv USER`);
+	return (`getenv USER`);
 }
 
 global proc string getDateModified (){
 	
-	return `date -format "MM/DD hh:mm "`;
-	//return python("import time;time.asctime( time.localtime(time.time()) )");
+	//return `date -format "MM/DD hh:mm:ss "`;
+
+	return python("import time;time.asctime( time.localtime(time.time()) )");
 }
-/*
-global proc string getDateModified (){
+global proc string getSeqFrame (){
 	
-	return `date -format "YY/MM/DD hh:mm"`;
+	//return `date -format "MM/DD hh:mm:ss "`;
+	string $curFr[] = `headsUpDisplay -q -sr HUDCurrentFrame`;
+	float $curSeqFr = (float($curFr[0]) -`playbackOptions -q -min` +1);
+	if (size(`ls -type shot`)>0)
+		$curSeqFr = `sequenceManager -q -ct`;
+	string $curFrStr = $curFr[0];
+	string $curSeqFrStr = $curSeqFr;
+
+	while (size($curFrStr) < 4)
+		$curFrStr = (" "+$curFrStr);
+	while (size($curSeqFrStr) < 4)
+		$curSeqFrStr = ("0"+$curSeqFrStr);
+
+	return ($curFrStr + "  | +" +$curSeqFrStr);
 
 }
-*/
+
 
 global proc string getRenderCamDetails(){
-	if (`objExists renderCam`){
-		float $fl = `getAttr renderCam.focalLength`;
-		float $flTemp = $fl * 100;
+
+	string $cam = `headsUpDisplay -q -label HUDCameraNames`;
+	if (`objExists $cam`){
+		float $fl = `getAttr ($cam+".focalLength")`;
+		float $flTemp = $fl * 10;
 		int $flInt = $flTemp;
 		float $flTrunc = $flInt * 0.01;
 
 
-		float $hAmm = `getAttr renderCam.horizontalFilmAperture` * 25.4;
+		float $hAmm = `getAttr ($cam+".horizontalFilmAperture")` * 25.4;
 
-		float $aspcHAmm = 23.6; // aspc horizontal sensor size
-		float $aspcFl = $fl * ($aspcHAmm/$hAmm);
-		float $aspcFlTemp = $aspcFl * 100;
-		int $aspcFlInt = $aspcFlTemp;
-		float $aspcFlTrunc = $aspcFlInt * 0.01;		
+		//float $aspcHAmm = 23.6; // aspc horizontal sensor size
+		//float $aspcFl = $fl * ($aspcHAmm/$hAmm);
+		//float $aspcFlTemp = $aspcFl * 100;
+		//int $aspcFlInt = $aspcFlTemp;
+		//float $aspcFlTrunc = $aspcFlInt * 0.01;		
+		//
+    	//// forumula for getting the area of view based on the flength and horizontal aperture width
+    	//$aovR = 2 * (atan($hAmm/(2*$fl)));
+		//
+    	//int $aovD = rad_to_deg($aovR) * 100;
 
-    	// forumula for getting the area of view based on the flength and horizontal aperture width
-    	$aovR = 2 * (atan($hAmm/(2*$fl)));
-
-    	int $aovD = rad_to_deg($aovR) * 100;
     	string $flStr = "";
-    	string $aspcFlStr = "";
-    	string $aovDStr = "";
+    	//string $aspcFlStr = "";
+    	//string $aovDStr = "";
+
+    	float $fstop = `getAttr ($cam+".fStop")`;
+    	$fstop = trunc($fstop*10);
+    	string $fStopStr  = $fstop;
+    	$fStopStr = (`substring $fStopStr 1 (size($fStopStr) - 1)`+"."+`substring $fStopStr (size($fStopStr)) (size($fStopStr)+1)`);
+
+    	float $fDist = `getAttr ($cam+".focusDistance")`;
+    	$fDist = trunc($fDist*100);
+    	string $fDistStr  = $fDist;
+    	$fDistStr = (`substring $fDistStr 1 (size($fDistStr) - 2)`+"."+`substring $fDistStr (size($fDistStr) - 1) (size($fDistStr)+1)`);
 
 		if ($flInt == 0){
-			$flStr = "  0.00";
+			$flStr = "  0.0";
 		}
 		else {
 			string $twFrStr = $flInt;
 			int $twFrSize = size($twFrStr);
-			$flStr = (`substring $twFrStr 1 ($twFrSize - 2)`+"."+`substring $twFrStr ($twFrSize - 1) ($twFrSize)`);
-			while (size($flStr) < 5)
+			$flStr = (`substring $twFrStr 1 ($twFrSize - 1)`+"."+`substring $twFrStr ($twFrSize) ($twFrSize)`);
+			while (size($flStr) < 4)
 				$flStr = ("0"+$flStr);
 		}
 
-		if ($aspcFlInt == 0){
-			$aspcFlStr = "  0.00";
-		}
-		else {
-			string $twFrStr = $aspcFlInt;
-			int $twFrSize = size($twFrStr);
-			$aspcFlStr = (`substring $twFrStr 1 ($twFrSize - 2)`+"."+`substring $twFrStr ($twFrSize - 1) ($twFrSize)`);
-			while (size($aspcFlStr) < 6)
-				$aspcFlStr = ("0"+$aspcFlStr);
-		}
-
-		if ($aovD == 0){
-			$aovDStr = "0.00";
-		}
-		else {
-			string $twFrStr = $aovD;
-			int $twFrSize = size($twFrStr);
-			$aovDStr = (`substring $twFrStr 1 ($twFrSize - 2)`+"."+`substring $twFrStr ($twFrSize - 1) ($twFrSize)`);
-			while (size($aovDStr) < 5)
-				$aovDStr = ("0"+$aovDStr);
-		}
-		return ("Focal Length (S35): "+$flStr+"mm");
+		//if ($aspcFlInt == 0){
+		//	$aspcFlStr = "  0.00";
+		//}
+		//else {
+		//	string $twFrStr = $aspcFlInt;
+		//	int $twFrSize = size($twFrStr);
+		//	$aspcFlStr = (`substring $twFrStr 1 ($twFrSize - 2)`+"."+`substring $twFrStr ($twFrSize - 1) ($twFrSize)`);
+		//	while (size($aspcFlStr) < 6)
+		//		$aspcFlStr = ("0"+$aspcFlStr);
+		//}
+//
+		//if ($aovD == 0){
+		//	$aovDStr = "0.00";
+		//}
+		//else {
+		//	string $twFrStr = $aovD;
+		//	int $twFrSize = size($twFrStr);
+		//	$aovDStr = (`substring $twFrStr 1 ($twFrSize - 2)`+"."+`substring $twFrStr ($twFrSize - 1) ($twFrSize)`);
+		//	while (size($aovDStr) < 5)
+		//		$aovDStr = ("0"+$aovDStr);
+		//}
+		return (""+$flStr+"mm   f"+$fStopStr+"   d"+$fDistStr);
 		//return ("Maya:"+$flStr+"mm   ASP-C: "+$aspcFlStr+"mm  hFOV: "+$aovDStr+"°");
 	}
 	else{
 		return "";
 	}
-}
-
-
-global proc initSceneNameHUD () {
-
-	headsUpDisplay 
-		-vis 0
-       	-section 5
-       	-block `headsUpDisplay -nfb 5`
-       	-blockSize "small"
-		-dataFontSize "large"
-        -command "getSceneName()"
-		-event "RecentCommandChanged"
-    HUDSceneName;
-
-	// set hud inactive display color to white for better vis
-	//displayColor -dormant headsUpDisplayLabels 16;
-}
-
-global proc initStatusHUD () {
-
-	headsUpDisplay 
-		-vis		0
-        
-		-dataWidth 	150
-               -section          4
-               -block `headsUpDisplay -nfb 4`
-               -blockSize        "large"
-		-dataFontSize    "large"
-               -command          "getShotStatus()"
-				-atr
-               HUDStatus;
-
-	// set hud inactive display color to white for better vis
-	//displayColor -dormant headsUpDisplayLabels 16;
-}
-
-global proc initUserNameHUD () {
-
-	headsUpDisplay 
-		-vis		0
-               -section          5
-               -block `headsUpDisplay -nfb 5`
-               -blockSize        "small"
-		-dataFontSize    "large"
-               -command          "getUserName()"
-		-event "RecentCommandChanged"
-               HUDUserName;
-
-	// set hud inactive display color to white for better vis
-	//displayColor -dormant headsUpDisplayLabels 16;
-
-}
-
-global proc initRenderCamHUD () {
-
-	headsUpDisplay 
-		-vis		0
-        -section          7
-        -block `headsUpDisplay -nfb 7`
-        -blockSize        "small"
-		-dataFontSize    "large"
-        -command          "getRenderCamDetails()"
-		-atr
-        HUDRenderCam;
-
-	// set hud inactive display color to white for better vis
-	//displayColor -dormant headsUpDisplayLabels 16;
-
-}
-
-global proc playblastHUDNameOverride () {
-	string $result = `promptDialog -title "playblastHUD Change User" -message "Change USER: to" -button "OK"  -button "Cancel"  -defaultButton "OK" -cancelButton "Cancel" -dismissString "Cancel"`;
-	if ($result == "OK" ) {
-		string $user = `promptDialog -query -text`;
-		putenv USER $user;
-	}
-}
-
-global proc playblastHUDResize(string $size){
-
-	if ($size == "large" || $size == "small"){
-			headsUpDisplay -e -labelFontSize $size -dataFontSize $size HUDSceneName;
-			headsUpDisplay -e -labelFontSize $size -dataFontSize $size HUDUserName;
-			headsUpDisplay -e -labelFontSize $size -dataFontSize $size HUDFR;
-			headsUpDisplay -e -labelFontSize $size -dataFontSize $size HUDSceneTimecode;
-			headsUpDisplay -e -labelFontSize $size -dataFontSize $size HUDFocalLength;
-			headsUpDisplay -e -labelFontSize $size -dataFontSize $size HUDCurrentFrame;
-			headsUpDisplay -e -labelFontSize $size -dataFontSize $size HUDCameraNames;
-			//headsUpDisplay -e -labelFontSize $size -dataFontSize $size HUDHQCameraNames;
-			headsUpDisplay -e -labelFontSize $size -dataFontSize $size HUDRenderCam;
-			headsUpDisplay -e -labelFontSize $size -dataFontSize $size HUDStatus;
-	}
-	else {
-		error("Unsupported Size. Valid sizes include: \"large\" and \"small\"");
-	}
-}
-
-
-global proc initFRHUD () {
-
-	headsUpDisplay 
-		-vis		0
-               -section          0
-               -block `headsUpDisplay -nfb 0`
-               -blockSize        "large"
-		-dataFontSize    "large"
-               -command          "getFR()"
-		-atr
-               HUDFR;
-
-	// set hud inactive display color to white for better vis
-	//displayColor -dormant headsUpDisplayLabels 16;
-
 }
 
 global proc string getShotStatus(){
@@ -340,7 +380,7 @@ global proc string getFR () {
 	return ($fps+"fps"+$hvOffset);
 }
 
-
+// returns the stage/status of an animated shot (choices are Previs, Blocking, Splining, Polish, Blessed)
 global proc int playblastHUDStatus (){
 	// create script job to refresh picker window on scene loads
 	string $listArray[] = `scriptJob -lj`;
@@ -350,7 +390,7 @@ global proc int playblastHUDStatus (){
 	int $toggleState = 0;
 	for ($i=0;$i<size($listArray);$i++){
 		// if the script jobs are found Kill them
-		if (`gmatch $listArray[$i] "*playblastHUDClear*"`){
+		if (`gmatch $listArray[$i] "*playblastHUDClearStatus*"`){
 			tokenize $listArray[$i] ":" $tokenBuffer;
 			$JobNum = $tokenBuffer[0];
 			scriptJob -k (int($JobNum));
@@ -359,24 +399,152 @@ global proc int playblastHUDStatus (){
 	}
 	// if no script jobs were found then start new ones
 	if ($foundJob == 0) {
-		int $jobNum = `scriptJob -e "NewSceneOpened" "playblastHUDClear"`;
+		int $jobNum = `scriptJob -e "NewSceneOpened" "playblastHUDClearStatus"`;
 		$toggleState = 1;
 	}
 	return $toggleState;
 }
 
 
-global proc playblastHUDClear (){
+global proc playblastHUDClearStatus (){
 	global string $hudStatus;
 	$hudStatus = "";
 }
 
-//  -event            "timeChanged"
 
-//  -event		"NameChanged" 
+global proc playblastHUDNameOverride () {
+	string $result = `promptDialog -title "playblastHUD Change User" -message "Change USER: to" -button "OK"  -button "Cancel"  -defaultButton "OK" -cancelButton "Cancel" -dismissString "Cancel"`;
+	if ($result == "OK" ) {
+		string $user = `promptDialog -query -text`;
+		putenv USER $user;
+	}
+}
 
-// -event "ModelPanelSetFocus"
+global proc playblastHUDResize(string $size){
 
-//NO -event "postSceneCallbacks"
+	if ($size == "large" || $size == "small"){
+			headsUpDisplay -e -labelFontSize $size -dataFontSize $size HUDSceneName;
+			headsUpDisplay -e -labelFontSize $size -dataFontSize $size HUDUserName;
+			headsUpDisplay -e -labelFontSize $size -dataFontSize $size HUDDateName;
+			headsUpDisplay -e -labelFontSize $size -dataFontSize $size HUDFR;
+			headsUpDisplay -e -labelFontSize $size -dataFontSize $size HUDSceneTimecode;
+			headsUpDisplay -e -labelFontSize $size -dataFontSize $size HUDFocalLength;
+			headsUpDisplay -e -labelFontSize $size -dataFontSize $size HUDCurrentFrame;
+			headsUpDisplay -e -labelFontSize $size -dataFontSize $size HUDCameraNames;
+			//headsUpDisplay -e -labelFontSize $size -dataFontSize $size HUDHQCameraNames;
+			headsUpDisplay -e -labelFontSize $size -dataFontSize $size HUDRenderCam;
+			headsUpDisplay -e -labelFontSize $size -dataFontSize $size HUDStatus;
+	}
+	else {
+		error("Unsupported Size. Valid sizes include: \"large\" and \"small\"");
+	}
+}
 
-// -event "SceneSegmentChanged"
+global proc playblastHUDHideAll(){
+			$huds = `headsUpDisplay -q -lh`;
+			global string $visHuds[];
+			clear($visHuds);
+			for ($each in $huds){
+				if (`headsUpDisplay -q -vis $each`)
+					$visHuds[size($visHuds)] = $each;
+			}
+
+			for ($each in $visHuds)
+				headsUpDisplay -e -vis 0 $each;
+
+}
+global proc playblastHUDShowLastVis(){
+			global string $visHuds[];
+			$huds = `headsUpDisplay -q -lh`;
+			for ($each in $huds)
+				headsUpDisplay -e -vis 0 $each;
+			for ($each in $visHuds)
+				headsUpDisplay -e -vis 1 $each;
+
+}
+
+
+global proc playblastHUDCleanForBlast(){
+
+			playblastHUDHideAll();
+
+			print ("Turning Animation HUD OFF\n");
+			headsUpDisplay -e -vis 1 HUDSeqFrame;
+			headsUpDisplay -e -vis 1 HUDSceneName;
+			headsUpDisplay -e -vis 1 HUDStatus;
+			headsUpDisplay -e -vis 1 HUDUserName;
+			headsUpDisplay -e -vis 1 HUDFR;
+			headsUpDisplay -e -vis 1 HUDRenderCam;
+			headsUpDisplay -e -vis 1 HUDDateName;
+
+			
+
+			if (`headsUpDisplay -q -exists HUDCameraNames`){
+				headsUpDisplay -e -vis 0 HUDCameraNames;
+			}
+
+			headsUpDisplay -e -vis 1 HUDCameraNames;
+			headsUpDisplay -e -ao true -vis 0 HUDFocalLength;
+			headsUpDisplay -e -ao true -vis 0 HUDCurrentFrame;
+
+			headsUpDisplay -e -vis 0 HUDViewAxis;
+
+			// set display colors and options
+			colorIndex 17  0.72 0.6 0;
+			eval("playblastHUDResize \"large\"");
+			// this returns an error about it not existing but it actually still does and still works
+			catchQuiet(eval("displayColor -dormant headsUpDisplayLabels 17"));
+			catchQuiet(eval("displayColor -dormant headsUpDisplayValues 17"));
+}
+
+global proc playblastHUDRestore(){
+
+			playblastHUDHideAll();
+
+			print ("Turning Animation HUD ON\n");
+			headsUpDisplay -e -vis 1 HUDSeqFrame;
+			headsUpDisplay -e -vis 1 HUDSceneName;
+			headsUpDisplay -e -vis 1 HUDStatus;
+			headsUpDisplay -e -vis 1 HUDUserName;
+			headsUpDisplay -e -vis 1 HUDFR;
+			headsUpDisplay -e -vis 1 HUDRenderCam;
+			headsUpDisplay -e -vis 1 HUDDateName;
+
+
+			if (`headsUpDisplay -q -exists HUDCameraNames`){
+				headsUpDisplay -e -vis 0 HUDCameraNames;
+			}
+
+			headsUpDisplay -e -vis 1 HUDCameraNames;
+			headsUpDisplay -e -ao true -vis 0 HUDFocalLength;
+			headsUpDisplay -e -ao true -vis 0 HUDCurrentFrame;
+
+			headsUpDisplay -e -vis 0 HUDViewAxis;
+
+			// set display colors and options
+			colorIndex 17  0.72 0.6 0;
+			eval("playblastHUDResize \"large\"");
+			// this returns an error about it not existing but it actually still does and still works
+			catchQuiet(eval("displayColor -dormant headsUpDisplayLabels 17"));
+			catchQuiet(eval("displayColor -dormant headsUpDisplayValues 17"));
+}
+
+global proc playblastHUDDeleteHuds()
+{
+
+		// initialize missing huds
+	if (`headsUpDisplay -q -exists HUDSeqFrame`)
+		headsUpDisplay -rem HUDSeqFrame;
+	if (`headsUpDisplay -q -exists HUDRenderCam`)
+		headsUpDisplay -rem HUDRenderCam;
+	if (`headsUpDisplay -q -exists HUDUserName`)
+		headsUpDisplay -rem HUDUserName;
+	if (`headsUpDisplay -q -exists HUDDateName`)
+		headsUpDisplay -rem HUDDateName;
+	if (`headsUpDisplay -q -exists HUDSceneName`)
+		headsUpDisplay -rem HUDSceneName;
+	if (`headsUpDisplay -q -exists HUDStatus`)
+		headsUpDisplay -rem HUDStatus;
+	if (`headsUpDisplay -q -exists HUDFR`)
+		headsUpDisplay -rem HUDFR;
+}

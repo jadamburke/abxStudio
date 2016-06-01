@@ -31,6 +31,8 @@
 // formLayouts are not transparent EVER although they can inherit the parent bg color, other controls will be obscured
 // these two things make it suck to do background images
 
+// nov 26th 2015 fixed bug that prevented you from adding buttons to a referenced pickr sheet
+
 global proc abxPicker(){
 	if (`window -q -ex abxPickerWindow`){
 		showWindow abxPickerWindow;
@@ -337,6 +339,7 @@ global proc int abxPickerCtrlTrash(string $dragControl, string $dropControl, str
 global proc abxPickerCtrlDrop(string $dragControl, string $dropControl, string $msgs[], int $x, int $y, int $type){
 
 	global string $pickrHiliteList[];
+	global string $pickrPrefix;
 	iconTextButton -e -en true abxPickerSaveBtn;
 	iconTextButton -e -ebg 1 -bgc 1 0 0 abxPickerSaveBtn;
 
@@ -465,17 +468,30 @@ global proc abxPickerCtrlDrop(string $dragControl, string $dropControl, string $
 		string $colorControl = abxDropOnButton($dropControl,$x,$y);
 		if ($colorControl != ""){
 			string $command = `nodeIconButton -q -c $dragControl`;
+			string $slNodes[] = `ls -sl`;
+
+			// bug fix: if the picker prefix is enabled, then make sure to subtract the picker prefix from objects that are selected before storing them.
+			if ($pickrPrefix != "")	{
+				int $i = 0;
+				for ($i=0;$i<size($slNodes);$i++){
+					string $substResult = `substitute ("("+$pickrPrefix+")*") $slNodes[$i] ""`;
+					print ("Substituting: "+" prefix="+$pickrPrefix+" "+$slNodes[$i]+ " with "+$substResult+"\n");
+					$slNodes[$i] = $substResult;
+				}
+			}
+
 			
 			if ($command == "/*select*/"){
-				$slNodes = `ls -sl`;
+				//$slNodes = `ls -sl`;
 				$cmd = "\"";
+
 				for ($each in $slNodes)
 					$cmd = $cmd + " " + $each;
 				nodeIconButton -e -c ("global string $pickrPrefix=\"\";abxPickerSelect "+$cmd+"\"") $colorControl;
 				print ("Command Changed\n"); 
 			}
 			else if ($command == "/*selectT*/"){
-				$slNodes = `ls -sl`;
+				//$slNodes = `ls -sl`;
 				$cmd = "\"";
 				for ($each in $slNodes)
 					$cmd = $cmd + " " + $each;
@@ -483,7 +499,7 @@ global proc abxPickerCtrlDrop(string $dragControl, string $dropControl, string $
 				print ("Command Changed\n"); 
 			}
 			else if ($command == "/*selectR*/"){
-				$slNodes = `ls -sl`;
+				//$slNodes = `ls -sl`;
 				$cmd = "\"";
 				for ($each in $slNodes)
 					$cmd = $cmd + " " + $each;
@@ -491,7 +507,7 @@ global proc abxPickerCtrlDrop(string $dragControl, string $dropControl, string $
 				print ("Command Changed\n"); 
 			}
 			else if ($command == "/*key*/"){
-				$slNodes = `ls -sl`;
+				//$slNodes = `ls -sl`;
 				$cmd = "\"";
 				for ($each in $slNodes)
 					$cmd = $cmd + " " + $each;
@@ -499,7 +515,7 @@ global proc abxPickerCtrlDrop(string $dragControl, string $dropControl, string $
 				print ("Command Changed\n"); 
 			}
 			else if ($command == "/*selectS*/"){
-				$slNodes = `ls -sl`;
+				//$slNodes = `ls -sl`;
 				$cmd = "\"";
 				for ($each in $slNodes)
 					$cmd = $cmd + " " + $each;
@@ -507,7 +523,7 @@ global proc abxPickerCtrlDrop(string $dragControl, string $dropControl, string $
 				print ("Command Changed\n"); 
 			}
 			else if ($command == "/*selectM*/"){
-				$slNodes = `ls -sl`;
+				//$slNodes = `ls -sl`;
 				$cmd = "\"";
 				for ($each in $slNodes)
 					$cmd = $cmd + " " + $each;
@@ -515,7 +531,7 @@ global proc abxPickerCtrlDrop(string $dragControl, string $dropControl, string $
 				print ("Command Changed\n"); 
 			}
 			else if ($command == "/*toggle*/"){
-				string $slNodes[] = `ls -sl`;
+				//string $slNodes[] = `ls -sl`;
 				string $selectedChnl[] = `channelBox -q -sma mainChannelBox`;
 				
 				if(size($selectedChnl) != 0 && size($slNodes) != 0){
@@ -531,7 +547,7 @@ global proc abxPickerCtrlDrop(string $dragControl, string $dropControl, string $
 				}
 			}
 			else if ($command == "/*pose*/"){
-				string $slNodes[] = `ls -sl`;
+				//string $slNodes[] = `ls -sl`;
 				$cmd = "";
 				for ($each in $slNodes){
 					string $keyableAttrs[] = `listAnimatable $each`;
@@ -543,7 +559,7 @@ global proc abxPickerCtrlDrop(string $dragControl, string $dropControl, string $
 				}
 			}
 			else if ($command == "/*isolate*/"){
-				$slNodes = `ls -sl`;
+				//$slNodes = `ls -sl`;
 				$cmd = "";
 				for ($each in $slNodes)
 					$cmd = $cmd + " " + $each;
@@ -595,12 +611,21 @@ global proc abxPickerCtrlDrop(string $dragControl, string $dropControl, string $
 
 		string $tokenBuffer[];
 		tokenize $data ":" $tokenBuffer;
-		$slNodes = `ls -sl`;
+		string $slNodes[] = `ls -sl`;
+			// bug fix: if the picker prefix is enabled, then make sure to subtract the picker prefix from objects that are selected before storing them.
+			if ($pickrPrefix != "")	{
+				int $i = 0;
+				for ($i=0;$i<size($slNodes);$i++){
+					string $substResult = `substitute ("("+$pickrPrefix+")*") $slNodes[$i] ""`;
+					print ("Substituting: "+" prefix="+$pickrPrefix+" "+$slNodes[$i]+ " with "+$substResult+"\n");
+					$slNodes[$i] = $substResult;
+				}
+			}
 		$cmd = "\"";
 
 		for ($each in $slNodes)
 			$cmd = $cmd + " " + $each;
-		$newCtrl = abxPickerNewButton(($x-($ctrlWidth/2)),($y-($ctrlHeight/2)),$ctrlWidth,$ctrlHeight,$tokenBuffer[2],$tokenBuffer[3],$tokenBuffer[4],$image,("global string $pickrPrefix=\"\";abxPickerSelect "+$cmd+"\""),$label);
+		$newCtrl = abxPickerNewButton(($x-($ctrlWidth/2)),($y-($ctrlHeight/2)),$ctrlWidth,$ctrlHeight,$tokenBuffer[2],$tokenBuffer[3],$tokenBuffer[4],$image,("global string $pickrPrefix=\""+$pickrPrefix+"\";abxPickerSelect "+$cmd+"\""),$label);
 
 		control -e -h $ctrlHeight -w $ctrlWidth $newCtrl;		
 
@@ -1396,7 +1421,9 @@ global proc abxPickerSelect (string $selList){
 	int $mods = `getModifiers`;
 	// shift
 	if (($mods / 1) %2) {
-		select -add $selListBuffer;
+		for ($ea in $selListBuffer)
+			catch(evalEcho("select -add "+$ea));
+		//select -add $selListBuffer;
 		if (`control -exists $pickrControl`){
 			abxPickerCtrlHilite $pickrControl;
 			$pickrHiliteList[`size $pickrHiliteList`] = $pickrControl;
@@ -1404,13 +1431,18 @@ global proc abxPickerSelect (string $selList){
 	}
 	// ctrl
 	else if (($mods / 4) %2) {
-		select -toggle $selListBuffer;
+		for ($ea in $selListBuffer)
+			catch(evalEcho("select -toggle "+$ea));
+		//select -toggle $selListBuffer;
 		abxPickerCtrlClearHilite $pickrControl;
 	}
 	// nothing
 	else{
-		print $selListBuffer;
-		select $selListBuffer;
+		//print $selListBuffer;
+		//select $selListBuffer;
+		select -clear;
+		for ($ea in $selListBuffer)
+			catch(evalEcho("select -add "+$ea));
 		if (`control -exists $pickrControl`){
 			abxPickerClearHilites;
 			abxPickerCtrlHilite $pickrControl;
@@ -1419,7 +1451,7 @@ global proc abxPickerSelect (string $selList){
 		
 	}
 	$pickrPress = true;
-	//setFocus MayaWindow;
+	evalDeferred("setFocus MayaWindow;");
 }
 
 //------------------------------------------------------------------------
@@ -1888,6 +1920,8 @@ global proc abxPickerMenuCmd (string $character){
 			textField -e -text $charName abxPickerCharText;
 		else
 			textField -e -text "*Prefix*" abxPickerCharText;
+		if (`getAttr ($node+".charPrefix")`)
+			$pickrPrefix = $charName;
 	}
 }
 
