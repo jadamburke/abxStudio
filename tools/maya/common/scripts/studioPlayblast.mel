@@ -1,32 +1,38 @@
-global proc passionPlayblast (){
+global proc studioPlayblast (){
 
 	updateTimeSliderMenu "MayaWindow|toolBar6|MainTimeSliderLayout|formLayout9|TimeSliderMenu";
 	if (`menu -exists "TimeSliderMenu"`){
-		if (`menuItem -q -exists "ppAutoPlayblastMenuItem"`){
-			if (`menuItem -q -exists "ppAutoPlayblastMenuItem"`)
-				deleteUI -menuItem "ppAutoPlayblastMenuItem";
-			if (`menuItem -q -exists "ppAutoPlayblastMenuItem2"`)
-				deleteUI -menuItem "ppAutoPlayblastMenuItem2";
-			if (`menuItem -q -exists "ppAutoPlayblastDivItem"`)
-				deleteUI -menuItem "ppAutoPlayblastDivItem";
-			if (`menuItem -q -exists "ppAutoPlayblastDivItem2"`)
-				deleteUI -menuItem "ppAutoPlayblastDivItem2";
-			if (`menuItem -q -exists "ppAutoPlayblastMenuItem3"`)
-				deleteUI -menuItem "ppAutoPlayblastMenuItem3";
-			if (`menuItem -q -exists "ppAutoPlayblastMenuItem4"`)
-				deleteUI -menuItem "ppAutoPlayblastMenuItem4";
-			if (`menuItem -q -exists "ppAutoPlayblastDivItem3"`)
-				deleteUI -menuItem "ppAutoPlayblastDivItem3";
+		if (`menuItem -q -exists "stAutoPlayblastMenuItem"`){
+			if (`menuItem -q -exists "stAutoPlayblastMenuItem"`)
+				deleteUI -menuItem "stAutoPlayblastMenuItem";
+			if (`menuItem -q -exists "stAutoPlayblastMenuItem2"`)
+				deleteUI -menuItem "stAutoPlayblastMenuItem2";
+			if (`menuItem -q -exists "stAutoPlayblastDivItem"`)
+				deleteUI -menuItem "stAutoPlayblastDivItem";
+			if (`menuItem -q -exists "stAutoPlayblastDivItem2"`)
+				deleteUI -menuItem "stAutoPlayblastDivItem2";
+			if (`menuItem -q -exists "stAutoPlayblastMenuItem3"`)
+				deleteUI -menuItem "stAutoPlayblastMenuItem3";
+			if (`menuItem -q -exists "stAutoPlayblastMenuItem4"`)
+				deleteUI -menuItem "stAutoPlayblastMenuItem4";
+			if (`menuItem -q -exists "stAutoPlayblastDivItem3"`)
+				deleteUI -menuItem "stAutoPlayblastDivItem3";
+			if (`menuItem -q -exists "stAutoPlayblastMenuItem5"`)
+				deleteUI -menuItem "stAutoPlayblastMenuItem5";
+			if (`menuItem -q -exists "stAutoPlayblastDivItem4"`)
+				deleteUI -menuItem "stAutoPlayblastDivItem4";
 		}
 		else{
 			setParent -menu TimeSliderMenu;
-			menuItem -divider true ppAutoPlayblastDivItem;
-			menuItem -label "Passion Playblast renderLayer" -c "ppPlayblastDoCurrentScene 2 0 0 1" ppAutoPlayblastMenuItem4;
-			menuItem -divider true ppAutoPlayblastDivItem2;
-			menuItem -label "Passion Playblast GreenScreen" -c "ppPlayblastDoCurrentScene 2 0 1 0" ppAutoPlayblastMenuItem3;
-			menuItem -divider true ppAutoPlayblastDivItem3;
-			menuItem -label "Passion Playblast As Is(Sends to Edit)" -c "ppPlayblastDoCurrentScene 2 1 0 0" ppAutoPlayblastMenuItem;
-			menuItem -label "Passion Playblast Geo Only(Sends to Edit)" -c "ppPlayblastDoCurrentScene 2 0 0 0" ppAutoPlayblastMenuItem2;
+			menuItem -divider true stAutoPlayblastDivItem;
+			menuItem -label "Passion Playblast renderLayer" -c "stPlayblastDoCurrentScene 2 0 0 1 0" stAutoPlayblastMenuItem4;
+			menuItem -divider true stAutoPlayblastDivItem2;
+			menuItem -label "Passion Playblast CameraName" -c "stPlayblastDoCurrentScene 2 0 0 0 1" stAutoPlayblastMenuItem5;
+			menuItem -divider true stAutoPlayblastDivItem4;
+			menuItem -label "Passion Playblast GreenScreen" -c "stPlayblastDoCurrentScene 2 0 1 0 0" stAutoPlayblastMenuItem3;
+			menuItem -divider true stAutoPlayblastDivItem3;
+			menuItem -label "Passion Playblast As Is(Sends to Edit)" -c "stPlayblastDoCurrentScene 2 1 0 0 0" stAutoPlayblastMenuItem;
+			menuItem -label "Passion Playblast Geo Only(Sends to Edit)" -c "stPlayblastDoCurrentScene 2 0 0 0 0" stAutoPlayblastMenuItem2;
 
 
 		}
@@ -34,7 +40,7 @@ global proc passionPlayblast (){
 
 }
 
-global proc ppPlayblastAddCustomCamAttrs(string $dupedCam){
+global proc stPlayblastAddCustomCamAttrs(string $dupedCam){
 
 		if (!`attributeExists "clipStart" $dupedCam`){
 			addAttr -ln "clipStart"  -at double $dupedCam;
@@ -55,7 +61,7 @@ global proc ppPlayblastAddCustomCamAttrs(string $dupedCam){
 
 }
 
-global proc ppPlayblastDoCurrentScene(string $doCommit, int $asIs, int $greenscreen, int $useRenderLayerName){
+global proc stPlayblastDoCurrentScene(string $doCommit, int $asIs, int $greenscreen, int $useRenderLayerName, int $useCamera){
 
 	
 	// determine the shot
@@ -64,6 +70,20 @@ global proc ppPlayblastDoCurrentScene(string $doCommit, int $asIs, int $greenscr
 
 	// 0:Server 1:Job 2:ShotFolder 3:Seq 4:Shot 5:dept 6:subDept 7:take 8:version 9:ext 10:subshot
 	string $shotInfo[] = abxShotsGetFromPath($currentScene);
+
+	string $cameraName = "";
+	if (`objExists "master:renderCam"`)
+		$cameraName = "master:renderCam";
+	else if (`objExists "anim:renderCam"`)
+		$cameraName = "anim:renderCam";
+	else if (`objExists "renderCam"`)
+		$cameraName = "renderCam";
+	else 
+		$cameraName = "renderCam";
+
+
+	string $activePanel = `getPanel -withFocus`; 
+	if ($useCamera) $cameraName = `modelPanel -q -camera $activePanel`;
 	
 	//set the playblast variables
 	string $renderPath = "";
@@ -77,6 +97,13 @@ global proc ppPlayblastDoCurrentScene(string $doCommit, int $asIs, int $greenscr
 	string $currentLayer = `editRenderLayerGlobals -q -currentRenderLayer`;
 
 	string $pbPath  = $renderPath+$currentSceneName;
+	if ($useCamera){
+		string $tbuf[];
+		tokenize $cameraName "|" $tbuf;
+		$camNameValid = $tbuf[size($tbuf)-1];
+		//$pbPath += ("/"+$camNameValid);
+		$currentSceneName += ("_"+$camNameValid);		
+	}
 	if ($useRenderLayerName){
 		$pbPath += ("/"+$currentLayer);
 		$currentSceneName += ("_"+$currentLayer);
@@ -121,18 +148,7 @@ global proc ppPlayblastDoCurrentScene(string $doCommit, int $asIs, int $greenscr
 	evalEcho("setAttr defaultResolution.deviceAspectRatio "+(float($imgWidth)/float($imgHeight)));
 
 
-	string $cameraName = "";
-	if (`objExists "master:renderCam"`)
-		$cameraName = "master:renderCam";
-	else if (`objExists "anim:renderCam"`)
-		$cameraName = "anim:renderCam";
-	else if (`objExists "renderCam"`)
-		$cameraName = "renderCam";
-	else 
-		$cameraName = "renderCam";
 
-
-	string $activePanel = `getPanel -withFocus`; 
 	// if the viewport is the stereo panel then switch back to the normal modelPanel 
 	if ($activePanel == "StereoPanel") {
 		lookThroughModelPanel $cameraName StereoPanel;
@@ -143,7 +159,7 @@ global proc ppPlayblastDoCurrentScene(string $doCommit, int $asIs, int $greenscr
 	if (`modelPanel -q -exists $activePanel`){
 
 		if (!`objExists $cameraName`){
-			$result = `confirmDialog -title "No renderCam Found" -message "There is no 'renderCam' found. Please rename your main camera to 'renderCam' (case-sensitive) and make sure the camera shape node is named renderCamShape" -button "OK" -defaultButton "OK" -cancelButton "OK" -dismissString "OK"`;
+			$result = `confirmDialog -title ("No "+$cameraName+" found") -message ("There is no "+$cameraName+" found. Please rename your main camera to 'renderCam' (case-sensitive) and make sure the camera shape node is named "+$cameraName+"Shape") -button "OK" -defaultButton "OK" -cancelButton "OK" -dismissString "OK"`;
 			return;
 		}
 			//error ($cameraName+" does not exist. Please conform your scene or make your main camera named "+$cameraName+"\n");
@@ -175,19 +191,21 @@ global proc ppPlayblastDoCurrentScene(string $doCommit, int $asIs, int $greenscr
 	}
 
 	// frame range check
-	ppPlayblastCheckFrameRange($pbPath);
+	stPlayblastCheckFrameRange($pbPath);
 	
 	if ($shotInfo[3] == ""){
 		
 		print("LOOKING FOR:"+$pbPath+".mov\n");
 		if (`file -q -exists ($pbPath+".mov")`){
-			$result = `confirmDialog -title "ppPlayblast" -message ("A Playblast for "+$currentSceneName+" Already Exists. Please increment your scene version and try again.") -button "Abort Playblast" -button "Force Overwrite" -defaultButton "Abort Playblast" -dismissString "Abort Playblast"`;
+			$result = `confirmDialog -title "stPlayblast" -message ("A Playblast for "+$currentSceneName+" Already Exists. Please increment your scene version and try again.") -button "Abort Playblast" -button "Force Overwrite" -defaultButton "Abort Playblast" -dismissString "Abort Playblast"`;
 			if ($result == "Force Overwrite"){
-				ppPlayblastDoBlast2 $cameraName $pbPath $currentSceneName "png" `playbackOptions -q -min` `playbackOptions -q -max` $imgWidth $imgHeight $doCommit $shotInfo[3];
+				stPlayblastDoBlast2 $cameraName $pbPath $currentSceneName "mov" `playbackOptions -q -min` `playbackOptions -q -max` $imgWidth $imgHeight $doCommit $shotInfo[3];
+				//stPlayblastDoBlast2 $cameraName $pbPath $currentSceneName "png" `playbackOptions -q -min` `playbackOptions -q -max` $imgWidth $imgHeight $doCommit $shotInfo[3];
 			}
 		}
 		else{		
-			ppPlayblastDoBlast2 $cameraName $pbPath $currentSceneName "png" `playbackOptions -q -min` `playbackOptions -q -max` $imgWidth $imgHeight $doCommit $shotInfo[3];
+			stPlayblastDoBlast2 $cameraName $pbPath $currentSceneName "mov" `playbackOptions -q -min` `playbackOptions -q -max` $imgWidth $imgHeight $doCommit $shotInfo[3];
+			//stPlayblastDoBlast2 $cameraName $pbPath $currentSceneName "png" `playbackOptions -q -min` `playbackOptions -q -max` $imgWidth $imgHeight $doCommit $shotInfo[3];
 		}
 	}
 	else {
@@ -195,20 +213,20 @@ global proc ppPlayblastDoCurrentScene(string $doCommit, int $asIs, int $greenscr
 		//string $pbPath  = ($renderPath+$shotInfo[3]+"/"+$shotInfo[3]+"_"+$shotInfo[4]+"/playblasts/"+$currentSceneName);
 		print("LOOKING FOR:"+$pbPath+".mov\n");
 		if (`file -q -exists ($pbPath+".mov")`){
-			$result = `confirmDialog -title "ppPlayblast" -message ("A Playblast for "+$currentSceneName+" Already Exists. Please increment your scene version and try again.") -button "Abort Playblast" -button "Force Overwrite" -defaultButton "Abort Playblast" -dismissString "Abort Playblast"`;
+			$result = `confirmDialog -title "stPlayblast" -message ("A Playblast for "+$currentSceneName+" Already Exists. Please increment your scene version and try again.") -button "Abort Playblast" -button "Force Overwrite" -defaultButton "Abort Playblast" -dismissString "Abort Playblast"`;
 			if ($result == "Force Overwrite"){
-				ppPlayblastDoBlast2 $cameraName $pbPath $currentSceneName "png" `playbackOptions -q -min` `playbackOptions -q -max` $imgWidth $imgHeight $doCommit $shotInfo[3];
+				stPlayblastDoBlast2 $cameraName $pbPath $currentSceneName "mov" `playbackOptions -q -min` `playbackOptions -q -max` $imgWidth $imgHeight $doCommit $shotInfo[3];
 			}
 		}
 		else{
-			ppPlayblastDoBlast2 $cameraName $pbPath $currentSceneName "png" `playbackOptions -q -min` `playbackOptions -q -max` $imgWidth $imgHeight $doCommit $shotInfo[3];
+			stPlayblastDoBlast2 $cameraName $pbPath $currentSceneName "mov" `playbackOptions -q -min` `playbackOptions -q -max` $imgWidth $imgHeight $doCommit $shotInfo[3];
 		}
 	}
 
 	modelEditor -e -ignorePanZoom false $activePanel;
 }
 
-global proc string ppPlayblastGetPadded (int $inNumber){
+global proc string stPlayblastGetPadded (int $inNumber){
 
 	string $result = "";
 	if ($inNumber < 10)
@@ -224,7 +242,7 @@ global proc string ppPlayblastGetPadded (int $inNumber){
 }
 
 
-global proc ppPlayblastDoBlast2 (string $cameraName, string $pbPath, string $pbName, string $ext, int $startFr, int $endFr,int $imgWidth,int $imgHeight, int $doCommit, string $seqName){
+global proc stPlayblastDoBlast2 (string $cameraName, string $pbPath, string $pbName, string $ext, int $startFr, int $endFr,int $imgWidth,int $imgHeight, int $doCommit, string $seqName){
 
 	string $cmd;
 	string $cmd2;
@@ -268,18 +286,18 @@ global proc ppPlayblastDoBlast2 (string $cameraName, string $pbPath, string $pbN
 	//string $pbTempFullPath = ($localFolder+"/"+$pbName);
 	string $pbTempFullPath = ($pbPath+"/"+$pbName);
 	string $pbTempPath = $pbPath;
-	string $startFrame = `ppPlayblastGetPadded $startFr`;
-	string $endFrame = `ppPlayblastGetPadded $endFr`;
+	string $startFrame = `stPlayblastGetPadded $startFr`;
+	string $endFrame = `stPlayblastGetPadded $endFr`;
 	
-	string $ppResource = `getenv PP_RESOURCE`;
-	string $fileViewPath = ($ppResource+"/bin/win32/djv/djv-083-pre2_winxp-x86/bin/djv_view.exe");
+	string $stResource = `getenv ST_RESOURCE`;
+	string $fileViewPath = ($stResource+"/bin/win32/djv/djv-083-pre2_winxp-x86/bin/djv_view.exe");
 
 	// DJV_convert file converter flags (does not support audio) but can do arbitrary image sequences
-	string $fileConvertPath = ($ppResource+"/bin/win32/djv/djv-083-pre2_winxp-x86/bin/djv_convert.exe");
+	string $fileConvertPath = ($stResource+"/bin/win32/djv/djv-083-pre2_winxp-x86/bin/djv_convert.exe");
 	string $fileConvertFlags = "-save quicktime codec jpeg";
 
 	// FFMPEG file Converter and flags, can convert between movie formats but is bad at image sequences
-	string $fileConvertPathAlt = ($ppResource+"/bin/win32/ffmpeg/ffmpeg-20120424-git-3bbf3f7-win64-static/bin/ffmpeg");
+	string $fileConvertPathAlt = ($stResource+"/bin/win32/ffmpeg/ffmpeg-20120424-git-3bbf3f7-win64-static/bin/ffmpeg");
 	string $fileConvertFlagsAlt = "-y -i";
 	string $fileConvertFlagsAlt2 = ("-vcodec libx264 -b:v 10000k -f mov -g 1 -r "+$fps);
 
@@ -321,9 +339,9 @@ global proc ppPlayblastDoBlast2 (string $cameraName, string $pbPath, string $pbN
 			//playblast  -format image -filename "//pp-fs-nyc/Production/0124_Pediasure/Movies/Animation_Preview/DM/04_00/DM_04_00_Block_TK01_v001" -sequenceTime 0 -clearCache 1 -viewer 1 -showOrnaments 1 -fp 4 -percent 50 -compression "png" -quality 70;
 
 			if ($soundNode != "")
-				$cmd += ("playblast -st "+$startFr+" -et "+$endFr+" -format image -sound \""+$soundNode+"\"  -filename \""+$pbTempPath+"/"+$pbName+"\" -sequenceTime 0  -clearCache 1 -viewer 1 -showOrnaments 1 -fp 4 -percent "+$percent+" -compression \"png\" -quality 70 -widthHeight "+$imgWidth+" "+$imgHeight+";\n");
+				$cmd += ("playblast -st "+$startFr+" -et "+$endFr+" -format qt -sound \""+$soundNode+"\"  -filename \""+$pbTempPath+"/"+$pbName+"\" -sequenceTime 0  -clearCache 1 -viewer 1 -showOrnaments 1 -fp 4 -percent "+$percent+" -compression \"h264\" -quality 100 -widthHeight "+$imgWidth+" "+$imgHeight+";\n");
 			else
-				$cmd += ("playblast -st "+$startFr+" -et "+$endFr+" -format image -filename \""+$pbTempPath+"/"+$pbName+"\" -sequenceTime 0 -clearCache 1 -viewer 1 -showOrnaments 1 -fp 4 -percent "+$percent+" -compression \"png\" -quality 70 -widthHeight "+$imgWidth+" "+$imgHeight+";\n");
+				$cmd += ("playblast -st "+$startFr+" -et "+$endFr+" -format qt -filename \""+$pbTempPath+"/"+$pbName+"\" -sequenceTime 0 -clearCache 1 -viewer 1 -showOrnaments 1 -fp 4 -percent "+$percent+" -compression \"h264\" -quality 100 -widthHeight "+$imgWidth+" "+$imgHeight+";\n");
 
 
 			$cmd += ("displayRGBColor \"background\" .27 .27 .27;displayPref -displayGradient 1;");
@@ -347,9 +365,9 @@ global proc ppPlayblastDoBlast2 (string $cameraName, string $pbPath, string $pbN
 			//$cmd += ("system(\"load "+$localFile+"\");\n");
 
 			//print ("system("+$sysCmd2+"\");
-			//print ("ppPlayblastsCommitToEditorAlt \""+$pbPath+"\" \""+$destMovPath+"\";");
+			//print ("stPlayblastsCommitToEditorAlt \""+$pbPath+"\" \""+$destMovPath+"\";");
 			if($doCommit != 0) {
-				//$cmd += ("ppPlayblastsCommitToEditorAlt \""+$pbPath+"\" \""+$convertSourcePath+"\" "+$doCommit+" \""+$seqName+"\";");
+				//$cmd += ("stPlayblastsCommitToEditorAlt \""+$pbPath+"\" \""+$convertSourcePath+"\" "+$doCommit+" \""+$seqName+"\";");
 			}
             else {
             	// deletes the .avi file if since it is no longer needed. if commit did happen it would only be deleted after converting for commit to edit
@@ -361,7 +379,7 @@ global proc ppPlayblastDoBlast2 (string $cameraName, string $pbPath, string $pbN
 			//if ($imgHeight < 720 || $imgWidth < 640){
 				$cmd += "playblastHUDResize \"small\";";
 				$cmd += "headsUpDisplay -e -vis 1 HUDViewAxis;";
-				$cmd += ("ppPlayblastThumbnailUpdate \""+`file -q -sn`+"\""); 
+				$cmd += ("stPlayblastThumbnailUpdate \""+`file -q -sn`+"\""); 
 			//}			
 
 			// run the playblast command as deferred evaluation
@@ -370,7 +388,7 @@ global proc ppPlayblastDoBlast2 (string $cameraName, string $pbPath, string $pbN
 }
 
 
-global proc ppPlayblastCheckFrameRange(string $filePath){
+global proc stPlayblastCheckFrameRange(string $filePath){
 
 
 	float $currentS = `playbackOptions -q -min`;
@@ -435,7 +453,7 @@ global proc ppPlayblastCheckFrameRange(string $filePath){
 	//}
 }
 
-global proc ppPlayblastThumbnailUpdate(string $filePath){
+global proc stPlayblastThumbnailUpdate(string $filePath){
 
 	float $currentS = `playbackOptions -q -min`;
 	float $currentE = `playbackOptions -q -max`;	
@@ -457,5 +475,28 @@ global proc ppPlayblastThumbnailUpdate(string $filePath){
     	}
     	abxShotsCaptureThumbnail "";
 	}
+
+}
+
+
+global proc string studioPlayblastRenderPath(){
+
+	string $renderPath;
+	setAttr -type "string" defaultRenderGlobals.imageFilePrefix "<Scene>/<RenderLayer>/<Scene>_<RenderLayer>_<RenderPass>_<Camera>";
+
+	string $shotInfo[] = abxShotsGetFromPath(`file -q -sn`);
+	if ($shotInfo[2] == "assets"){
+		string $assetInfo[] = abxAssetsGetFromPath(`file -q -sn`);
+		$renderPath = ($assetInfo[0]+"/"+$assetInfo[1]+"/"+$assetInfo[2]+"/"+$assetInfo[3]+"/"+$assetInfo[4]+"/"+$assetInfo[5]+"/render/");
+
+	}
+	else if ($shotInfo[2] == "shots" || $shotInfo[2] == "Shots"){
+		$renderPath = ($shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$shotInfo[5]+"/render/");
+	}
+	else{
+		$renderPath = (`workspace -q -rd`+"maya/images");
+	}
+
+	return $renderPath;
 
 }

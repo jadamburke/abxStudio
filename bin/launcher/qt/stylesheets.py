@@ -27,6 +27,14 @@ class StyleSheet(object):
 
         sStyleSheet = ""
         sStyleSheet += """
+            QScrollBar:vertical {
+                border: 0px solid grey; 
+                background: %s;
+                width: 10px; 
+                margin: 0px 0px 0 0px; 
+                }
+                """%(backroundColor)
+        sStyleSheet += """
             QWidget {
                 background-color: %s;
                 color: white;

@@ -3,12 +3,12 @@
 
 global proc int callMayaBG (int $noUI, int $threaded, string $filePath, string $projDir, string $sourceScript, string $command){
     
-   $ppTools = `getenv MAYA_PPTOOLS`;
-   //$mayaBG = ($ppTools+"/env/ppMayaBatch.bat");
+   $stTools = `getenv MAYA_STTOOLS`;
+   //$mayaBG = ($stTools+"/env/studioMayaBatch.bat");
    $mayaBG = "mayabatch.exe";
    string $sysCmd = "";
     if ($noUI == 1){
-        $command = ("source \\\""+$ppTools+"/scripts/abxLockFile.mel\\\";"+$command);
+        $command = ("source \\\""+$stTools+"/scripts/abxLockFile.mel\\\";"+$command);
         $command += ";mayaBGQuit();";
     }
     else {

@@ -23,7 +23,7 @@ global proc ppDoNewSceneQuiet (string $which) {
 
 global proc ppDoNewSceneVerbosity (string $which, int $verbose) {
 	if ($verbose) print ("DOING THE NEW ONE\n");
-	string $ppTools = `getenv MAYA_PPTOOLS`;
+	string $stTools = `getenv MAYA_STTOOLS`;
 	//get the old newFile name variable if it exists so it can be restored later.
 	//string $OldnewFileName = `optionVar -q "newFileName"`;
 
@@ -41,27 +41,27 @@ global proc ppDoNewSceneVerbosity (string $which, int $verbose) {
 	
 	switch ($which){
 		case "empty":
-			$newFile = ($ppTools+"/sceneTemplates/new_empty.ma");
+			$newFile = ($stTools+"/sceneTemplates/new_empty.ma");
 			$dept = "";
 			break;
 		case "anm":
-			$newFile = ($ppTools+"/sceneTemplates/new_anm.ma");
+			$newFile = ($stTools+"/sceneTemplates/new_anm.ma");
 			$dept = "anm";
 			break;
 		case "lgt":
-			$newFile = ($ppTools+"/sceneTemplates/new_lgt.ma");
+			$newFile = ($stTools+"/sceneTemplates/new_lgt.ma");
 			$dept = "lgt";
 			break;
 		case "fx":
-			$newFile = ($ppTools+"/sceneTemplates/new_fx.ma");
+			$newFile = ($stTools+"/sceneTemplates/new_fx.ma");
 			$dept = "fx";
 			break;
 		case "geo":
-			$newFile = ($ppTools+"/sceneTemplates/new_geo.ma");
+			$newFile = ($stTools+"/sceneTemplates/new_geo.ma");
 			$dept = "geo";
 			break;
 		case "rig":
-			$newFile = ($ppTools+"/sceneTemplates/new_rig.ma");
+			$newFile = ($stTools+"/sceneTemplates/new_rig.ma");
 			$dept = "rig";
 			break;	
 		default: 
@@ -153,7 +153,7 @@ global proc ppPerformNewScene (string $fileToOpen, string $dept, int $verbose) {
 
 global proc ppNewSceneConfigDefaults(string $dept){
 
-	eval("source \""+`getenv MAYA_PPTOOLS`+"/scripts/abxProject.mel\"");
+	eval("source \""+`getenv MAYA_STTOOLS`+"/scripts/abxProject.mel\"");
 
 	string $workspace = `workspace -q -rd`;
 

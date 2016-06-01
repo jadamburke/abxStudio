@@ -7,16 +7,16 @@ BIN = os.path.dirname(LAUNCHER)
 ROOT = os.path.dirname(BIN)
 CONFIG = os.path.join(ROOT,'config')
 
-os.environ['PP_ROOT'] = ROOT.replace('\\','/')
-os.environ['PP_CONFIG'] = CONFIG.replace('\\','/')
+os.environ['ST_ROOT'] = ROOT.replace('\\','/')
+os.environ['ST_CONFIG'] = CONFIG.replace('\\','/')
 
 # import the proper version of PYQT
 # need to look at a better way of sourcing pyqt / pyside
-os.environ['PATH'] += ';\\\\diskstation\\res\\studio\\nyc\\lib\\python\\pyqt4\\4.10.3'
+os.environ['PATH'] += ';C:\\pipeline\\abxStudio\\lib\\python\\pyqt4\\4.10.3'
 #os.environ['PATH'] += ';E:\\pyqt\\4.8.4'
-os.environ['PYTHONPATH'] += ';\\\\diskstation\\res\\studio\\nyc\\lib\\python\\pyqt4\\4.10.3'
+os.environ['PYTHONPATH'] += ';C:\\pipeline\\abxStudio\\lib\\python\\pyqt4\\4.10.3'
 #os.environ['PYTHONPATH'] += ';E:\\pyqt\\4.8.4'
-sys.path.append('\\\\diskstation\\res\\studio\\nyc\\lib\\python\\pyqt4\\4.10.3')
+sys.path.append('C:\\pipeline\\abxStudio\\lib\\python\\pyqt4\\4.10.3')
 #sys.path.append('E:\\pyqt\\4.8.4')
 
 print os.environ['PYTHONPATH']
@@ -27,10 +27,10 @@ import yaml
 
 MODE = "pub"
 SITE = "ny"
-SERVER = "diskstation"
+SERVER = "pp-fs-nyc"
 SHARES = {
-    'prod' : 'jobs',
-    'sys' : 'res',
+    'prod' : 'production',
+    'sys' : 'pipeline',
     'user' : 'personal',
     'lib' : 'lib',
     'job' : 'jobs'

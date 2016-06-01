@@ -1,8 +1,8 @@
-// ppFileBrowse
+// studioFileBrowse
 // handles opening of OS specific file browsers for various needs
 
 
-global proc ppBrowseProject
+global proc studioBrowseProject
  () {
 	$projPath = toNativePath(`workspace -q -rd`); 
 	
@@ -15,7 +15,7 @@ global proc ppBrowseProject
 }
 
 
-global proc ppBrowseJob
+global proc studioBrowseJob
  () {
 	$projPath = toNativePath(`workspace -q -rd`); 
 
@@ -49,7 +49,7 @@ global proc ppBrowseJob
 
 }
 
-global proc ppBrowsePath (string $path){
+global proc studioBrowsePath (string $path){
 	$path = toNativePath($path);
 	print ("Path = "+$path+"\n");
 	if (`about -os ` == "mac")

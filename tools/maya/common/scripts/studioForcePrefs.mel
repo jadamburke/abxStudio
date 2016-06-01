@@ -1,5 +1,5 @@
-// ppForcePrefs
-global proc ppForcePrefs () {
+// studioForcePrefs
+global proc studioForcePrefs () {
 	string $gUseSaveScenePanelConfig;
 	string $gUseScenePanelConfig;
 

@@ -13,10 +13,12 @@ from qt.widgets import *
 from qt.stylesheets import *
 
 import yaml
+import core.project
 
 class Launcher(QMainWindow):
 
     studioenv = StudioEnvironment()
+    os.environ['QT_AUTO_SCREEN_SCALE_FACTOR '] = 'TRUE'
 
     def __init__(self, parent=None):
 
@@ -34,13 +36,11 @@ class Launcher(QMainWindow):
 
     def updateUi(self):
 
-
-
         sStyleSheet = StyleSheet().styleSheet(1)
         self.setStyleSheet(sStyleSheet)
 
         self.setWindowFlags( Qt.FramelessWindowHint )
-        pixmapPasion = QPixmap(os.path.join( RES, "passion-pink.ico"))
+        pixmapPasion = QPixmap(os.path.join( RES, "pink.ico"))
         self.setWindowIcon(QIcon(pixmapPasion))
 
         iconsize = QSize(48,48)
@@ -48,7 +48,7 @@ class Launcher(QMainWindow):
 
         vertical = QVBoxLayout()
         vertical.addSpacing(15)
-        title = "Passion Studio Tools "
+        title = "Studio Launcher"
         if MODE == 'dev':
             title += MODE
         frame = PQTitleBar(self, title)
@@ -96,6 +96,8 @@ class Launcher(QMainWindow):
 
 
         tab1_layout = QVBoxLayout(self.stack_layouts['Apps'])
+        tab2_layout = QVBoxLayout(self.stack_layouts['Projects'])
+        tab3_layout = QVBoxLayout(self.stack_layouts['Workgroups'])
         # launchers
         buttonsGroup = QGroupBox('Software')
         tab1_layout.addWidget( buttonsGroup)
@@ -108,7 +110,8 @@ class Launcher(QMainWindow):
 
         for package in WORKGRP['default']['order']:
             if package in APPS and APPS[package]['show']:
-                self.appLayouts[package] = QPushButton((package+' '+WORKGRP['default']['packages'][package]['version']))
+                #self.appLayouts[package] = QPushButton((package+' '+WORKGRP['default']['packages'][package]['version']))
+                self.appLayouts[package] = QPushButton('')
 
                 #pixmap caching
                 value = os.path.join(RES, (package+".png"))
@@ -139,6 +142,17 @@ class Launcher(QMainWindow):
                 #self.utilLayouts[package].setIconSize(iconsize)
                 self.connect(self.utilLayouts[package], SIGNAL("clicked()"), self.launchUtil)
                 utilsGrid.addWidgetAuto(self.utilLayouts[package])
+
+        jobsListBox = QListWidget()
+        jobsList = core.project.list_jobs('jobs')
+        for j in jobsList:
+            jobsListBox.addItem(j)
+        for j in jobsList:
+            jobsListBox.addItem(j)
+        for j in jobsList:
+            jobsListBox.addItem(j)
+        tab2_layout.addWidget(jobsListBox)
+
 
 
 

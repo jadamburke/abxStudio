@@ -1,4 +1,4 @@
-// ppNewScene
+// studioNewScene
 
 
 
@@ -7,42 +7,42 @@
 // it then restores the option vars to their original values before returning
 
 
-global proc ppNewCam () {
+global proc studioNewCam () {
 
 }
 
-global proc ppDoNewCam (string $which) {
-	ppDoNewSceneVerbosity($which, true);
+global proc studioDoNewCam (string $which) {
+	studioDoNewSceneVerbosity($which, true);
 }
 
-global proc ppDoNewCamQuiet (string $which) {
-	ppDoNewSceneVerbosity($which, false);
+global proc studioDoNewCamQuiet (string $which) {
+	studioDoNewSceneVerbosity($which, false);
 }
 
-global proc ppDoNewCamVerbosity (string $which, int $verbose) {
+global proc studioDoNewCamVerbosity (string $which, int $verbose) {
 	if ($verbose) print ("DOING THE NEW ONE\n");
-	string $ppTools = `getenv MAYA_PPTOOLS`;
+	string $stTools = `getenv MAYA_STTOOLS`;
 
 	string $newFile = "";
 	
 	switch ($which){
 		case "camera":
-			$newFile = ($ppTools+"/sceneTemplates/cameras/renderCam.ma");
+			$newFile = ($stTools+"/sceneTemplates/cameras/renderCam.ma");
 			break;
 		case "cameraAim":
-			$newFile = ($ppTools+"/sceneTemplates/cameras/renderCamAim.ma");
+			$newFile = ($stTools+"/sceneTemplates/cameras/renderCamAim.ma");
 			break;
 		case "cameraAimUp":
-			$newFile = ($ppTools+"/sceneTemplates/cameras/renderCamAimUp.ma");
+			$newFile = ($stTools+"/sceneTemplates/cameras/renderCamAimUp.ma");
 			break;
 		case "orbitCam":
-			$newFile = ($ppTools+"/sceneTemplates/cameras/orbitCam.ma");
+			$newFile = ($stTools+"/sceneTemplates/cameras/orbitCam.ma");
 			break;
 		case "moPathCam":
-			$newFile = ($ppTools+"/sceneTemplates/cameras/moPathCam.ma");
+			$newFile = ($stTools+"/sceneTemplates/cameras/moPathCam.ma");
 			break;	
 		case "renderCam4Track":
-			$newFile = ($ppTools+"/sceneTemplates/cameras/renderCam4Track.ma");
+			$newFile = ($stTools+"/sceneTemplates/cameras/renderCam4Track.ma");
 		default: 
 			break;
 	}
@@ -59,7 +59,7 @@ global proc ppDoNewCamVerbosity (string $which, int $verbose) {
 	}
 
 
-	ppPerformNewCam $newFile $verbose;
+	studioPerformNewCam $newFile $verbose;
 }
 
 
@@ -67,7 +67,7 @@ global proc ppDoNewCamVerbosity (string $which, int $verbose) {
 
 
 
-global proc ppPerformNewCam (string $fileToOpen, int $verbose) {
+global proc studioPerformNewCam (string $fileToOpen, int $verbose) {
 
 		// import the camera safely
 			string $prefix = "CAMIMPORT";
@@ -75,9 +75,9 @@ global proc ppPerformNewCam (string $fileToOpen, int $verbose) {
 			evalEcho ("file -import -loadReferenceDepth \"all\" -namespace \""+$prefix+"\" -pr -options \"v=0\" \""+$fileToOpen+"\"");
 
 
-			// apply scene default config to files in import
+			// astudioly scene default config to files in import
 			// configure the camera properties based on the scene defaults
-			ppNewCamConfigDefaults ($prefix);
+			studioNewCamConfigDefaults ($prefix);
 
 			if (`objExists renderCam` || `objExists master:renderCam`){
 				if (`objExists ($prefix+":renderCam")`){
@@ -197,7 +197,7 @@ global proc ppPerformNewCam (string $fileToOpen, int $verbose) {
 
 // check the defaults section for 
 
-global proc ppNewCamConfigDefaults(string $prefix){
+global proc studioNewCamConfigDefaults(string $prefix){
 
 	string $workspace = `workspace -q -rd`;
 

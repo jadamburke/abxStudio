@@ -1,46 +1,46 @@
 
-global proc passionPPnyMenu()
+global proc studioMenu()
 {
     global string $gPassionMainMenu;
     global string $gMainWindow;
 
 
         if(!`menu -exists $gPassionMainMenu`){
-            $gPassionMainMenu = `menu -p $gMainWindow -l "Passion" -tearOff true -allowOptionBoxes true mainPassionMenu`;
+            $gPassionMainMenu = `menu -p $gMainWindow -l "Studio" -tearOff true -allowOptionBoxes true mainPassionMenu`;
         }
 
         if (`menu -exists $gPassionMainMenu`) {
             setParent -menu $gPassionMainMenu;
             // custom menu items
             if (int(`about -v`) >= 2015)
-                menuItem -divider true -dl "PASSION NY TOOLS";
+                menuItem -divider true -dl "STUDIO TOOLS";
             else{
                 menuItem -divider true ;
                 menuItem -divider true ;
-                menuItem -label "Passion NY Tools" ;
+                menuItem -label "Studio Tools" ;
                 menuItem -divider true ;
             }
 
 
                 menuItem -label "New Scene" -sm true;
-                    menuItem -l "New Empty Scene" -c "ppNewScene;ppDoNewScene \"empty\"";
+                    menuItem -l "New Empty Scene" -c "studioNewScene;studioDoNewScene \"empty\"";
                     menuItem -divider true ;
-                    menuItem -l "New Anm Scene" -c "ppNewScene;ppDoNewScene (\"anm\")";
-                    menuItem -l "New Lgt Scene" -c "ppNewScene;ppDoNewScene (\"lgt\")";
+                    menuItem -l "New Anm Scene" -c "studioNewScene;studioDoNewScene (\"anm\")";
+                    menuItem -l "New Lgt Scene" -c "studioNewScene;studioDoNewScene (\"lgt\")";
                     menuItem -divider true ;
-                    menuItem -l "New Rig Scene" -c "ppNewScene;ppDoNewScene \"rig\"";
+                    menuItem -l "New Rig Scene" -c "studioNewScene;studioDoNewScene \"rig\"";
 
                 setParent -menu $gPassionMainMenu;
                 menuItem -en 1 -l  "New Camera" -sm true;
-                    menuItem -en 1 -l "Camera" -c "ppNewCam;ppDoNewCamVerbosity \"camera\" 1";
-                    menuItem -en 1 -l "Camera and Aim" -c "ppNewCam;ppDoNewCamVerbosity \"cameraAim\" 1";
-                    menuItem -en 1 -l "Camera, Aim and Up" -c "ppNewCam;ppDoNewCamVerbosity \"cameraAimUp\" 1";
+                    menuItem -en 1 -l "Camera" -c "studioNewCam;studioDoNewCamVerbosity \"camera\" 1";
+                    menuItem -en 1 -l "Camera and Aim" -c "studioNewCam;studioDoNewCamVerbosity \"cameraAim\" 1";
+                    menuItem -en 1 -l "Camera, Aim and Up" -c "studioNewCam;studioDoNewCamVerbosity \"cameraAimUp\" 1";
                     menuItem -divider true ;
-                    menuItem -en 1 -l "Camera Orbit" -c "ppNewCam;ppDoNewCamVerbosity \"orbitCam\" 1";
+                    menuItem -en 1 -l "Camera Orbit" -c "studioNewCam;studioDoNewCamVerbosity \"orbitCam\" 1";
                     menuItem -divider true ;
-                    //menuItem -l "StereoCam Tools" -c ("if (`exists ppStereoCam`==0) source \""+$ppScripts+"/scripts/production/ppStereoCam.mel\";if (`exists ppStereoCam`) ppStereoCam");
+                    //menuItem -l "StereoCam Tools" -c ("if (`exists studioStereoCam`==0) source \""+$studioScripts+"/scripts/production/studioStereoCam.mel\";if (`exists studioStereoCam`) studioStereoCam");
                     //menuItem -divider true ;
-                    menuItem -l "renderCam for Track Shots" -c "ppNewCam;ppDoNewCamVerbosity \"renderCam4Track\" 1";    
+                    menuItem -l "renderCam for Track Shots" -c "studioNewCam;studioDoNewCamVerbosity \"renderCam4Track\" 1";    
                 setParent -menu $gPassionMainMenu;
 
                 menuItem -divider true ;
@@ -62,13 +62,13 @@ global proc passionPPnyMenu()
                 menuItem -l "Scripts" -c "abxToybox";
 
                 menuItem -divider true ;
-                menuItem -l "Export Camera for Nuke" -c "ppNukeCamExport \"\"";
-                menuItem -l "Export Nulls on Selected" -c "ppNukeNullsExport \"\"";
+                menuItem -l "Export Camera for Nuke" -c "studioNukeCamExport \"\"";
+                menuItem -l "Export Nulls on Selected" -c "studioNukeNullsExport \"\"";
 
                 menuItem -divider true ;
 
-                menuItem -l "Browse Job" -c "ppBrowseJob";
-                menuItem -l "Browse Maya Project" -c "ppBrowseProject";
+                menuItem -l "Browse Job" -c "studioBrowseJob";
+                menuItem -l "Browse Maya Project" -c "studioBrowseProject";
         }
 
 }

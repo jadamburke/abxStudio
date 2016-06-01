@@ -1,0 +1,79 @@
+company: 'abx'
+frame_padding: 5
+frame_delimiter: '.'
+version_prefix: 'v'
+version_incr: 1
+version_padding: 3
+servers:
+  'jobs':
+    root_path: 'C:/Users/Adam/Dropbox/personal'
+  'media':
+    root_path: 'C:/Users/Adam/Dropbox/personal'
+  'personal':
+    root_path: 'C:/Users/Adam/Dropbox/personal'
+stages:
+  - pitch
+  - lookdev
+  - production
+departments:
+- admin
+- design
+- producer
+- cg
+- edit
+tasks:
+- model
+- texture
+- shade
+- rig
+- anim
+- fx
+- cfx
+- light
+- comp
+- edit
+- roto
+- track
+- cleanup
+- cel
+status:
+- 'ready'
+- 'not started'
+- 'in progress'
+- 'finished'
+- 'cbb'
+- 'approved'
+- 'on hold'
+- 'dead'
+data_structs:
+  'asset_lib':
+    root_path: "<file_share>/<job>/<stage>"
+    public_root: "<root_path>"
+    private_root: "<root_path>"
+  'asset_group':
+    root_path: "<file_share>/<job>/<stage>/<asset_lib>"
+    public_root: "<root_path>"
+    private_root: "<root_path>"      
+  'asset': 
+    root_path: "<fileshare>/<job>/<stage>/<asset_lib>/<asset_group>"
+    public_root: "<root_path>/public"
+    private_root: "<root_path>/user/<username>"
+  'sequences':
+    root_path: "<fileshare>/<job>/<stage>/sequences"
+    public_root: "<root_path>"
+    private_root: "<root_path>"
+  'shot': 
+    root_path: "<fileshare>/<job>/<stage>/sequences/<sequence>"
+    public_root: "<root_path>/<shot>/public"
+    private_root: "<root_path>/<shot>/user/<username>"
+task_struct:
+  'base':
+    root_path: "<task_root>/"
+    public_root: "<task_root>/public/<package>"
+    private_root: "<task_root>/user/<package>"
+    out_cache_path: "<task_root>/public/cache/<version>"
+    out_cache_file: "<sequence>_<shot>_<task>_<version>.<ext>"
+    out_render_path: "<fileshare>/<job>/<stage>/renders/<sequence>/<shot>/<task>/<version>"
+    out_cache_file: "<sequence>_<shot>_<task>_<version>.<ext>"
+    out_scenefile: "<sequence>_<shot>_<task>_<version>.<ext>"
+

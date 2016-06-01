@@ -1,54 +1,51 @@
 // userSetup.mel
 // this mel script is called upon maya startup. configure what happens at startup by editing this file.
 
-
-
 if (!`about -batch`){
 
-	string $ppTools = `getenv MAYA_PPTOOLS`;
-	string $ppResource = `getenv PP_RESOURCE`;
-	string $mayaInstall = `getenv PP_MAYA_DIR`;
+	string $stTools = `getenv MAYA_STTOOLS`;
+	string $stResource = `getenv ST_RESOURCE`;
+	string $mayaInstall = `getenv ST_MAYA_DIR`;
 
 	// early declaration of Autodesk Proc "performNewScene" so that our overrides in ppNewScene.mel work correctly
 	//source "C:/Program Files/Autodesk/Maya2012/scripts/startup/performNewScene.mel";
 	evalEcho ("source \""+$mayaInstall+"/scripts/startup/performNewScene.mel\"");
-
-	evalEcho ("source \""+$ppTools+"/scripts/abxShots.mel\"");
-	evalEcho ("source \""+$ppTools+"/scripts/abxLockFile.mel\"");
-	evalEcho ("source \""+$ppTools+"/scripts/ppNewScene.mel\"");
-	evalEcho ("source \""+$ppTools+"/scripts/ppNewCam.mel\"");
-	evalEcho ("source \""+$ppTools+"/scripts/ppFileBrowse.mel\"");
-	evalEcho ("source \""+$ppTools+"/scripts/ppForcePrefs.mel\"");
-	evalEcho ("source \""+$ppTools+"/scripts/passionPPnyMenu.mel\"");
-	evalEcho ("source \""+$ppTools+"/scripts/passionPlayblast.mel\"");
+	evalEcho ("source \""+$stTools+"/scripts/abxShots.mel\"");
+	evalEcho ("source \""+$stTools+"/scripts/abxLockFile.mel\"");
+	evalEcho ("source \""+$stTools+"/scripts/studioNewScene.mel\"");
+	evalEcho ("source \""+$stTools+"/scripts/studioNewCam.mel\"");
+	evalEcho ("source \""+$stTools+"/scripts/studioFileBrowse.mel\"");
+	evalEcho ("source \""+$stTools+"/scripts/studioForcePrefs.mel\"");
+	evalEcho ("source \""+$stTools+"/scripts/studioMenu.mel\"");
+	evalEcho ("source \""+$stTools+"/scripts/studioPlayblast.mel\"");
 
 
 	// enable the playblast HUD for now
 
-	//evalDeferred("if (`exists playblastHUD`==0) source \""+$ppTools+"/toolbox/Pipeline/playblastHUD.mel\";if (`exists playblastHUD`) playblastHUD;");
-	//evalDeferred("if (`exists timewarpHUD`==0) source \""+$ppTools+"/toolbox/Pipeline/timewarpHUD.mel\";if (`exists timewarpHUD`) timewarpHUD;");
+	evalDeferred("if (`exists playblastHUD`==0) source \""+$stTools+"/toolbox/Pipeline/playblastHUD.mel\";if (`exists playblastHUD`) playblastHUD;");
+	//evalDeferred("if (`exists timewarpHUD`==0) source \""+$stTools+"/toolbox/Pipeline/timewarpHUD.mel\";if (`exists timewarpHUD`) timewarpHUD;");
 
 
 	// not implemented but it allows us to force maya preferences
-	//evalDeferred("ppForcePrefs;");
+	evalDeferred("studioForcePrefs;");
 
 	// loads the Project Manager
-	//evalDeferred("if (`exists abxAssets`==0) source \""+$ppTools+"/scripts/abxProject.mel\";if (`exists abxProject`) abxProject");
+	//evalDeferred("if (`exists abxAssets`==0) source \""+$stTools+"/scripts/abxProject.mel\";if (`exists abxProject`) abxProject");
 
 	// sometimes plug-ins turn off undo queue, this would enforce it to be on each time maya starts
 	//evalDeferred("int $state = `undoInfo -q -state`; if (!$state){undoInfo -state 1; print (\"undoQueue turned on\\n\");}");
 
 
-	// this checks to see if the local machine has zbrush, if so, it loads a custom script for working with zbrush
-	//if (`filetest -d "C:/Users/Public/Pixologic"`){
-	//	evalEcho ("source \""+$ppTools+"/scripts/goZBrush/GoZScript.mel\"");
-	//}
+	// loads GoZ if zbrush is installed
+	if (`filetest -d "C:/Program Files/Pixologic"`){
+		evalEcho ("source \""+$stTools+"/scripts/goZBrush/GoZScript.mel\"");
+	}
 
 	// this alters existing Maya Menus to include our own studio specific menu items
 
 
-	if(`optionVar -exists ppSwatchUpdate` ) 
-	    renderThumbnailUpdate `optionVar -q "ppSwatchUpdate"`;
+	if(`optionVar -exists stSwatchUpdate` ) 
+	    renderThumbnailUpdate `optionVar -q "stSwatchUpdate"`;
 
 	// autoload is disabled on maya startup so we must load certain ones
 	//string $loadPlugs[] = {"matrixNodes","modelingToolkit","fbxmaya","OneClick","OpenEXRLoader","quatNodes","tiffFloatReader","ik2Bsolver","ikSpringSolver","nearestPointOnMesh","objExport"};
@@ -58,9 +55,9 @@ if (!`about -batch`){
 	for ($each in $loadPlugs){
 	    catch(eval("loadPlugin "+$each));
 	}
-	evalDeferred("qube_addUI_maya()");
-	evalDeferred("qube_addUI()");
+	//evalDeferred("qube_addUI_maya()");
+	//evalDeferred("qube_addUI()");
 	evalDeferred("abxLockFile()");
-	evalDeferred("passionPPnyMenu()");
-	evalDeferred("passionPlayblast()");
+	evalDeferred("studioMenu()");
+	evalDeferred("studioPlayblast()");
 }
