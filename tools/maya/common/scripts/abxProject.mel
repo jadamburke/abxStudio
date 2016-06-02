@@ -336,11 +336,13 @@ global proc abxProjectSelectCurrentProject () {
 	string $curWorkspace = `workspace -q -rd`;
 	string $tokenBuffer[];
 	tokenize $curWorkspace "/" $tokenBuffer;
+	$pathLeader = "";
+	if (`gmatch $curWorkspace "//*"` || `gmatch $curWorkspace "\\\\*"`) $pathLeader = "//";
 	if (size($tokenBuffer) == 3){
 		//print ($tokenBuffer[0]+"/"+$tokenBuffer[1]+"\n");
-		treeView -e -selectItem ("//"+$tokenBuffer[0]+"/"+$tokenBuffer[1]+"/"+$tokenBuffer[2]) 1 abxProjectJobList;
-		treeView -e -showItem ("//"+$tokenBuffer[0]+"/"+$tokenBuffer[1]+"/"+$tokenBuffer[2]) abxProjectJobList;
-		abxProjectRefreshProjectList ("//"+$tokenBuffer[0]+"/"+$tokenBuffer[1]+"/"+$tokenBuffer[2]);
+		treeView -e -selectItem ($pathLeader+$tokenBuffer[0]+"/"+$tokenBuffer[1]+"/"+$tokenBuffer[2]) 1 abxProjectJobList;
+		treeView -e -showItem ($pathLeader+$tokenBuffer[0]+"/"+$tokenBuffer[1]+"/"+$tokenBuffer[2]) abxProjectJobList;
+		abxProjectRefreshProjectList ($pathLeader+$tokenBuffer[0]+"/"+$tokenBuffer[1]+"/"+$tokenBuffer[2]);
 		$len = size($curWorkspace);
 		$itemName = substring($curWorkspace,1,($len-1));
 		treeView -e -selectItem $itemName 1 abxProjectProjectList;
