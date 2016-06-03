@@ -12,19 +12,19 @@ import qubeSimpleCmd_menu
 qubeSimpleCmd_menu.addMenuItems()
 ## === QUBE SimpleCmd: END ===
 
-# create passion toolbar in menu
+# create studio toolbar in menu
 toolbar = nuke.menu('Nodes')
-passionMenu = toolbar.addMenu('Passion', icon='passion.png')
-passionMenu.addCommand( 'Read From Write', 'readFromWrite.readFromWrite()', 'alt+r' )
-passionMenu.addCommand('Passion_Slate', 'nuke.createNode(\"Passion_Slate\")')
-passionMenu.addCommand('RGBmatte', 'nuke.createNode(\"RGBmatte\")')
-passionMenu.addCommand('ID_Matte_Maker', 'nuke.createNode(\"ID_Matte_Maker\")')
-passionMenu.addCommand('L_Alpha_Clean', 'nuke.createNode(\"L_AlphaClean_v03\")')
-passionMenu.addCommand('Despill_Power', 'nuke.createNode(\"Despill_Power\")')
-passionMenu.addCommand('Aberration_jb', 'nuke.createNode(\"Aberration_jb\")')
-passionMenu.addCommand('BumpNormals', 'nuke.createNode(\"BumpNormals\")')
-passionMenu.addCommand('Reload All Read Nodes', 'reloadAllNodes()')
-passionMenu.addCommand('Postage Stamp Generator', 'postageStampGenerator()', 'ctrl+alt+p')
+studioMenu = toolbar.addMenu('Studio', icon='studio.png')
+studioMenu.addCommand( 'Read From Write', 'readFromWrite.readFromWrite()', 'alt+r' )
+studioMenu.addCommand('Studio_Slate', 'nuke.createNode(\"Studio_Slate\")')
+studioMenu.addCommand('RGBmatte', 'nuke.createNode(\"RGBmatte\")')
+studioMenu.addCommand('ID_Matte_Maker', 'nuke.createNode(\"ID_Matte_Maker\")')
+studioMenu.addCommand('L_Alpha_Clean', 'nuke.createNode(\"L_AlphaClean_v03\")')
+studioMenu.addCommand('Despill_Power', 'nuke.createNode(\"Despill_Power\")')
+studioMenu.addCommand('Aberration_jb', 'nuke.createNode(\"Aberration_jb\")')
+studioMenu.addCommand('BumpNormals', 'nuke.createNode(\"BumpNormals\")')
+studioMenu.addCommand('Reload All Read Nodes', 'reloadAllNodes()')
+studioMenu.addCommand('Postage Stamp Generator', 'postageStampGenerator()', 'ctrl+alt+p')
 
 # create world position toolkit menu
 wptkMenu = toolbar.addMenu('World Position Tool Kit', icon='wptk.png')

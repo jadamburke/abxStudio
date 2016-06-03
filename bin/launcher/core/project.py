@@ -46,6 +46,8 @@ STUDIO = yaml.safe_load(f)
 f.close()
 print "Loaded studio Config Successfully"
 
+os.environ['ST_JOB_SERVERS'] = STUDIO['servers']['jobs']['root_path']
+
 list_servers()
 
 

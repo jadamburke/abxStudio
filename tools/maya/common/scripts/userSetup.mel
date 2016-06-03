@@ -50,7 +50,7 @@ if (!`about -batch`){
 	// autoload is disabled on maya startup so we must load certain ones
 	//string $loadPlugs[] = {"matrixNodes","modelingToolkit","fbxmaya","OneClick","OpenEXRLoader","quatNodes","tiffFloatReader","ik2Bsolver","ikSpringSolver","nearestPointOnMesh","objExport"};
 	//fast load
-	string $loadPlugs[] = {"fbxmaya","OpenEXRLoader","quatNodes","tiffFloatReader","objExport","mtoa"};
+	string $loadPlugs[] = {"fbxmaya","OpenEXRLoader","quatNodes","tiffFloatReader","objExport","mtoa","MayaExocortexAlembic"};
 
 	for ($each in $loadPlugs){
 	    catch(eval("loadPlugin "+$each));

@@ -8,7 +8,7 @@ global proc int callMayaBG (int $noUI, int $threaded, string $filePath, string $
    $mayaBG = "mayabatch.exe";
    string $sysCmd = "";
     if ($noUI == 1){
-        $command = ("source \\\""+$stTools+"/scripts/abxLockFile.mel\\\";"+$command);
+        $command = ("source \\\""+$stTools+"/scripts/abxLockFile.mel\\\";source \\\""+$stTools+"/scripts/abxShots.mel\\\";"+$command);
         $command += ";mayaBGQuit();";
     }
     else {

@@ -1128,6 +1128,23 @@ global proc abxShotsCreateDetailUI (){
 				setParent..;
 			setParent..;
 		setParent..;
+		frameLayout -cll 1 -li 0 -bv 0 -bgc .27 .27 .27 -l "Camera Details";
+			columnLayout -bgc .4 .4 .4 -cat "both" 2 -adj true;
+				rowLayout -numberOfColumns 2;
+					columnLayout;
+						textFieldGrp -cw 1 100 -cw 2 150 -label "Cam Version:" -editable false -text "" abxShotsDtlCamScene;
+						textFieldGrp -cw 1 100 -cw 2 150 -label "Date:" -editable false -text "" abxShotsDtlCamDate;
+					setParent..;
+					columnLayout -cat "both" 0 -adj 1;
+						button -w 140 -label "Reference Cam ->" -c "abxShotsCameraReference \"\"";
+						rowLayout -numberOfColumns 2;
+							button -bgc .2 .2 .2 -ebg 0 -w 70 -label "Edit Cam" -c "abxShotsCameraMakeEditable";
+							button -bgc .2 .2 .2 -ebg 0 -w 70 -label "Publish Cam" -c "abxShotsCameraPublish `ls -type camera -r 1 \"*renderCamShape\"`";
+						setParent..;
+					setParent..;
+				setParent..;
+			separator -style "none" -h 2;	
+		setParent..;
 		frameLayout -p "abxShotsDtlColLyt" -cl 0 -cll 1 -bv 0 -li 0 -bgc .27 .27 .27 -l "Activity Log (Newest At Top)";
 			columnLayout -bgc .4 .4 .4 -cat "both" 2 -adj true;
 				columnLayout -cat "both" 2 -adj true -rs 2;
@@ -1202,22 +1219,7 @@ global proc abxShotsCreateDetailUI (){
 				setParent..;
 			setParent..;
 		setParent..;
-		frameLayout -cll 1 -li 0 -bv 0 -bgc .27 .27 .27 -l "Camera Details";
-			columnLayout -bgc .4 .4 .4 -cat "both" 2 -adj true;
-				rowLayout -numberOfColumns 2;
-					columnLayout;
-						textFieldGrp -cw 1 100 -cw 2 150 -label "Cam Version:" -editable false -text "" abxShotsDtlCamScene;
-						textFieldGrp -cw 1 100 -cw 2 150 -label "Date:" -editable false -text "" abxShotsDtlCamDate;
-					setParent..;
-					columnLayout -cat "both" 0 -adj 1;
-						button -w 140 -label "Reference Cam ->" -c "abxShotsCameraReference \"\"";
-						rowLayout -numberOfColumns 2;
-							button -bgc .2 .2 .2 -ebg 0 -w 70 -label "Edit Cam" -c "abxShotsCameraMakeEditable";
-							button -bgc .2 .2 .2 -ebg 0 -w 70 -label "Publish Cam" -c "abxShotsCameraPublish `ls -type camera -r 1 \"*renderCamShape\"`";
-						setParent..;
-					setParent..;
-				setParent..;
-			separator -style "none" -h 2;	
+
 
 
 
@@ -1283,12 +1285,12 @@ global proc abxShotsCreateDetailUI (){
 					//button -ann "Reference selected publish into your open scene" -en 1 -label "Ref Publish" -w 60 -c "abxShotsReferencePublish abxShotsAnimScnList";
 					separator -h 30;
 					button -bgc .7 .2 .2 -ebg 0 -en 1 -ann "Publish latest work scene"-label "Publish" -w 70 -c "abxShotsPublishTake 1 1 abxShotsAnimScnList \"latest\" \"\"";
-					button -bgc .7 .2 .2 -ebg 0 -en 1 -ann "Cache latest work scene"-label "Cache" -w 70 -c "abxShotsCacheTake 1 1 abxShotsAnimScnList \"latest\" \"\"";
+					button -bgc .7 .2 .2 -ebg 0 -en 1 -ann "Cache latest work scene"-label "Cache" -w 70 -c "abxShotsExportAlembicCache()";
 
 					setParent ..;					
 				
 				//textScrollList -dcc "abxShotsOpenTake abxShotsAnimScnList" abxShotsAnimScnList;
-				frameLayout -bgc .4 .2 .2 -bs "in" -cll 0 -label "   DEPT          TAKE                                    WORK         PUBLISH" abxShotsAnimScnListFrme;
+				frameLayout -bgc .4 .2 .2 -bs "in" -cll 0 -label "   DEPT          TAKE                                    WORK         PUBLISH      CACHE" abxShotsAnimScnListFrme;
 					treeView -numberOfButtons 1 -abr true -enableKeys true -idc "abxShotsTakeListDblClk" -sc "abxShotsSetActiveTake " -cmc "abxShotsUpdateTakeMenu" abxShotsAnimScnList;
 					popupMenu abxShotsAnimPUMenu;
 					abxShotsBuildTakeMenu ("abxShotsAnimScnList");
@@ -1320,14 +1322,14 @@ global proc abxShotsCreateDetailUI (){
 					//button -ann "Reference selected publish into your open scene" -en 1 -label "Ref Publish" -w 60 -c "abxShotsReferencePublish abxShotsEffectsScnList";
 					separator -h 30;
 					button -bgc .7 .2 .2 -ebg 0 -en 1 -ann "Publish latest work scene"-label "Publish" -w 70 -c "abxShotsPublishTake 1 1 abxShotsEffectsScnList \"latest\" \"\"";
-					button -bgc .7 .2 .2 -ebg 0 -en 1 -ann "Cache latest work scene"-label "Cache" -w 70 -c "abxShotsCacheTake 1 1 abxShotsEffectsScnList \"latest\" \"\"";
+					button -bgc .7 .2 .2 -ebg 0 -en 1 -ann "Cache latest work scene"-label "Cache" -w 70 -c "abxShotsExportAlembicCache()";
 
 					setParent ..;	
 
 									
 				
 					//textScrollList -dcc "abxShotsOpenTake abxShotsEffectsScnList" abxShotsEffectsScnList;
-					frameLayout -bgc .26 .2 .24 -bs "in" -cll 0 -label "   DEPT          TAKE                                    WORK         PUBLISH" abxShotsEffectsScnListFrme;
+					frameLayout -bgc .26 .2 .24 -bs "in" -cll 0 -label "   DEPT          TAKE                                    WORK         PUBLISH      CACHE" abxShotsEffectsScnListFrme;
 						treeView -numberOfButtons 1 -abr true -enableKeys true -idc "abxShotsTakeListDblClk" -sc "abxShotsSetActiveTake " -cmc "abxShotsUpdateTakeMenu" abxShotsEffectsScnList;
 						popupMenu abxShotsEffectsPUMenu;
 						abxShotsBuildTakeMenu ("abxShotsEffectsScnList");
@@ -1357,12 +1359,13 @@ global proc abxShotsCreateDetailUI (){
 					//separator -h 20;
 					//button -ann "Reference selected publish into your open scene" -en 1 -label "Ref Publish" -w 60 -c "abxShotsReferencePublish abxShotsLightScnList";
 					separator -h 30;
-					button -bgc .7 .2 .2 -ebg 0 -en 1 -ann "Publish latest work scene"-label "Publish" -w 70 -c "abxShotsPublishTake 1 1 abxShotsLightScnList \"latest\" \"\"";
+					button -bgc .7 .2 .2 -ebg 0 -en 1 -ann "Loads assets from cache" -label "Build" -w 70 -c "abxShotsPublishTake 1 1 abxShotsLightScnList \"latest\" \"\"";
+					button -bgc .7 .2 .2 -ebg 0 -en 1 -ann "Reads the latest cache and builds a scene"-label "Check Update" -w 70 -c "abxShotsPublishTake 1 1 abxShotsLightScnList \"latest\" \"\"";
 
 					setParent ..;					
 				
 					//textScrollList -dcc "abxShotsOpenTake abxShotsLightScnList" abxShotsLightScnList;
-					frameLayout -bgc .2 .3 .4 -bs "in" -cll 0 -label "   DEPT          TAKE                                    WORK         PUBLISH" abxShotsLightScnListFrme;
+					frameLayout -bgc .2 .3 .4 -bs "in" -cll 0 -label "   DEPT          TAKE                                    WORK         PUBLISH      CACHE" abxShotsLightScnListFrme;
 						treeView -numberOfButtons 1 -abr true -enableKeys true -idc "abxShotsTakeListDblClk" -sc "abxShotsSetActiveTake " -cmc "abxShotsUpdateTakeMenu" abxShotsLightScnList;
 						popupMenu abxShotsLightPUMenu;
 						abxShotsBuildTakeMenu ("abxShotsLightScnList");
@@ -1848,7 +1851,7 @@ global proc int[] abxShotsGetFrameRange(string $shotName, string $shotFolder){
 global proc string abxShotsGetTakeLabel (string $takeName,string $filePath){
 
 	string $shotFolder = `abxShotsGetActiveShotFolder`;
-	// DEPT  TAKE          VER   PUBLISH
+	// DEPT  TAKE          VER   PUBLISH  CACHE
 	string $noExt = `basenameEx $takeName`;
 	string $tokenBuffer[];
 	string $shotName;
@@ -1901,6 +1904,17 @@ global proc string abxShotsGetTakeLabel (string $takeName,string $filePath){
 		$latestPublishVersion = "----";
 	}
 
+	string $latestAbcCacheVersion = "";
+	if ($takeName == "default" || $takeName == "")
+		$latestAbcCacheVersion = abxShotsGetLatestWorkVersion($shotFolder,$shotName, $dept, "", "cache",0);
+	else 
+		$latestAbcCacheVersion = abxShotsGetLatestWorkVersion($shotFolder,$shotName, $dept, $takeName, "cache",0);
+	//print("\n\nabxShotsGetLatestWorkVersion("+$shotFolder+","+$shotName+", "+$dept+", \"\", \"publish\",0)\n\n");
+	//print ("\n\n\nLATEST PUB VERSION = "+$latestPublishVersion+"\n\n\n");
+	if ($latestAbcCacheVersion == "v000"){
+		$latestAbcCacheVersion = "----";
+	}	
+
 
 	// find publish and print the version if found
 	//$publishDirGuess = (`workspace -q -rd`++$shotFolder+"/"+$shotName+"/"+$deptUpper+"/publish/");
@@ -1919,7 +1933,10 @@ global proc string abxShotsGetTakeLabel (string $takeName,string $filePath){
 	while (size($latestPublishVersion) < 8){
 		$latestPublishVersion += " ";
 	}
-	return ($dept+$takeNameL+$version+$latestPublishVersion);
+	while (size($latestAbcCacheVersion) < 8){
+		$latestAbcCacheVersion += " ";
+	}
+	return ($dept+$takeNameL+$version+$latestPublishVersion+$latestAbcCacheVersion);
 }
 /*
 global proc abxShotsUpdateTakeMenu (string $dept) {
@@ -4024,6 +4041,7 @@ global proc abxShotsExportAlembicCache (){
 		//string $customGeo[] = `listRelatives -children "_CUSTOM_"`;
 
 		// export the children to a file
+		print("Alembic Result:"+$alembicpath+"\n");
 	}
 	else {
 		error("No geoCacheOverride' set found in scene. Please create one and add the objects you wish to cache.");
@@ -4047,7 +4065,7 @@ global proc abxShotsBuildLightSceneForAlembic (string $dept,string $takeName, st
 		$refDept = "model";
 
 	$filename = ($shotInfo[3]+"_"+$shotInfo[4]+"_"+$shotInfo[10]+"_"+$dept+"_"+$version);
-	$filepath = ("//"+$shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$dept+"/cache/");
+	$filepath = ($shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/"+$dept+"/cache/");
 	$alembicpath = ($filepath+$filename+".abc");
 	$assetdescPath = ($filepath+$filename+".txt");
 	if (`filetest -r $alembicpath` && `filetest -r $assetdescPath`){
@@ -4788,21 +4806,32 @@ global proc abxShotsCameraPublish (string $cameraName[]) {
 	}
 	$shotName = $shotNames[0];
 
-	// check for sequence name
-	string $sequenceName = "";
-	string $tokenBuffer[];
-	tokenize $shotName "/" $tokenBuffer;
-	if (size($tokenBuffer)>1)
-		$sequenceName = $tokenBuffer[0];
-	
-	string $sceneName = basenameEx(`file -q -sn`);
-	string $fullScnName = `file -q -sn`;
-	
-	if ($sequenceName != ""){
-		$sceneName = ($sequenceName +"/"+ $sceneName);
+	string $filePath = "";
+	if ($filePath == ""){
+		$filePath = `file -q -sn`;
 	}
+
+	// 0:Server 1:Job 2:ShotFolder 3:Seq 4:Shot 5:dept 6:subDept 7:take 8:version 9:ext
+	string $shotInfo[] = abxShotsGetFromPath($filePath);
+    string $shotDetails[] = abxShotsGetShotDetails(($shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]), $shotInfo[2]);
+   	string $sceneName = ($shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]);
+
+	// check for sequence name
+	//string $sequenceName = "";
+	//string $tokenBuffer[];
+	//tokenize $shotName "/" $tokenBuffer;
+	//if (size($tokenBuffer)>1)
+	//	$sequenceName = $tokenBuffer[0];
+	//
+	//string $sceneName = basenameEx(`file -q -sn`);
+	string $fullScnName = `file -q -sn`;
+	//
+	//if ($sequenceName != ""){
+	//	$sceneName = ($sequenceName +"/"+ $sceneName);
+	//}
 	string $sceneShotName = `abxShotsGetSceneShotName $sceneName`;
-	if (`abxShotsGetSceneShotName $sceneName` != $shotName){
+	print ("sceneName="+$sceneName+" shotName="+$shotName+"\n");
+	if ($sceneName != $shotName){
 		string $buttonName = ("Publish As "+$sceneShotName+" Camera");
 		string $result = `confirmDialog -title "Confirm" -message ("This scene file does not appear to be "+$shotName+".") -button $buttonName -button "Force" -button "Cancel"`;
 		if ($result == "Cancel"){
@@ -5014,9 +5043,21 @@ global proc abxShotsCameraMakeEditable () {
 	if ($sequenceName != ""){
 		$sceneName = ($sequenceName +"/"+ $sceneName);
 	}
+
+	string $filePath = "";
+	if ($filePath == ""){
+		$filePath = `file -q -sn`;
+	}
+
+	// 0:Server 1:Job 2:ShotFolder 3:Seq 4:Shot 5:dept 6:subDept 7:take 8:version 9:ext
+	string $shotInfo[] = abxShotsGetFromPath($filePath);
+    string $shotDetails[] = abxShotsGetShotDetails(($shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]), $shotInfo[2]);
+   	string $sceneName = ($shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]);
+	
+	string $shotFileName = `abxShotsGetShortName $shotName`;
 	
 	string $sceneShotName = `abxShotsGetSceneShotName $sceneName`;
-	if (`abxShotsGetSceneShotName $sceneName` != $shotName){
+	if ($sceneName != $shotName){
 		string $buttonName = ("Edit "+$sceneShotName+" Camera");
 		string $result = `confirmDialog -title "Confirm" -message ("This scene file does not appear to be "+$shotName+".") -button $buttonName -button "Cancel"`;
 		if ($result == "Cancel"){
@@ -5026,8 +5067,7 @@ global proc abxShotsCameraMakeEditable () {
 			$shotName = $sceneShotName;
 		} 
 	}
-	
-	string $shotFileName = `abxShotsGetShortName $shotName`;
+
 	
 	// if reference exists 
 	if (`objExists "publish:renderCamShape"`){
@@ -5097,8 +5137,18 @@ global proc abxShotsCameraReference (string $shotName){
 
 	string $shotFileName = `abxShotsGetShortName $shotName`;
 
+	string $filePath = "";
+	if ($filePath == ""){
+		$filePath = `file -q -sn`;
+	}
+
+	// 0:Server 1:Job 2:ShotFolder 3:Seq 4:Shot 5:dept 6:subDept 7:take 8:version 9:ext
+	string $shotInfo[] = abxShotsGetFromPath($filePath);
+    string $shotDetails[] = abxShotsGetShotDetails(($shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]), $shotInfo[2]);
+   	string $sceneName = ($shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]);
+
 	string $sceneShotName = `abxShotsGetSceneShotName $sceneName`;
-	if (`abxShotsGetSceneShotName $sceneName` != $shotName){
+	if ($sceneName != $shotName){
 		string $buttonName = ("Use "+$sceneShotName+" Camera Instead");
 		string $button2Name = ("Reference "+$shotFileName+" Publish Cam Anyway");
 		string $result = `confirmDialog -title "Confirm" -message ("This scene file does not appear to be "+$shotName+".") -button $buttonName -button $button2Name -button "Cancel"`;
@@ -5197,6 +5247,11 @@ global proc string abxShotsGetLatestWorkVersion (string $shotFolder, string $sho
 
 	if ($whichOne == "publish")
 		$filePrefix += ("publish_");
+	if ($whichOne == "cache")
+		$filePrefix += ("");
+
+	string $ext = "m?";
+	if ($whichOne == "cache") $ext = "abc";
 
 	string $workFolderFiles[] = `getFileList -fs ($filePrefix+"*") -folder $workPath`;
 	string $workScenes[];
@@ -5209,7 +5264,7 @@ global proc string abxShotsGetLatestWorkVersion (string $shotFolder, string $sho
 	// iterate through the files to find the latest version number
 	for ($each in $workFolderFiles){
 		// match to the file naming structure
-		if (`gmatch $each ($filePrefix+"*.m?")`){
+		if (`gmatch $each ($filePrefix+"*."+$ext)`){
 			$workScenes[size($workScenes)] = $each;
 			string $wholeFileName = basenameEx($each);
 			// added a plus 1
@@ -8119,7 +8174,7 @@ global proc string[] studioNukeCamExport (string $filePath){
     //string $exportPath = ("M:/"+$shotInfo[1]+"/COMP/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/camera/"+$shotInfo[4]+"_"+$shotInfo[10]+"_"+$shotInfo[5]);
     	string $shotInfo[] = abxShotsGetFromPath(`file -q -sn`);
 		$filename = ($shotInfo[3]+"_"+$shotInfo[4]+"_"+$shotInfo[10]+"_camera_"+$shotInfo[8]);
-		$filepath = ("//"+$shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/camera/");
+		$filepath = ($shotInfo[0]+"/"+$shotInfo[1]+"/"+$shotInfo[2]+"/"+$shotInfo[3]+"/"+$shotInfo[4]+"_"+$shotInfo[10]+"/camera/");
 
 
     for ($each in $renderCamNames){

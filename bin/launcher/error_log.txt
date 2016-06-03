@@ -1,218 +1,0 @@
-
--------------------------------------------------------------------------------
-   ROBOCOPY     ::     Robust File Copy for Windows                              
--------------------------------------------------------------------------------
-
-  Started : Wed Sep 24 18:34:08 2014
-
-   Source : T:\pipelineny\aftereffects\UIPanels\
-     Dest : C:\Program Files\Adobe\Adobe After Effects CC\Support Files\Scripts\ScriptUI Panels\
-
-    Files : PPNY_Qube_Submitter.jsx
-	    
-  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
-
-------------------------------------------------------------------------------
-
-2014/09/24 18:34:08 ERROR 3 (0x00000003) Accessing Source Directory T:\pipelineny\aftereffects\UIPanels\
-The system cannot find the path specified.
-
--------------------------------------------------------------------------------
-   ROBOCOPY     ::     Robust File Copy for Windows                              
--------------------------------------------------------------------------------
-
-  Started : Wed Sep 24 18:34:08 2014
-
-   Source : T:\pipelineny\aftereffects\Preferences\CC\12.1\
-     Dest : C:\Users\adamb\AppData\Roaming\Adobe\After Effects\12.1\
-
-    Files : *.*
-	    
-  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
-
-------------------------------------------------------------------------------
-
-2014/09/24 18:34:08 ERROR 3 (0x00000003) Accessing Source Directory T:\pipelineny\aftereffects\Preferences\CC\12.1\
-The system cannot find the path specified.
-
--------------------------------------------------------------------------------
-   ROBOCOPY     ::     Robust File Copy for Windows                              
--------------------------------------------------------------------------------
-
-  Started : Wed Sep 24 18:34:08 2014
-
-   Source : T:\pipelineny\aftereffects\UIPanels\
-     Dest : C:\Program Files\Adobe\Adobe After Effects CC 2014\Support Files\Scripts\ScriptUI Panels\
-
-    Files : PPNY_Qube_Submitter.jsx
-	    
-  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
-
-------------------------------------------------------------------------------
-
-2014/09/24 18:34:08 ERROR 2 (0x00000002) Accessing Source Directory T:\pipelineny\aftereffects\UIPanels\
-The system cannot find the file specified.
-
--------------------------------------------------------------------------------
-   ROBOCOPY     ::     Robust File Copy for Windows                              
--------------------------------------------------------------------------------
-
-  Started : Wed Sep 24 18:34:08 2014
-
-   Source : T:\pipelineny\aftereffects\Preferences\CC2014\13.0\
-     Dest : C:\Users\adamb\AppData\Roaming\Adobe\After Effects\13.0\
-
-    Files : *.*
-	    
-  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
-
-------------------------------------------------------------------------------
-
-2014/09/24 18:34:08 ERROR 3 (0x00000003) Accessing Source Directory T:\pipelineny\aftereffects\Preferences\CC2014\13.0\
-The system cannot find the path specified.
-
--------------------------------------------------------------------------------
-   ROBOCOPY     ::     Robust File Copy for Windows                              
--------------------------------------------------------------------------------
-
-  Started : Wed Sep 24 18:37:26 2014
-
-   Source : \\pp-fs-nyc\pipeline\nyc\tools\aftereffects\UIPanels\
-     Dest : C:\Program Files\Adobe\Adobe After Effects CC\Support Files\Scripts\ScriptUI Panels\
-
-    Files : PPNY_Qube_Submitter.jsx
-	    
-  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
-
-------------------------------------------------------------------------------
-
-	                   1	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\UIPanels\
-	    New File  		    2959	PPNY_Qube_Submitter.jsx
-2014/09/24 18:37:26 ERROR 5 (0x00000005) Copying File \\pp-fs-nyc\pipeline\nyc\tools\aftereffects\UIPanels\PPNY_Qube_Submitter.jsx
-Access is denied.
-
-
-------------------------------------------------------------------------------
-
-               Total    Copied   Skipped  Mismatch    FAILED    Extras
-    Dirs :         1         0         1         0         0         0
-   Files :         1         0         0         0         1         0
-   Bytes :     2.8 k         0         0         0     2.8 k         0
-   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
-
-   Ended : Wed Sep 24 18:37:26 2014
-
--------------------------------------------------------------------------------
-   ROBOCOPY     ::     Robust File Copy for Windows                              
--------------------------------------------------------------------------------
-
-  Started : Wed Sep 24 18:37:26 2014
-
-   Source : \\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC\12.1\
-     Dest : C:\Users\adamb\AppData\Roaming\Adobe\After Effects\12.1\
-
-    Files : *.*
-	    
-  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
-
-------------------------------------------------------------------------------
-
-	                  15	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC\12.1\
-	  *EXTRA File 		   10230	HeadlessPlugin Loading.log
-	    Newer     		   27768	Adobe After Effects 12.1 Win en_US Shortcuts.txt  0%  100%  
-	    Newer     		    8590	Interpretation Rules.txt  0%  100%  
-	    Newer     		     460	Workspaces.xml  0%  100%  
-	                   1	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC\12.1\DVADialogPrefs\
-	                   0	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC\12.1\logs\
-	                   1	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC\12.1\ModifiedWorkspaces\
-	                   0	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC\12.1\OriginalUserWorkspaces\
-	                   0	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC\12.1\Scripts\
-	                   0	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC\12.1\Scripts\Shutdown\
-	                   0	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC\12.1\Scripts\Startup\
-
-------------------------------------------------------------------------------
-
-               Total    Copied   Skipped  Mismatch    FAILED    Extras
-    Dirs :         8         0         8         0         0         0
-   Files :        17         3        14         0         0         1
-   Bytes :   441.7 k    35.9 k   405.7 k         0         0     9.9 k
-   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
-
-
-   Speed :              657464 Bytes/sec.
-   Speed :              37.620 MegaBytes/min.
-
-   Ended : Wed Sep 24 18:37:26 2014
-
--------------------------------------------------------------------------------
-   ROBOCOPY     ::     Robust File Copy for Windows                              
--------------------------------------------------------------------------------
-
-  Started : Wed Sep 24 18:37:26 2014
-
-   Source : \\pp-fs-nyc\pipeline\nyc\tools\aftereffects\UIPanels\
-     Dest : C:\Program Files\Adobe\Adobe After Effects CC 2014\Support Files\Scripts\ScriptUI Panels\
-
-    Files : PPNY_Qube_Submitter.jsx
-	    
-  Options : /FFT /TEE /S /E /COPY:DT /PURGE /Z /XO /R:0 /W:0 
-
-------------------------------------------------------------------------------
-
-2014/09/24 18:37:26 ERROR 5 (0x00000005) Creating Destination Directory C:\Program Files\Adobe\Adobe After Effects CC 2014\Support Files\Scripts\ScriptUI Panels\
-Access is denied.
-
--------------------------------------------------------------------------------
-   ROBOCOPY     ::     Robust File Copy for Windows                              
--------------------------------------------------------------------------------
-
-  Started : Wed Sep 24 18:37:26 2014
-
-   Source : \\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC2014\13.0\
-     Dest : C:\Users\adamb\AppData\Roaming\Adobe\After Effects\13.0\
-
-    Files : *.*
-	    
-  Options : *.* /FFT /TEE /S /COPY:DT /PURGE /Z /XO /R:0 /W:0 
-
-------------------------------------------------------------------------------
-
-	  New Dir         15	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC2014\13.0\
-	    New File  		    1447	Adobe After Effects 13.0 MC Prefs  0%  100%  
-	    New File  		   29693	Adobe After Effects 13.0 Prefs.txt  0%  100%  
-	    New File  		    5628	Adobe After Effects 13.0 Prefs-indep-composition.txt  0%  100%  
-	    New File  		    4475	Adobe After Effects 13.0 Prefs-indep-general.txt  0%  100%  
-	    New File  		  232876	Adobe After Effects 13.0 Prefs-indep-output.txt  0%   56%  100%  
-	    New File  		   11768	Adobe After Effects 13.0 Prefs-indep-render.txt  0%  100%  
-	    New File  		    4109	Adobe After Effects 13.0 Prefs-paint.txt  0%  100%  
-	    New File  		    1239	Adobe After Effects 13.0 Prefs-text.txt  0%  100%  
-	    New File  		   27780	Adobe After Effects 13.0 Win en_US Shortcuts.txt  0%  100%  
-	    New File  		     566	AfterFX13.ini  0%  100%  
-	    New File  		    2002	Debug Database.txt  0%  100%  
-	    New File  		    8590	Interpretation Rules.txt  0%  100%  
-	    New File  		   13501	Plugin Loading.log  0%  100%  
-	    New File  		     181	Trace Database.txt  0%  100%  
-	    New File  		     460	Workspaces.xml  0%  100%  
-	  New Dir          1	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC2014\13.0\DVADialogPrefs\
-	    New File  		    3015	DVADialogPrefs.xml  0%  100%  
-	  New Dir          0	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC2014\13.0\logs\
-	  New Dir          1	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC2014\13.0\ModifiedWorkspaces\
-	    New File  		   17849	UserWorkspace1.xml  0%  100%  
-	  New Dir          0	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC2014\13.0\OriginalUserWorkspaces\
-	  New Dir          0	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC2014\13.0\Scripts\
-	  New Dir          0	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC2014\13.0\Scripts\Shutdown\
-	  New Dir          0	\\pp-fs-nyc\pipeline\nyc\tools\aftereffects\Preferences\CC2014\13.0\Scripts\Startup\
-
-------------------------------------------------------------------------------
-
-               Total    Copied   Skipped  Mismatch    FAILED    Extras
-    Dirs :         8         8         0         0         0         0
-   Files :        17        17         0         0         0         0
-   Bytes :   356.6 k   356.6 k         0         0         0         0
-   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
-
-
-   Speed :              857227 Bytes/sec.
-   Speed :              49.050 MegaBytes/min.
-
-   Ended : Wed Sep 24 18:37:27 2014
